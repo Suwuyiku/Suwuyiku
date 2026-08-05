@@ -4,65 +4,142 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- SEO & Google Verification -->
     <meta name="google-site-verification" content="3roOwsEGBObyATvMQgQGeNyHRKH-labRw-z3GWrNYgE" />
+    <meta name="description" content="Visual archives, manga, and scattered thoughts by suwuyiku.">
+
+    <title>Suwuyiku • Visual Diary</title>
     
-    <title>suwuyiku | Visual Diary</title>
-    
+    <!-- Tab Favicon Icon -->
     <link rel="icon" type="image/png" href="logo.jpg">
-    
+
+    <!-- Open Graph Meta Tags (For Discord, Twitter, Social Previews) -->
     <meta property="og:title" content="☁️✨ livíng ìn délusión">
     <meta property="og:description" content="visual archives, manga, and scattered thoughts by suwuyiku.">
     <meta property="og:image" content="https://suwuyiku.github.io/logo.png">
     <meta property="og:url" content="https://suwuyiku.github.io">
     <meta name="theme-color" content="#4a90e2">
 
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
     
-    
-    <style>
-        /* This is where your CSS styling lives */
-        body {
-            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #333;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .container {
-            background: rgba(255, 255, 255, 0.6);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-            text-align: center;
-            max-width: 600px;
-        }
-        h1 {
-            margin-bottom: 10px;
-            color: #2c3e50;
-            font-weight: 600;
-        }
-        p {
-            line-height: 1.6;
-            color: #555;
-        }
-    </style>
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-        <div class="container">
-        <h1>☁️✨ livíng ìn délusión</h1>
-        <p>visual archives, manga, and scattered thoughts by suwuyiku.</p>
-        <p>founder of <strong>echoes under the april aozora</strong></p>
-        <br>
-        <p><em>(Manga reviews and visual diaries coming soon...)</em></p>
-        
-        <br>
-        <p><a href="https://suwuyiku.carrd.co" target="_blank" style="color: #2c3e50; text-decoration: none; font-weight: 600;">contact</a></p>
-    </div>
+    <!-- Strict Kodansha-Style Navigation Bar -->
+    <nav class="top-nav">
+        <div class="nav-left">
+            <span class="logo-text">Suwuyiku</span>
+        </div>
+
+        <div class="nav-right">
+            <ul class="nav-links">
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="connections.html">Connections</a></li>
+                <li><a href="https://suwuyiku.notion.site/library">Library</a></li>
+                <li><a href="https://suwuyiku.bearblog.dev">Journal</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="#" class="btn-action">SHOP</a>
+                <a href="contact.html" class="btn-action">CONTACT</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- The Vision (Hero Section) -->
+    <header class="hero">
+        <h1>livíńg ìn délusión </h1>
+        <h2>visual diary, manga, and scattered thoughts by suwuyiku. founder of echoes under the april aozora</h2>
+    </header>
+
+    <!-- Structured Bento Dashboard -->
+    <main class="bento-container">
+        <a href="projects.html" class="bento-card card-large">
+            <div class="card-content">
+                <h2>Projects</h2>
+                <p>Edit & Visual cards</p>
+            </div>
+        </a>
+        <a href="connections.html" class="bento-card">
+            <div class="card-content">
+                <h2>Connections</h2>
+                <p>Social Directory</p>
+            </div>
+        </a>
+        <a href="#" class="bento-card">
+            <div class="card-content">
+                <h2>Shop</h2>
+                <p>Digital Assets</p>
+            </div>
+        </a>
+        <a href="https://suwuyiku.notion.site/library" class="bento-card card-large-wide">
+            <div class="card-content">
+                <h2>Library</h2>
+                <p>Manga & Book Archive</p>
+            </div>
+        </a>
+    </main>
+
+    <!-- =========================================
+         3. ARCHITECTURAL FOOTER
+         ========================================= -->
+    <footer class="site-footer">
+        <div class="footer-top">
+            <!-- Brand & Vision -->
+            <div class="footer-brand">
+                <span class="logo-text footer-logo">Suwuyiku</span>
+                <h2>Visual curation and digital architecture</h2>
+                <p>
+                    Building timeless structures without restrictions. A visual diary, manga collection, and scattered thoughts by Suwuyiku. Founder of echoes under the april aozora. Built to last a thousand years.
+                </p>
+            </div>
+
+            <!-- Footer Link Columns -->
+            <div class="footer-links">
+                <div class="link-column">
+                    <h3>Ecosystem</h3>
+                    <ul>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="https://suwuyiku.notion.site/library">Library</a></li>
+                        <li><a href="https://suwuyiku.bearblog.dev">Journal</a></li>
+                        <li><a href="#">Shop</a></li>
+                    </ul>
+                </div>
+                
+                <div class="link-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="connections.html">Connections</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="https://github.com/Suwuyiku">GitHub</a></li>
+                    </ul>
+                </div>
+
+                <div class="link-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <!-- Links to your actual GitHub License -->
+                        <li><a href="https://github.com/Suwuyiku/suwuyiku.github.io/blob/main/LICENSE">MIT License</a></li>
+                        <li><a href="https://github.com/Suwuyiku/suwuyiku.github.io">Source Code</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Legal & Copyright Bar -->
+        <div class="footer-bottom">
+            <div class="footer-bottom-links">
+                <a href="#">Privacy Policy</a>
+                <span class="divider">|</span>
+                <a href="#">Terms of Use</a>
+            </div>
+            <div class="copyright">
+                &copy; 2026 Suwuyiku. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
 
 </body>
 </html>
