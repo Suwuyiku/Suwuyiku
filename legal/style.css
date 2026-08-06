@@ -1,0 +1,69 @@
+/* =========================================
+   4. LEGAL PAGES (Privacy, Terms, etc.)
+   ========================================= */
+.legal-container {
+    max-width: 50rem; /* Narrow column for comfortable reading */
+    margin: 4rem auto 8rem auto;
+    padding: 0 3rem;
+    width: 100%;
+}
+
+.legal-header {
+    margin-bottom: 4rem;
+    border-bottom: 0.125rem solid var(--kodansha-black);
+    padding-bottom: 2rem;
+}
+
+.legal-header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: -0.02rem;
+    margin-bottom: 1rem;
+}
+
+.legal-header p {
+    color: #666666;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+    font-weight: 600;
+}
+
+.legal-content h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 3rem 0 1rem 0;
+    letter-spacing: -0.02rem;
+}
+
+.legal-content p {
+    margin-bottom: 1.5rem;
+    color: #333333;
+    line-height: 1.8;
+    font-size: 1rem;
+}
+
+.legal-content ul {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    color: #333333;
+    line-height: 1.8;
+    font-size: 1rem;
+}
+
+.legal-content li {
+    margin-bottom: 0.5rem;
+}
+
+.legal-content a {
+    color: var(--kodansha-black);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-thickness: 0.125rem;
+    text-underline-offset: 0.2rem;
+    transition: color 0.2s ease;
+}
+
+.legal-content a:hover {
+    color: var(--hover-gray);
+}
