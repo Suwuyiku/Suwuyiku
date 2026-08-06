@@ -9,7 +9,7 @@
 }
 
 .legal-header {
-    text-align: center; /* Centers the main title perfectly */
+    text-align: center; 
     margin-bottom: 4rem;
 }
 
@@ -47,8 +47,9 @@
     margin-bottom: 0.75rem;
 }
 
+/* Forces all links, including emails, to stay black */
 .legal-content a {
-    color: var(--kodansha-black);
+    color: var(--kodansha-black) !important;
     font-weight: 600;
     text-decoration: underline;
     text-decoration-thickness: 0.125rem;
@@ -57,5 +58,5 @@
 }
 
 .legal-content a:hover {
-    color: var(--hover-gray);
+    color: var(--hover-gray) !important;
 }
