@@ -2,57 +2,49 @@
    4. LEGAL PAGES (Privacy, Terms, etc.)
    ========================================= */
 .legal-container {
-    max-width: 50rem; /* Narrow column for comfortable reading */
+    max-width: 50rem; 
     margin: 4rem auto 8rem auto;
     padding: 0 3rem;
     width: 100%;
 }
 
 .legal-header {
+    text-align: center; /* Centers the main title perfectly */
     margin-bottom: 4rem;
-    border-bottom: 0.125rem solid var(--kodansha-black);
-    padding-bottom: 2rem;
 }
 
 .legal-header h1 {
-    font-size: 3rem;
-    font-weight: 700;
+    font-size: 3rem; 
+    font-weight: 800;
     letter-spacing: -0.02rem;
-    margin-bottom: 1rem;
-}
-
-.legal-header p {
-    color: #666666;
-    font-size: 0.875rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05rem;
-    font-weight: 600;
 }
 
 .legal-content h2 {
-    font-size: 1.5rem;
+    font-size: 1.1rem; 
     font-weight: 700;
+    text-transform: uppercase;
     margin: 3rem 0 1rem 0;
-    letter-spacing: -0.02rem;
+    letter-spacing: 0.05rem;
 }
 
-.legal-content p {
+.legal-content p, .legal-content ul {
     margin-bottom: 1.5rem;
-    color: #333333;
+    color: #111111; 
     line-height: 1.8;
-    font-size: 1rem;
+    font-size: 0.95rem; 
+}
+
+.legal-content strong {
+    font-weight: 700;
+    color: #000000;
 }
 
 .legal-content ul {
-    margin-bottom: 1.5rem;
-    padding-left: 1.5rem;
-    color: #333333;
-    line-height: 1.8;
-    font-size: 1rem;
+    padding-left: 2rem;
 }
 
 .legal-content li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
 }
 
 .legal-content a {
