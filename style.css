@@ -329,13 +329,13 @@ a:focus-visible, button:focus-visible {
    DYNAMIC HOVER TITLES
    ========================================= */
 .dynamic-book-title {
-    font-size: 0.85rem;
     color: var(--hover-gray);
-    font-weight: 500;
     margin-left: 0.25rem;
-    opacity: 0; /* Hidden by default */
+    opacity: 0; 
     transition: opacity 0.3s ease;
     white-space: nowrap; 
+    display: inline-block;
+    vertical-align: baseline;
 }
 
 /* Fade in the title area when ANY book is hovered */
@@ -343,12 +343,46 @@ a:focus-visible, button:focus-visible {
     opacity: 1;
 }
 
-/* Inject the specific names based on which book is hovered */
-.library-card-special:has(.mini-manga:nth-child(1):hover) .dynamic-book-title::after { content: "— Your Lie in April"; }
-.library-card-special:has(.mini-manga:nth-child(2):hover) .dynamic-book-title::after { content: "— Blue Box"; }
-.library-card-special:has(.mini-manga:nth-child(3):hover) .dynamic-book-title::after { content: "— Kubo Won't Let Me Be Invisible"; }
-.library-card-special:has(.mini-manga:nth-child(4):hover) .dynamic-book-title::after { content: "— Kaguya-sama: Love Is War"; }
-.library-card-special:has(.mini-manga:nth-child(5):hover) .dynamic-book-title::after { content: "— Spy x Family"; }
+/* 1. Your Lie in April (Shigatsu wa Kimi no Uso) */
+.library-card-special:has(.mini-manga:nth-child(1):hover) .dynamic-book-title::after { 
+    content: "— \00A0 Your Lie in April / 四月は君の嘘"; 
+    font-family: 'Caveat', cursive;
+    font-weight: 700;
+    font-size: 1.3rem; 
+}
+
+/* 2. Blue Box (Ao no Hako) */
+.library-card-special:has(.mini-manga:nth-child(2):hover) .dynamic-book-title::after { 
+    content: "— \00A0 Blue Box / アオのハコ"; 
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: -0.02rem;
+}
+
+/* 3. Kubo Won't Let Me Be Invisible (Kubo-san wa Mobu wo Yurusanai) */
+.library-card-special:has(.mini-manga:nth-child(3):hover) .dynamic-book-title::after { 
+    content: "— \00A0 Kubo Won't Let Me Be Invisible / 久保さんは僕を許さない"; 
+    font-family: 'Sniglet', cursive;
+    font-size: 1rem;
+}
+
+/* 4. Kaguya-sama: Love Is War (Kaguya-sama wa Kokurasetai) */
+.library-card-special:has(.mini-manga:nth-child(4):hover) .dynamic-book-title::after { 
+    content: "— \00A0 KAGUYA-SAMA: LOVE IS WAR / かぐや様は告らせたい"; 
+    font-family: 'Teko', sans-serif;
+    font-weight: 600;
+    font-size: 1.25rem;
+    letter-spacing: 0.05rem;
+}
+
+/* 5. Spy x Family (Supai Famirī) */
+.library-card-special:has(.mini-manga:nth-child(5):hover) .dynamic-book-title::after { 
+    content: "— \00A0 SPY x FAMILY / スパイファミリー"; 
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 0.05rem;
+}
 
 /* =========================================
    7. LIBRARY / MANGA SHELF
