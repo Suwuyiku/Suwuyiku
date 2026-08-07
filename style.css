@@ -266,12 +266,12 @@ a:focus-visible, button:focus-visible {
 .mini-manga {
     width: 4.5rem; 
     height: auto;
-    border-radius: 2px;
+    border-radius: 4px; /* Increased Curviness */
     position: relative; 
-    box-shadow: 6px 0 12px rgba(0, 0, 0, 0.2); 
+    border: 1px solid transparent; /* Prevents jitter when hover border appears */
+    box-shadow: 8px 0 16px rgba(0, 0, 0, 0.3); /* Upgraded, darker base shadow */
     flex-shrink: 0;
-    /* SLOWER, SMOOTHER PHYSICS */
-    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), margin 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), margin 0.6s cubic-bezier(0.22, 1, 0.36, 1), border 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* Authentic Japanese Manga Stacking */
@@ -281,21 +281,22 @@ a:focus-visible, button:focus-visible {
 .mini-manga:nth-child(4) { z-index: 2; }
 .mini-manga:nth-child(5) { z-index: 1; }
 
-/* Tighter base overlap so they look stacked */
+/* Tighter base overlap */
 .mini-manga:not(:first-child) {
     margin-left: -3.2rem; 
 }
 
-/* Card Hover: WIDER SPREAD */
+/* Card Hover: Wider spread */
 .library-card-special:hover .mini-manga:not(:first-child) {
-    margin-left: -1.2rem; /* Fans out significantly wider */
+    margin-left: -1.2rem; 
 }
 
-/* Individual Book Hover */
+/* Individual Book Hover Enhancements */
 .library-card-special .mini-manga:hover {
     transform: translateY(-0.75rem) scale(1.05) rotate(-2deg);
     z-index: 10 !important; 
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--kodansha-black); /* Crisp 1px selection border */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4); /* Deeper hover shadow */
 }
 
 /* =========================================
@@ -338,11 +339,11 @@ a:focus-visible, button:focus-visible {
     width: 12rem;
     height: auto;
     flex-shrink: 0; 
-    border-radius: 4px;
+    border-radius: 6px; /* Increased Curviness */
     position: relative;
-    box-shadow: 15px 0 25px rgba(0, 0, 0, 0.25); 
-    /* SLOWER, SMOOTHER PHYSICS */
-    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), margin 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    border: 1px solid transparent; /* Prevents jitter when hover border appears */
+    box-shadow: 20px 0 35px rgba(0, 0, 0, 0.35); /* Upgraded, darker base shadow */
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), margin 0.6s cubic-bezier(0.22, 1, 0.36, 1), border 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
 }
 
@@ -361,19 +362,19 @@ a:focus-visible, button:focus-visible {
     margin-left: -8rem; 
 }
 
-/* Shelf Hover: Gently spread all books slightly when the mouse enters the shelf area */
+/* Shelf Hover Spread */
 .manga-shelf:hover .manga-book:not(:first-child) {
     margin-left: -6.5rem;
 }
 
-/* Individual Book Hover */
+/* Individual Book Hover Enhancements */
 .manga-book:hover {
     transform: translateY(-2rem) rotate(-1deg) scale(1.02);
     z-index: 20 !important; 
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--kodansha-black); /* Crisp 1px selection border */
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.45); /* Deeper hover shadow */
 }
 
-/* Push the next book much further away to reveal the spine clearly */
 .manga-shelf:hover .manga-book:hover + .manga-book {
     margin-left: -3rem; 
 }
