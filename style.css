@@ -22,6 +22,33 @@ html {
     --hover-gray: #888888; 
 }
 
+/* =========================================
+   CUSTOM TEXT SELECTION
+   ========================================= */
+/* Main Website: Black highlight with white text */
+::selection {
+    background-color: var(--kodansha-black);
+    color: var(--bg-color);
+}
+
+::-moz-selection {
+    background-color: var(--kodansha-black);
+    color: var(--bg-color);
+}
+
+/* Footer: Invert to White highlight with black text so it remains visible */
+.site-footer ::selection,
+.site-footer *::selection {
+    background-color: var(--bg-color);
+    color: var(--kodansha-black);
+}
+
+.site-footer ::-moz-selection,
+.site-footer *::-moz-selection {
+    background-color: var(--bg-color);
+    color: var(--kodansha-black);
+}
+
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
