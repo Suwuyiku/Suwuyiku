@@ -246,7 +246,6 @@ a:focus-visible, button:focus-visible {
     border-color: #4A5C6A;
     transform: translateY(-0.125rem);
 }
-
 /* =========================================
    BENTO CARD MINI PREVIEWS
    ========================================= */
@@ -268,43 +267,51 @@ a:focus-visible, button:focus-visible {
     height: auto;
     border-radius: 4px; 
     position: relative; 
-    /* Removed borders entirely to stop the "stamp" look */
-    /* Much softer, natural default shadow */
-    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1); 
+    /* Base shadow with 0px transparent border to prevent white ghosting */
+    box-shadow: 0 0 0 0 transparent, 4px 0 10px rgba(0, 0, 0, 0.15); 
     flex-shrink: 0;
-    /* Upgraded physics: Ultra-smooth 0.8s Expo-Out curve */
     transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Authentic Japanese Manga Stacking */
-.mini-manga:nth-child(1) { z-index: 5; }
-.mini-manga:nth-child(2) { z-index: 4; }
-.mini-manga:nth-child(3) { z-index: 3; }
-.mini-manga:nth-child(4) { z-index: 2; }
-.mini-manga:nth-child(5) { z-index: 1; }
+/* 1. Organic "Messy" Base State & Z-Index Stacking */
+.mini-manga:nth-child(1) { z-index: 5; transform: rotate(-2deg) translateY(2px); }
+.mini-manga:nth-child(2) { z-index: 4; transform: rotate(1.5deg) translateY(-1px); }
+.mini-manga:nth-child(3) { z-index: 3; transform: rotate(-1deg) translateY(3px); }
+.mini-manga:nth-child(4) { z-index: 2; transform: rotate(2.5deg) translateY(0px); }
+.mini-manga:nth-child(5) { z-index: 1; transform: rotate(-1.5deg) translateY(2px); }
 
 /* Tighter base overlap */
 .mini-manga:not(:first-child) {
-    margin-left: -3.2rem; 
+    margin-left: -3.5rem; 
 }
 
-/* Card Hover: HUGE Spread */
+/* 2. Container Hover: Huge Spread & "Deck of Cards" Fan */
 .library-card-special:hover .mini-manga:not(:first-child) {
-    margin-left: -0.8rem; /* Fans out significantly wider */
+    margin-left: 0.2rem; /* Spreads out massively to fill white space */
 }
 
-/* Individual Book Hover Enhancements */
-.library-card-special .mini-manga:hover {
-    /* Pops UP and to the RIGHT, with a slight rightward tilt */
-    transform: translate(0.5rem, -0.75rem) scale(1.05) rotate(2deg);
+.library-card-special:hover .mini-manga:nth-child(1) { transform: rotate(-4deg) translateY(0); }
+.library-card-special:hover .mini-manga:nth-child(2) { transform: rotate(-2deg) translateY(0); }
+.library-card-special:hover .mini-manga:nth-child(3) { transform: rotate(0deg) translateY(0); }
+.library-card-special:hover .mini-manga:nth-child(4) { transform: rotate(2deg) translateY(0); }
+.library-card-special:hover .mini-manga:nth-child(5) { transform: rotate(4deg) translateY(0); }
+
+/* 3. Individual Book Hover: Alternating Tilts + 1px Border */
+.library-card-special .mini-manga:nth-child(odd):hover {
+    transform: translate(0.5rem, -1rem) scale(1.08) rotate(-4deg) !important;
     z-index: 10 !important; 
-    /* The 1px Border Trick: Uses box-shadow to draw a crisp 1px line without breaking the image shape, combined with a smooth drop shadow */
-    box-shadow: 0 0 0 1px var(--kodansha-black), 0 12px 24px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0 0 1px var(--kodansha-black), 0 15px 30px rgba(0, 0, 0, 0.3);
 }
 
-/* Pushes the adjacent book out of the way to show the spine */
+.library-card-special .mini-manga:nth-child(even):hover {
+    transform: translate(0.5rem, -1rem) scale(1.08) rotate(4deg) !important;
+    z-index: 10 !important; 
+    box-shadow: 0 0 0 1px var(--kodansha-black), 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Pushes adjacent book to reveal the spine */
 .library-card-special .mini-manga:hover + .mini-manga {
-    margin-left: 0.5rem; 
+    margin-left: 1.5rem; 
 }
 
 /* =========================================
@@ -349,46 +356,58 @@ a:focus-visible, button:focus-visible {
     flex-shrink: 0; 
     border-radius: 6px; 
     position: relative;
-    /* Soft, realistic base shadow */
-    box-shadow: 10px 0 20px rgba(0, 0, 0, 0.15); 
-    /* Upgraded physics: Ultra-smooth 0.8s Expo-Out curve */
+    box-shadow: 0 0 0 0 transparent, 10px 0 20px rgba(0, 0, 0, 0.15); 
     transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: pointer;
 }
 
-/* Authentic Japanese Manga Stacking Z-Index */
-.manga-book:nth-child(1) { z-index: 8; }
-.manga-book:nth-child(2) { z-index: 7; }
-.manga-book:nth-child(3) { z-index: 6; }
-.manga-book:nth-child(4) { z-index: 5; }
-.manga-book:nth-child(5) { z-index: 4; }
-.manga-book:nth-child(6) { z-index: 3; }
-.manga-book:nth-child(7) { z-index: 2; }
-.manga-book:nth-child(8) { z-index: 1; }
+/* 1. Organic "Messy" Base State & Z-Index */
+.manga-book:nth-child(1) { z-index: 8; transform: rotate(-2deg) translateY(3px); }
+.manga-book:nth-child(2) { z-index: 7; transform: rotate(1deg) translateY(-2px); }
+.manga-book:nth-child(3) { z-index: 6; transform: rotate(-1.5deg) translateY(4px); }
+.manga-book:nth-child(4) { z-index: 5; transform: rotate(2deg) translateY(-1px); }
+.manga-book:nth-child(5) { z-index: 4; transform: rotate(-1deg) translateY(2px); }
+.manga-book:nth-child(6) { z-index: 3; transform: rotate(2.5deg) translateY(-3px); }
+.manga-book:nth-child(7) { z-index: 2; transform: rotate(-2deg) translateY(1px); }
+.manga-book:nth-child(8) { z-index: 1; transform: rotate(1.5deg) translateY(2px); }
 
 /* The Base Overlap */
 .manga-book:not(:first-child) {
-    margin-left: -8.5rem; 
+    margin-left: -9rem; 
 }
 
-/* Shelf Hover Spread: Massive expansion to reveal covers */
+/* 2. Shelf Hover Spread & Fanning Effect */
 .manga-shelf:hover .manga-book:not(:first-child) {
-    margin-left: -4rem;
+    margin-left: -3rem; /* Huge spread */
 }
 
-/* Individual Book Hover Enhancements */
-.manga-book:hover {
-    /* Pops UP and to the RIGHT, with a slight rightward tilt */
-    transform: translate(1rem, -1.5rem) rotate(2deg) scale(1.03);
+.manga-shelf:hover .manga-book:nth-child(1) { transform: rotate(-7deg) translateY(0); }
+.manga-shelf:hover .manga-book:nth-child(2) { transform: rotate(-5deg) translateY(0); }
+.manga-shelf:hover .manga-book:nth-child(3) { transform: rotate(-3deg) translateY(0); }
+.manga-shelf:hover .manga-book:nth-child(4) { transform: rotate(-1deg) translateY(0); }
+.manga-shelf:hover .manga-book:nth-child(5) { transform: rotate(1deg) translateY(0); }
+.manga-shelf:hover .manga-book:nth-child(6) { transform: rotate(3deg) translateY(0); }
+.manga-shelf:hover .manga-book:nth-child(7) { transform: rotate(5deg) translateY(0); }
+.manga-shelf:hover .manga-book:nth-child(8) { transform: rotate(7deg) translateY(0); }
+
+/* 3. Individual Book Hover: Alternating Tilts + 1px Border */
+.manga-book:nth-child(odd):hover {
+    transform: translate(1rem, -2rem) rotate(-4deg) scale(1.05) !important;
     z-index: 20 !important; 
-    /* The 1px Border Trick + Deep Hover Shadow */
-    box-shadow: 0 0 0 1px var(--kodansha-black), 0 25px 45px rgba(0, 0, 0, 0.3); 
+    box-shadow: 0 0 0 1px var(--kodansha-black), 0 25px 45px rgba(0, 0, 0, 0.4); 
 }
 
-/* Push the next book much further away to reveal the spine clearly */
-.manga-shelf:hover .manga-book:hover + .manga-book {
-    margin-left: -1rem; 
+.manga-book:nth-child(even):hover {
+    transform: translate(1rem, -2rem) rotate(4deg) scale(1.05) !important;
+    z-index: 20 !important; 
+    box-shadow: 0 0 0 1px var(--kodansha-black), 0 25px 45px rgba(0, 0, 0, 0.4); 
 }
+
+/* Push the next book further away to reveal the spine clearly */
+.manga-shelf:hover .manga-book:hover + .manga-book {
+    margin-left: -0.5rem; 
+}
+
 /* =========================================
    4. LEGAL PAGES (Privacy, Terms, etc.)
    ========================================= */
