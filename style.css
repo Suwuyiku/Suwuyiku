@@ -252,40 +252,50 @@ a:focus-visible, button:focus-visible {
    ========================================= */
 .library-card-special {
     position: relative;
-    overflow: hidden; /* Prevents the books from spilling outside the card's borders */
+    overflow: hidden; 
 }
 
 .mini-manga-stack {
     display: flex;
     align-items: flex-end;
-    justify-content: flex-end; /* Pushes the book stack to the bottom right */
+    justify-content: flex-end; 
     width: 100%;
     margin-top: 1rem;
 }
 
 .mini-manga {
-    width: 4.5rem; /* Scaled down perfectly for the dashboard card */
+    width: 4.5rem; 
     height: auto;
     border-radius: 2px;
-    box-shadow: -6px 0 12px rgba(0, 0, 0, 0.15); /* Left-side shadow for 3D depth */
+    position: relative; /* Required for explicit z-index control */
+    box-shadow: 6px 0 12px rgba(0, 0, 0, 0.2); /* FLIPPED: Shadow now casts to the right */
     flex-shrink: 0;
-    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), margin 0.4s ease;
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), margin 0.3s ease;
 }
+
+/* Authentic Japanese Manga Stacking (Left book sits on top of Right book) */
+.mini-manga:nth-child(1) { z-index: 5; }
+.mini-manga:nth-child(2) { z-index: 4; }
+.mini-manga:nth-child(3) { z-index: 3; }
+.mini-manga:nth-child(4) { z-index: 2; }
+.mini-manga:nth-child(5) { z-index: 1; }
 
 /* The Overlap Effect */
 .mini-manga:not(:first-child) {
-    margin-left: -2.8rem; 
+    margin-left: -3rem; 
 }
 
-/* Interactive Hover: Fans the books out to reveal more covers when hovering the card */
-.library-card-special:hover .mini-manga {
-    transform: translateY(-0.25rem);
-}
-
+/* Card Hover: Slight Fan Out */
 .library-card-special:hover .mini-manga:not(:first-child) {
-    margin-left: -2.2rem; 
+    margin-left: -2.4rem; 
 }
 
+/* Individual Book Hover: The specific book your cursor is on pops to the very front */
+.library-card-special .mini-manga:hover {
+    transform: translateY(-0.75rem) scale(1.05) rotate(-2deg);
+    z-index: 10 !important; /* Forces hovered book above the rest */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
 /* =========================================
    4. LEGAL PAGES (Privacy, Terms, etc.)
    ========================================= */
@@ -500,39 +510,46 @@ a:focus-visible, button:focus-visible {
     justify-content: center;
     align-items: center;
     padding: 2rem 0 4rem 0;
-    /* Allows scrolling if someone is on a smaller laptop screen */
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
 }
 
-/* Base style for the manga cover */
 .manga-book {
     width: 12rem;
     height: auto;
-    flex-shrink: 0; /* Prevents the images from squishing */
+    flex-shrink: 0; 
     border-radius: 4px;
-    box-shadow: -15px 0 25px rgba(0, 0, 0, 0.25); /* Casts a shadow to the left over the previous book */
+    position: relative;
+    box-shadow: 15px 0 25px rgba(0, 0, 0, 0.25); /* FLIPPED: Shadow casts to the right */
     transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), margin 0.3s ease;
     cursor: pointer;
-    position: relative;
 }
 
-/* THE OVERLAP FIX: This covers the right side of the previous book */
+/* Authentic Japanese Manga Stacking Z-Index for up to 8 books */
+.manga-book:nth-child(1) { z-index: 8; }
+.manga-book:nth-child(2) { z-index: 7; }
+.manga-book:nth-child(3) { z-index: 6; }
+.manga-book:nth-child(4) { z-index: 5; }
+.manga-book:nth-child(5) { z-index: 4; }
+.manga-book:nth-child(6) { z-index: 3; }
+.manga-book:nth-child(7) { z-index: 2; }
+.manga-book:nth-child(8) { z-index: 1; }
+
+/* The Overlap */
 .manga-book:not(:first-child) {
     margin-left: -7.5rem; 
 }
 
-/* Hover Interaction: Brings the book forward so you can see the whole cover */
+/* Individual Book Hover Interaction */
 .manga-book:hover {
-    transform: translateY(-2rem) rotate(-1deg);
-    z-index: 50; /* Forces the hovered book to the absolute front */
+    transform: translateY(-2rem) rotate(-1deg) scale(1.02);
+    z-index: 20 !important; /* Bring hovered book to the absolute front */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
-/* Pushes the next book slightly away when hovering to reveal the spine */
 .manga-book:hover + .manga-book {
     margin-left: -5rem; 
 }
-
 /* =========================================
    6. MODERN MOBILE RESPONSIVENESS
    ========================================= */
