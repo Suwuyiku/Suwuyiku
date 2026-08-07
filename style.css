@@ -268,31 +268,33 @@ a:focus-visible, button:focus-visible {
     height: auto;
     border-radius: 4px; 
     position: relative; 
-    border: 1px solid transparent; /* Stabilizes the edge to prevent jitter */
-    box-shadow: 0 0 0 0 transparent, 4px 0 10px rgba(0, 0, 0, 0.15); 
+    box-sizing: border-box; /* Forces border to draw inside so it doesn't shift */
+    border: 1px solid transparent; /* True border prevents the rotation glitch */
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.15); 
     flex-shrink: 0;
-    /* Ultra-smooth GPU-accelerated glide */
-    transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1), 
-                margin 0.6s cubic-bezier(0.19, 1, 0.22, 1), 
-                box-shadow 0.4s ease;
+    /* Ultimate Smoothness Engine */
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), 
+                margin 0.7s cubic-bezier(0.22, 1, 0.36, 1), 
+                border-color 0.3s ease, 
+                box-shadow 0.7s cubic-bezier(0.22, 1, 0.36, 1);
     cursor: pointer;
 }
 
 /* 1. Organic "Messy" Base State */
-.mini-manga:nth-child(1) { z-index: 5; transform: rotate(-2deg) translateY(2px); }
-.mini-manga:nth-child(2) { z-index: 4; transform: rotate(1.5deg) translateY(-1px); }
-.mini-manga:nth-child(3) { z-index: 3; transform: rotate(-1deg) translateY(3px); }
-.mini-manga:nth-child(4) { z-index: 2; transform: rotate(2.5deg) translateY(0px); }
-.mini-manga:nth-child(5) { z-index: 1; transform: rotate(-1.5deg) translateY(2px); }
+.mini-manga:nth-child(1) { z-index: 5; transform: rotate(-3deg) translateY(2px); }
+.mini-manga:nth-child(2) { z-index: 4; transform: rotate(1deg) translateY(-1px); }
+.mini-manga:nth-child(3) { z-index: 3; transform: rotate(-2deg) translateY(3px); }
+.mini-manga:nth-child(4) { z-index: 2; transform: rotate(2deg) translateY(0px); }
+.mini-manga:nth-child(5) { z-index: 1; transform: rotate(-1deg) translateY(2px); }
 
-/* Relaxed base overlap */
+/* Looser, natural base overlap */
 .mini-manga:not(:first-child) {
-    margin-left: -2.9rem; 
+    margin-left: -2.7rem; 
 }
 
-/* 2. Container Hover: Fan out, but keep them overlapping */
+/* 2. Card Hover: The Perfect Spread (Just touching) */
 .library-card-special:hover .mini-manga:not(:first-child) {
-    margin-left: -1.6rem; /* Stays connected */
+    margin-left: -1.2rem; 
 }
 
 .library-card-special:hover .mini-manga:nth-child(1) { transform: rotate(-4deg) translateY(0); }
@@ -301,17 +303,19 @@ a:focus-visible, button:focus-visible {
 .library-card-special:hover .mini-manga:nth-child(4) { transform: rotate(2deg) translateY(0); }
 .library-card-special:hover .mini-manga:nth-child(5) { transform: rotate(4deg) translateY(0); }
 
-/* 3. Individual Book Hover: Glitch-free vertical pop */
+/* 3. Individual Book Hover: Glitch-free, true borders */
 .library-card-special .mini-manga:nth-child(odd):hover {
-    transform: translate(0.25rem, -1rem) rotate(-4deg) !important;
+    transform: translate(0.25rem, -1.2rem) rotate(-3deg) scale(1.05) !important;
     z-index: 10 !important; 
-    box-shadow: 0 0 0 1px var(--kodansha-black), 0 12px 24px rgba(0, 0, 0, 0.3);
+    border-color: var(--kodansha-black); 
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
 }
 
 .library-card-special .mini-manga:nth-child(even):hover {
-    transform: translate(0.25rem, -1rem) rotate(4deg) !important;
+    transform: translate(0.25rem, -1.2rem) rotate(3deg) scale(1.05) !important;
     z-index: 10 !important; 
-    box-shadow: 0 0 0 1px var(--kodansha-black), 0 12px 24px rgba(0, 0, 0, 0.3);
+    border-color: var(--kodansha-black); 
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
 }
 
 /* =========================================
@@ -356,33 +360,35 @@ a:focus-visible, button:focus-visible {
     flex-shrink: 0; 
     border-radius: 6px; 
     position: relative;
-    border: 1px solid transparent; 
-    box-shadow: 0 0 0 0 transparent, 10px 0 20px rgba(0, 0, 0, 0.15); 
-    /* Ultra-smooth GPU-accelerated glide */
-    transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1), 
-                margin 0.6s cubic-bezier(0.19, 1, 0.22, 1), 
-                box-shadow 0.4s ease;
+    box-sizing: border-box; 
+    border: 1px solid transparent; /* True border prevents the rotation glitch */
+    box-shadow: 10px 0 20px rgba(0, 0, 0, 0.15); 
+    /* Ultimate Smoothness Engine */
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), 
+                margin 0.7s cubic-bezier(0.22, 1, 0.36, 1), 
+                border-color 0.3s ease, 
+                box-shadow 0.7s cubic-bezier(0.22, 1, 0.36, 1);
     cursor: pointer;
 }
 
 /* 1. Organic "Messy" Base State */
-.manga-book:nth-child(1) { z-index: 8; transform: rotate(-2deg) translateY(3px); }
-.manga-book:nth-child(2) { z-index: 7; transform: rotate(1deg) translateY(-2px); }
-.manga-book:nth-child(3) { z-index: 6; transform: rotate(-1.5deg) translateY(4px); }
-.manga-book:nth-child(4) { z-index: 5; transform: rotate(2deg) translateY(-1px); }
-.manga-book:nth-child(5) { z-index: 4; transform: rotate(-1deg) translateY(2px); }
-.manga-book:nth-child(6) { z-index: 3; transform: rotate(2.5deg) translateY(-3px); }
-.manga-book:nth-child(7) { z-index: 2; transform: rotate(-2deg) translateY(1px); }
-.manga-book:nth-child(8) { z-index: 1; transform: rotate(1.5deg) translateY(2px); }
+.manga-book:nth-child(1) { z-index: 8; transform: rotate(-3deg) translateY(3px); }
+.manga-book:nth-child(2) { z-index: 7; transform: rotate(1.5deg) translateY(-2px); }
+.manga-book:nth-child(3) { z-index: 6; transform: rotate(-2deg) translateY(4px); }
+.manga-book:nth-child(4) { z-index: 5; transform: rotate(2.5deg) translateY(-1px); }
+.manga-book:nth-child(5) { z-index: 4; transform: rotate(-1.5deg) translateY(2px); }
+.manga-book:nth-child(6) { z-index: 3; transform: rotate(3deg) translateY(-3px); }
+.manga-book:nth-child(7) { z-index: 2; transform: rotate(-2.5deg) translateY(1px); }
+.manga-book:nth-child(8) { z-index: 1; transform: rotate(1deg) translateY(2px); }
 
-/* Relaxed base overlap */
+/* Looser, natural base overlap */
 .manga-book:not(:first-child) {
-    margin-left: -8rem; 
+    margin-left: -7.5rem; 
 }
 
-/* 2. Shelf Hover: Fan out, but keep them overlapping */
+/* 2. Shelf Hover: The Perfect Spread (Just touching) */
 .manga-shelf:hover .manga-book:not(:first-child) {
-    margin-left: -5rem; /* Stays physically connected */
+    margin-left: -4rem; 
 }
 
 .manga-shelf:hover .manga-book:nth-child(1) { transform: rotate(-7deg) translateY(0); }
@@ -394,20 +400,20 @@ a:focus-visible, button:focus-visible {
 .manga-shelf:hover .manga-book:nth-child(7) { transform: rotate(5deg) translateY(0); }
 .manga-shelf:hover .manga-book:nth-child(8) { transform: rotate(7deg) translateY(0); }
 
-/* 3. Individual Book Hover: Glitch-free vertical pop */
+/* 3. Individual Book Hover: Glitch-free, true borders */
 .manga-book:nth-child(odd):hover {
-    transform: translate(0.5rem, -2rem) rotate(-4deg) !important;
+    transform: translate(0.5rem, -2.5rem) rotate(-3deg) scale(1.03) !important;
     z-index: 20 !important; 
-    box-shadow: 0 0 0 1px var(--kodansha-black), 0 25px 45px rgba(0, 0, 0, 0.4); 
+    border-color: var(--kodansha-black); 
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.4); 
 }
 
 .manga-book:nth-child(even):hover {
-    transform: translate(0.5rem, -2rem) rotate(4deg) !important;
+    transform: translate(0.5rem, -2.5rem) rotate(3deg) scale(1.03) !important;
     z-index: 20 !important; 
-    box-shadow: 0 0 0 1px var(--kodansha-black), 0 25px 45px rgba(0, 0, 0, 0.4); 
-}
-
-/* =========================================
+    border-color: var(--kodansha-black); 
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.4); 
+}/* =========================================
    4. LEGAL PAGES (Privacy, Terms, etc.)
    ========================================= */
 .legal-container {
