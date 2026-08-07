@@ -454,10 +454,13 @@ a:focus-visible, button:focus-visible {
         padding: 0 max(1.5rem, env(safe-area-inset-right)) 0 max(1.5rem, env(safe-area-inset-left));
         gap: 1.25rem; 
     }
-    .card-large, .card-large-wide {
+    
+    /* FIX: Tells all special desktop cards to become standard squares on mobile */
+    .card-large, .card-large-wide, .card-full-wide {
         grid-row: span 1;
         grid-column: span 1;
     }
+    
     .bento-card {
         padding: 1.5rem; 
     }
