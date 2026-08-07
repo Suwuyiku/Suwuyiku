@@ -257,6 +257,15 @@ a:focus-visible, button:focus-visible {
     pointer-events: none;
     font-family: 'Inter', sans-serif;
     font-weight: 500;
+    
+    /* THE FIX: Hide the entire container (including the dash) by default */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* THE FIX: Fade in the entire container when ANY book is hovered */
+.library-card-special:has(.mini-manga:hover) .dynamic-book-title {
+    opacity: 1;
 }
 
 .book-title {
@@ -266,7 +275,7 @@ a:focus-visible, button:focus-visible {
     white-space: nowrap;
 }
 
-/* Activate the correct title when a book is hovered */
+/* Activate the correct title when a specific book is hovered */
 .library-card-special:has(.mini-manga:nth-child(1):hover) .title-1,
 .library-card-special:has(.mini-manga:nth-child(2):hover) .title-2,
 .library-card-special:has(.mini-manga:nth-child(3):hover) .title-3,
@@ -276,7 +285,7 @@ a:focus-visible, button:focus-visible {
     opacity: 1;
 }
 
-/* Pure Japanese Base Reset - Completely isolates it from the English fonts */
+/* Pure Japanese Base Reset - Isolates it from the English fonts */
 .jp {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
     font-weight: 400 !important;
