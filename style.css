@@ -261,7 +261,6 @@ a:focus-visible, button:focus-visible {
     justify-content: flex-end; 
     width: 100%;
     margin-top: 1rem;
-    /* Pulls the stack away from the hard edges so it floats naturally */
     padding-right: 2rem; 
     padding-bottom: 0.5rem;
 }
@@ -275,6 +274,12 @@ a:focus-visible, button:focus-visible {
     border: 1px solid transparent; 
     box-shadow: 4px 0 10px rgba(0, 0, 0, 0.15); 
     flex-shrink: 0;
+    
+    /* IMAGE QUALITY FIX: Forces sharp downscaling */
+    image-rendering: high-quality;
+    image-rendering: -webkit-optimize-contrast;
+    will-change: transform; /* Prevents blur during animation */
+
     transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), 
                 margin 0.7s cubic-bezier(0.22, 1, 0.36, 1), 
                 border-color 0.3s ease, 
@@ -319,6 +324,31 @@ a:focus-visible, button:focus-visible {
     border-color: var(--kodansha-black); 
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
 }
+
+/* =========================================
+   DYNAMIC HOVER TITLES
+   ========================================= */
+.dynamic-book-title {
+    font-size: 0.85rem;
+    color: var(--hover-gray);
+    font-weight: 500;
+    margin-left: 0.25rem;
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.3s ease;
+    white-space: nowrap; 
+}
+
+/* Fade in the title area when ANY book is hovered */
+.library-card-special:has(.mini-manga:hover) .dynamic-book-title {
+    opacity: 1;
+}
+
+/* Inject the specific names based on which book is hovered */
+.library-card-special:has(.mini-manga:nth-child(1):hover) .dynamic-book-title::after { content: "— Your Lie in April"; }
+.library-card-special:has(.mini-manga:nth-child(2):hover) .dynamic-book-title::after { content: "— Blue Box"; }
+.library-card-special:has(.mini-manga:nth-child(3):hover) .dynamic-book-title::after { content: "— Kubo Won't Let Me Be Invisible"; }
+.library-card-special:has(.mini-manga:nth-child(4):hover) .dynamic-book-title::after { content: "— Kaguya-sama: Love Is War"; }
+.library-card-special:has(.mini-manga:nth-child(5):hover) .dynamic-book-title::after { content: "— Spy x Family"; }
 
 /* =========================================
    7. LIBRARY / MANGA SHELF
