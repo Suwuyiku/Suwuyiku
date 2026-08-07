@@ -260,70 +260,93 @@ a:focus-visible, button:focus-visible {
 }
 
 /* =========================================
-   SUDDEN GLINT ENGINE (OPTIMIZED & DELAYED)
+   PREMIUM EASTER EGG GLINT ENGINE
    ========================================= */
-/* Base setup for the sudden flash of light */
-.library-card-special::before {
+/* Base architecture for the localized light burst */
+.library-card-special::after {
     content: "✦";
     position: absolute;
     color: #FFFFFF; 
-    font-size: 1.5rem;
     opacity: 0;
     pointer-events: none; 
     z-index: 100;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
+    text-shadow: 0 0 12px rgba(255, 255, 255, 1), 0 0 25px rgba(255, 255, 255, 0.8);
     
     /* GPU OPTIMIZATION: Commands the browser to only use cheap hardware math */
     will-change: transform, opacity;
 }
 
 /* 
-  THE UNPREDICTABLE DELAY: 
-  Notice the second time value (e.g., 0.8s). This is the delay. 
-  If you swipe your mouse too fast, nothing happens. 
-  The light only catches when you hover and wait naturally.
+  PRECISION COORDINATE MAPPING:
+  Each book has its own exact physical coordinates, size, and dedicated keyframe.
+  Switching books forces the CSS engine to completely reset the animation timer.
 */
-.library-card-special:has(.mini-manga:nth-child(1):hover)::before {
-    right: 32%; bottom: 22%;
-    animation: sudden-flash 0.4s ease-out 0.8s forwards;
+
+/* Book 1 (Your Lie in April - Far Left) */
+.library-card-special:has(.mini-manga:nth-child(1):hover)::after {
+    right: 20rem; bottom: 4.5rem;
+    font-size: 1.2rem;
+    animation: easter-glint-1 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.7s forwards;
 }
 
-.library-card-special:has(.mini-manga:nth-child(2):hover)::before {
-    right: 25%; bottom: 35%;
-    animation: sudden-flash 0.35s ease-out 0.5s forwards;
+/* Book 2 (Blue Box) */
+.library-card-special:has(.mini-manga:nth-child(2):hover)::after {
+    right: 15rem; bottom: 5.5rem;
+    font-size: 1.8rem; /* Ultra-bright massive glint */
+    animation: easter-glint-2 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5s forwards;
 }
 
-.library-card-special:has(.mini-manga:nth-child(3):hover)::before {
-    right: 18%; bottom: 15%;
-    animation: sudden-flash 0.45s ease-out 1.1s forwards;
+/* Book 3 (Kubo) */
+.library-card-special:has(.mini-manga:nth-child(3):hover)::after {
+    right: 11.5rem; bottom: 3.5rem;
+    font-size: 0.9rem; /* Subtle, small glint */
+    animation: easter-glint-3 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.9s forwards;
 }
 
-.library-card-special:has(.mini-manga:nth-child(4):hover)::before {
-    right: 10%; bottom: 28%;
-    animation: sudden-flash 0.4s ease-out 0.6s forwards;
+/* Book 4 (Kaguya-sama) */
+.library-card-special:has(.mini-manga:nth-child(4):hover)::after {
+    right: 7.5rem; bottom: 6.5rem;
+    font-size: 1.4rem;
+    animation: easter-glint-4 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.6s forwards;
 }
 
-.library-card-special:has(.mini-manga:nth-child(5):hover)::before {
-    right: 3%; bottom: 20%;
-    animation: sudden-flash 0.5s ease-out 0.9s forwards;
+/* Book 5 (Spy x Family - Far Right) */
+.library-card-special:has(.mini-manga:nth-child(5):hover)::after {
+    right: 3.5rem; bottom: 4rem;
+    font-size: 1.1rem;
+    animation: easter-glint-5 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1.1s forwards;
 }
 
-/* HARDWARE-ACCELERATED PHYSICS (No Heavy Filters) */
-@keyframes sudden-flash {
-    0% { 
-        opacity: 0; 
-        transform: scale(0) rotate(0deg); 
-    }
-    40% { 
-        opacity: 1; 
-        transform: scale(1.3) rotate(45deg); 
-    }
-    100% { 
-        opacity: 0; 
-        transform: scale(0) rotate(90deg); 
-    }
+/* 
+  5 INDEPENDENT HARDWARE ANIMATIONS:
+  This guarantees a hard reset when rapidly hovering between books.
+  The rotations are uniquely mapped so the light physically expands in different directions.
+*/
+@keyframes easter-glint-1 {
+    0% { opacity: 0; transform: scale(0) rotate(-45deg); }
+    50% { opacity: 1; transform: scale(1.2) rotate(45deg); }
+    100% { opacity: 0; transform: scale(0) rotate(135deg); }
 }
-
+@keyframes easter-glint-2 {
+    0% { opacity: 0; transform: scale(0) rotate(0deg); }
+    50% { opacity: 1; transform: scale(1) rotate(90deg); }
+    100% { opacity: 0; transform: scale(0) rotate(180deg); }
+}
+@keyframes easter-glint-3 {
+    0% { opacity: 0; transform: scale(0) rotate(30deg); }
+    50% { opacity: 1; transform: scale(1.5) rotate(120deg); }
+    100% { opacity: 0; transform: scale(0) rotate(210deg); }
+}
+@keyframes easter-glint-4 {
+    0% { opacity: 0; transform: scale(0) rotate(-90deg); }
+    50% { opacity: 1; transform: scale(1.1) rotate(0deg); }
+    100% { opacity: 0; transform: scale(0) rotate(90deg); }
+}
+@keyframes easter-glint-5 {
+    0% { opacity: 0; transform: scale(0) rotate(15deg); }
+    50% { opacity: 1; transform: scale(1.3) rotate(105deg); }
+    100% { opacity: 0; transform: scale(0) rotate(195deg); }
+}
 /* =========================================
    DYNAMIC HOVER TITLES (HTML-BASED MULTILINGUAL FIX)
    ========================================= */
