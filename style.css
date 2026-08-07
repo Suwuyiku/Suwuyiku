@@ -396,7 +396,6 @@ a:focus-visible, button:focus-visible {
 .footer-bottom-links a:hover {
     color: var(--bg-color);
 }
-
 /* =========================================
    6. MODERN MOBILE RESPONSIVENESS
    ========================================= */
@@ -408,10 +407,16 @@ a:focus-visible, button:focus-visible {
         -moz-osx-font-smoothing: grayscale;
     }
 
-    /* Nav Mobile - Notch & Dynamic Island Protection */
+    /* FIX: Flush Nav Mobile - No more floating white box */
     .top-nav {
-        margin: max(1rem, env(safe-area-inset-top)) 1.25rem 2rem 1.25rem; 
-        padding: 0.875rem 1.25rem;
+        margin: 0; /* Remove floating margins */
+        top: 0; /* Sit absolutely flush against the screen top */
+        width: 100%;
+        border-left: none; /* Remove side borders */
+        border-right: none;
+        border-top: none;
+        /* Use padding to push content safely below the physical notch */
+        padding: max(1rem, env(safe-area-inset-top)) 1.5rem 1rem 1.5rem; 
     }
     .nav-links {
         display: none; 
@@ -419,8 +424,8 @@ a:focus-visible, button:focus-visible {
     
     /* Optimized touch targets for thumbs */
     .btn-action {
-        padding: 0.5rem 1rem; 
-        font-size: 0.75rem;
+        padding: 0.5rem 0.875rem; 
+        font-size: 0.7rem;
     }
 
     /* Hero Mobile */
@@ -428,7 +433,7 @@ a:focus-visible, button:focus-visible {
         padding: 3rem max(1.5rem, env(safe-area-inset-right)) 2rem max(1.5rem, env(safe-area-inset-left));
     }
     .hero h1 {
-        font-size: 2.25rem; /* Scaled for modern flagship screens */
+        font-size: 2.25rem; 
         letter-spacing: -0.03rem;
         line-height: 1.15;
     }
@@ -442,7 +447,7 @@ a:focus-visible, button:focus-visible {
     .bento-container {
         grid-template-columns: 1fr;
         padding: 0 max(1.5rem, env(safe-area-inset-right)) 0 max(1.5rem, env(safe-area-inset-left));
-        gap: 1.25rem; /* Expanded gap to prevent mis-taps */
+        gap: 1.25rem; 
     }
     .card-large, .card-large-wide {
         grid-row: span 1;
@@ -490,7 +495,6 @@ a:focus-visible, button:focus-visible {
         text-align: center;
     }
     .site-footer {
-        /* Bottom padding accounts for the iOS/Android swipe-up home bar */
         padding: 4rem max(1.5rem, env(safe-area-inset-right)) max(2rem, env(safe-area-inset-bottom)) max(1.5rem, env(safe-area-inset-left));
     }
 }
