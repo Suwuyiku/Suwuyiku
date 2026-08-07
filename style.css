@@ -246,6 +246,7 @@ a:focus-visible, button:focus-visible {
     border-color: #4A5C6A;
     transform: translateY(-0.125rem);
 }
+
 /* =========================================
    BENTO CARD MINI PREVIEWS
    ========================================= */
@@ -267,27 +268,31 @@ a:focus-visible, button:focus-visible {
     height: auto;
     border-radius: 4px; 
     position: relative; 
-    /* Base shadow with 0px transparent border to prevent white ghosting */
+    border: 1px solid transparent; /* Stabilizes the edge to prevent jitter */
     box-shadow: 0 0 0 0 transparent, 4px 0 10px rgba(0, 0, 0, 0.15); 
     flex-shrink: 0;
-    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Ultra-smooth GPU-accelerated glide */
+    transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1), 
+                margin 0.6s cubic-bezier(0.19, 1, 0.22, 1), 
+                box-shadow 0.4s ease;
+    cursor: pointer;
 }
 
-/* 1. Organic "Messy" Base State & Z-Index Stacking */
+/* 1. Organic "Messy" Base State */
 .mini-manga:nth-child(1) { z-index: 5; transform: rotate(-2deg) translateY(2px); }
 .mini-manga:nth-child(2) { z-index: 4; transform: rotate(1.5deg) translateY(-1px); }
 .mini-manga:nth-child(3) { z-index: 3; transform: rotate(-1deg) translateY(3px); }
 .mini-manga:nth-child(4) { z-index: 2; transform: rotate(2.5deg) translateY(0px); }
 .mini-manga:nth-child(5) { z-index: 1; transform: rotate(-1.5deg) translateY(2px); }
 
-/* Tighter base overlap */
+/* Relaxed base overlap */
 .mini-manga:not(:first-child) {
-    margin-left: -3.5rem; 
+    margin-left: -2.9rem; 
 }
 
-/* 2. Container Hover: Huge Spread & "Deck of Cards" Fan */
+/* 2. Container Hover: Fan out, but keep them overlapping */
 .library-card-special:hover .mini-manga:not(:first-child) {
-    margin-left: 0.2rem; /* Spreads out massively to fill white space */
+    margin-left: -1.6rem; /* Stays connected */
 }
 
 .library-card-special:hover .mini-manga:nth-child(1) { transform: rotate(-4deg) translateY(0); }
@@ -296,22 +301,17 @@ a:focus-visible, button:focus-visible {
 .library-card-special:hover .mini-manga:nth-child(4) { transform: rotate(2deg) translateY(0); }
 .library-card-special:hover .mini-manga:nth-child(5) { transform: rotate(4deg) translateY(0); }
 
-/* 3. Individual Book Hover: Alternating Tilts + 1px Border */
+/* 3. Individual Book Hover: Glitch-free vertical pop */
 .library-card-special .mini-manga:nth-child(odd):hover {
-    transform: translate(0.5rem, -1rem) scale(1.08) rotate(-4deg) !important;
+    transform: translate(0.25rem, -1rem) rotate(-4deg) !important;
     z-index: 10 !important; 
-    box-shadow: 0 0 0 1px var(--kodansha-black), 0 15px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 0 1px var(--kodansha-black), 0 12px 24px rgba(0, 0, 0, 0.3);
 }
 
 .library-card-special .mini-manga:nth-child(even):hover {
-    transform: translate(0.5rem, -1rem) scale(1.08) rotate(4deg) !important;
+    transform: translate(0.25rem, -1rem) rotate(4deg) !important;
     z-index: 10 !important; 
-    box-shadow: 0 0 0 1px var(--kodansha-black), 0 15px 30px rgba(0, 0, 0, 0.3);
-}
-
-/* Pushes adjacent book to reveal the spine */
-.library-card-special .mini-manga:hover + .mini-manga {
-    margin-left: 1.5rem; 
+    box-shadow: 0 0 0 1px var(--kodansha-black), 0 12px 24px rgba(0, 0, 0, 0.3);
 }
 
 /* =========================================
@@ -356,12 +356,16 @@ a:focus-visible, button:focus-visible {
     flex-shrink: 0; 
     border-radius: 6px; 
     position: relative;
+    border: 1px solid transparent; 
     box-shadow: 0 0 0 0 transparent, 10px 0 20px rgba(0, 0, 0, 0.15); 
-    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Ultra-smooth GPU-accelerated glide */
+    transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1), 
+                margin 0.6s cubic-bezier(0.19, 1, 0.22, 1), 
+                box-shadow 0.4s ease;
     cursor: pointer;
 }
 
-/* 1. Organic "Messy" Base State & Z-Index */
+/* 1. Organic "Messy" Base State */
 .manga-book:nth-child(1) { z-index: 8; transform: rotate(-2deg) translateY(3px); }
 .manga-book:nth-child(2) { z-index: 7; transform: rotate(1deg) translateY(-2px); }
 .manga-book:nth-child(3) { z-index: 6; transform: rotate(-1.5deg) translateY(4px); }
@@ -371,14 +375,14 @@ a:focus-visible, button:focus-visible {
 .manga-book:nth-child(7) { z-index: 2; transform: rotate(-2deg) translateY(1px); }
 .manga-book:nth-child(8) { z-index: 1; transform: rotate(1.5deg) translateY(2px); }
 
-/* The Base Overlap */
+/* Relaxed base overlap */
 .manga-book:not(:first-child) {
-    margin-left: -9rem; 
+    margin-left: -8rem; 
 }
 
-/* 2. Shelf Hover Spread & Fanning Effect */
+/* 2. Shelf Hover: Fan out, but keep them overlapping */
 .manga-shelf:hover .manga-book:not(:first-child) {
-    margin-left: -3rem; /* Huge spread */
+    margin-left: -5rem; /* Stays physically connected */
 }
 
 .manga-shelf:hover .manga-book:nth-child(1) { transform: rotate(-7deg) translateY(0); }
@@ -390,22 +394,17 @@ a:focus-visible, button:focus-visible {
 .manga-shelf:hover .manga-book:nth-child(7) { transform: rotate(5deg) translateY(0); }
 .manga-shelf:hover .manga-book:nth-child(8) { transform: rotate(7deg) translateY(0); }
 
-/* 3. Individual Book Hover: Alternating Tilts + 1px Border */
+/* 3. Individual Book Hover: Glitch-free vertical pop */
 .manga-book:nth-child(odd):hover {
-    transform: translate(1rem, -2rem) rotate(-4deg) scale(1.05) !important;
+    transform: translate(0.5rem, -2rem) rotate(-4deg) !important;
     z-index: 20 !important; 
     box-shadow: 0 0 0 1px var(--kodansha-black), 0 25px 45px rgba(0, 0, 0, 0.4); 
 }
 
 .manga-book:nth-child(even):hover {
-    transform: translate(1rem, -2rem) rotate(4deg) scale(1.05) !important;
+    transform: translate(0.5rem, -2rem) rotate(4deg) !important;
     z-index: 20 !important; 
     box-shadow: 0 0 0 1px var(--kodansha-black), 0 25px 45px rgba(0, 0, 0, 0.4); 
-}
-
-/* Push the next book further away to reveal the spine clearly */
-.manga-shelf:hover .manga-book:hover + .manga-book {
-    margin-left: -0.5rem; 
 }
 
 /* =========================================
