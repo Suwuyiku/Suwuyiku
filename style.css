@@ -260,47 +260,68 @@ a:focus-visible, button:focus-visible {
 }
 
 /* =========================================
-   PURE CSS SPARKLE ENGINE
+   SUDDEN GLINT ENGINE (OPTIMIZED & DELAYED)
    ========================================= */
-/* Base setup for the invisible sparkle particles */
-.library-card-special::before,
-.library-card-special::after {
+/* Base setup for the sudden flash of light */
+.library-card-special::before {
     content: "✦";
     position: absolute;
-    color: #FFD700; /* Gold */
-    font-size: 1.25rem;
+    color: #FFFFFF; 
+    font-size: 1.5rem;
     opacity: 0;
-    pointer-events: none; /* Ensures the sparkles don't block your mouse clicks */
+    pointer-events: none; 
     z-index: 100;
-    text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
+    
+    /* GPU OPTIMIZATION: Commands the browser to only use cheap hardware math */
+    will-change: transform, opacity;
 }
 
-/* Trigger Particle 1 when ANY book is hovered */
-.library-card-special:has(.mini-manga:hover)::before {
-    right: 18%;
-    bottom: 25%;
-    animation: float-sparkle-1 1s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+/* 
+  THE UNPREDICTABLE DELAY: 
+  Notice the second time value (e.g., 0.8s). This is the delay. 
+  If you swipe your mouse too fast, nothing happens. 
+  The light only catches when you hover and wait naturally.
+*/
+.library-card-special:has(.mini-manga:nth-child(1):hover)::before {
+    right: 32%; bottom: 22%;
+    animation: sudden-flash 0.4s ease-out 0.8s forwards;
 }
 
-/* Trigger Particle 2 (Delayed and offset) when ANY book is hovered */
-.library-card-special:has(.mini-manga:hover)::after {
-    right: 26%;
-    bottom: 35%;
-    font-size: 0.9rem;
-    animation: float-sparkle-2 1.2s cubic-bezier(0.22, 1, 0.36, 1) infinite 0.2s;
+.library-card-special:has(.mini-manga:nth-child(2):hover)::before {
+    right: 25%; bottom: 35%;
+    animation: sudden-flash 0.35s ease-out 0.5s forwards;
 }
 
-/* Hardware-Accelerated Float Animations */
-@keyframes float-sparkle-1 {
-    0% { opacity: 0; transform: translateY(0) scale(0.2) rotate(0deg); }
-    50% { opacity: 0.8; transform: translateY(-25px) scale(1) rotate(45deg); }
-    100% { opacity: 0; transform: translateY(-50px) scale(0.2) rotate(90deg); }
+.library-card-special:has(.mini-manga:nth-child(3):hover)::before {
+    right: 18%; bottom: 15%;
+    animation: sudden-flash 0.45s ease-out 1.1s forwards;
 }
 
-@keyframes float-sparkle-2 {
-    0% { opacity: 0; transform: translateY(0) scale(0.2) rotate(0deg); }
-    50% { opacity: 0.6; transform: translateY(-15px) scale(1) rotate(-45deg); }
-    100% { opacity: 0; transform: translateY(-35px) scale(0.2) rotate(-90deg); }
+.library-card-special:has(.mini-manga:nth-child(4):hover)::before {
+    right: 10%; bottom: 28%;
+    animation: sudden-flash 0.4s ease-out 0.6s forwards;
+}
+
+.library-card-special:has(.mini-manga:nth-child(5):hover)::before {
+    right: 3%; bottom: 20%;
+    animation: sudden-flash 0.5s ease-out 0.9s forwards;
+}
+
+/* HARDWARE-ACCELERATED PHYSICS (No Heavy Filters) */
+@keyframes sudden-flash {
+    0% { 
+        opacity: 0; 
+        transform: scale(0) rotate(0deg); 
+    }
+    40% { 
+        opacity: 1; 
+        transform: scale(1.3) rotate(45deg); 
+    }
+    100% { 
+        opacity: 0; 
+        transform: scale(0) rotate(90deg); 
+    }
 }
 
 /* =========================================
