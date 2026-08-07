@@ -267,35 +267,117 @@ a:focus-visible, button:focus-visible {
     width: 4.5rem; 
     height: auto;
     border-radius: 2px;
-    position: relative; /* Required for explicit z-index control */
-    box-shadow: 6px 0 12px rgba(0, 0, 0, 0.2); /* FLIPPED: Shadow now casts to the right */
+    position: relative; 
+    box-shadow: 6px 0 12px rgba(0, 0, 0, 0.2); 
     flex-shrink: 0;
-    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), margin 0.3s ease;
+    /* SLOWER, SMOOTHER PHYSICS */
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), margin 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Authentic Japanese Manga Stacking (Left book sits on top of Right book) */
+/* Authentic Japanese Manga Stacking */
 .mini-manga:nth-child(1) { z-index: 5; }
 .mini-manga:nth-child(2) { z-index: 4; }
 .mini-manga:nth-child(3) { z-index: 3; }
 .mini-manga:nth-child(4) { z-index: 2; }
 .mini-manga:nth-child(5) { z-index: 1; }
 
-/* The Overlap Effect */
+/* Tighter base overlap so they look stacked */
 .mini-manga:not(:first-child) {
+    margin-left: -3.2rem; 
+}
+
+/* Card Hover: WIDER SPREAD */
+.library-card-special:hover .mini-manga:not(:first-child) {
+    margin-left: -1.2rem; /* Fans out significantly wider */
+}
+
+/* Individual Book Hover */
+.library-card-special .mini-manga:hover {
+    transform: translateY(-0.75rem) scale(1.05) rotate(-2deg);
+    z-index: 10 !important; 
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* =========================================
+   7. LIBRARY / MANGA SHELF
+   ========================================= */
+.library-container {
+    max-width: 75rem;
+    margin: 4rem auto 8rem auto;
+    padding: 0 3rem;
+    width: 100%;
+}
+
+.library-header {
+    text-align: center;
+    margin-bottom: 5rem;
+}
+
+.library-header h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: -0.02rem;
+}
+
+.library-header p {
+    color: #666666;
+    margin-top: 1rem;
+    font-size: 1.1rem;
+}
+
+.manga-shelf {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 0 4rem 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.manga-book {
+    width: 12rem;
+    height: auto;
+    flex-shrink: 0; 
+    border-radius: 4px;
+    position: relative;
+    box-shadow: 15px 0 25px rgba(0, 0, 0, 0.25); 
+    /* SLOWER, SMOOTHER PHYSICS */
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), margin 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    cursor: pointer;
+}
+
+/* Authentic Japanese Manga Stacking Z-Index */
+.manga-book:nth-child(1) { z-index: 8; }
+.manga-book:nth-child(2) { z-index: 7; }
+.manga-book:nth-child(3) { z-index: 6; }
+.manga-book:nth-child(4) { z-index: 5; }
+.manga-book:nth-child(5) { z-index: 4; }
+.manga-book:nth-child(6) { z-index: 3; }
+.manga-book:nth-child(7) { z-index: 2; }
+.manga-book:nth-child(8) { z-index: 1; }
+
+/* The Base Overlap */
+.manga-book:not(:first-child) {
+    margin-left: -8rem; 
+}
+
+/* Shelf Hover: Gently spread all books slightly when the mouse enters the shelf area */
+.manga-shelf:hover .manga-book:not(:first-child) {
+    margin-left: -6.5rem;
+}
+
+/* Individual Book Hover */
+.manga-book:hover {
+    transform: translateY(-2rem) rotate(-1deg) scale(1.02);
+    z-index: 20 !important; 
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Push the next book much further away to reveal the spine clearly */
+.manga-shelf:hover .manga-book:hover + .manga-book {
     margin-left: -3rem; 
 }
 
-/* Card Hover: Slight Fan Out */
-.library-card-special:hover .mini-manga:not(:first-child) {
-    margin-left: -2.4rem; 
-}
-
-/* Individual Book Hover: The specific book your cursor is on pops to the very front */
-.library-card-special .mini-manga:hover {
-    transform: translateY(-0.75rem) scale(1.05) rotate(-2deg);
-    z-index: 10 !important; /* Forces hovered book above the rest */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-}
 /* =========================================
    4. LEGAL PAGES (Privacy, Terms, etc.)
    ========================================= */
@@ -478,78 +560,6 @@ a:focus-visible, button:focus-visible {
     color: var(--bg-color);
 }
 
-/* =========================================
-   7. LIBRARY / MANGA SHELF
-   ========================================= */
-.library-container {
-    max-width: 75rem;
-    margin: 4rem auto 8rem auto;
-    padding: 0 3rem;
-    width: 100%;
-}
-
-.library-header {
-    text-align: center;
-    margin-bottom: 5rem;
-}
-
-.library-header h1 {
-    font-size: 3rem;
-    font-weight: 800;
-    letter-spacing: -0.02rem;
-}
-
-.library-header p {
-    color: #666666;
-    margin-top: 1rem;
-    font-size: 1.1rem;
-}
-
-.manga-shelf {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem 0 4rem 0;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-}
-
-.manga-book {
-    width: 12rem;
-    height: auto;
-    flex-shrink: 0; 
-    border-radius: 4px;
-    position: relative;
-    box-shadow: 15px 0 25px rgba(0, 0, 0, 0.25); /* FLIPPED: Shadow casts to the right */
-    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), margin 0.3s ease;
-    cursor: pointer;
-}
-
-/* Authentic Japanese Manga Stacking Z-Index for up to 8 books */
-.manga-book:nth-child(1) { z-index: 8; }
-.manga-book:nth-child(2) { z-index: 7; }
-.manga-book:nth-child(3) { z-index: 6; }
-.manga-book:nth-child(4) { z-index: 5; }
-.manga-book:nth-child(5) { z-index: 4; }
-.manga-book:nth-child(6) { z-index: 3; }
-.manga-book:nth-child(7) { z-index: 2; }
-.manga-book:nth-child(8) { z-index: 1; }
-
-/* The Overlap */
-.manga-book:not(:first-child) {
-    margin-left: -7.5rem; 
-}
-
-/* Individual Book Hover Interaction */
-.manga-book:hover {
-    transform: translateY(-2rem) rotate(-1deg) scale(1.02);
-    z-index: 20 !important; /* Bring hovered book to the absolute front */
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-}
-
-.manga-book:hover + .manga-book {
-    margin-left: -5rem; 
-}
 /* =========================================
    6. MODERN MOBILE RESPONSIVENESS
    ========================================= */
