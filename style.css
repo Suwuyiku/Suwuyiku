@@ -266,12 +266,14 @@ a:focus-visible, button:focus-visible {
 .mini-manga {
     width: 4.5rem; 
     height: auto;
-    border-radius: 4px; /* Increased Curviness */
+    border-radius: 4px; 
     position: relative; 
-    border: 1px solid transparent; /* Prevents jitter when hover border appears */
-    box-shadow: 8px 0 16px rgba(0, 0, 0, 0.3); /* Upgraded, darker base shadow */
+    /* Removed borders entirely to stop the "stamp" look */
+    /* Much softer, natural default shadow */
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1); 
     flex-shrink: 0;
-    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), margin 0.6s cubic-bezier(0.22, 1, 0.36, 1), border 0.3s ease, box-shadow 0.3s ease;
+    /* Upgraded physics: Ultra-smooth 0.8s Expo-Out curve */
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Authentic Japanese Manga Stacking */
@@ -286,17 +288,23 @@ a:focus-visible, button:focus-visible {
     margin-left: -3.2rem; 
 }
 
-/* Card Hover: Wider spread */
+/* Card Hover: HUGE Spread */
 .library-card-special:hover .mini-manga:not(:first-child) {
-    margin-left: -1.2rem; 
+    margin-left: -0.8rem; /* Fans out significantly wider */
 }
 
 /* Individual Book Hover Enhancements */
 .library-card-special .mini-manga:hover {
-    transform: translateY(-0.75rem) scale(1.05) rotate(-2deg);
+    /* Pops UP and to the RIGHT, with a slight rightward tilt */
+    transform: translate(0.5rem, -0.75rem) scale(1.05) rotate(2deg);
     z-index: 10 !important; 
-    border: 1px solid var(--kodansha-black); /* Crisp 1px selection border */
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4); /* Deeper hover shadow */
+    /* The 1px Border Trick: Uses box-shadow to draw a crisp 1px line without breaking the image shape, combined with a smooth drop shadow */
+    box-shadow: 0 0 0 1px var(--kodansha-black), 0 12px 24px rgba(0, 0, 0, 0.25);
+}
+
+/* Pushes the adjacent book out of the way to show the spine */
+.library-card-special .mini-manga:hover + .mini-manga {
+    margin-left: 0.5rem; 
 }
 
 /* =========================================
@@ -339,11 +347,12 @@ a:focus-visible, button:focus-visible {
     width: 12rem;
     height: auto;
     flex-shrink: 0; 
-    border-radius: 6px; /* Increased Curviness */
+    border-radius: 6px; 
     position: relative;
-    border: 1px solid transparent; /* Prevents jitter when hover border appears */
-    box-shadow: 20px 0 35px rgba(0, 0, 0, 0.35); /* Upgraded, darker base shadow */
-    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), margin 0.6s cubic-bezier(0.22, 1, 0.36, 1), border 0.3s ease, box-shadow 0.3s ease;
+    /* Soft, realistic base shadow */
+    box-shadow: 10px 0 20px rgba(0, 0, 0, 0.15); 
+    /* Upgraded physics: Ultra-smooth 0.8s Expo-Out curve */
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: pointer;
 }
 
@@ -359,26 +368,27 @@ a:focus-visible, button:focus-visible {
 
 /* The Base Overlap */
 .manga-book:not(:first-child) {
-    margin-left: -8rem; 
+    margin-left: -8.5rem; 
 }
 
-/* Shelf Hover Spread */
+/* Shelf Hover Spread: Massive expansion to reveal covers */
 .manga-shelf:hover .manga-book:not(:first-child) {
-    margin-left: -6.5rem;
+    margin-left: -4rem;
 }
 
 /* Individual Book Hover Enhancements */
 .manga-book:hover {
-    transform: translateY(-2rem) rotate(-1deg) scale(1.02);
+    /* Pops UP and to the RIGHT, with a slight rightward tilt */
+    transform: translate(1rem, -1.5rem) rotate(2deg) scale(1.03);
     z-index: 20 !important; 
-    border: 1px solid var(--kodansha-black); /* Crisp 1px selection border */
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.45); /* Deeper hover shadow */
+    /* The 1px Border Trick + Deep Hover Shadow */
+    box-shadow: 0 0 0 1px var(--kodansha-black), 0 25px 45px rgba(0, 0, 0, 0.3); 
 }
 
+/* Push the next book much further away to reveal the spine clearly */
 .manga-shelf:hover .manga-book:hover + .manga-book {
-    margin-left: -3rem; 
+    margin-left: -1rem; 
 }
-
 /* =========================================
    4. LEGAL PAGES (Privacy, Terms, etc.)
    ========================================= */
