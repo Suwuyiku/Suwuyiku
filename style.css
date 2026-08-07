@@ -398,44 +398,76 @@ a:focus-visible, button:focus-visible {
 }
 
 /* =========================================
-   6. MOBILE RESPONSIVENESS
+   6. MODERN MOBILE RESPONSIVENESS
    ========================================= */
 @media (max-width: 48rem) {
     
-    /* Nav & Hero Mobile */
+    /* Hardware Rendering Enhancements for OLED/Retina */
+    body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Nav Mobile - Notch & Dynamic Island Protection */
+    .top-nav {
+        margin: max(1rem, env(safe-area-inset-top)) 1.25rem 2rem 1.25rem; 
+        padding: 0.875rem 1.25rem;
+    }
     .nav-links {
         display: none; 
     }
+    
+    /* Optimized touch targets for thumbs */
+    .btn-action {
+        padding: 0.5rem 1rem; 
+        font-size: 0.75rem;
+    }
+
+    /* Hero Mobile */
     .hero {
-        padding: 4rem 1.5rem 2rem 1.5rem;
+        padding: 3rem max(1.5rem, env(safe-area-inset-right)) 2rem max(1.5rem, env(safe-area-inset-left));
     }
     .hero h1 {
-        font-size: 2rem;
+        font-size: 2.25rem; /* Scaled for modern flagship screens */
+        letter-spacing: -0.03rem;
+        line-height: 1.15;
+    }
+    .hero h2 {
+        font-size: 1rem;
+        margin-top: 0.75rem;
+        line-height: 1.5;
     }
 
     /* Bento Grid Mobile */
     .bento-container {
         grid-template-columns: 1fr;
-        padding: 0 1.5rem;
+        padding: 0 max(1.5rem, env(safe-area-inset-right)) 0 max(1.5rem, env(safe-area-inset-left));
+        gap: 1.25rem; /* Expanded gap to prevent mis-taps */
     }
     .card-large, .card-large-wide {
         grid-row: span 1;
         grid-column: span 1;
     }
+    .bento-card {
+        padding: 1.5rem; 
+    }
 
     /* Legal Pages Mobile Scaling */
     .legal-container {
-        margin: 2rem auto 4rem auto;
-        padding: 0 1.5rem;
+        margin: 1.5rem auto 4rem auto;
+        padding: 0 max(1.5rem, env(safe-area-inset-right)) 0 max(1.5rem, env(safe-area-inset-left));
     }
     .legal-header h1 {
         font-size: 2.2rem;
+        line-height: 1.2;
     }
     .legal-content h2 {
-        font-size: 1rem;
+        font-size: 1.05rem;
+        margin: 2rem 0 1rem 0; 
     }
     .legal-content p, .legal-content ul {
-        font-size: 0.875rem; 
+        font-size: 0.95rem; 
+        line-height: 1.6; 
     }
 
     /* Footer Mobile */
@@ -458,6 +490,7 @@ a:focus-visible, button:focus-visible {
         text-align: center;
     }
     .site-footer {
-        padding: 4rem 1.5rem 2rem 1.5rem;
+        /* Bottom padding accounts for the iOS/Android swipe-up home bar */
+        padding: 4rem max(1.5rem, env(safe-area-inset-right)) max(2rem, env(safe-area-inset-bottom)) max(1.5rem, env(safe-area-inset-left));
     }
 }
