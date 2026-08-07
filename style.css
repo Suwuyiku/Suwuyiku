@@ -3,7 +3,7 @@
    ========================================= */
 html {
     font-size: 100%;
-    -webkit-text-size-adjust: 100%; /* Prevents iOS text zoom */
+    -webkit-text-size-adjust: 100%; 
     scroll-behavior: smooth;
 }
 
@@ -25,29 +25,11 @@ html {
 /* =========================================
    CUSTOM TEXT SELECTION
    ========================================= */
-/* Main Website: Black highlight with white text */
-::selection {
-    background-color: var(--kodansha-black);
-    color: var(--bg-color);
-}
+::selection { background-color: var(--kodansha-black); color: var(--bg-color); }
+::-moz-selection { background-color: var(--kodansha-black); color: var(--bg-color); }
 
-::-moz-selection {
-    background-color: var(--kodansha-black);
-    color: var(--bg-color);
-}
-
-/* Footer: Invert to White highlight with black text so it remains visible */
-.site-footer ::selection,
-.site-footer *::selection {
-    background-color: var(--bg-color);
-    color: var(--kodansha-black);
-}
-
-.site-footer ::-moz-selection,
-.site-footer *::-moz-selection {
-    background-color: var(--bg-color);
-    color: var(--kodansha-black);
-}
+.site-footer ::selection, .site-footer *::selection { background-color: var(--bg-color); color: var(--kodansha-black); }
+.site-footer ::-moz-selection, .site-footer *::-moz-selection { background-color: var(--bg-color); color: var(--kodansha-black); }
 
 body {
     background-color: var(--bg-color);
@@ -55,14 +37,11 @@ body {
     padding: 0; 
     line-height: 1.6;
     overflow-x: hidden; 
-    
-    /* Forces full screen height for the sticky footer */
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
-/* Accessibility Focus States */
 a:focus-visible, button:focus-visible {
     outline: 0.125rem solid var(--hover-gray);
     outline-offset: 0.125rem;
@@ -84,10 +63,7 @@ a:focus-visible, button:focus-visible {
     margin: 1rem 1.5vw 3rem 1.5vw; 
 }
 
-.nav-left {
-    display: flex;
-    align-items: center;
-}
+.nav-left { display: flex; align-items: center; }
 
 .logo-text {
     font-size: 1.4rem; 
@@ -96,17 +72,8 @@ a:focus-visible, button:focus-visible {
     color: var(--kodansha-black);
 }
 
-.nav-right {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 0.875rem; 
-}
+.nav-right { display: flex; align-items: center; gap: 2rem; }
+.nav-links { list-style: none; display: flex; gap: 0.875rem; }
 
 .nav-links li a {
     position: relative;
@@ -131,20 +98,14 @@ a:focus-visible, button:focus-visible {
     transition: transform 0.25s ease-out, background-color 0.25s ease-out;
 }
 
-.nav-links li a:hover {
-    color: var(--hover-gray);
-}
-
+.nav-links li a:hover { color: var(--hover-gray); }
 .nav-links li a:hover::after {
     transform: scaleX(1);
     transform-origin: bottom left;
     background-color: var(--hover-gray);
 }
 
-.nav-actions {
-    display: flex;
-    gap: 0.625rem;
-}
+.nav-actions { display: flex; gap: 0.625rem; }
 
 .btn-action {
     display: flex;
@@ -177,23 +138,8 @@ a:focus-visible, button:focus-visible {
     width: 100%;
 }
 
-.hero h1 {
-    font-size: 3rem;
-    font-weight: 600;
-    letter-spacing: -0.02rem;
-    max-width: 50rem;
-    line-height: 1.2;
-}
-
-.hero h2 {
-    font-size: 1.1rem;
-    font-weight: 400; 
-    color: #666666; 
-    margin-top: 1rem; 
-    letter-spacing: 0.02rem;
-    line-height: 1.6;
-    max-width: 45rem; 
-}
+.hero h1 { font-size: 3rem; font-weight: 600; letter-spacing: -0.02rem; max-width: 50rem; line-height: 1.2; }
+.hero h2 { font-size: 1.1rem; font-weight: 400; color: #666666; margin-top: 1rem; letter-spacing: 0.02rem; line-height: 1.6; max-width: 45rem; }
 
 .bento-container {
     display: grid;
@@ -218,42 +164,19 @@ a:focus-visible, button:focus-visible {
     transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
-.card-content h2 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 0.25rem;
-}
+.card-content h2 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.25rem; }
+.card-content p { font-size: 0.85rem; color: #666666; }
 
-.card-content p {
-    font-size: 0.85rem;
-    color: #666666;
-}
+.card-large { grid-row: span 2; }
+.card-large-wide { grid-column: span 2; }
+.card-full-wide { grid-column: 1 / -1; }
 
-.card-large {
-    grid-row: span 2;
-}
-
-.card-large-wide {
-    grid-column: span 2;
-}
-
-/* Anchors the bottom of the grid */
-.card-full-wide {
-    grid-column: 1 / -1; 
-}
-
-.bento-card:hover {
-    border-color: #4A5C6A;
-    transform: translateY(-0.125rem);
-}
+.bento-card:hover { border-color: #4A5C6A; transform: translateY(-0.125rem); }
 
 /* =========================================
-   BENTO CARD MINI PREVIEWS
+   BENTO CARD MINI PREVIEWS (GLITCH FREE)
    ========================================= */
-.library-card-special {
-    position: relative;
-    overflow: hidden; 
-}
+.library-card-special { position: relative; overflow: hidden; }
 
 .mini-manga-stack {
     display: flex;
@@ -275,10 +198,15 @@ a:focus-visible, button:focus-visible {
     box-shadow: 4px 0 10px rgba(0, 0, 0, 0.15); 
     flex-shrink: 0;
     
-    /* Image Quality & Sharpness Fix */
+    /* Ultimate Image Quality & Sharpness Fix */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    filter: contrast(1.02) saturate(1.05); /* Recovers lost detail from browser downscaling */
+    filter: contrast(1.02) saturate(1.05);
+    
+    /* Hardware GPU pre-load to prevent jitter/glitches */
+    will-change: transform, margin, border-color, box-shadow;
 
     transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), 
                 margin 0.7s cubic-bezier(0.22, 1, 0.36, 1), 
@@ -294,15 +222,10 @@ a:focus-visible, button:focus-visible {
 .mini-manga:nth-child(4) { z-index: 2; transform: rotate(2deg) translateY(0px); }
 .mini-manga:nth-child(5) { z-index: 1; transform: rotate(-1deg) translateY(2px); }
 
-/* Looser, natural base overlap */
-.mini-manga:not(:first-child) {
-    margin-left: -2.7rem; 
-}
+.mini-manga:not(:first-child) { margin-left: -2.7rem; }
 
-/* Card Hover: MAXIMUM SPREAD (Barely touching) */
-.library-card-special:hover .mini-manga:not(:first-child) {
-    margin-left: -0.5rem; 
-}
+/* Hover Spread */
+.library-card-special:hover .mini-manga:not(:first-child) { margin-left: -0.5rem; }
 
 .library-card-special:hover .mini-manga:nth-child(1) { transform: rotate(-4deg) translateY(0); }
 .library-card-special:hover .mini-manga:nth-child(2) { transform: rotate(-2deg) translateY(0); }
@@ -310,7 +233,7 @@ a:focus-visible, button:focus-visible {
 .library-card-special:hover .mini-manga:nth-child(4) { transform: rotate(2deg) translateY(0); }
 .library-card-special:hover .mini-manga:nth-child(5) { transform: rotate(4deg) translateY(0); }
 
-/* Individual Book Hover */
+/* Individual Book Hover Focus */
 .library-card-special .mini-manga:nth-child(odd):hover {
     transform: translate(0.25rem, -1.2rem) rotate(-3deg) scale(1.05) !important;
     z-index: 10 !important; 
@@ -326,7 +249,7 @@ a:focus-visible, button:focus-visible {
 }
 
 /* =========================================
-   DYNAMIC HOVER TITLES (ZERO LAYOUT SHIFT)
+   DYNAMIC HOVER TITLES (SCALED & STABILIZED)
    ========================================= */
 .dynamic-book-title {
     color: var(--hover-gray);
@@ -334,56 +257,59 @@ a:focus-visible, button:focus-visible {
     opacity: 0; 
     transition: opacity 0.3s ease;
     white-space: nowrap; 
-    
-    /* THE FIX: Takes the text out of the document flow so it never shifts your layout */
     position: absolute;
     pointer-events: none;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
 }
 
-/* Fade in the title area when ANY book is hovered */
-.library-card-special:has(.mini-manga:hover) .dynamic-book-title {
-    opacity: 1;
+.library-card-special:has(.mini-manga:hover) .dynamic-book-title { opacity: 1; }
+
+.dynamic-book-title::after {
+    margin-left: 0.25rem; 
+    display: inline-block;
 }
 
-/* 1. Your Lie in April (Shigatsu wa Kimi no Uso) */
+/* Scaled down typography perfectly aligned to baseline */
 .library-card-special:has(.mini-manga:nth-child(1):hover) .dynamic-book-title::after { 
-    content: "— \00A0 Your Lie in April / 四月は君の嘘"; 
-    font-family: 'Caveat', cursive;
+    content: "Your Lie in April / 四月は君の嘘"; 
+    font-family: 'Caveat', cursive, sans-serif;
     font-weight: 700;
-    font-size: 1.3rem; 
+    font-size: 1.15rem; 
+    transform: translateY(0.12rem); 
 }
 
-/* 2. Blue Box (Ao no Hako) */
 .library-card-special:has(.mini-manga:nth-child(2):hover) .dynamic-book-title::after { 
-    content: "— \00A0 Blue Box / アオのハコ"; 
+    content: "Blue Box / アオのハコ"; 
     font-family: 'Fredoka', sans-serif;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 0.9rem;
     letter-spacing: -0.02rem;
 }
 
-/* 3. Kubo (Kubo-san wa Mobu wo Yurusanai) */
 .library-card-special:has(.mini-manga:nth-child(3):hover) .dynamic-book-title::after { 
-    content: "— \00A0 Kubo Won't Let Me Be Invisible / 久保さんは僕を許さない"; 
-    font-family: 'Sniglet', cursive;
-    font-size: 1rem;
+    content: "Kubo Won't Let Me Be Invisible / 久保さんは僕を許さない"; 
+    font-family: 'Sniglet', cursive, sans-serif;
+    font-weight: 400; 
+    font-size: 0.9rem;
 }
 
-/* 4. Kaguya-sama (Kaguya-sama wa Kokurasetai) */
 .library-card-special:has(.mini-manga:nth-child(4):hover) .dynamic-book-title::after { 
-    content: "— \00A0 KAGUYA-SAMA: LOVE IS WAR / かぐや様は告らせたい"; 
+    content: "KAGUYA-SAMA: LOVE IS WAR / かぐや様は告らせたい"; 
     font-family: 'Teko', sans-serif;
     font-weight: 600;
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     letter-spacing: 0.05rem;
+    transform: translateY(0.08rem);
 }
 
-/* 5. Spy x Family (Supai Famirī) */
 .library-card-special:has(.mini-manga:nth-child(5):hover) .dynamic-book-title::after { 
-    content: "— \00A0 SPY x FAMILY / スパイファミリー"; 
+    content: "SPY x FAMILY / スパイファミリー"; 
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.2rem;
+    font-weight: 400; 
+    font-size: 1.05rem;
     letter-spacing: 0.05rem;
+    transform: translateY(0.08rem);
 }
 
 /* =========================================
@@ -396,22 +322,9 @@ a:focus-visible, button:focus-visible {
     width: 100%;
 }
 
-.library-header {
-    text-align: center;
-    margin-bottom: 5rem;
-}
-
-.library-header h1 {
-    font-size: 3rem;
-    font-weight: 800;
-    letter-spacing: -0.02rem;
-}
-
-.library-header p {
-    color: #666666;
-    margin-top: 1rem;
-    font-size: 1.1rem;
-}
+.library-header { text-align: center; margin-bottom: 5rem; }
+.library-header h1 { font-size: 3rem; font-weight: 800; letter-spacing: -0.02rem; }
+.library-header p { color: #666666; margin-top: 1rem; font-size: 1.1rem; }
 
 .manga-shelf {
     display: flex;
@@ -432,10 +345,13 @@ a:focus-visible, button:focus-visible {
     border: 1px solid transparent; 
     box-shadow: 10px 0 20px rgba(0, 0, 0, 0.15); 
     
-    /* Image Quality & Sharpness Fix */
+    /* Ultimate Image Quality Fix */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     filter: contrast(1.02) saturate(1.05);
+    will-change: transform, margin, border-color, box-shadow;
 
     transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), 
                 margin 0.7s cubic-bezier(0.22, 1, 0.36, 1), 
@@ -444,7 +360,7 @@ a:focus-visible, button:focus-visible {
     cursor: pointer;
 }
 
-/* Organic "Messy" Base State */
+/* Organic Base State */
 .manga-book:nth-child(1) { z-index: 8; transform: rotate(-3deg) translateY(3px); }
 .manga-book:nth-child(2) { z-index: 7; transform: rotate(1.5deg) translateY(-2px); }
 .manga-book:nth-child(3) { z-index: 6; transform: rotate(-2deg) translateY(4px); }
@@ -454,15 +370,10 @@ a:focus-visible, button:focus-visible {
 .manga-book:nth-child(7) { z-index: 2; transform: rotate(-2.5deg) translateY(1px); }
 .manga-book:nth-child(8) { z-index: 1; transform: rotate(1deg) translateY(2px); }
 
-/* Looser, natural base overlap */
-.manga-book:not(:first-child) {
-    margin-left: -7.5rem; 
-}
+.manga-book:not(:first-child) { margin-left: -7.5rem; }
 
-/* Shelf Hover: MAXIMUM SPREAD (Barely touching) */
-.manga-shelf:hover .manga-book:not(:first-child) {
-    margin-left: -2rem; 
-}
+/* Shelf Hover Spread */
+.manga-shelf:hover .manga-book:not(:first-child) { margin-left: -2rem; }
 
 .manga-shelf:hover .manga-book:nth-child(1) { transform: rotate(-7deg) translateY(0); }
 .manga-shelf:hover .manga-book:nth-child(2) { transform: rotate(-5deg) translateY(0); }
@@ -473,7 +384,7 @@ a:focus-visible, button:focus-visible {
 .manga-shelf:hover .manga-book:nth-child(7) { transform: rotate(5deg) translateY(0); }
 .manga-shelf:hover .manga-book:nth-child(8) { transform: rotate(7deg) translateY(0); }
 
-/* Individual Book Hover */
+/* Individual Book Focus */
 .manga-book:nth-child(odd):hover {
     transform: translate(0.5rem, -2.5rem) rotate(-3deg) scale(1.03) !important;
     z-index: 20 !important; 
@@ -486,303 +397,71 @@ a:focus-visible, button:focus-visible {
     z-index: 20 !important; 
     border-color: var(--kodansha-black); 
     box-shadow: 0 25px 45px rgba(0, 0, 0, 0.4); 
-}/* =========================================
-   4. LEGAL PAGES (Privacy, Terms, etc.)
+}
+
+/* =========================================
+   4. LEGAL PAGES
    ========================================= */
-.legal-container {
-    max-width: 50rem; 
-    margin: 4rem auto 8rem auto;
-    padding: 0 3rem;
-    width: 100%;
-}
-
-.legal-header {
-    text-align: center; 
-    margin-bottom: 1.5rem; /* Pulled up to match Kodansha */
-}
-
-.legal-header h1 {
-    font-size: 3rem; 
-    font-weight: 800;
-    letter-spacing: -0.02rem;
-}
-
-/* Crisp document font stack specifically for legal reading */
-.legal-content {
-    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
-.legal-content h2 {
-    font-size: 1.1rem; 
-    font-weight: 700;
-    text-transform: uppercase;
-    margin: 3rem 0 1rem 0;
-    letter-spacing: 0.05rem;
-}
-
-.legal-content p, .legal-content ul {
-    margin-bottom: 1.5rem;
-    color: #111111; 
-    line-height: 1.7; 
-    font-size: 0.95rem; 
-}
-
-.legal-content strong {
-    font-weight: 700;
-    color: #000000;
-}
-
-.legal-content ul {
-    padding-left: 2rem;
-}
-
-.legal-content li {
-    margin-bottom: 0.75rem;
-}
-
-.legal-content a {
-    color: var(--kodansha-black) !important;
-    font-weight: 600;
-    text-decoration: underline;
-    text-decoration-thickness: 0.125rem;
-    text-underline-offset: 0.2rem;
-    transition: color 0.2s ease;
-}
-
-.legal-content a:hover {
-    color: var(--hover-gray) !important;
-}
+.legal-container { max-width: 50rem; margin: 4rem auto 8rem auto; padding: 0 3rem; width: 100%; }
+.legal-header { text-align: center; margin-bottom: 1.5rem; }
+.legal-header h1 { font-size: 3rem; font-weight: 800; letter-spacing: -0.02rem; }
+.legal-content { font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif; }
+.legal-content h2 { font-size: 1.1rem; font-weight: 700; text-transform: uppercase; margin: 3rem 0 1rem 0; letter-spacing: 0.05rem; }
+.legal-content p, .legal-content ul { margin-bottom: 1.5rem; color: #111111; line-height: 1.7; font-size: 0.95rem; }
+.legal-content strong { font-weight: 700; color: #000000; }
+.legal-content ul { padding-left: 2rem; }
+.legal-content li { margin-bottom: 0.75rem; }
+.legal-content a { color: var(--kodansha-black) !important; font-weight: 600; text-decoration: underline; text-decoration-thickness: 0.125rem; text-underline-offset: 0.2rem; transition: color 0.2s ease; }
+.legal-content a:hover { color: var(--hover-gray) !important; }
 
 /* =========================================
    5. ARCHITECTURAL FOOTER
    ========================================= */
-.site-footer {
-    background-color: var(--kodansha-black);
-    color: var(--bg-color);
-    padding: 5rem calc(1.5vw + 1.5rem) 2rem calc(1.5vw + 1.5rem); 
-    margin-top: auto; 
-    width: 100%;
-}
-
-.footer-top {
-    display: flex; 
-    justify-content: space-between; 
-    width: 100%;
-}
-
-.footer-brand {
-    width: 42%; 
-    padding-right: 3rem;
-}
-
-.footer-logo {
-    color: var(--bg-color); 
-    font-size: 1.5rem;
-    display: block; 
-    margin-bottom: 0.5rem;
-}
-
-.footer-brand h2 {
-    font-size: 2rem; 
-    font-weight: 700;
-    margin: 1.5rem 0 1.25rem 0;
-    letter-spacing: -0.03rem;
-    line-height: 1.2;
-}
-
-.footer-brand p {
-    font-size: 0.875rem;
-    color: #A0A0A0; 
-    line-height: 1.7;
-    max-width: 36rem; 
-}
-
-.footer-links {
-    width: 50%; 
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2.5rem;
-}
-
-.link-column h3 {
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--bg-color);
-    text-transform: uppercase;
-    letter-spacing: 0.1rem;
-    border-bottom: 0.0625rem solid #333333; 
-    padding-bottom: 0.5rem;
-    margin-bottom: 1.25rem;
-}
-
-.link-column ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
-
-.link-column a {
-    text-decoration: none;
-    color: #A0A0A0;
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08rem;
-    transition: color 0.2s ease;
-}
-
-.link-column a:hover {
-    color: var(--bg-color); 
-}
-
-.footer-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin-top: 6rem;
-    padding-top: 2rem;
-    border-bottom: 0.0625rem solid #333333;
-    font-size: 0.7rem;
-    font-weight: 700;
-    color: #777777;
-    text-transform: uppercase;
-    letter-spacing: 0.08rem;
-}
-
-.footer-bottom-links {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap; /* Allows links to wrap on very small screens */
-    gap: 1.25rem;
-}
-
-.footer-bottom-links a {
-    color: #777777;
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-.footer-bottom-links a:hover {
-    color: var(--bg-color);
-}
+.site-footer { background-color: var(--kodansha-black); color: var(--bg-color); padding: 5rem calc(1.5vw + 1.5rem) 2rem calc(1.5vw + 1.5rem); margin-top: auto; width: 100%; }
+.footer-top { display: flex; justify-content: space-between; width: 100%; }
+.footer-brand { width: 42%; padding-right: 3rem; }
+.footer-logo { color: var(--bg-color); font-size: 1.5rem; display: block; margin-bottom: 0.5rem; }
+.footer-brand h2 { font-size: 2rem; font-weight: 700; margin: 1.5rem 0 1.25rem 0; letter-spacing: -0.03rem; line-height: 1.2; }
+.footer-brand p { font-size: 0.875rem; color: #A0A0A0; line-height: 1.7; max-width: 36rem; }
+.footer-links { width: 50%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+.link-column h3 { font-size: 0.75rem; font-weight: 700; color: var(--bg-color); text-transform: uppercase; letter-spacing: 0.1rem; border-bottom: 0.0625rem solid #333333; padding-bottom: 0.5rem; margin-bottom: 1.25rem; }
+.link-column ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+.link-column a { text-decoration: none; color: #A0A0A0; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08rem; transition: color 0.2s ease; }
+.link-column a:hover { color: var(--bg-color); }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; width: 100%; margin-top: 6rem; padding-top: 2rem; border-bottom: 0.0625rem solid #333333; font-size: 0.7rem; font-weight: 700; color: #777777; text-transform: uppercase; letter-spacing: 0.08rem; }
+.footer-bottom-links { display: flex; align-items: center; flex-wrap: wrap; gap: 1.25rem; }
+.footer-bottom-links a { color: #777777; text-decoration: none; transition: color 0.2s ease; }
+.footer-bottom-links a:hover { color: var(--bg-color); }
 
 /* =========================================
    6. MODERN MOBILE RESPONSIVENESS
    ========================================= */
 @media (max-width: 48rem) {
+    body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    .top-nav { margin: 0; top: 0; width: 100%; border-left: none; border-right: none; border-top: none; padding: max(1rem, env(safe-area-inset-top)) 1.5rem 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .btn-action { padding: 0.5rem 0.875rem; font-size: 0.7rem; }
+    .hero { padding: 3rem max(1.5rem, env(safe-area-inset-right)) 2rem max(1.5rem, env(safe-area-inset-left)); }
+    .hero h1 { font-size: 2.25rem; letter-spacing: -0.03rem; line-height: 1.15; }
+    .hero h2 { font-size: 1rem; margin-top: 0.75rem; line-height: 1.5; }
+    .bento-container { grid-template-columns: 1fr; padding: 0 max(1.5rem, env(safe-area-inset-right)) 0 max(1.5rem, env(safe-area-inset-left)); gap: 1.25rem; }
+    .card-large, .card-large-wide, .card-full-wide { grid-row: span 1; grid-column: span 1; }
+    .bento-card { padding: 1.5rem; }
     
-    /* Hardware Rendering Enhancements for OLED/Retina */
-    body {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }
+    /* Disable complex hover effects on mobile for native tap feel */
+    .library-card-special:hover .mini-manga:not(:first-child) { margin-left: -2.7rem; }
+    .dynamic-book-title { display: none; }
 
-    /* FIX: Flush Nav Mobile - No more floating white box */
-    .top-nav {
-        margin: 0; /* Remove floating margins */
-        top: 0; /* Sit absolutely flush against the screen top */
-        width: 100%;
-        border-left: none; /* Remove side borders */
-        border-right: none;
-        border-top: none;
-        /* Use padding to push content safely below the physical notch */
-        padding: max(1rem, env(safe-area-inset-top)) 1.5rem 1rem 1.5rem; 
-    }
-    .nav-links {
-        display: none; 
-    }
-    
-    /* Optimized touch targets for thumbs */
-    .btn-action {
-        padding: 0.5rem 0.875rem; 
-        font-size: 0.7rem;
-    }
-
-    /* Hero Mobile */
-    .hero {
-        padding: 3rem max(1.5rem, env(safe-area-inset-right)) 2rem max(1.5rem, env(safe-area-inset-left));
-    }
-    .hero h1 {
-        font-size: 2.25rem; 
-        letter-spacing: -0.03rem;
-        line-height: 1.15;
-    }
-    .hero h2 {
-        font-size: 1rem;
-        margin-top: 0.75rem;
-        line-height: 1.5;
-    }
-
-    /* Bento Grid Mobile */
-    .bento-container {
-        grid-template-columns: 1fr;
-        padding: 0 max(1.5rem, env(safe-area-inset-right)) 0 max(1.5rem, env(safe-area-inset-left));
-        gap: 1.25rem; 
-    }
-    
-    /* FIX: Tells all special desktop cards to become standard squares on mobile */
-    .card-large, .card-large-wide, .card-full-wide {
-        grid-row: span 1;
-        grid-column: span 1;
-    }
-    
-    .bento-card {
-        padding: 1.5rem; 
-    }
-
-    /* Legal Pages Mobile Scaling */
-    .legal-container {
-        margin: 1.5rem auto 4rem auto;
-        padding: 0 max(1.5rem, env(safe-area-inset-right)) 0 max(1.5rem, env(safe-area-inset-left));
-    }
-    .legal-header h1 {
-        font-size: 2.2rem;
-        line-height: 1.2;
-    }
-    .legal-content h2 {
-        font-size: 1.05rem;
-        margin: 2rem 0 1rem 0; 
-    }
-    .legal-content p, .legal-content ul {
-        font-size: 0.95rem; 
-        line-height: 1.6; 
-    }
-
-    /* Library Mobile Scaling */
-    .manga-shelf {
-        justify-content: flex-start; /* Allows smooth swiping on mobile */
-        padding-bottom: 2rem;
-    }
-    .manga-book {
-        width: 8rem;
-        box-shadow: -8px 0 15px rgba(0, 0, 0, 0.2);
-    }
-    .manga-book:not(:first-child) {
-        margin-left: -5rem; 
-    }
-
-    /* Footer Mobile */
-    .footer-top {
-        flex-direction: column; 
-        gap: 3rem;
-    }
-    .footer-brand, .footer-links {
-        flex: 1 1 auto; 
-        width: 100%;
-        padding-right: 0;
-    }
-    .footer-links {
-        grid-template-columns: 1fr; 
-        gap: 2.5rem;
-    }
-    .footer-bottom {
-        flex-direction: column; 
-        gap: 1.5rem;
-        text-align: center;
-    }
-    .site-footer {
-        padding: 4rem max(1.5rem, env(safe-area-inset-right)) max(2rem, env(safe-area-inset-bottom)) max(1.5rem, env(safe-area-inset-left));
-    }
+    .legal-container { margin: 1.5rem auto 4rem auto; padding: 0 max(1.5rem, env(safe-area-inset-right)) 0 max(1.5rem, env(safe-area-inset-left)); }
+    .legal-header h1 { font-size: 2.2rem; line-height: 1.2; }
+    .legal-content h2 { font-size: 1.05rem; margin: 2rem 0 1rem 0; }
+    .legal-content p, .legal-content ul { font-size: 0.95rem; line-height: 1.6; }
+    .manga-shelf { justify-content: flex-start; padding-bottom: 2rem; }
+    .manga-book { width: 8rem; box-shadow: -8px 0 15px rgba(0, 0, 0, 0.2); }
+    .manga-book:not(:first-child) { margin-left: -5rem; }
+    .footer-top { flex-direction: column; gap: 3rem; }
+    .footer-brand, .footer-links { flex: 1 1 auto; width: 100%; padding-right: 0; }
+    .footer-links { grid-template-columns: 1fr; gap: 2.5rem; }
+    .footer-bottom { flex-direction: column; gap: 1.5rem; text-align: center; }
+    .site-footer { padding: 4rem max(1.5rem, env(safe-area-inset-right)) max(2rem, env(safe-area-inset-bottom)) max(1.5rem, env(safe-area-inset-left)); }
 }
