@@ -275,10 +275,10 @@ a:focus-visible, button:focus-visible {
     box-shadow: 4px 0 10px rgba(0, 0, 0, 0.15); 
     flex-shrink: 0;
     
-    /* IMAGE QUALITY FIX: Forces sharp downscaling */
-    image-rendering: high-quality;
-    image-rendering: -webkit-optimize-contrast;
-    will-change: transform; /* Prevents blur during animation */
+    /* Image Quality & Sharpness Fix */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    filter: contrast(1.02) saturate(1.05); /* Recovers lost detail from browser downscaling */
 
     transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), 
                 margin 0.7s cubic-bezier(0.22, 1, 0.36, 1), 
@@ -326,7 +326,7 @@ a:focus-visible, button:focus-visible {
 }
 
 /* =========================================
-   DYNAMIC HOVER TITLES
+   DYNAMIC HOVER TITLES (ZERO LAYOUT SHIFT)
    ========================================= */
 .dynamic-book-title {
     color: var(--hover-gray);
@@ -334,8 +334,10 @@ a:focus-visible, button:focus-visible {
     opacity: 0; 
     transition: opacity 0.3s ease;
     white-space: nowrap; 
-    display: inline-block;
-    vertical-align: baseline;
+    
+    /* THE FIX: Takes the text out of the document flow so it never shifts your layout */
+    position: absolute;
+    pointer-events: none;
 }
 
 /* Fade in the title area when ANY book is hovered */
@@ -360,14 +362,14 @@ a:focus-visible, button:focus-visible {
     letter-spacing: -0.02rem;
 }
 
-/* 3. Kubo Won't Let Me Be Invisible (Kubo-san wa Mobu wo Yurusanai) */
+/* 3. Kubo (Kubo-san wa Mobu wo Yurusanai) */
 .library-card-special:has(.mini-manga:nth-child(3):hover) .dynamic-book-title::after { 
     content: "— \00A0 Kubo Won't Let Me Be Invisible / 久保さんは僕を許さない"; 
     font-family: 'Sniglet', cursive;
     font-size: 1rem;
 }
 
-/* 4. Kaguya-sama: Love Is War (Kaguya-sama wa Kokurasetai) */
+/* 4. Kaguya-sama (Kaguya-sama wa Kokurasetai) */
 .library-card-special:has(.mini-manga:nth-child(4):hover) .dynamic-book-title::after { 
     content: "— \00A0 KAGUYA-SAMA: LOVE IS WAR / かぐや様は告らせたい"; 
     font-family: 'Teko', sans-serif;
@@ -429,6 +431,12 @@ a:focus-visible, button:focus-visible {
     box-sizing: border-box; 
     border: 1px solid transparent; 
     box-shadow: 10px 0 20px rgba(0, 0, 0, 0.15); 
+    
+    /* Image Quality & Sharpness Fix */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    filter: contrast(1.02) saturate(1.05);
+
     transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), 
                 margin 0.7s cubic-bezier(0.22, 1, 0.36, 1), 
                 border-color 0.3s ease, 
@@ -478,9 +486,7 @@ a:focus-visible, button:focus-visible {
     z-index: 20 !important; 
     border-color: var(--kodansha-black); 
     box-shadow: 0 25px 45px rgba(0, 0, 0, 0.4); 
-}
-
-/* =========================================
+}/* =========================================
    4. LEGAL PAGES (Privacy, Terms, etc.)
    ========================================= */
 .legal-container {
