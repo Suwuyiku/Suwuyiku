@@ -174,9 +174,12 @@ a:focus-visible, button:focus-visible {
 .bento-card:hover { border-color: #4A5C6A; transform: translateY(-0.125rem); }
 
 /* =========================================
-   BENTO CARD MINI PREVIEWS (GLITCH FREE)
+   BENTO CARD MINI PREVIEWS
    ========================================= */
-.library-card-special { position: relative; overflow: hidden; }
+.library-card-special {
+    position: relative;
+    overflow: hidden; 
+}
 
 .mini-manga-stack {
     display: flex;
@@ -198,14 +201,10 @@ a:focus-visible, button:focus-visible {
     box-shadow: 4px 0 10px rgba(0, 0, 0, 0.15); 
     flex-shrink: 0;
     
-    /* Ultimate Image Quality & Sharpness Fix */
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
+    /* Removed the pixelating crisp-edges code. Returned to smooth rendering. */
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     filter: contrast(1.02) saturate(1.05);
-    
-    /* Hardware GPU pre-load to prevent jitter/glitches */
     will-change: transform, margin, border-color, box-shadow;
 
     transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), 
@@ -215,7 +214,7 @@ a:focus-visible, button:focus-visible {
     cursor: pointer;
 }
 
-/* Organic "Messy" Base State */
+/* Organic Base State */
 .mini-manga:nth-child(1) { z-index: 5; transform: rotate(-3deg) translateY(2px); }
 .mini-manga:nth-child(2) { z-index: 4; transform: rotate(1deg) translateY(-1px); }
 .mini-manga:nth-child(3) { z-index: 3; transform: rotate(-2deg) translateY(3px); }
@@ -233,7 +232,7 @@ a:focus-visible, button:focus-visible {
 .library-card-special:hover .mini-manga:nth-child(4) { transform: rotate(2deg) translateY(0); }
 .library-card-special:hover .mini-manga:nth-child(5) { transform: rotate(4deg) translateY(0); }
 
-/* Individual Book Hover Focus */
+/* Individual Book Focus */
 .library-card-special .mini-manga:nth-child(odd):hover {
     transform: translate(0.25rem, -1.2rem) rotate(-3deg) scale(1.05) !important;
     z-index: 10 !important; 
@@ -249,68 +248,49 @@ a:focus-visible, button:focus-visible {
 }
 
 /* =========================================
-   DYNAMIC HOVER TITLES (SCALED & STABILIZED)
+   DYNAMIC HOVER TITLES (HTML-BASED MULTILINGUAL FIX)
    ========================================= */
 .dynamic-book-title {
     color: var(--hover-gray);
     margin-left: 0.25rem;
-    opacity: 0; 
-    transition: opacity 0.3s ease;
-    white-space: nowrap; 
     position: absolute;
     pointer-events: none;
     font-family: 'Inter', sans-serif;
     font-weight: 500;
 }
 
-.library-card-special:has(.mini-manga:hover) .dynamic-book-title { opacity: 1; }
+.book-title {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+}
 
-.dynamic-book-title::after {
-    margin-left: 0.25rem; 
+/* Activate the correct title when a book is hovered */
+.library-card-special:has(.mini-manga:nth-child(1):hover) .title-1,
+.library-card-special:has(.mini-manga:nth-child(2):hover) .title-2,
+.library-card-special:has(.mini-manga:nth-child(3):hover) .title-3,
+.library-card-special:has(.mini-manga:nth-child(4):hover) .title-4,
+.library-card-special:has(.mini-manga:nth-child(5):hover) .title-5 {
     display: inline-block;
+    opacity: 1;
 }
 
-/* Scaled down typography perfectly aligned to baseline */
-.library-card-special:has(.mini-manga:nth-child(1):hover) .dynamic-book-title::after { 
-    content: "Your Lie in April / 四月は君の嘘"; 
-    font-family: 'Caveat', cursive, sans-serif;
-    font-weight: 700;
-    font-size: 1.15rem; 
-    transform: translateY(0.12rem); 
+/* Pure Japanese Base Reset - Completely isolates it from the English fonts */
+.jp {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-weight: 400 !important;
+    font-size: 0.9rem !important;
+    letter-spacing: normal !important;
+    vertical-align: baseline;
 }
 
-.library-card-special:has(.mini-manga:nth-child(2):hover) .dynamic-book-title::after { 
-    content: "Blue Box / アオのハコ"; 
-    font-family: 'Fredoka', sans-serif;
-    font-weight: 600;
-    font-size: 0.9rem;
-    letter-spacing: -0.02rem;
-}
-
-.library-card-special:has(.mini-manga:nth-child(3):hover) .dynamic-book-title::after { 
-    content: "Kubo Won't Let Me Be Invisible / 久保さんは僕を許さない"; 
-    font-family: 'Sniglet', cursive, sans-serif;
-    font-weight: 400; 
-    font-size: 0.9rem;
-}
-
-.library-card-special:has(.mini-manga:nth-child(4):hover) .dynamic-book-title::after { 
-    content: "KAGUYA-SAMA: LOVE IS WAR / かぐや様は告らせたい"; 
-    font-family: 'Teko', sans-serif;
-    font-weight: 600;
-    font-size: 1.1rem;
-    letter-spacing: 0.05rem;
-    transform: translateY(0.08rem);
-}
-
-.library-card-special:has(.mini-manga:nth-child(5):hover) .dynamic-book-title::after { 
-    content: "SPY x FAMILY / スパイファミリー"; 
-    font-family: 'Bebas Neue', sans-serif;
-    font-weight: 400; 
-    font-size: 1.05rem;
-    letter-spacing: 0.05rem;
-    transform: translateY(0.08rem);
-}
+/* Individual English Stylings */
+.title-1 .eng { font-family: 'Caveat', cursive; font-weight: 700; font-size: 1.15rem; display: inline-block; transform: translateY(0.12rem); }
+.title-2 .eng { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 0.9rem; letter-spacing: -0.02rem; }
+.title-3 .eng { font-family: 'Sniglet', cursive; font-weight: 400; font-size: 0.9rem; }
+.title-4 .eng { font-family: 'Teko', sans-serif; font-weight: 600; font-size: 1.1rem; letter-spacing: 0.05rem; display: inline-block; transform: translateY(0.08rem); }
+.title-5 .eng { font-family: 'Bebas Neue', sans-serif; font-weight: 400; font-size: 1.05rem; letter-spacing: 0.05rem; display: inline-block; transform: translateY(0.08rem); }
 
 /* =========================================
    7. LIBRARY / MANGA SHELF
@@ -345,9 +325,7 @@ a:focus-visible, button:focus-visible {
     border: 1px solid transparent; 
     box-shadow: 10px 0 20px rgba(0, 0, 0, 0.15); 
     
-    /* Ultimate Image Quality Fix */
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
+    /* Removed the pixelating crisp-edges code. Returned to smooth rendering. */
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     filter: contrast(1.02) saturate(1.05);
