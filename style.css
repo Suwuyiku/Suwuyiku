@@ -261,6 +261,9 @@ a:focus-visible, button:focus-visible {
     justify-content: flex-end; 
     width: 100%;
     margin-top: 1rem;
+    /* Pulls the stack away from the hard edges so it floats naturally */
+    padding-right: 2rem; 
+    padding-bottom: 0.5rem;
 }
 
 .mini-manga {
@@ -268,11 +271,10 @@ a:focus-visible, button:focus-visible {
     height: auto;
     border-radius: 4px; 
     position: relative; 
-    box-sizing: border-box; /* Forces border to draw inside so it doesn't shift */
-    border: 1px solid transparent; /* True border prevents the rotation glitch */
+    box-sizing: border-box; 
+    border: 1px solid transparent; 
     box-shadow: 4px 0 10px rgba(0, 0, 0, 0.15); 
     flex-shrink: 0;
-    /* Ultimate Smoothness Engine */
     transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), 
                 margin 0.7s cubic-bezier(0.22, 1, 0.36, 1), 
                 border-color 0.3s ease, 
@@ -280,7 +282,7 @@ a:focus-visible, button:focus-visible {
     cursor: pointer;
 }
 
-/* 1. Organic "Messy" Base State */
+/* Organic "Messy" Base State */
 .mini-manga:nth-child(1) { z-index: 5; transform: rotate(-3deg) translateY(2px); }
 .mini-manga:nth-child(2) { z-index: 4; transform: rotate(1deg) translateY(-1px); }
 .mini-manga:nth-child(3) { z-index: 3; transform: rotate(-2deg) translateY(3px); }
@@ -292,9 +294,9 @@ a:focus-visible, button:focus-visible {
     margin-left: -2.7rem; 
 }
 
-/* 2. Card Hover: The Perfect Spread (Just touching) */
+/* Card Hover: MAXIMUM SPREAD (Barely touching) */
 .library-card-special:hover .mini-manga:not(:first-child) {
-    margin-left: -1.2rem; 
+    margin-left: -0.5rem; 
 }
 
 .library-card-special:hover .mini-manga:nth-child(1) { transform: rotate(-4deg) translateY(0); }
@@ -303,7 +305,7 @@ a:focus-visible, button:focus-visible {
 .library-card-special:hover .mini-manga:nth-child(4) { transform: rotate(2deg) translateY(0); }
 .library-card-special:hover .mini-manga:nth-child(5) { transform: rotate(4deg) translateY(0); }
 
-/* 3. Individual Book Hover: Glitch-free, true borders */
+/* Individual Book Hover */
 .library-card-special .mini-manga:nth-child(odd):hover {
     transform: translate(0.25rem, -1.2rem) rotate(-3deg) scale(1.05) !important;
     z-index: 10 !important; 
@@ -361,9 +363,8 @@ a:focus-visible, button:focus-visible {
     border-radius: 6px; 
     position: relative;
     box-sizing: border-box; 
-    border: 1px solid transparent; /* True border prevents the rotation glitch */
+    border: 1px solid transparent; 
     box-shadow: 10px 0 20px rgba(0, 0, 0, 0.15); 
-    /* Ultimate Smoothness Engine */
     transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), 
                 margin 0.7s cubic-bezier(0.22, 1, 0.36, 1), 
                 border-color 0.3s ease, 
@@ -371,7 +372,7 @@ a:focus-visible, button:focus-visible {
     cursor: pointer;
 }
 
-/* 1. Organic "Messy" Base State */
+/* Organic "Messy" Base State */
 .manga-book:nth-child(1) { z-index: 8; transform: rotate(-3deg) translateY(3px); }
 .manga-book:nth-child(2) { z-index: 7; transform: rotate(1.5deg) translateY(-2px); }
 .manga-book:nth-child(3) { z-index: 6; transform: rotate(-2deg) translateY(4px); }
@@ -386,9 +387,9 @@ a:focus-visible, button:focus-visible {
     margin-left: -7.5rem; 
 }
 
-/* 2. Shelf Hover: The Perfect Spread (Just touching) */
+/* Shelf Hover: MAXIMUM SPREAD (Barely touching) */
 .manga-shelf:hover .manga-book:not(:first-child) {
-    margin-left: -4rem; 
+    margin-left: -2rem; 
 }
 
 .manga-shelf:hover .manga-book:nth-child(1) { transform: rotate(-7deg) translateY(0); }
@@ -400,7 +401,7 @@ a:focus-visible, button:focus-visible {
 .manga-shelf:hover .manga-book:nth-child(7) { transform: rotate(5deg) translateY(0); }
 .manga-shelf:hover .manga-book:nth-child(8) { transform: rotate(7deg) translateY(0); }
 
-/* 3. Individual Book Hover: Glitch-free, true borders */
+/* Individual Book Hover */
 .manga-book:nth-child(odd):hover {
     transform: translate(0.5rem, -2.5rem) rotate(-3deg) scale(1.03) !important;
     z-index: 20 !important; 
@@ -413,7 +414,9 @@ a:focus-visible, button:focus-visible {
     z-index: 20 !important; 
     border-color: var(--kodansha-black); 
     box-shadow: 0 25px 45px rgba(0, 0, 0, 0.4); 
-}/* =========================================
+}
+
+/* =========================================
    4. LEGAL PAGES (Privacy, Terms, etc.)
    ========================================= */
 .legal-container {
