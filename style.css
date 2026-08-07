@@ -210,6 +210,11 @@ a:focus-visible, button:focus-visible {
     grid-column: span 2;
 }
 
+/* NEW: Anchors the bottom of the grid */
+.card-full-wide {
+    grid-column: 1 / -1; 
+}
+
 .bento-card:hover {
     border-color: #4A5C6A;
     transform: translateY(-0.125rem);
