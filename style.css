@@ -1,4 +1,12 @@
-/* Global Reset */
+/* =========================================
+   1. GLOBAL RESET & BASE VARS
+   ========================================= */
+html {
+    font-size: 100%;
+    -webkit-text-size-adjust: 100%; /* Prevents iOS text zoom */
+    scroll-behavior: smooth;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -27,8 +35,14 @@ body {
     min-height: 100vh;
 }
 
+/* Accessibility Focus States */
+a:focus-visible, button:focus-visible {
+    outline: 0.125rem solid var(--hover-gray);
+    outline-offset: 0.125rem;
+}
+
 /* =========================================
-   1. KODANSHA TOP NAV 
+   2. TOP NAVIGATION
    ========================================= */
 .top-nav {
     position: sticky;
@@ -40,13 +54,9 @@ body {
     border: 0.125rem solid var(--kodansha-black); 
     padding: 1rem 1.5rem; 
     background-color: var(--bg-color);
-    margin-top: 1rem; 
-    margin-bottom: 3rem;
-    margin-left: 1.5vw; 
-    margin-right: 1.5vw;
+    margin: 1rem 1.5vw 3rem 1.5vw; 
 }
 
-/* Left Side: Logo Area */
 .nav-left {
     display: flex;
     align-items: center;
@@ -59,7 +69,6 @@ body {
     color: var(--kodansha-black);
 }
 
-/* Right Side: Links and Buttons */
 .nav-right {
     display: flex;
     align-items: center;
@@ -105,7 +114,6 @@ body {
     background-color: var(--hover-gray);
 }
 
-/* Nav Action Buttons */
 .nav-actions {
     display: flex;
     gap: 0.625rem;
@@ -133,13 +141,13 @@ body {
 }
 
 /* =========================================
-   2. HERO & BENTO BOXES
+   3. HERO & BENTO DASHBOARD
    ========================================= */
 .hero {
     padding: 6rem 3rem 4rem 3rem;
     max-width: 75rem;
     margin: 0 auto;
-    width: 100%; /* FIX: Forces container to stretch back out inside the Flexbox */
+    width: 100%;
 }
 
 .hero h1 {
@@ -168,7 +176,7 @@ body {
     max-width: 75rem;
     margin: 0 auto 6rem auto;
     padding: 0 3rem;
-    width: 100%; /* FIX: Forces grid to stretch back out inside the Flexbox */
+    width: 100%; 
 }
 
 .bento-card {
@@ -208,12 +216,78 @@ body {
 }
 
 /* =========================================
-   3. ARCHITECTURAL FOOTER (KODANSHA SPEC)
+   4. LEGAL PAGES (Privacy, Terms, etc.)
+   ========================================= */
+.legal-container {
+    max-width: 50rem; 
+    margin: 4rem auto 8rem auto;
+    padding: 0 3rem;
+    width: 100%;
+}
+
+.legal-header {
+    text-align: center; 
+    margin-bottom: 1.5rem; /* Pulled up to match Kodansha */
+}
+
+.legal-header h1 {
+    font-size: 3rem; 
+    font-weight: 800;
+    letter-spacing: -0.02rem;
+}
+
+/* Crisp document font stack specifically for legal reading */
+.legal-content {
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.legal-content h2 {
+    font-size: 1.1rem; 
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 3rem 0 1rem 0;
+    letter-spacing: 0.05rem;
+}
+
+.legal-content p, .legal-content ul {
+    margin-bottom: 1.5rem;
+    color: #111111; 
+    line-height: 1.7; 
+    font-size: 0.95rem; 
+}
+
+.legal-content strong {
+    font-weight: 700;
+    color: #000000;
+}
+
+.legal-content ul {
+    padding-left: 2rem;
+}
+
+.legal-content li {
+    margin-bottom: 0.75rem;
+}
+
+.legal-content a {
+    color: var(--kodansha-black) !important;
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-thickness: 0.125rem;
+    text-underline-offset: 0.2rem;
+    transition: color 0.2s ease;
+}
+
+.legal-content a:hover {
+    color: var(--hover-gray) !important;
+}
+
+/* =========================================
+   5. ARCHITECTURAL FOOTER
    ========================================= */
 .site-footer {
     background-color: var(--kodansha-black);
     color: var(--bg-color);
-    /* Perfectly matches the Top Nav margin + padding structure */
     padding: 5rem calc(1.5vw + 1.5rem) 2rem calc(1.5vw + 1.5rem); 
     margin-top: auto; 
     width: 100%;
@@ -225,21 +299,20 @@ body {
     width: 100%;
 }
 
-/* Expanded left side to match Kodansha's wide hero text */
 .footer-brand {
     width: 42%; 
     padding-right: 3rem;
 }
 
 .footer-logo {
-    color: var(--bg-color); /* This forces the text to be white */
+    color: var(--bg-color); 
     font-size: 1.5rem;
-    display: block; /* Ensures it sits on its own line above the h2 */
+    display: block; 
     margin-bottom: 0.5rem;
 }
 
 .footer-brand h2 {
-    font-size: 2rem; /* Larger, bold statement header */
+    font-size: 2rem; 
     font-weight: 700;
     margin: 1.5rem 0 1.25rem 0;
     letter-spacing: -0.03rem;
@@ -250,10 +323,9 @@ body {
     font-size: 0.875rem;
     color: #A0A0A0; 
     line-height: 1.7;
-    max-width: 36rem; /* Allows text to breathe across the screen */
+    max-width: 36rem; 
 }
 
-/* Links Section on the Right */
 .footer-links {
     width: 50%; 
     display: grid;
@@ -279,7 +351,6 @@ body {
     gap: 0.75rem;
 }
 
-/* Clean Kodansha Link Styling */
 .link-column a {
     text-decoration: none;
     color: #A0A0A0;
@@ -294,7 +365,6 @@ body {
     color: var(--bg-color); 
 }
 
-/* Bottom Legal & Copyright Bar */
 .footer-bottom {
     display: flex;
     justify-content: space-between;
@@ -313,6 +383,7 @@ body {
 .footer-bottom-links {
     display: flex;
     align-items: center;
+    flex-wrap: wrap; /* Allows links to wrap on very small screens */
     gap: 1.25rem;
 }
 
@@ -326,18 +397,12 @@ body {
     color: var(--bg-color);
 }
 
-/* Mobile Responsiveness */
+/* =========================================
+   6. MOBILE RESPONSIVENESS
+   ========================================= */
 @media (max-width: 48rem) {
     
-    /* Grid & Nav Mobile Rules */
-    .bento-container {
-        grid-template-columns: 1fr;
-        padding: 0 1.5rem;
-    }
-    .card-large, .card-large-wide {
-        grid-row: span 1;
-        grid-column: span 1;
-    }
+    /* Nav & Hero Mobile */
     .nav-links {
         display: none; 
     }
@@ -348,92 +413,51 @@ body {
         font-size: 2rem;
     }
 
-    /* Footer Mobile Rules */
+    /* Bento Grid Mobile */
+    .bento-container {
+        grid-template-columns: 1fr;
+        padding: 0 1.5rem;
+    }
+    .card-large, .card-large-wide {
+        grid-row: span 1;
+        grid-column: span 1;
+    }
+
+    /* Legal Pages Mobile Scaling */
+    .legal-container {
+        margin: 2rem auto 4rem auto;
+        padding: 0 1.5rem;
+    }
+    .legal-header h1 {
+        font-size: 2.2rem;
+    }
+    .legal-content h2 {
+        font-size: 1rem;
+    }
+    .legal-content p, .legal-content ul {
+        font-size: 0.875rem; 
+    }
+
+    /* Footer Mobile */
     .footer-top {
         flex-direction: column; 
         gap: 3rem;
     }
-    
     .footer-brand, .footer-links {
         flex: 1 1 auto; 
         width: 100%;
+        padding-right: 0;
     }
-    
     .footer-links {
         grid-template-columns: 1fr; 
         gap: 2.5rem;
     }
-    
     .footer-bottom {
         flex-direction: column; 
         gap: 1.5rem;
         text-align: center;
     }
-    
     .site-footer {
         padding: 4rem 1.5rem 2rem 1.5rem;
     }
-}
-
-/* =========================================
-   4. LEGAL PAGES (Privacy, Terms, etc.)
-   ========================================= */
-.legal-container {
-    max-width: 50rem; 
-    margin: 4rem auto 8rem auto;
-    padding: 0 3rem;
-    width: 100%;
-}
-
-.legal-header {
-    text-align: center; 
-    margin-bottom: 4rem;
-}
-
-.legal-header h1 {
-    font-size: 3rem; 
-    font-weight: 800;
-    letter-spacing: -0.02rem;
-}
-
-.legal-content h2 {
-    font-size: 1.1rem; 
-    font-weight: 700;
-    text-transform: uppercase;
-    margin: 3rem 0 1rem 0;
-    letter-spacing: 0.05rem;
-}
-
-.legal-content p, .legal-content ul {
-    margin-bottom: 1.5rem;
-    color: #111111; 
-    line-height: 1.8;
-    font-size: 0.95rem; 
-}
-
-.legal-content strong {
-    font-weight: 700;
-    color: #000000;
-}
-
-.legal-content ul {
-    padding-left: 2rem;
-}
-
-.legal-content li {
-    margin-bottom: 0.75rem;
-}
-
-/* Forces all links, including emails, to stay black */
-.legal-content a {
-    color: var(--kodansha-black) !important;
-    font-weight: 600;
-    text-decoration: underline;
-    text-decoration-thickness: 0.125rem;
-    text-underline-offset: 0.2rem;
-    transition: color 0.2s ease;
-}
-
-.legal-content a:hover {
-    color: var(--hover-gray) !important;
 }
