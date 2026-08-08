@@ -184,8 +184,8 @@ a:focus-visible, button:focus-visible {
     border: 0.15rem solid #000000; 
     box-shadow: 4px 6px 14px rgba(0, 0, 0, 0.08); 
     
-    padding: 2rem 2.5rem;
-    max-width: 45rem;
+    padding: 1.5rem 2.5rem; /* CHANGED: Reduced vertical padding from 2rem to 1.5rem to shrink the height */
+    max-width: 48rem; /* CHANGED: Increased from 45rem to 48rem to fit the text */
     text-align: left; 
     
     margin-top: -4rem; 
@@ -213,8 +213,7 @@ a:focus-visible, button:focus-visible {
 }
 
 .hero h1 { font-size: 3rem; font-weight: 600; letter-spacing: -0.02rem; max-width: 50rem; line-height: 1.2; }
-.hero h2 { font-size: 1.1rem; font-weight: 400; color: #666666; margin-top: 1rem; letter-spacing: 0.02rem; line-height: 1.6; max-width: 45rem; }
-
+.hero h2 { font-size: 1.1rem; font-weight: 400; color: #666666; margin-top: 1rem; letter-spacing: 0.02rem; line-height: 1.6; max-width: 100%; /* CHANGED: Set to 100% so it perfectly fills the new box width */ }
 .bento-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
