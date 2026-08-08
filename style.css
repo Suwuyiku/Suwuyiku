@@ -430,11 +430,10 @@ a:focus-visible, button:focus-visible {
     border-radius: 50%; 
     object-fit: cover; 
     
-    /* THE Z-INDEX FIX: This is required for z-index overlapping to work */
     position: relative;
     
-    /* THE BORDER FIX: Thicker 0.15rem base border so the hover color is visible */
-    border: 0.15rem solid var(--bg-color); 
+    /* THE BORDER FIX: Dialed back to 0.12rem for the perfect delicate sweet spot */
+    border: 0.12rem solid var(--bg-color); 
     
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
     background-color: var(--border-color);
@@ -448,14 +447,16 @@ a:focus-visible, button:focus-visible {
 
 /* Organic Base State */
 .creator-avatar:nth-child(1) {
-    z-index: 2; /* Left logo perfectly on top */
+    /* THE Z-INDEX FIX: Left logo now tucked underneath */
+    z-index: 1; 
     transform: rotate(-2deg);
 }
 
 .creator-avatar:nth-child(2) {
     margin-left: -1.2rem; 
     transform: translateY(-4px) rotate(2deg); 
-    z-index: 1; /* Right logo tucked underneath */
+    /* THE Z-INDEX FIX: Right logo is now perfectly on top */
+    z-index: 2; 
 }
 
 /* Base Card Hover: Gentle Separation */
@@ -479,16 +480,17 @@ a:focus-visible, button:focus-visible {
 /* 1. Cosy Tales Art Studios - Warm Pastel Yellow Glow */
 .shop-card-special .creator-avatar:nth-child(1):hover {
     border-color: #F8E08E; 
-    /* Added a solid 2px ring in the shadow to make the border look thicker and richer */
-    box-shadow: 0 0 0 2px #F8E08E, 0 8px 20px rgba(248, 224, 142, 0.5);
+    /* Removed the hard ring, leaving only the soft ambient glow */
+    box-shadow: 0 8px 20px rgba(248, 224, 142, 0.45);
 }
 
 /* 2. Zodingdi - Soft Pastel Lilac Glow */
 .shop-card-special .creator-avatar:nth-child(2):hover {
     border-color: #D1C1FA; 
-    /* Added a solid 2px ring in the shadow to make the border look thicker and richer */
-    box-shadow: 0 0 0 2px #D1C1FA, 0 8px 20px rgba(209, 193, 250, 0.5);
+    /* Removed the hard ring, leaving only the soft ambient glow */
+    box-shadow: 0 8px 20px rgba(209, 193, 250, 0.45);
 }
+
 /* =========================================
    DYNAMIC CREATOR HOVER TITLES
    ========================================= */
