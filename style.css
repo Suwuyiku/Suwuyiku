@@ -180,15 +180,19 @@ a:focus-visible, button:focus-visible {
     position: relative;
     z-index: 2; 
     background-color: var(--bg-color, #ffffff);
-    
     border: 0.15rem solid #000000; 
     box-shadow: 4px 6px 14px rgba(0, 0, 0, 0.08); 
     
-    padding: 1.5rem 2.5rem; /* CHANGED: Reduced vertical padding from 2rem to 1.5rem to shrink the height */
-    max-width: 48rem; /* CHANGED: Increased from 45rem to 48rem to fit the text */
+    padding: 1.25rem 2.25rem; /* CHANGED: Reduced padding to shrink height */
+    max-width: 42rem; /* CHANGED: Reduced width to make the box tighter */
     text-align: left; 
-    
     margin-top: -4rem; 
+    
+    /* ADDED: Anti-copy protection for this box only */
+    -webkit-user-select: none; 
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; 
 }
 
 /* Ensuring your exact text formatting remains completely untouched */
@@ -212,8 +216,21 @@ a:focus-visible, button:focus-visible {
     width: 100%;
 }
 
-.hero h1 { font-size: 3rem; font-weight: 600; letter-spacing: -0.02rem; max-width: 50rem; line-height: 1.2; }
+/* CHANGED: Reduced font-size from 3rem to 2.6rem */
+.hero h1 { font-size: 2.6rem; font-weight: 600; letter-spacing: -0.02rem; max-width: 50rem; line-height: 1.2; }
 .hero h2 { font-size: 1.1rem; font-weight: 400; color: #666666; margin-top: 1rem; letter-spacing: 0.02rem; line-height: 1.6; max-width: 100%; /* CHANGED: Set to 100% so it perfectly fills the new box width */ }
+
+/* Custom Suwuyiku Hover Glow */
+.name-glow {
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+    cursor: default; /* Keeps the standard arrow pointer */
+}
+
+.name-glow:hover {
+    color: #84C1E9; /* The exact blue from the banner */
+    text-shadow: 0 0 10px rgba(132, 193, 233, 0.8); /* Soft ambient glow */
+}
+
 .bento-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
