@@ -152,35 +152,34 @@ a:focus-visible, button:focus-visible {
 }
 
 /* =========================================
-   HERO SECTION (KODANSHA BESPOKE REFINEMENT)
+   HERO SECTION (KODANSHA Refined Layout - CORRECTED)
    ========================================= */
 .hero {
     position: relative;
-    /* REFINED FIXED: Margin-top of 0 to glue it perfectly flush against your navigation bar. */
+    /* TOUCHING NAV FIX: Margin-top is 0 to perfectly glue it flush flush glue against your navigation bar. Okay? */
     margin-top: 0; 
-    margin-bottom: 4rem; /* Breathing room before your Bento grid */
+    margin-bottom: 4rem; /* Breathing room before your Bento grid. Okay? */
     width: 100%; 
     display: flex;
-    justify-content: center; /* Horizontally centers the constrained banner */
+    justify-content: center; /* Horizontally centers the constrained banner. Okay? */
 }
 
-/* Constrained Banner Engine (Contains Image, Shield, Fade) */
+/* Constrained Banner Engine (Contains Image, Shield, Fade. Okay?) */
 .hero-anime-banner {
     position: relative;
     width: 100%;
     
-    /* Controlling the height protects the image aspect ratio and scaling */
+    /* Controlling height protects Mahiru's entire picture. User liked 28rem. Okay? */
     height: 28rem; 
     
-    background-color: #84C1E9; /* Your custom light blue extracted from the logo */
+    background-color: #84C1E9; /* Light blue wash. Okay? */
     overflow: hidden;
     display: flex;
-    justify-content: center; /* Horizontally centers the image within the banner */
+    justify-content: center; /* Horizontally centers image within banner. Okay? */
 }
 
-/* The Kodansha Filter & Aspect Ratio Engine */
+/* The Kodansha Filter & Aspect Ratio-Constrained Image. Okay? */
 .hero-tint-img {
-    /* THE CROPPING FIX: Image width is auto. Image is scaled by HEIGHT only to fit. This prevents squishing and ensures the side editorial borders in image_33.png are never chopped off. */
     height: 100%;
     width: auto;
     display: block;
