@@ -145,10 +145,22 @@ a:focus-visible, button:focus-visible {
 .hero-anime-banner {
     position: relative;
     width: 100%;
-    height: 42rem; 
+    height: 36rem; /* CHANGED: Cropped the overall height */
     background-color: #84C1E9; 
     overflow: hidden;
-    /* The border line has been removed from here */
+}
+
+/* Seamless Page Blending Engine */
+.hero-anime-banner::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 45%; /* Controls how far up the image the fade begins */
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, var(--bg-color) 100%);
+    z-index: 1; /* Keeps it under your white text box but over the image */
+    pointer-events: none; /* Ensures the image protection still works */
 }
 
 .hero-tint-img {
@@ -203,9 +215,9 @@ a:focus-visible, button:focus-visible {
    ========================================= */
 .hero {
     position: relative;
-    padding: 0 3rem 4rem 3rem; /* CHANGED: Top padding set to 0 */
+    padding: 0 3rem 4rem 3rem;
     max-width: 75rem;
-    margin: -2.5rem auto 0 auto; /* CHANGED: -2.5rem pulls it up exactly halfway under the nav */
+    margin: -4rem auto 0 auto; /* CHANGED: Increased negative margin to tuck it deeper */
     width: 100%;
 }
 
