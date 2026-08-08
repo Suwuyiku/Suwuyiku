@@ -891,14 +891,16 @@ a:focus-visible, button:focus-visible {
     .sidebar-actions { 
         display: flex; 
         flex-direction: column; 
-        gap: 0.75rem; /* Tighter gap between the two boxes */
-        padding: 0 0.5rem; 
+        gap: 0.75rem; 
+        padding: 0; /* CHANGED: Removed padding to align perfectly with the text above */
+        width: 100%;
     }
     .sidebar-btn-action {
         display: flex; justify-content: center; align-items: center;
+        width: 100%; /* CHANGED: Forces the buttons to stretch the full width of the menu */
         text-decoration: none; color: var(--kodansha-black);
         border: 0.125rem solid var(--kodansha-black);
-        padding: 0.6rem 1rem; /* CHANGED: Reduced height to make the boxes slimmer */
+        padding: 0.8rem 1rem; /* Slightly taller for easier tapping on mobile */
         font-size: 0.75rem; font-weight: 700;
         letter-spacing: 0.12rem; text-transform: uppercase;
     }
@@ -938,15 +940,22 @@ a:focus-visible, button:focus-visible {
     .sidebar-overlay.active { opacity: 1; pointer-events: auto; }
 
     /* 4. Perfect Mobile Banner Scaling */
-    .hero { padding: 0 1.25rem 2rem 1.25rem; margin-top: -3.5rem; }
-    .hero-anime-banner { height: 26rem; } /* Adjusted height to fit vertical screens */
-    .hero-tint-img { object-position: center 15%; } /* Re-anchors Mahiru's face in the center */
+    .hero { 
+        padding: 0 0 2rem 0; /* CHANGED: Removed side padding so the blue banner touches the edges of the phone */
+        margin-top: -3.5rem; 
+    }
+    .hero-anime-banner { 
+        height: 24rem; /* Adjusted for better phone proportions */
+    } 
+    .hero-tint-img { 
+        object-position: 65% 10%; /* CHANGED: Pans the camera to the left to keep Mahiru's face dead center */
+    } 
     
     /* 5. Mobile Box & Typographic Tuning */
     .hero-content {
         padding: 1.25rem 1.5rem; 
-        margin-top: -3.5rem; 
-        max-width: 100%;
+        margin: -3.5rem 1.25rem 0 1.25rem; /* CHANGED: Re-applies the side spacing specifically to the white box */
+        max-width: calc(100% - 2.5rem); /* Prevents the box from spilling off the screen */
         box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.08); 
     }
     .hero h1 { font-size: 2.1rem; letter-spacing: -0.02rem; line-height: 1.15; }
