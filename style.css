@@ -429,12 +429,14 @@ a:focus-visible, button:focus-visible {
     height: 3.5rem;
     border-radius: 50%; 
     object-fit: cover; 
-    border: 0.125rem solid var(--bg-color); 
+    
+    /* THE FIX: Thinner 0.1rem base border for a more delicate look */
+    border: 0.1rem solid var(--bg-color); 
+    
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
     background-color: var(--border-color);
     
     will-change: transform, box-shadow, border-color;
-    /* IDENTICAL TO LIBRARY: Ultra-smooth 0.7s elastic curve */
     transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), 
                 box-shadow 0.7s cubic-bezier(0.22, 1, 0.36, 1),
                 border-color 0.3s ease;
@@ -449,7 +451,6 @@ a:focus-visible, button:focus-visible {
 
 .creator-avatar:nth-child(2) {
     margin-left: -1.2rem; 
-    /* THE FIX: Permanently shifted up 4px for a natural, unaligned look */
     transform: translateY(-4px) rotate(2deg); 
     z-index: 1;
 }
@@ -460,17 +461,28 @@ a:focus-visible, button:focus-visible {
 }
 
 .shop-card-special:hover .creator-avatar:nth-child(2) {
-    /* Maintains the 4px vertical shift while spreading horizontally */
     transform: translateX(0.4rem) translateY(-4px) rotate(5deg);
 }
 
-/* Individual Avatar Focus: Subtle selection, NO massive scale */
+/* =========================================
+   INDIVIDUAL AVATAR HOVER (PERSONALIZED COLORS)
+   ========================================= */
+/* Base Hover Physics (Removed the harsh black border) */
 .shop-card-special .creator-avatar:hover {
     z-index: 10 !important; 
-    border-color: var(--kodansha-black);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    /* Just a gentle lift of 4px to indicate selection, staying static in size */
     transform: translateY(-8px) rotate(0deg) !important; 
+}
+
+/* 1. Cosy Tales Art Studios - Warm Pastel Yellow Glow */
+.shop-card-special .creator-avatar:nth-child(1):hover {
+    border-color: #F8E08E; 
+    box-shadow: 0 8px 20px rgba(248, 224, 142, 0.45);
+}
+
+/* 2. Zodingdi - Soft Pastel Lilac Glow */
+.shop-card-special .creator-avatar:nth-child(2):hover {
+    border-color: #D1C1FA; 
+    box-shadow: 0 8px 20px rgba(209, 193, 250, 0.45);
 }
 
 /* =========================================
