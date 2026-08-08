@@ -253,11 +253,11 @@
             const overlay = document.querySelector('.sidebar-overlay');
             const closeBtn = document.querySelector('.close-sidebar-btn');
 
-            // Safety check: Only run if the mobile elements exist
             if (hamburger && sidebar && overlay && closeBtn) {
                 function toggleMenu() {
                     sidebar.classList.toggle('active');
                     overlay.classList.toggle('active');
+                    document.body.classList.toggle('no-scroll'); // FIX: Locks the background website in place
                 }
 
                 hamburger.addEventListener('click', toggleMenu);
