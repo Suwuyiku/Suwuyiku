@@ -819,12 +819,12 @@ a:focus-visible, button:focus-visible {
     
     .mobile-sidebar.active { transform: translateX(0); }
     
-    /* Layout for the top links */
+/* Layout for the top links */
     .sidebar-menu-container {
-        padding: 5rem 1.5rem 2rem 1.5rem; 
+        padding: 4rem 1.5rem 1rem 1.5rem; /* CHANGED: Reduced top padding so the footer fits without scrolling */
         display: flex;
         flex-direction: column;
-        gap: 2rem; 
+        gap: 1.5rem; /* CHANGED: Tightened the gap between sections */
         width: 100%;
     }
     
@@ -843,7 +843,7 @@ a:focus-visible, button:focus-visible {
     .sidebar-links li:first-child { border-top: 1px solid var(--border-color); }
     .sidebar-links li a { 
         display: block; 
-        padding: 1rem 0.5rem; 
+        padding: 0.75rem 0.5rem; /* CHANGED: Reduced vertical padding to save space */
         font-size: 1.15rem; 
         font-weight: 600; 
         color: var(--kodansha-black); 
@@ -856,7 +856,7 @@ a:focus-visible, button:focus-visible {
         display: flex; 
         flex-direction: column; 
         gap: 0.75rem; 
-        padding: 0; 
+        padding: 0 0.5rem; /* CHANGED: Shrinks the buttons to perfectly align with the text above them */
         width: 100%;
     }
     .sidebar-btn-action {
@@ -951,5 +951,10 @@ a:focus-visible, button:focus-visible {
     .footer-brand, .footer-links { flex: 1 1 auto; width: 100%; padding-right: 0; }
     .footer-links { grid-template-columns: 1fr; gap: 2.5rem; }
     .footer-bottom { flex-direction: column; gap: 1.5rem; text-align: center; }
+    
+    /* CHANGED: Stacks the links vertically and hides the dangling | lines */
+    .footer-bottom-links { flex-direction: column; gap: 0.85rem; }
+    .footer-bottom-links .divider { display: none; }
+    
     .site-footer { padding: 4rem 1.25rem 2rem 1.25rem; }
 }
