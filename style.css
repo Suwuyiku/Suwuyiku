@@ -51,16 +51,19 @@ a:focus-visible, button:focus-visible {
    2. TOP NAVIGATION
    ========================================= */
 .top-nav {
-    position: sticky;
-    top: 1rem; 
-    z-index: 1000; 
+    position: fixed; /* Changed from sticky to fixed to float over the banner */
+    top: 1rem;
+    left: 1.5vw;
+    right: 1.5vw;
+    width: calc(100% - 3vw); /* Keeps it perfectly centered */
+    z-index: 1000;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 0.125rem solid var(--kodansha-black); 
-    padding: 1rem 1.5rem; 
+    border: 0.125rem solid var(--kodansha-black);
+    padding: 1rem 1.5rem;
     background-color: var(--bg-color);
-    margin: 1rem 1.5vw 3rem 1.5vw; 
+    /* Removed the bottom margin so it stops pushing the banner down */
 }
 
 .nav-left { display: flex; align-items: center; }
@@ -145,18 +148,18 @@ a:focus-visible, button:focus-visible {
 .hero-anime-banner {
     position: relative;
     width: 100%;
-    height: 28rem; 
-    background-color: #84C1E9; 
+    height: 45rem; /* Increased from 28rem to show the full scale of the artwork */
+    background-color: #84C1E9;
     overflow: hidden;
 }
 
 .hero-tint-img {
     width: 100%;
     height: 100%;
-    object-fit: cover; 
-    object-position: center 20%; 
-    mix-blend-mode: multiply; 
-    opacity: 0.45; 
+    object-fit: cover;
+    object-position: center 15%; /* Nudged up to perfectly frame her eyes and face */
+    mix-blend-mode: multiply;
+    opacity: 0.45;
 }
 
 /* THE BLEND FIX: Uses transparent white to avoid the muddy CSS glitch, and increased height to 85% for an ultra-smooth fade */
@@ -200,12 +203,6 @@ a:focus-visible, button:focus-visible {
 /* =========================================
    3. HERO & BENTO DASHBOARD
    ========================================= */
-.hero {
-    padding: 6rem 3rem 4rem 3rem;
-    max-width: 75rem;
-    margin: 0 auto;
-    width: 100%;
-}
 
 .hero h1 { font-size: 3rem; font-weight: 600; letter-spacing: -0.02rem; max-width: 50rem; line-height: 1.2; }
 .hero h2 { font-size: 1.1rem; font-weight: 400; color: #666666; margin-top: 1rem; letter-spacing: 0.02rem; line-height: 1.6; max-width: 45rem; }
@@ -599,6 +596,7 @@ a:focus-visible, button:focus-visible {
     display: inline-block;
     opacity: 1;
 }
+
 /* =========================================
    7. LIBRARY / MANGA SHELF
    ========================================= */
