@@ -430,8 +430,11 @@ a:focus-visible, button:focus-visible {
     border-radius: 50%; 
     object-fit: cover; 
     
-    /* THE FIX: Thinner 0.1rem base border for a more delicate look */
-    border: 0.1rem solid var(--bg-color); 
+    /* THE Z-INDEX FIX: This is required for z-index overlapping to work */
+    position: relative;
+    
+    /* THE BORDER FIX: Thicker 0.15rem base border so the hover color is visible */
+    border: 0.15rem solid var(--bg-color); 
     
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
     background-color: var(--border-color);
@@ -445,14 +448,14 @@ a:focus-visible, button:focus-visible {
 
 /* Organic Base State */
 .creator-avatar:nth-child(1) {
-    z-index: 2;
+    z-index: 2; /* Left logo perfectly on top */
     transform: rotate(-2deg);
 }
 
 .creator-avatar:nth-child(2) {
     margin-left: -1.2rem; 
     transform: translateY(-4px) rotate(2deg); 
-    z-index: 1;
+    z-index: 1; /* Right logo tucked underneath */
 }
 
 /* Base Card Hover: Gentle Separation */
@@ -467,7 +470,7 @@ a:focus-visible, button:focus-visible {
 /* =========================================
    INDIVIDUAL AVATAR HOVER (PERSONALIZED COLORS)
    ========================================= */
-/* Base Hover Physics (Removed the harsh black border) */
+/* Base Hover Physics */
 .shop-card-special .creator-avatar:hover {
     z-index: 10 !important; 
     transform: translateY(-8px) rotate(0deg) !important; 
@@ -476,15 +479,16 @@ a:focus-visible, button:focus-visible {
 /* 1. Cosy Tales Art Studios - Warm Pastel Yellow Glow */
 .shop-card-special .creator-avatar:nth-child(1):hover {
     border-color: #F8E08E; 
-    box-shadow: 0 8px 20px rgba(248, 224, 142, 0.45);
+    /* Added a solid 2px ring in the shadow to make the border look thicker and richer */
+    box-shadow: 0 0 0 2px #F8E08E, 0 8px 20px rgba(248, 224, 142, 0.5);
 }
 
 /* 2. Zodingdi - Soft Pastel Lilac Glow */
 .shop-card-special .creator-avatar:nth-child(2):hover {
     border-color: #D1C1FA; 
-    box-shadow: 0 8px 20px rgba(209, 193, 250, 0.45);
+    /* Added a solid 2px ring in the shadow to make the border look thicker and richer */
+    box-shadow: 0 0 0 2px #D1C1FA, 0 8px 20px rgba(209, 193, 250, 0.5);
 }
-
 /* =========================================
    DYNAMIC CREATOR HOVER TITLES
    ========================================= */
