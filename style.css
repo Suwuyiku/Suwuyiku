@@ -836,51 +836,99 @@ a:focus-visible, button:focus-visible {
     
     .mobile-sidebar.active { transform: translateX(0); }
     
-    /* Layout for the top links */
-    .sidebar-menu-container {
-        padding: 5rem 2rem 2rem 2rem;
+/* 3. The Sliding Sidebar Engine */
+    .mobile-sidebar {
         display: flex;
         flex-direction: column;
-        gap: 2.5rem;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 18rem;
+        height: 100vh;
+        background-color: var(--bg-color);
+        border-left: 0.125rem solid var(--kodansha-black);
+        z-index: 2000;
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        padding: 0; /* CHANGED: Removed outer padding so the footer can touch the edges */
+    }
+    
+    .mobile-sidebar.active { transform: translateX(0); }
+    
+    /* Layout for the top links */
+    .sidebar-menu-container {
+        padding: 5rem 1.5rem 2rem 1.5rem; /* CHANGED: Padding moved here */
+        display: flex;
+        flex-direction: column;
+        gap: 2rem; 
+        width: 100%;
     }
     
     /* Divided Link List */
-    .sidebar-links { list-style: none; display: flex; flex-direction: column; }
-    .sidebar-links li { border-bottom: 1px solid var(--border-color); }
+    .sidebar-links { 
+        list-style: none; 
+        display: flex; 
+        flex-direction: column; 
+        padding: 0; /* CHANGED: Removes default HTML indentation */
+        margin: 0; 
+    }
+    .sidebar-links li { 
+        border-bottom: 1px solid var(--border-color); 
+        width: 100%; 
+    }
     .sidebar-links li:first-child { border-top: 1px solid var(--border-color); }
     .sidebar-links li a { 
         display: block; 
-        padding: 1.25rem 0; 
-        font-size: 1.2rem; 
-        font-weight: 700; 
+        padding: 1rem 0.5rem; /* Cleaned up spacing */
+        font-size: 1.15rem; 
+        font-weight: 600; 
         color: var(--kodansha-black); 
         text-decoration: none; 
+        text-align: left;
     }
     
     /* Boxed Action Buttons (Shop & Contact) */
-    .sidebar-actions { display: flex; flex-direction: column; gap: 1rem; }
+    .sidebar-actions { 
+        display: flex; 
+        flex-direction: column; 
+        gap: 0.75rem; /* Tighter gap between the two boxes */
+        padding: 0 0.5rem; 
+    }
     .sidebar-btn-action {
         display: flex; justify-content: center; align-items: center;
         text-decoration: none; color: var(--kodansha-black);
         border: 0.125rem solid var(--kodansha-black);
-        padding: 0.85rem 1rem; font-size: 0.8rem; font-weight: 700;
+        padding: 0.6rem 1rem; /* CHANGED: Reduced height to make the boxes slimmer */
+        font-size: 0.75rem; font-weight: 700;
         letter-spacing: 0.12rem; text-transform: uppercase;
     }
     
-    .close-sidebar-btn { position: absolute; top: 1.25rem; right: 1.5rem; background: none; border: none; font-size: 2.5rem; cursor: pointer; color: var(--kodansha-black); }
+    .close-sidebar-btn { 
+        position: absolute; top: 1.25rem; right: 1.5rem; 
+        background: none; border: none; font-size: 2.5rem; 
+        cursor: pointer; color: var(--kodansha-black);
+        z-index: 2001; 
+    }
     
     /* The Black Branding Footer */
     .sidebar-footer {
         background-color: var(--kodansha-black);
         color: var(--bg-color);
-        padding: 2.5rem 1.5rem;
+        padding: 2rem 1.5rem;
         text-align: center;
-        font-size: 0.75rem;
-        letter-spacing: 0.05rem;
+        width: 100%; /* CHANGED: Forces the footer to stretch edge-to-edge */
+        margin-top: auto; /* CHANGED: Pushes the footer to the absolute bottom of the screen */
     }
     
-    .sidebar-footer .brand { font-weight: 800; font-size: 1.2rem; margin-bottom: 0.75rem; display: block; letter-spacing: 0.1rem; text-transform: uppercase; }
-    .sidebar-footer a { color: #A0A0A0; text-decoration: none; margin: 0 0.5rem; font-weight: 600; }
+    .sidebar-footer .brand { 
+        font-weight: 800; font-size: 1.1rem; 
+        margin-bottom: 0.5rem; display: block; 
+        letter-spacing: 0.1rem; text-transform: uppercase; 
+    }
+    .sidebar-footer a { 
+        color: #A0A0A0; text-decoration: none; margin: 0 0.5rem; 
+        font-size: 0.7rem; font-weight: 600; 
+    }
     
     .sidebar-overlay {
         display: block; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
