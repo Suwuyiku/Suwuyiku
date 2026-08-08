@@ -50,10 +50,31 @@
                 <a href="#" class="btn-action">SHOP</a>
                 <a href="contact.html" class="btn-action">CONTACT</a>
             </div>
+
+            <!-- NEW: The 3-Line Hamburger Button (Mobile Only) -->
+            <button class="hamburger-btn" aria-label="Open Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
         </div>
     </nav>
 
- <!-- The Vision (Hero Section with Kodansha Box) -->
+    <!-- NEW: The Sliding Mobile Sidebar & Overlay -->
+    <div class="mobile-sidebar">
+        <button class="close-sidebar-btn" aria-label="Close Menu">&times;</button>
+        <ul class="sidebar-links">
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="connections.html">Connections</a></li>
+            <li><a href="library.html">Library</a></li>
+            <li><a href="https://suwuyiku.bearblog.dev">Journal</a></li>
+            <li><a href="#" style="color: #888888;">Shop</a></li>
+            <li><a href="contact.html" style="color: #888888;">Contact</a></li>
+        </ul>
+    </div>
+    <div class="sidebar-overlay"></div>
+
+    <!-- The Vision (Hero Section with Kodansha Box) -->
     <header class="hero">
         
         <!-- Full-Width Edge-to-Edge Banner Engine -->
@@ -94,7 +115,7 @@
             </div>
         </a>
 
-       <!-- Commerce -->
+        <!-- Commerce -->
         <a href="#" class="bento-card shop-card-special">
             <div class="card-content">
                 <h2>Shop 
@@ -114,7 +135,7 @@
             </div>
         </a>
 
-       <!-- Library -->
+        <!-- Library -->
         <a href="library.html" class="bento-card card-large-wide library-card-special">
             <div class="card-content">
                 <h2>Library 
@@ -207,5 +228,26 @@
         </div>
     </footer>
 
+    <!-- Interaction Script for Mobile Sidebar -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const hamburger = document.querySelector('.hamburger-btn');
+            const sidebar = document.querySelector('.mobile-sidebar');
+            const overlay = document.querySelector('.sidebar-overlay');
+            const closeBtn = document.querySelector('.close-sidebar-btn');
+
+            // Safety check: Only run if the mobile elements exist
+            if (hamburger && sidebar && overlay && closeBtn) {
+                function toggleMenu() {
+                    sidebar.classList.toggle('active');
+                    overlay.classList.toggle('active');
+                }
+
+                hamburger.addEventListener('click', toggleMenu);
+                closeBtn.addEventListener('click', toggleMenu);
+                overlay.addEventListener('click', toggleMenu);
+            }
+        });
+    </script>
 </body>
 </html>
