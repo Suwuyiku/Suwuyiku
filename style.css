@@ -771,14 +771,14 @@ a:focus-visible, button:focus-visible {
     
     /* 1. Detached Floating Header */
     .top-nav { 
-        margin: 1rem 1rem 0 1rem; /* Creates the detached floating look */
+        margin: 1rem 1rem 0 1rem; 
         top: 1rem; 
         width: calc(100% - 2rem); 
         padding: 0.8rem 1.25rem; 
         border: 0.125rem solid var(--kodansha-black);
     }
     
-    .nav-links, .nav-actions { display: none; } /* Hide standard links to clean up space */
+    .nav-links, .nav-actions { display: none; } 
 
     /* 2. Hamburger Button Setup */
     .hamburger-btn {
@@ -812,52 +812,16 @@ a:focus-visible, button:focus-visible {
         background-color: var(--bg-color);
         border-left: 0.125rem solid var(--kodansha-black);
         z-index: 2000;
-        padding: 2.5rem;
         transform: translateX(100%);
         transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-    
-    /* 3. The Sliding Sidebar Engine */
-    .mobile-sidebar {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between; /* Pushes the footer to the very bottom */
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: 18rem;
-        height: 100vh;
-        background-color: var(--bg-color);
-        border-left: 0.125rem solid var(--kodansha-black);
-        z-index: 2000;
-        transform: translateX(100%);
-        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-    
-    .mobile-sidebar.active { transform: translateX(0); }
-    
-/* 3. The Sliding Sidebar Engine */
-    .mobile-sidebar {
-        display: flex;
-        flex-direction: column;
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: 18rem;
-        height: 100vh;
-        background-color: var(--bg-color);
-        border-left: 0.125rem solid var(--kodansha-black);
-        z-index: 2000;
-        transform: translateX(100%);
-        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        padding: 0; /* CHANGED: Removed outer padding so the footer can touch the edges */
+        padding: 0; 
     }
     
     .mobile-sidebar.active { transform: translateX(0); }
     
     /* Layout for the top links */
     .sidebar-menu-container {
-        padding: 5rem 1.5rem 2rem 1.5rem; /* CHANGED: Padding moved here */
+        padding: 5rem 1.5rem 2rem 1.5rem; 
         display: flex;
         flex-direction: column;
         gap: 2rem; 
@@ -869,7 +833,7 @@ a:focus-visible, button:focus-visible {
         list-style: none; 
         display: flex; 
         flex-direction: column; 
-        padding: 0; /* CHANGED: Removes default HTML indentation */
+        padding: 0; 
         margin: 0; 
     }
     .sidebar-links li { 
@@ -879,7 +843,7 @@ a:focus-visible, button:focus-visible {
     .sidebar-links li:first-child { border-top: 1px solid var(--border-color); }
     .sidebar-links li a { 
         display: block; 
-        padding: 1rem 0.5rem; /* Cleaned up spacing */
+        padding: 1rem 0.5rem; 
         font-size: 1.15rem; 
         font-weight: 600; 
         color: var(--kodansha-black); 
@@ -892,15 +856,15 @@ a:focus-visible, button:focus-visible {
         display: flex; 
         flex-direction: column; 
         gap: 0.75rem; 
-        padding: 0; /* CHANGED: Removed padding to align perfectly with the text above */
+        padding: 0; 
         width: 100%;
     }
     .sidebar-btn-action {
         display: flex; justify-content: center; align-items: center;
-        width: 100%; /* CHANGED: Forces the buttons to stretch the full width of the menu */
+        width: 100%; 
         text-decoration: none; color: var(--kodansha-black);
         border: 0.125rem solid var(--kodansha-black);
-        padding: 0.8rem 1rem; /* Slightly taller for easier tapping on mobile */
+        padding: 0.8rem 1rem; 
         font-size: 0.75rem; font-weight: 700;
         letter-spacing: 0.12rem; text-transform: uppercase;
     }
@@ -918,14 +882,15 @@ a:focus-visible, button:focus-visible {
         color: var(--bg-color);
         padding: 2rem 1.5rem;
         text-align: center;
-        width: 100%; /* CHANGED: Forces the footer to stretch edge-to-edge */
-        margin-top: auto; /* CHANGED: Pushes the footer to the absolute bottom of the screen */
+        width: 100%; 
+        margin-top: auto; 
     }
     
     .sidebar-footer .brand { 
         font-weight: 800; font-size: 1.1rem; 
         margin-bottom: 0.5rem; display: block; 
-        letter-spacing: 0.1rem; text-transform: uppercase; 
+        letter-spacing: 0.05rem; 
+        text-transform: none; /* Prevents forced ALL CAPS */
     }
     .sidebar-footer a { 
         color: #A0A0A0; text-decoration: none; margin: 0 0.5rem; 
@@ -939,27 +904,28 @@ a:focus-visible, button:focus-visible {
     
     .sidebar-overlay.active { opacity: 1; pointer-events: auto; }
 
-    /* 4. Perfect Mobile Banner Scaling */
+    /* 4. Perfect Mobile Banner Scaling (No Cropping) */
     .hero { 
-        padding: 0 0 2rem 0; /* CHANGED: Removed side padding so the blue banner touches the edges of the phone */
+        padding: 0 0 2rem 0; 
         margin-top: -3.5rem; 
     }
     .hero-anime-banner { 
-        height: 24rem; /* Adjusted for better phone proportions */
+        height: 60vw; /* Scales height perfectly to the phone width */
     } 
     .hero-tint-img { 
-        object-position: 65% 10%; /* CHANGED: Pans the camera to the left to keep Mahiru's face dead center */
+        object-fit: contain; /* Prevents any cropping */
+        object-position: center bottom; /* Anchors the image to the fade */
     } 
     
-    /* 5. Mobile Box & Typographic Tuning */
+    /* 5. Mobile Box & Typographic Tuning (Smaller Box) */
     .hero-content {
-        padding: 1.25rem 1.5rem; 
-        margin: -3.5rem 1.25rem 0 1.25rem; /* CHANGED: Re-applies the side spacing specifically to the white box */
-        max-width: calc(100% - 2.5rem); /* Prevents the box from spilling off the screen */
+        padding: 1rem 1.25rem; 
+        margin: -2.5rem 1.25rem 0 1.25rem; 
+        max-width: calc(100% - 2.5rem); 
         box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.08); 
     }
-    .hero h1 { font-size: 2.1rem; letter-spacing: -0.02rem; line-height: 1.15; }
-    .hero h2 { font-size: 0.95rem; margin-top: 0.75rem; line-height: 1.5; }
+    .hero h1 { font-size: 1.75rem; letter-spacing: -0.02rem; line-height: 1.15; }
+    .hero h2 { font-size: 0.85rem; margin-top: 0.5rem; line-height: 1.5; }
     
     /* 6. Clean Bento Dashboard */
     .bento-container { grid-template-columns: 1fr; padding: 0 1.25rem; gap: 1.25rem; }
@@ -967,7 +933,9 @@ a:focus-visible, button:focus-visible {
     .bento-card { padding: 1.5rem; }
     
     .library-card-special:hover .mini-manga:not(:first-child) { margin-left: -2.7rem; }
-    .dynamic-book-title { display: none; }
+    
+    /* Disable dynamic hover effects on mobile */
+    .dynamic-book-title, .dynamic-creator-title { display: none !important; }
 
     /* 7. Clean Legal & Footer */
     .legal-container { margin: 1.5rem auto 4rem auto; padding: 0 1.25rem; }
