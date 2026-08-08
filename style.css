@@ -183,12 +183,11 @@ a:focus-visible, button:focus-visible {
     border: 0.15rem solid #000000; 
     box-shadow: 4px 6px 14px rgba(0, 0, 0, 0.08); 
     
-    padding: 1.25rem 2.25rem; /* CHANGED: Reduced padding to shrink height */
-    max-width: 42rem; /* CHANGED: Reduced width to make the box tighter */
+    padding: 1.25rem 2.25rem; 
+    max-width: 34rem; /* CHANGED: Reduced from 42rem to 34rem to force the text to wrap */
     text-align: left; 
     margin-top: -4rem; 
     
-    /* ADDED: Anti-copy protection for this box only */
     -webkit-user-select: none; 
     -moz-user-select: none;
     -ms-user-select: none;
@@ -222,13 +221,18 @@ a:focus-visible, button:focus-visible {
 
 /* Custom Suwuyiku Hover Glow */
 .name-glow {
-    transition: color 0.3s ease, text-shadow 0.3s ease;
-    cursor: default; /* Keeps the standard arrow pointer */
+    /* Upgraded transition for a smoother, buttery fade */
+    transition: color 0.4s cubic-bezier(0.22, 1, 0.36, 1), text-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    cursor: default; 
 }
 
 .name-glow:hover {
-    color: #84C1E9; /* The exact blue from the banner */
-    text-shadow: 0 0 10px rgba(132, 193, 233, 0.8); /* Soft ambient glow */
+    color: #84C1E9; 
+    /* Layered shadows for a realistic, premium neon bloom */
+    text-shadow: 
+        0 0 8px rgba(132, 193, 233, 0.9),
+        0 0 16px rgba(132, 193, 233, 0.6),
+        0 0 24px rgba(132, 193, 233, 0.3); 
 }
 
 .bento-container {
