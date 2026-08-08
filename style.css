@@ -423,50 +423,91 @@ a:focus-visible, button:focus-visible {
     padding-bottom: 0.5rem;
 }
 
-/* Enforcing the Perfect Circle */
+/* Enforcing the Perfect Circle & Buttery Smooth Physics */
 .creator-avatar {
     width: 3.5rem; 
     height: 3.5rem;
-    border-radius: 50%; /* Forces the geometry into a perfect circle */
-    object-fit: cover; /* Prevents the non-circular image from stretching */
-    border: 0.125rem solid var(--bg-color); /* Creates a clean cut-out overlap effect */
+    border-radius: 50%; 
+    object-fit: cover; 
+    border: 0.125rem solid var(--bg-color); 
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
     background-color: var(--border-color);
     
-    /* Hardware acceleration for smooth popping */
-    will-change: transform, box-shadow;
-    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), 
-                box-shadow 0.5s ease;
+    will-change: transform, box-shadow, border-color;
+    /* IDENTICAL TO LIBRARY: Ultra-smooth 0.7s elastic curve */
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), 
+                box-shadow 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.3s ease;
     cursor: pointer;
 }
 
-/* Stacking the avatars */
-.creator-avatar:first-child {
+/* Organic Base State */
+.creator-avatar:nth-child(1) {
+    z-index: 2;
+    transform: rotate(-2deg);
+}
+
+.creator-avatar:nth-child(2) {
+    margin-left: -1.2rem; 
+    /* THE FIX: Permanently shifted up 4px for a natural, unaligned look */
+    transform: translateY(-4px) rotate(2deg); 
     z-index: 1;
 }
 
-.creator-avatar:not(:first-child) {
-    margin-left: -1.2rem; /* Creates the overlapping cluster look */
-    z-index: 2;
-}
-
-/* Base Card Hover Spread */
+/* Base Card Hover: Gentle Separation */
 .shop-card-special:hover .creator-avatar:nth-child(1) {
-    transform: translateX(-0.5rem) rotate(-5deg);
+    transform: translateX(-0.4rem) rotate(-5deg);
 }
 
 .shop-card-special:hover .creator-avatar:nth-child(2) {
-    transform: translateX(0.25rem) rotate(5deg);
+    /* Maintains the 4px vertical shift while spreading horizontally */
+    transform: translateX(0.4rem) translateY(-4px) rotate(5deg);
 }
 
-/* Individual Avatar Direct Hover (Premium Pop) */
+/* Individual Avatar Focus: Subtle selection, NO massive scale */
 .shop-card-special .creator-avatar:hover {
-    transform: translateY(-0.5rem) scale(1.15) !important;
     z-index: 10 !important; 
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     border-color: var(--kodansha-black);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    /* Just a gentle lift of 4px to indicate selection, staying static in size */
+    transform: translateY(-8px) rotate(0deg) !important; 
 }
 
+/* =========================================
+   DYNAMIC CREATOR HOVER TITLES
+   ========================================= */
+.dynamic-creator-title {
+    color: var(--hover-gray);
+    margin-left: 0.25rem;
+    position: absolute;
+    pointer-events: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    
+    /* Hidden by default */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Fades in the container when ANY avatar is hovered */
+.shop-card-special:has(.creator-avatar:hover) .dynamic-creator-title {
+    opacity: 1;
+}
+
+.creator-name {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+}
+
+/* Activate the correct creator name when hovered */
+.shop-card-special:has(.creator-avatar:nth-child(1):hover) .creator-1,
+.shop-card-special:has(.creator-avatar:nth-child(2):hover) .creator-2 {
+    display: inline-block;
+    opacity: 1;
+}
 /* =========================================
    7. LIBRARY / MANGA SHELF
    ========================================= */
