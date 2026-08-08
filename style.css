@@ -758,35 +758,115 @@ a:focus-visible, button:focus-visible {
 .footer-bottom-links a { color: #777777; text-decoration: none; transition: color 0.2s ease; }
 .footer-bottom-links a:hover { color: var(--bg-color); }
 
+/* Hide Mobile Navigation Elements on Desktop */
+.hamburger-btn, .mobile-sidebar, .sidebar-overlay {
+    display: none;
+}
+
 /* =========================================
    6. MODERN MOBILE RESPONSIVENESS
    ========================================= */
 @media (max-width: 48rem) {
     body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-    .top-nav { margin: 0; top: 0; width: 100%; border-left: none; border-right: none; border-top: none; padding: max(1rem, env(safe-area-inset-top)) 1.5rem 1rem 1.5rem; }
-    .nav-links { display: none; }
-    .btn-action { padding: 0.5rem 0.875rem; font-size: 0.7rem; }
-    .hero { padding: 3rem max(1.5rem, env(safe-area-inset-right)) 2rem max(1.5rem, env(safe-area-inset-left)); }
-    .hero h1 { font-size: 2.25rem; letter-spacing: -0.03rem; line-height: 1.15; }
-    .hero h2 { font-size: 1rem; margin-top: 0.75rem; line-height: 1.5; }
-    .bento-container { grid-template-columns: 1fr; padding: 0 max(1.5rem, env(safe-area-inset-right)) 0 max(1.5rem, env(safe-area-inset-left)); gap: 1.25rem; }
+    
+    /* 1. Detached Floating Header */
+    .top-nav { 
+        margin: 1rem 1rem 0 1rem; /* Creates the detached floating look */
+        top: 1rem; 
+        width: calc(100% - 2rem); 
+        padding: 0.8rem 1.25rem; 
+        border: 0.125rem solid var(--kodansha-black);
+    }
+    
+    .nav-links, .nav-actions { display: none; } /* Hide standard links to clean up space */
+
+    /* 2. Hamburger Button Setup */
+    .hamburger-btn {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 1.5rem;
+        height: 1.1rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        z-index: 1001;
+    }
+    
+    .hamburger-btn .bar {
+        height: 0.15rem;
+        width: 100%;
+        background-color: var(--kodansha-black);
+        border-radius: 2px;
+    }
+
+    /* 3. The Sliding Sidebar Engine */
+    .mobile-sidebar {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 18rem;
+        height: 100vh;
+        background-color: var(--bg-color);
+        border-left: 0.125rem solid var(--kodansha-black);
+        z-index: 2000;
+        padding: 2.5rem;
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    
+    .mobile-sidebar.active { transform: translateX(0); }
+    
+    .sidebar-links { list-style: none; display: flex; flex-direction: column; gap: 1.75rem; margin-top: 4rem; }
+    .sidebar-links li a { font-size: 1.4rem; font-weight: 700; color: var(--kodansha-black); text-decoration: none; }
+    
+    .close-sidebar-btn { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; font-size: 2.5rem; cursor: pointer; color: var(--kodansha-black); }
+    
+    .sidebar-overlay {
+        display: block; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+        background: rgba(0,0,0,0.5); z-index: 1999; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+    }
+    
+    .sidebar-overlay.active { opacity: 1; pointer-events: auto; }
+
+    /* 4. Perfect Mobile Banner Scaling */
+    .hero { padding: 0 1.25rem 2rem 1.25rem; margin-top: -3.5rem; }
+    .hero-anime-banner { height: 26rem; } /* Adjusted height to fit vertical screens */
+    .hero-tint-img { object-position: center 15%; } /* Re-anchors Mahiru's face in the center */
+    
+    /* 5. Mobile Box & Typographic Tuning */
+    .hero-content {
+        padding: 1.25rem 1.5rem; 
+        margin-top: -3.5rem; 
+        max-width: 100%;
+        box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.08); 
+    }
+    .hero h1 { font-size: 2.1rem; letter-spacing: -0.02rem; line-height: 1.15; }
+    .hero h2 { font-size: 0.95rem; margin-top: 0.75rem; line-height: 1.5; }
+    
+    /* 6. Clean Bento Dashboard */
+    .bento-container { grid-template-columns: 1fr; padding: 0 1.25rem; gap: 1.25rem; }
     .card-large, .card-large-wide, .card-full-wide { grid-row: span 1; grid-column: span 1; }
     .bento-card { padding: 1.5rem; }
     
-    /* Disable complex hover effects on mobile for native tap feel */
     .library-card-special:hover .mini-manga:not(:first-child) { margin-left: -2.7rem; }
     .dynamic-book-title { display: none; }
 
-    .legal-container { margin: 1.5rem auto 4rem auto; padding: 0 max(1.5rem, env(safe-area-inset-right)) 0 max(1.5rem, env(safe-area-inset-left)); }
+    /* 7. Clean Legal & Footer */
+    .legal-container { margin: 1.5rem auto 4rem auto; padding: 0 1.25rem; }
     .legal-header h1 { font-size: 2.2rem; line-height: 1.2; }
     .legal-content h2 { font-size: 1.05rem; margin: 2rem 0 1rem 0; }
     .legal-content p, .legal-content ul { font-size: 0.95rem; line-height: 1.6; }
+    
     .manga-shelf { justify-content: flex-start; padding-bottom: 2rem; }
     .manga-book { width: 8rem; box-shadow: -8px 0 15px rgba(0, 0, 0, 0.2); }
     .manga-book:not(:first-child) { margin-left: -5rem; }
+    
     .footer-top { flex-direction: column; gap: 3rem; }
     .footer-brand, .footer-links { flex: 1 1 auto; width: 100%; padding-right: 0; }
     .footer-links { grid-template-columns: 1fr; gap: 2.5rem; }
     .footer-bottom { flex-direction: column; gap: 1.5rem; text-align: center; }
-    .site-footer { padding: 4rem max(1.5rem, env(safe-area-inset-right)) max(2rem, env(safe-area-inset-bottom)) max(1.5rem, env(safe-area-inset-left)); }
+    .site-footer { padding: 4rem 1.25rem 2rem 1.25rem; }
 }
