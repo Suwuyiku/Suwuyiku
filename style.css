@@ -763,6 +763,9 @@ a:focus-visible, button:focus-visible {
     display: none;
 }
 
+/* Utility class to prevent background scrolling when mobile menu is open */
+.no-scroll { overflow: hidden; }
+
 /* =========================================
    6. MODERN MOBILE RESPONSIVENESS
    ========================================= */
@@ -808,7 +811,8 @@ a:focus-visible, button:focus-visible {
         top: 0;
         right: 0;
         width: 18rem;
-        height: 100vh;
+        height: 100vh; /* Fallback for older phones */
+        height: 100dvh; /* FIX: Dynamic height stops mobile browser bars from hiding the footer */
         background-color: var(--bg-color);
         border-left: 0.125rem solid var(--kodansha-black);
         z-index: 2000;
@@ -819,12 +823,12 @@ a:focus-visible, button:focus-visible {
     
     .mobile-sidebar.active { transform: translateX(0); }
     
-/* Layout for the top links */
+    /* Layout for the top links */
     .sidebar-menu-container {
-        padding: 3.5rem 1.5rem 1rem 1.5rem; /* CHANGED: Reduced top padding heavily */
+        padding: 3rem 1.5rem 0.5rem 1.5rem; /* CHANGED: Pushed higher up the screen */
         display: flex;
         flex-direction: column;
-        gap: 1rem; /* CHANGED: Tightened the gap between sections */
+        gap: 0.75rem; /* CHANGED: Tighter gap */
         width: 100%;
     }
     
@@ -843,8 +847,8 @@ a:focus-visible, button:focus-visible {
     .sidebar-links li:first-child { border-top: 1px solid var(--border-color); }
     .sidebar-links li a { 
         display: block; 
-        padding: 0.6rem 0.5rem; /* CHANGED: Thinner vertical padding */
-        font-size: 1.05rem; /* CHANGED: Slightly smaller link text */
+        padding: 0.5rem 0.5rem; /* CHANGED: Shrunk vertical padding */
+        font-size: 1rem; /* CHANGED: Shrunk link text to save height */
         font-weight: 600; 
         color: var(--kodansha-black); 
         text-decoration: none; 
@@ -855,7 +859,7 @@ a:focus-visible, button:focus-visible {
     .sidebar-actions { 
         display: flex; 
         flex-direction: column; 
-        gap: 0.5rem; /* CHANGED: Tighter gap between the boxes */
+        gap: 0.5rem; 
         padding: 0 0.5rem; 
         width: 100%;
     }
@@ -864,13 +868,13 @@ a:focus-visible, button:focus-visible {
         width: 100%; 
         text-decoration: none; color: var(--kodansha-black);
         border: 0.125rem solid var(--kodansha-black);
-        padding: 0.65rem 1rem; /* CHANGED: Slimmer button heights */
+        padding: 0.65rem 1rem; 
         font-size: 0.7rem; font-weight: 700;
         letter-spacing: 0.12rem; text-transform: uppercase;
     }
     
     .close-sidebar-btn { 
-        position: absolute; top: 1rem; right: 1.5rem; /* Nudged the X up slightly */
+        position: absolute; top: 0.75rem; right: 1.5rem; /* Nudged higher */
         background: none; border: none; font-size: 2.5rem; 
         cursor: pointer; color: var(--kodansha-black);
         z-index: 2001; 
@@ -880,7 +884,7 @@ a:focus-visible, button:focus-visible {
     .sidebar-footer {
         background-color: var(--kodansha-black);
         color: var(--bg-color);
-        padding: 1.25rem 1.5rem; /* CHANGED: Made the black box thinner vertically */
+        padding: 1rem 1.5rem; /* CHANGED: Made the black box slightly thinner */
         text-align: center;
         width: 100%; 
         margin-top: auto; 
@@ -890,7 +894,7 @@ a:focus-visible, button:focus-visible {
         font-weight: 800; font-size: 1.1rem; 
         margin-bottom: 0.5rem; display: block; 
         letter-spacing: 0.05rem; 
-        text-transform: none; /* Prevents forced ALL CAPS */
+        text-transform: none; 
     }
     .sidebar-footer a { 
         color: #A0A0A0; text-decoration: none; margin: 0 0.5rem; 
@@ -899,6 +903,7 @@ a:focus-visible, button:focus-visible {
     
     .sidebar-overlay {
         display: block; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+        height: 100dvh; /* FIX: Matches dynamic height */
         background: rgba(0,0,0,0.5); z-index: 1999; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
     }
     
