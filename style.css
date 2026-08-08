@@ -821,10 +821,10 @@ a:focus-visible, button:focus-visible {
     
 /* Layout for the top links */
     .sidebar-menu-container {
-        padding: 4rem 1.5rem 1rem 1.5rem; /* CHANGED: Reduced top padding so the footer fits without scrolling */
+        padding: 3.5rem 1.5rem 1rem 1.5rem; /* CHANGED: Reduced top padding heavily */
         display: flex;
         flex-direction: column;
-        gap: 1.5rem; /* CHANGED: Tightened the gap between sections */
+        gap: 1rem; /* CHANGED: Tightened the gap between sections */
         width: 100%;
     }
     
@@ -843,8 +843,8 @@ a:focus-visible, button:focus-visible {
     .sidebar-links li:first-child { border-top: 1px solid var(--border-color); }
     .sidebar-links li a { 
         display: block; 
-        padding: 0.75rem 0.5rem; /* CHANGED: Reduced vertical padding to save space */
-        font-size: 1.15rem; 
+        padding: 0.6rem 0.5rem; /* CHANGED: Thinner vertical padding */
+        font-size: 1.05rem; /* CHANGED: Slightly smaller link text */
         font-weight: 600; 
         color: var(--kodansha-black); 
         text-decoration: none; 
@@ -855,8 +855,8 @@ a:focus-visible, button:focus-visible {
     .sidebar-actions { 
         display: flex; 
         flex-direction: column; 
-        gap: 0.75rem; 
-        padding: 0 0.5rem; /* CHANGED: Shrinks the buttons to perfectly align with the text above them */
+        gap: 0.5rem; /* CHANGED: Tighter gap between the boxes */
+        padding: 0 0.5rem; 
         width: 100%;
     }
     .sidebar-btn-action {
@@ -864,13 +864,13 @@ a:focus-visible, button:focus-visible {
         width: 100%; 
         text-decoration: none; color: var(--kodansha-black);
         border: 0.125rem solid var(--kodansha-black);
-        padding: 0.8rem 1rem; 
-        font-size: 0.75rem; font-weight: 700;
+        padding: 0.65rem 1rem; /* CHANGED: Slimmer button heights */
+        font-size: 0.7rem; font-weight: 700;
         letter-spacing: 0.12rem; text-transform: uppercase;
     }
     
     .close-sidebar-btn { 
-        position: absolute; top: 1.25rem; right: 1.5rem; 
+        position: absolute; top: 1rem; right: 1.5rem; /* Nudged the X up slightly */
         background: none; border: none; font-size: 2.5rem; 
         cursor: pointer; color: var(--kodansha-black);
         z-index: 2001; 
@@ -880,7 +880,7 @@ a:focus-visible, button:focus-visible {
     .sidebar-footer {
         background-color: var(--kodansha-black);
         color: var(--bg-color);
-        padding: 2rem 1.5rem;
+        padding: 1.25rem 1.5rem; /* CHANGED: Made the black box thinner vertically */
         text-align: center;
         width: 100%; 
         margin-top: auto; 
@@ -919,13 +919,21 @@ a:focus-visible, button:focus-visible {
     
     /* 5. Mobile Box & Typographic Tuning (Smaller Box) */
     .hero-content {
-        padding: 1rem 1.25rem; 
+        padding: 0.85rem 1.15rem; /* CHANGED: Tighter internal padding */
         margin: -2.5rem 1.25rem 0 1.25rem; 
         max-width: calc(100% - 2.5rem); 
         box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.08); 
     }
-    .hero h1 { font-size: 1.75rem; letter-spacing: -0.02rem; line-height: 1.15; }
-    .hero h2 { font-size: 0.85rem; margin-top: 0.5rem; line-height: 1.5; }
+    .hero h1 { 
+        font-size: 1.5rem; /* CHANGED: Shrunk the main header */
+        letter-spacing: -0.02rem; 
+        line-height: 1.15; 
+    }
+    .hero h2 { 
+        font-size: 0.75rem; /* CHANGED: Shrunk the subtext */
+        margin-top: 0.35rem; /* CHANGED: Pulled the subtext closer to the title */
+        line-height: 1.4; 
+    }
     
     /* 6. Clean Bento Dashboard */
     .bento-container { grid-template-columns: 1fr; padding: 0 1.25rem; gap: 1.25rem; }
