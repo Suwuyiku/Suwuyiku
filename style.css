@@ -129,107 +129,69 @@ a:focus-visible, button:focus-visible {
 }
 
 /* =========================================
-   HIGH-SECURITY IMAGE PROTECTION
-   ========================================= */
-
-/* Locks down the image itself from browser behaviors */
-.protected-img {
-    user-select: none;
-    -webkit-user-drag: none;
-    -webkit-touch-callout: none; /* Disables "Save Image" tap-and-hold on iPhones */
-    pointer-events: none; /* Kills all click interactions on the actual image file */
-}
-
-/* The Invisible Shield that blocks right-clicks and elements inspectors */
-.image-shield {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1; /* Sits directly on top of the image */
-    cursor: default; /* Keeps the mouse looking normal so they don't suspect anything */
-}
-
-/* =========================================
-   HERO SECTION (KODANSHA Refined Layout - CORRECTED)
+   HERO SECTION (RESTORED RIGHT BOX LAYOUT)
    ========================================= */
 .hero {
     position: relative;
-    /* TOUCHING NAV FIX: Margin-top is 0 to perfectly glue it flush flush glue against your navigation bar. Okay? */
-    margin-top: 0; 
-    margin-bottom: 4rem; /* Breathing room before your Bento grid. Okay? */
-    width: 100%; 
-    display: flex;
-    justify-content: center; /* Horizontally centers the constrained banner. Okay? */
+    /* Fixed width to match bento grid alignment, matching image_35.png */
+    max-width: 65rem; 
+    margin: 2rem auto 4rem auto; /* Clean spacing, perfectly centered under nav bar */
+    padding: 0;
+    text-align: left; /* Restores the clean text alignment */
+    overflow: hidden; /* Contains the floating image and text box */
 }
 
-/* Constrained Banner Engine (Contains Image, Shield, Fade. Okay?) */
+/* Image container: Constrained and floated left */
 .hero-anime-banner {
     position: relative;
-    width: 100%;
-    
-    /* Controlling height protects Mahiru's entire picture. User liked 28rem. Okay? */
-    height: 28rem; 
-    
-    background-color: #84C1E9; /* Light blue wash. Okay? */
+    float: left; /* Pushes Mahiru to the left */
+    width: 60%; /* Spans 60% of the container, leaving room for the box */
+    height: auto;
+    z-index: 1; /* Sets the image depth, behind the text box */
     overflow: hidden;
-    display: flex;
-    justify-content: center; /* Horizontally centers image within banner. Okay? */
 }
 
-/* The Kodansha Filter & Aspect Ratio-Constrained Image. Okay? */
 .hero-tint-img {
-    height: 100%;
-    width: auto;
+    width: 100%;
+    height: auto;
     display: block;
-    
-    /* Multiply blend strips white ink for blue wash */
-    mix-blend-mode: multiply; 
-    
-    /* Ink subtly kept at 0.45 opacity for readable header text */
-    opacity: 0.45; 
+    /* The core blue filter (Multiply blend and custom opacity) */
+    background-color: #84C1E9;
+    mix-blend-mode: multiply;
+    opacity: 0.35; 
 }
 
-/* Perfected Milky Blend Gradient Fade */
+/* Subtle milky blend gradient fade (Down boundary junction junction junction) */
 .banner-fade {
     position: absolute;
-    /* Implements ultra-smooth fade *only* at the bottom boundary junction where Mahiru picture and page meet. */
     bottom: 0;
     left: 0;
     width: 100%;
-    
-    /* Flawless milky white to transparent white transition, increased height for ultra-smoothness only at that junction boundary. */
-    height: 85%; 
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
-    z-index: 1;
-    pointer-events: none; /* Prevents the invisible shield underneath from being blocked */
+    height: 35%; /* Just a subtle fade at the very bottom */
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
+    z-index: 3; /* Sits over the image and shield to help the fade blend */
+    pointer-events: none; /* Allows the shield underneath to still work */
 }
 
-/* The Editorial Kodansha White Box (Repositioned to the left & lower) */
+/* The Vision Text (Belonging on the RIGHT) */
 .hero-content {
-    position: relative;
-    z-index: 2; 
-    background-color: var(--bg-color, #ffffff);
+    position: absolute; /* Allows precise placement */
+    right: 0; /* Pushes it flush to the container's right edge */
+    top: 5rem; /* Sets its vertical position in the frame */
+    z-index: 5; /* Forces the box to sit *over* the image */
     
-    /* The thick Kodansha border of 0.15rem */
-    border: 0.15rem solid #000000; 
+    background-color: #ffffff;
     
-    /* A premium offset dropshadow on the down and right side */
+    /* The thick Kodansha border and drop shadow */
+    border: 0.15rem solid #000000;
     box-shadow: 4px 6px 14px rgba(0, 0, 0, 0.08); 
     
     padding: 2rem 2.5rem;
-    max-width: 45rem;
-    text-align: left; 
-    
-    /* THE OVERLAP FIX: Box is repositioned to sit flush against the site's LEFT side.
-       Instead of centering math, we position it relative to the container width. 
-       The upward overlap math has been significantly reduced to sit lower in that zone. */
-    left: 0; 
-    margin-top: -1rem; 
+    width: 45%; /* Controls the width of the text box itself */
+    max-width: 35rem; /* Puts an upper limit on how wide it gets */
 }
 
-/* Ensuring your exact text formatting remains completely untouched */
+/* Retaining your exact text formatting */
 .hero-content h1 {
     margin-top: 0;
     margin-bottom: 0.5rem;
@@ -237,6 +199,29 @@ a:focus-visible, button:focus-visible {
 
 .hero-content h2 {
     margin-bottom: 0;
+}
+
+/* =========================================
+   IMAGE PROTECTION (Active and Functional)
+   ========================================= */
+
+/* Locks down the image file directly (Dragging, touch menus, context menus) */
+.protected-img {
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
+    pointer-events: none; /* Kills all click interactions on the image itself */
+}
+
+/* The Invisible Shield overlay that blocks right-clicks and inspection attempts */
+.image-shield {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2; /* Sits directly over the image to catch clicks */
+    cursor: default; /* Mouse looks normal, hiding the shield's presence */
 }
 
 /* =========================================
