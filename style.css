@@ -129,6 +129,87 @@ a:focus-visible, button:focus-visible {
 }
 
 /* =========================================
+   HIGH-SECURITY IMAGE PROTECTION
+   ========================================= */
+
+/* Locks down the image itself from browser behaviors */
+.protected-img {
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none; /* Disables "Save Image" tap-and-hold on iPhones */
+    pointer-events: none; /* Kills all click interactions on the actual image file */
+}
+
+/* The Invisible Shield that blocks right-clicks and elements inspectors */
+.image-shield {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Sits directly on top of the image */
+    cursor: default; /* Keeps the mouse looking normal so they don't suspect anything */
+}
+
+/* =========================================
+   HERO SECTION (GLOBAL ANIME BANNER)
+   ========================================= */
+.hero {
+    position: relative;
+    /* Massive padding gives the banner room to breathe like the Kodansha site */
+    padding: 8rem 2rem 6rem 2rem; 
+    text-align: center;
+    overflow: hidden;
+}
+
+.hero-content {
+    position: relative;
+    /* Keeps your text firmly anchored above the image */
+    z-index: 2; 
+}
+
+/* The Container for the Full-Width Banner */
+.hero-anime-banner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    /* Your custom light blue extracted from the logo */
+    background-color: #84C1E9; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* The Kodansha Filter Engine */
+.hero-tint-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    /* Centers Mahiru's face perfectly based on the crop */
+    object-position: center 30%; 
+    
+    /* This strips the white ink and replaces it with the blue background */
+    mix-blend-mode: multiply; 
+    
+    /* Keeps the ink subtle so your black header text is flawlessly readable */
+    opacity: 0.35; 
+}
+
+/* The seamless gradient fade from the banner into the white Bento Grid */
+.banner-fade {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60%; /* Fades the bottom half of the image */
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, var(--bg-color, #ffffff) 100%);
+    z-index: 1;
+}
+
+/* =========================================
    3. HERO & BENTO DASHBOARD
    ========================================= */
 .hero {
