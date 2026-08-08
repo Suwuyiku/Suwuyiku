@@ -129,34 +129,39 @@ a:focus-visible, button:focus-visible {
 }
 
 /* =========================================
-   HERO SECTION (RESTORED RIGHT BOX LAYOUT)
+   HERO SECTION (BESPOKE LAYOUT - IMAGE AS BACKGROUND)
    ========================================= */
 .hero {
     position: relative;
-    /* Fixed width to match bento grid alignment, matching image_35.png */
-    max-width: 65rem; 
-    margin: 2rem auto 4rem auto; /* Clean spacing, perfectly centered under nav bar */
+    /* Expansive layout that covers the screen */
+    width: 100vw; 
+    
+    /* Fixed height of 50% screen height to protect image aspect ratio on all monitors */
+    height: 50vh; 
+    
+    margin: 2rem 0 4rem 0; /* Clean spacing, perfectly centered under nav bar */
     padding: 0;
     text-align: left; /* Restores the clean text alignment */
-    overflow: hidden; /* Contains the floating image and text box */
+    overflow: hidden; /* Contains the background image and text box */
 }
 
-/* Image container: Constrained and floated left */
+/* Image container: Set as a full-size background overlay */
 .hero-anime-banner {
-    position: relative;
-    float: left; /* Pushes Mahiru to the left */
-    width: 60%; /* Spans 60% of the container, leaving room for the box */
-    height: auto;
-    z-index: 1; /* Sets the image depth, behind the text box */
-    overflow: hidden;
-}
-
-.hero-tint-img {
+    position: absolute; /* Sets it behind everything */
+    top: 0;
+    left: 0;
     width: 100%;
-    height: auto;
-    display: block;
+    height: 100%;
+    z-index: 1; /* Lowest depth, at the back */
+    
     /* The core blue filter (Multiply blend and custom opacity) */
     background-color: #84C1E9;
+    
+    /* Add the image as a background for a full, expansive look */
+    background-image: url("assets/Banner/mahirushiina.webp");
+    background-size: cover; /* Ensures it covers the entire section */
+    background-position: center 25%; /* Focal point is slightly above center */
+    
     mix-blend-mode: multiply;
     opacity: 0.35; 
 }
@@ -173,22 +178,24 @@ a:focus-visible, button:focus-visible {
     pointer-events: none; /* Allows the shield underneath to still work */
 }
 
-/* The Vision Text (Belonging on the RIGHT) */
+/* The Vision Text (Belonging on the LEFT) */
 .hero-content {
     position: absolute; /* Allows precise placement */
-    right: 0; /* Pushes it flush to the container's right edge */
-    top: 5rem; /* Sets its vertical position in the frame */
-    z-index: 5; /* Forces the box to sit *over* the image */
+    left: 5rem; /* Pushes it flush to the container's left edge with padding */
+    top: 10rem; /* Sets its vertical position in the frame */
+    z-index: 5; /* Forces the box to sit *over* everything, including the image */
     
     background-color: #ffffff;
     
-    /* The thick Kodansha border and drop shadow */
-    border: 0.15rem solid #000000;
-    box-shadow: 4px 6px 14px rgba(0, 0, 0, 0.08); 
+    /* The simple Kodansha border - thin, black, no shadow */
+    border: 1px solid #000000;
+    box-shadow: none; /* REMOVED THE DROPSHADOW FOR A CLEANER LOOK */
     
     padding: 2rem 2.5rem;
-    width: 45%; /* Controls the width of the text box itself */
-    max-width: 35rem; /* Puts an upper limit on how wide it gets */
+    
+    /* Sets a fixed, square size for the text box */
+    width: 20rem; 
+    height: 20rem; 
 }
 
 /* Retaining your exact text formatting */
@@ -223,7 +230,6 @@ a:focus-visible, button:focus-visible {
     z-index: 2; /* Sits directly over the image to catch clicks */
     cursor: default; /* Mouse looks normal, hiding the shield's presence */
 }
-
 /* =========================================
    3. HERO & BENTO DASHBOARD
    ========================================= */
