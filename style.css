@@ -145,10 +145,10 @@ a:focus-visible, button:focus-visible {
 .hero-anime-banner {
     position: relative;
     width: 100%;
-    height: 42rem; /* CHANGED: Increased from 28rem to show the full artwork */
+    height: 42rem; 
     background-color: #84C1E9; 
     overflow: hidden;
-    border: 0.125rem solid var(--kodansha-black); /* ADDED: Kodansha style border around the image */
+    /* The border line has been removed from here */
 }
 
 .hero-tint-img {
@@ -203,9 +203,9 @@ a:focus-visible, button:focus-visible {
    ========================================= */
 .hero {
     position: relative;
-    padding: 1rem 3rem 4rem 3rem; /* CHANGED: Reduced top padding from 6rem to 1rem */
+    padding: 0 3rem 4rem 3rem; /* CHANGED: Top padding set to 0 */
     max-width: 75rem;
-    margin: 0 auto;
+    margin: -2.5rem auto 0 auto; /* CHANGED: -2.5rem pulls it up exactly halfway under the nav */
     width: 100%;
 }
 
