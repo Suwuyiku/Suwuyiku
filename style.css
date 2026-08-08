@@ -206,7 +206,7 @@ a:focus-visible, button:focus-visible {
    ========================================= */
 .hero {
     position: relative;
-    padding: 0 3rem 1.5rem 3rem; /* CHANGED: Reduced bottom padding from 4rem to 1.5rem to shrink the gap */
+    padding: 0 3rem 2.5rem 3rem; /* CHANGED: Reduced bottom padding from 4rem to 1.5rem to shrink the gap */
     max-width: 75rem;
     margin: -4.7rem auto 0 auto; 
     width: 100%;
