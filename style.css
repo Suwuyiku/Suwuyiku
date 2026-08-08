@@ -151,79 +151,7 @@ a:focus-visible, button:focus-visible {
     cursor: default; /* Keeps the mouse looking normal so they don't suspect anything */
 }
 
-/* =========================================
-   HERO SECTION (KODANSHA REFINED LAYOUT)
-   ========================================= */
-.hero {
-    position: relative;
-    margin-top: 2rem;
-    margin-bottom: 4rem;
-    /* THE WIDTH FIX: Removed 100vw. The banner now naturally locks to the exact width of your nav bar and bento grid */
-    width: 100%; 
-}
 
-/* Constrained Banner Engine */
-.hero-anime-banner {
-    position: relative;
-    width: 100%;
-    
-    /* THE HEIGHT FIX: A controlled height protects the image from being chopped off on large screens */
-    height: 28rem; 
-    
-    background-color: #84C1E9; 
-    overflow: hidden;
-}
-
-.hero-tint-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; 
-    /* Adjusts the crop focal point to keep the eyes perfectly framed */
-    object-position: center 20%; 
-    mix-blend-mode: multiply; 
-    opacity: 0.45; 
-}
-
-/* THE BLEND FIX: A taller, smoother gradient fade at the bottom */
-.banner-fade {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 60%; 
-    background: linear-gradient(to bottom, transparent 0%, var(--bg-color, #ffffff) 100%);
-    z-index: 1;
-    pointer-events: none; /* Ensures the shield underneath still works */
-}
-
-/* The Editorial Kodansha White Box */
-.hero-content {
-    position: relative;
-    z-index: 2; 
-    background-color: var(--bg-color, #ffffff);
-    
-    border: 0.15rem solid #000000; 
-    
-    /* THE SHADOW FIX: A clean offset shadow on the down and right side */
-    box-shadow: 4px 6px 14px rgba(0, 0, 0, 0.08); 
-    
-    padding: 2rem 2.5rem;
-    max-width: 45rem;
-    text-align: left; 
-    
-    /* Overlaps the box beautifully over the bottom edge of the banner */
-    margin-top: -4rem; 
-}
-
-/* Ensuring your exact text formatting remains completely untouched */
-.hero-content h1 {
-    margin-top: 0;
-    margin-bottom: 0.5rem;
-}
-
-.hero-content h2 {
-    margin-bottom: 0;
-}
 
 /* =========================================
    3. HERO & BENTO DASHBOARD
