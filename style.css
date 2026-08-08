@@ -184,7 +184,7 @@ a:focus-visible, button:focus-visible {
     box-shadow: 4px 6px 14px rgba(0, 0, 0, 0.08); 
     
     padding: 1.25rem 2.25rem; 
-    max-width: 34rem; /* CHANGED: Reduced from 42rem to 34rem to force the text to wrap */
+    max-width: 38rem; /* CHANGED: Increased from 34rem to 38rem for better text wrapping */
     text-align: left; 
     margin-top: -4rem; 
     
