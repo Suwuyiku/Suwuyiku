@@ -141,7 +141,7 @@ a:focus-visible, button:focus-visible {
     width: 100%; 
 }
 
-/* Constrained Banner Engine (Parallax Edition) */
+/* Constrained Banner Engine (Restored & Optimized) */
 .hero-anime-banner {
     position: relative;
     width: 100%;
@@ -149,31 +149,18 @@ a:focus-visible, button:focus-visible {
     background-color: #84C1E9; 
     overflow: hidden;
     
-    /* The Parallax Engine */
-    background-image: 
-        linear-gradient(rgba(132, 193, 233, 0.45), rgba(132, 193, 233, 0.45)), 
-        url('assets/Banner/mahirushiina.webp');
-    background-attachment: fixed, fixed;
-    background-size: cover, cover;
-    background-position: center 5%, center 5%; /* Nudged up to account for viewport anchoring */
-    background-blend-mode: normal, multiply;
-    
-    /* The natural blend mask remains perfectly intact */
+    /* The perfect natural blend mask is kept intact */
     -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
     mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
-}
-
-/* Mobile Safeguard: Disables Parallax on Touch Devices to prevent the iOS Bug */
-@media (hover: none) and (pointer: coarse) {
-    .hero-anime-banner {
-        background-attachment: scroll, scroll;
-    }
 }
 
 .hero-tint-img {
     width: 100%;
     height: 100%;
-    opacity: 0; /* Hides the HTML image to show the parallax behind it, keeping anti-theft active */
+    object-fit: cover; 
+    object-position: center 10%; /* Restores the perfect framing of her face */
+    mix-blend-mode: multiply; 
+    opacity: 0.45; /* Restores the correct blue tint */
 }
 
 /* THE BLEND FIX: Uses transparent white to avoid the muddy CSS glitch, and increased height to 85% for an ultra-smooth fade */
