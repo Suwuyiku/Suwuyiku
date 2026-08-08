@@ -152,62 +152,82 @@ a:focus-visible, button:focus-visible {
 }
 
 /* =========================================
-   HERO SECTION (KODANSHA REFINED LAYOUT)
+   HERO SECTION (KODANSHA BESPOKE REFINEMENT)
    ========================================= */
 .hero {
     position: relative;
-    
-    /* THE TOP GAP FIX: Changed to 0 so it touches the navigation bar perfectly */
+    /* REFINED FIXED: Margin-top of 0 to glue it perfectly flush against your navigation bar. */
     margin-top: 0; 
-    
-    margin-bottom: 4rem;
+    margin-bottom: 4rem; /* Breathing room before your Bento grid */
     width: 100%; 
+    display: flex;
+    justify-content: center; /* Horizontally centers the constrained banner */
 }
 
-/* Constrained Banner Engine */
+/* Constrained Banner Engine (Contains Image, Shield, Fade) */
 .hero-anime-banner {
     position: relative;
     width: 100%;
+    
+    /* Controlling the height protects the image aspect ratio and scaling */
     height: 28rem; 
-    background-color: #84C1E9; 
+    
+    background-color: #84C1E9; /* Your custom light blue extracted from the logo */
     overflow: hidden;
+    display: flex;
+    justify-content: center; /* Horizontally centers the image within the banner */
 }
 
+/* The Kodansha Filter & Aspect Ratio Engine */
 .hero-tint-img {
-    width: 100%;
+    /* THE CROPPING FIX: Image width is auto. Image is scaled by HEIGHT only to fit. This prevents squishing and ensures the side editorial borders in image_33.png are never chopped off. */
     height: 100%;
-    object-fit: cover; 
-    object-position: center 20%; 
+    width: auto;
+    display: block;
+    
+    /* Multiply blend strips white ink for blue wash */
     mix-blend-mode: multiply; 
+    
+    /* Ink subtly kept at 0.45 opacity for readable header text */
     opacity: 0.45; 
 }
 
-/* THE BLEND FIX: Uses transparent white to avoid the muddy CSS glitch, and increased height to 85% for an ultra-smooth fade */
+/* Perfected Milky Blend Gradient Fade */
 .banner-fade {
     position: absolute;
+    /* Implements ultra-smooth fade *only* at the bottom boundary junction where Mahiru picture and page meet. */
     bottom: 0;
     left: 0;
     width: 100%;
+    
+    /* Flawless milky white to transparent white transition, increased height for ultra-smoothness only at that junction boundary. */
     height: 85%; 
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
     z-index: 1;
-    pointer-events: none; 
+    pointer-events: none; /* Prevents the invisible shield underneath from being blocked */
 }
 
-/* The Editorial Kodansha White Box */
+/* The Editorial Kodansha White Box (Repositioned to the left & lower) */
 .hero-content {
     position: relative;
     z-index: 2; 
     background-color: var(--bg-color, #ffffff);
     
+    /* The thick Kodansha border of 0.15rem */
     border: 0.15rem solid #000000; 
+    
+    /* A premium offset dropshadow on the down and right side */
     box-shadow: 4px 6px 14px rgba(0, 0, 0, 0.08); 
     
     padding: 2rem 2.5rem;
     max-width: 45rem;
     text-align: left; 
     
-    margin-top: -4rem; 
+    /* THE OVERLAP FIX: Box is repositioned to sit flush against the site's LEFT side.
+       Instead of centering math, we position it relative to the container width. 
+       The upward overlap math has been significantly reduced to sit lower in that zone. */
+    left: 0; 
+    margin-top: -1rem; 
 }
 
 /* Ensuring your exact text formatting remains completely untouched */
