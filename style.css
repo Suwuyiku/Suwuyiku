@@ -208,7 +208,7 @@ a:focus-visible, button:focus-visible {
     position: relative;
     padding: 0 3rem 4rem 3rem;
     max-width: 75rem;
-    margin: -6.5rem auto 0 auto; /* Increased negative margin to tuck it deeper */
+    margin: -5.5rem auto 0 auto; /* Increased negative margin to tuck it deeper */
     width: 100%;
 }
 
