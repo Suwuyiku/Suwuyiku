@@ -432,8 +432,8 @@ a:focus-visible, button:focus-visible {
     
     position: relative;
     
-    /* THE BORDER FIX: Dialed back to 0.12rem for the perfect delicate sweet spot */
-    border: 0.12rem solid var(--bg-color); 
+    /* THE BORDER FIX: Your perfect 0.12rem base, plus exactly 2 pixels */
+    border: calc(0.12rem + 2px) solid var(--bg-color); 
     
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
     background-color: var(--border-color);
@@ -447,16 +447,16 @@ a:focus-visible, button:focus-visible {
 
 /* Organic Base State */
 .creator-avatar:nth-child(1) {
-    /* THE Z-INDEX FIX: Left logo now tucked underneath */
-    z-index: 1; 
+    /* THE Z-INDEX FIX: Left logo reverted back to the top */
+    z-index: 2; 
     transform: rotate(-2deg);
 }
 
 .creator-avatar:nth-child(2) {
     margin-left: -1.2rem; 
     transform: translateY(-4px) rotate(2deg); 
-    /* THE Z-INDEX FIX: Right logo is now perfectly on top */
-    z-index: 2; 
+    /* THE Z-INDEX FIX: Right logo tucked underneath again */
+    z-index: 1; 
 }
 
 /* Base Card Hover: Gentle Separation */
