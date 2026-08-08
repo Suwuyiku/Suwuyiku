@@ -129,76 +129,65 @@ a:focus-visible, button:focus-visible {
 }
 
 /* =========================================
-   HERO SECTION (BESPOKE LAYOUT - IMAGE AS BACKGROUND)
+   HERO SECTION (KODANSHA REFINED LAYOUT)
    ========================================= */
 .hero {
     position: relative;
-    /* Expansive layout that covers the screen */
-    width: 100vw; 
     
-    /* Fixed height of 50% screen height to protect image aspect ratio on all monitors */
-    height: 50vh; 
+    /* THE TOP GAP FIX: Changed to 0 so it touches the navigation bar perfectly */
+    margin-top: 0; 
     
-    margin: 2rem 0 4rem 0; /* Clean spacing, perfectly centered under nav bar */
-    padding: 0;
-    text-align: left; /* Restores the clean text alignment */
-    overflow: hidden; /* Contains the background image and text box */
+    margin-bottom: 4rem;
+    width: 100%; 
 }
 
-/* Image container: Set as a full-size background overlay */
+/* Constrained Banner Engine */
 .hero-anime-banner {
-    position: absolute; /* Sets it behind everything */
-    top: 0;
-    left: 0;
+    position: relative;
+    width: 100%;
+    height: 28rem; 
+    background-color: #84C1E9; 
+    overflow: hidden;
+}
+
+.hero-tint-img {
     width: 100%;
     height: 100%;
-    z-index: 1; /* Lowest depth, at the back */
-    
-    /* The core blue filter (Multiply blend and custom opacity) */
-    background-color: #84C1E9;
-    
-    /* Add the image as a background for a full, expansive look */
-    background-image: url("assets/Banner/mahirushiina.webp");
-    background-size: cover; /* Ensures it covers the entire section */
-    background-position: center 25%; /* Focal point is slightly above center */
-    
-    mix-blend-mode: multiply;
-    opacity: 0.35; 
+    object-fit: cover; 
+    object-position: center 20%; 
+    mix-blend-mode: multiply; 
+    opacity: 0.45; 
 }
 
-/* Subtle milky blend gradient fade (Down boundary junction junction junction) */
+/* THE BLEND FIX: Uses transparent white to avoid the muddy CSS glitch, and increased height to 85% for an ultra-smooth fade */
 .banner-fade {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 35%; /* Just a subtle fade at the very bottom */
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
-    z-index: 3; /* Sits over the image and shield to help the fade blend */
-    pointer-events: none; /* Allows the shield underneath to still work */
+    height: 85%; 
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+    z-index: 1;
+    pointer-events: none; 
 }
 
-/* The Vision Text (Belonging on the LEFT) */
+/* The Editorial Kodansha White Box */
 .hero-content {
-    position: absolute; /* Allows precise placement */
-    left: 5rem; /* Pushes it flush to the container's left edge with padding */
-    top: 10rem; /* Sets its vertical position in the frame */
-    z-index: 5; /* Forces the box to sit *over* everything, including the image */
+    position: relative;
+    z-index: 2; 
+    background-color: var(--bg-color, #ffffff);
     
-    background-color: #ffffff;
-    
-    /* The simple Kodansha border - thin, black, no shadow */
-    border: 1px solid #000000;
-    box-shadow: none; /* REMOVED THE DROPSHADOW FOR A CLEANER LOOK */
+    border: 0.15rem solid #000000; 
+    box-shadow: 4px 6px 14px rgba(0, 0, 0, 0.08); 
     
     padding: 2rem 2.5rem;
+    max-width: 45rem;
+    text-align: left; 
     
-    /* Sets a fixed, square size for the text box */
-    width: 20rem; 
-    height: 20rem; 
+    margin-top: -4rem; 
 }
 
-/* Retaining your exact text formatting */
+/* Ensuring your exact text formatting remains completely untouched */
 .hero-content h1 {
     margin-top: 0;
     margin-bottom: 0.5rem;
@@ -208,28 +197,6 @@ a:focus-visible, button:focus-visible {
     margin-bottom: 0;
 }
 
-/* =========================================
-   IMAGE PROTECTION (Active and Functional)
-   ========================================= */
-
-/* Locks down the image file directly (Dragging, touch menus, context menus) */
-.protected-img {
-    user-select: none;
-    -webkit-user-drag: none;
-    -webkit-touch-callout: none;
-    pointer-events: none; /* Kills all click interactions on the image itself */
-}
-
-/* The Invisible Shield overlay that blocks right-clicks and inspection attempts */
-.image-shield {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 2; /* Sits directly over the image to catch clicks */
-    cursor: default; /* Mouse looks normal, hiding the shield's presence */
-}
 /* =========================================
    3. HERO & BENTO DASHBOARD
    ========================================= */
