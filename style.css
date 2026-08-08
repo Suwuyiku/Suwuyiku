@@ -406,6 +406,68 @@ a:focus-visible, button:focus-visible {
 .title-5 .eng { font-family: 'Bebas Neue', sans-serif; font-weight: 400; font-size: 1.05rem; letter-spacing: 0.05rem; display: inline-block; transform: translateY(0.08rem); }
 
 /* =========================================
+   SHOP BENTO CARD (CREATOR AVATARS)
+   ========================================= */
+.shop-card-special {
+    position: relative;
+    overflow: hidden; 
+}
+
+.shop-creator-avatars {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end; 
+    width: 100%;
+    margin-top: 1rem;
+    padding-right: 1.5rem; 
+    padding-bottom: 0.5rem;
+}
+
+/* Enforcing the Perfect Circle */
+.creator-avatar {
+    width: 3.5rem; 
+    height: 3.5rem;
+    border-radius: 50%; /* Forces the geometry into a perfect circle */
+    object-fit: cover; /* Prevents the non-circular image from stretching */
+    border: 0.125rem solid var(--bg-color); /* Creates a clean cut-out overlap effect */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+    background-color: var(--border-color);
+    
+    /* Hardware acceleration for smooth popping */
+    will-change: transform, box-shadow;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), 
+                box-shadow 0.5s ease;
+    cursor: pointer;
+}
+
+/* Stacking the avatars */
+.creator-avatar:first-child {
+    z-index: 1;
+}
+
+.creator-avatar:not(:first-child) {
+    margin-left: -1.2rem; /* Creates the overlapping cluster look */
+    z-index: 2;
+}
+
+/* Base Card Hover Spread */
+.shop-card-special:hover .creator-avatar:nth-child(1) {
+    transform: translateX(-0.5rem) rotate(-5deg);
+}
+
+.shop-card-special:hover .creator-avatar:nth-child(2) {
+    transform: translateX(0.25rem) rotate(5deg);
+}
+
+/* Individual Avatar Direct Hover (Premium Pop) */
+.shop-card-special .creator-avatar:hover {
+    transform: translateY(-0.5rem) scale(1.15) !important;
+    z-index: 10 !important; 
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    border-color: var(--kodansha-black);
+}
+
+/* =========================================
    7. LIBRARY / MANGA SHELF
    ========================================= */
 .library-container {
