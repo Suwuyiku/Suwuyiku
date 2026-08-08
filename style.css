@@ -423,7 +423,7 @@ a:focus-visible, button:focus-visible {
     padding-bottom: 0.5rem;
 }
 
-/* Enforcing the Perfect Circle & Buttery Smooth Physics */
+/* Enforcing the Perfect Circle & Apple-Style Fluid Physics */
 .creator-avatar {
     width: 3.5rem; 
     height: 3.5rem;
@@ -431,17 +431,18 @@ a:focus-visible, button:focus-visible {
     object-fit: cover; 
     
     position: relative;
-    
-    /* THE BORDER FIX: Back to the delicate 0.12rem thickness */
     border: 0.12rem solid var(--bg-color); 
     
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
     background-color: var(--border-color);
     
+    /* Hardware acceleration to force the browser to render this at 60fps */
     will-change: transform, box-shadow, border-color;
-    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), 
-                box-shadow 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-                border-color 0.3s ease;
+    
+    /* THE FIX: True iPhone-style fluid animation curve */
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                box-shadow 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.5s ease-out;
     cursor: pointer;
 }
 
