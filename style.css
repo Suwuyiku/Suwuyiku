@@ -432,8 +432,8 @@ a:focus-visible, button:focus-visible {
     
     position: relative;
     
-    /* THE BORDER FIX: Your perfect 0.12rem base, plus exactly 2 pixels */
-    border: calc(0.12rem + 2px) solid var(--bg-color); 
+    /* THE BORDER FIX: Back to the delicate 0.12rem thickness */
+    border: 0.12rem solid var(--bg-color); 
     
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
     background-color: var(--border-color);
