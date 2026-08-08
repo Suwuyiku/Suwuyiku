@@ -482,11 +482,12 @@ a:focus-visible, button:focus-visible {
     position: absolute;
     pointer-events: none;
     font-family: 'Inter', sans-serif;
-    
-    /* THE FIX: Smaller size with a premium letter spacing */
     font-size: 0.8rem; 
     font-weight: 500;
     letter-spacing: 0.02rem; 
+    
+    /* THE FIX: Precisely nudges the smaller text down to match the baseline of "Shop" */
+    transform: translateY(0.15rem);
     
     opacity: 0;
     transition: opacity 0.3s ease;
