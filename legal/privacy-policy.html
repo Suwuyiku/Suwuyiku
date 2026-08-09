@@ -13,6 +13,7 @@
 </head>
 <body>
 
+    <!-- Strict Kodansha-Style Navigation Bar -->
     <nav class="top-nav">
         <div class="nav-left">
             <a href="../index.html" style="text-decoration: none;"><span class="logo-text">Suwuyiku</span></a>
@@ -20,17 +21,55 @@
 
         <div class="nav-right">
             <ul class="nav-links">
-                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="../projects.html">About</a></li>
                 <li><a href="../connections.html">Connections</a></li>
                 <li><a href="https://suwuyiku.notion.site/library">Library</a></li>
-                <li><a href="https://suwuyiku.bearblog.dev">Journal</a></li>
+                <li><a href="https://suwuyiku.bearblog.dev">Fragments</a></li>
             </ul>
             <div class="nav-actions">
                 <a href="#" class="btn-action">SHOP</a>
                 <a href="../contact.html" class="btn-action">CONTACT</a>
             </div>
+
+            <!-- NEW: The 3-Line Hamburger Button (Mobile Only) -->
+            <button class="hamburger-btn" aria-label="Open Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
         </div>
     </nav>
+
+    <!-- NEW: The Sliding Mobile Sidebar & Overlay -->
+    <div class="mobile-sidebar">
+        <button class="close-sidebar-btn" aria-label="Close Menu">&times;</button>
+        
+        <!-- Main Links & Actions -->
+        <div class="sidebar-menu-container">
+            <ul class="sidebar-links">
+                <li><a href="../projects.html">About</a></li>
+                <li><a href="../connections.html">Connections</a></li>
+                <li><a href="https://suwuyiku.notion.site/library">Library</a></li>
+                <li><a href="https://suwuyiku.bearblog.dev">Fragments</a></li>
+            </ul>
+            
+            <div class="sidebar-actions">
+                <a href="#" class="sidebar-btn-action">SHOP</a>
+                <a href="../contact.html" class="sidebar-btn-action">CONTACT</a>
+            </div>
+        </div>
+
+        <!-- The Black Branding Footer -->
+        <div class="sidebar-footer">
+            <span class="brand">Suwuyiku</span>
+            <div>
+                <a href="terms-of-use.html">Terms</a>
+                <span style="color: #444;">|</span>
+                <a href="privacy-policy.html">Privacy</a>
+            </div>
+        </div>
+    </div>
+    <div class="sidebar-overlay"></div>
 
     <!-- LEGAL TEXT CONTAINER -->
     <main class="legal-container">
@@ -103,9 +142,9 @@
                 <div class="link-column">
                     <h3>Ecosystem</h3>
                     <ul>
-                        <li><a href="../projects.html">Projects</a></li>
+                        <li><a href="../projects.html">About</a></li>
                         <li><a href="https://suwuyiku.notion.site/library">Library</a></li>
-                        <li><a href="https://suwuyiku.bearblog.dev">Journal</a></li>
+                        <li><a href="https://suwuyiku.bearblog.dev">Fragments</a></li>
                         <li><a href="#">Shop</a></li>
                     </ul>
                 </div>
@@ -143,5 +182,27 @@
         </div>
     </footer>
 
+    <!-- Interaction Script for Mobile Sidebar -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const hamburger = document.querySelector('.hamburger-btn');
+            const sidebar = document.querySelector('.mobile-sidebar');
+            const overlay = document.querySelector('.sidebar-overlay');
+            const closeBtn = document.querySelector('.close-sidebar-btn');
+
+            // Safety check: Only run if the mobile elements exist
+            if (hamburger && sidebar && overlay && closeBtn) {
+                function toggleMenu() {
+                    sidebar.classList.toggle('active');
+                    overlay.classList.toggle('active');
+                    document.body.classList.toggle('no-scroll'); // Locks the background website in place
+                }
+
+                hamburger.addEventListener('click', toggleMenu);
+                closeBtn.addEventListener('click', toggleMenu);
+                overlay.addEventListener('click', toggleMenu);
+            }
+        });
+    </script>
 </body>
 </html>
