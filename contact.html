@@ -1,1 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- SEO & Google Verification -->
+    <meta name="google-site-verification" content="3roOwsEGBObyATvMQgQGeNyHRKH-labRw-z3GWrNYgE" />
+    <meta name="description" content="Reach out to Suwuyiku. Official lines for business, collaborations, and licensing, alongside a completely anonymous space for scattered thoughts.">
+
+    <title>Contact • Suwuyiku</title>
+    
+    <!-- Tab Favicon Icon -->
+    <link rel="icon" type="image/webp" href="assets/logo.webp">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Specific Contact Page Styles -->
+    <style>
+        .contact-layout {
+            padding-top: 6rem;
+            padding-bottom: 6rem;
+            grid-template-columns: 1fr 1fr; /* 2-column layout for desktop */
+            align-items: stretch;
+        }
+
+        /* Section 1: Official Lines */
+        .routing-card { padding: 2.5rem; display: flex; flex-direction: column; gap: 2rem; }
+        .route-group { border-bottom: 1px solid var(--border-color); padding-bottom: 1.5rem; }
+        .route-group:last-child { border-bottom: none; padding-bottom: 0; }
+        
+        .route-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 0.5rem; }
+        .route-title { font-size: 1.1rem; font-weight: 700; color: var(--kodansha-black); }
+        .route-desc { font-size: 0.85rem; color: #777777; line-height: 1.5; padding-right: 2rem; }
+        
+        .btn-connect {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--kodansha-black);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .btn-connect:hover { border-color: var(--kodansha-black); background-color: var(--kodansha-black); color: var(--bg-color); }
+
+        /* Section 2: Anonymous Drop */
+        .anonymous-card { 
+            padding: 3rem 2.5rem; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            text-align: center;
+            background-color: #FAFAFA; /* Slight visual contrast */
+        }
+        .anonymous-card h2 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+        .anonymous-card p { font-size: 0.95rem; color: #777777; margin-bottom: 2rem; }
+        
+        .btn-soft-blue {
+            display: inline-block;
+            padding: 0.85rem 1.75rem;
+            background-color: #EBF4FA;
+            color: #3A7CA5;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        .btn-soft-blue:hover { background-color: #D6EAF8; color: #2C6385; transform: translateY(-1px); }
+
+        /* Mobile Adjustments */
+        @media (max-width: 48rem) {
+            .contact-layout { padding-top: 5rem; grid-template-columns: 1fr; } /* Stacks the cards */
+            .routing-card { padding: 1.5rem; gap: 1.5rem; }
+            .route-header { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+            .route-desc { padding-right: 0; margin-bottom: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Strict Kodansha-Style Navigation Bar -->
+    <nav class="top-nav">
+        <div class="nav-left">
+            <a href="index.html" style="text-decoration: none;"><span class="logo-text">Suwuyiku</span></a>
+        </div>
+
+        <div class="nav-right">
+            <ul class="nav-links">
+                <li><a href="projects.html">About</a></li>
+                <li><a href="connections.html">Connections</a></li>
+                <li><a href="library.html">Library</a></li>
+                <li><a href="https://suwuyiku.bearblog.dev">Fragments</a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                <a href="#" class="btn-action">SHOP</a>
+                <a href="contact.html" class="btn-action">CONTACT</a>
+            </div>
+
+            <!-- The 3-Line Hamburger Button (Mobile Only) -->
+            <button class="hamburger-btn" aria-label="Open Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- The Sliding Mobile Sidebar & Overlay -->
+    <div class="mobile-sidebar">
+        <button class="close-sidebar-btn" aria-label="Close Menu">&times;</button>
+        
+        <!-- Main Links & Actions -->
+        <div class="sidebar-menu-container">
+            <ul class="sidebar-links">
+                <li><a href="projects.html">About</a></li>
+                <li><a href="connections.html">Connections</a></li>
+                <li><a href="library.html">Library</a></li>
+                <li><a href="https://suwuyiku.bearblog.dev">Fragments</a></li>
+            </ul>
+            
+            <div class="sidebar-actions">
+                <a href="#" class="sidebar-btn-action">SHOP</a>
+                <a href="contact.html" class="sidebar-btn-action">CONTACT</a>
+            </div>
+        </div>
+
+        <!-- The Black Branding Footer -->
+        <div class="sidebar-footer">
+            <span class="brand">Suwuyiku</span>
+            <div>
+                <a href="legal/terms-of-use.html">Terms</a>
+                <span style="color: #444;">|</span>
+                <a href="legal/privacy-policy.html">Privacy</a>
+            </div>
+        </div>
+    </div>
+    <div class="sidebar-overlay"></div>
+
+    <!-- Contact Layout Dashboard -->
+    <main class="bento-container contact-layout">
+        
+        <!-- SECTION 1: The Direct Lines (Email Routing) -->
+        <div class="bento-card routing-card">
+            
+            <div class="route-group">
+                <div class="route-header">
+                    <span class="route-title">General & Creator Chats</span>
+                    <a href="mailto:hellosuwuyiku@gmail.com" class="btn-connect">Connect ↗</a>
+                </div>
+                <p class="route-desc">For saying hi, creative thoughts, or general connections.</p>
+            </div>
+
+            <div class="route-group">
+                <div class="route-header">
+                    <span class="route-title">Business & The Shop</span>
+                    <a href="mailto:hisuwuyiku@gmail.com" class="btn-connect">Connect ↗</a>
+                </div>
+                <p class="route-desc">For collaborations, curated community works, and shop support.</p>
+            </div>
+
+            <div class="route-group">
+                <div class="route-header">
+                    <span class="route-title">Official & Licensing</span>
+                    <a href="mailto:suwuyiku.legal@gmail.com" class="btn-connect">Connect ↗</a>
+                </div>
+                <p class="route-desc">For official Udyam registry inquiries, IP, and architecture documentation.</p>
+            </div>
+
+        </div>
+
+        <!-- SECTION 2: The Anonymous Drop -->
+        <div class="bento-card anonymous-card">
+            <h2>Leave a note</h2>
+            <p>A completely anonymous space. No identities collected.</p>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdtV7dzrC6yCSJwZFixK48ISk97aSJN41_iqpKTrkXcJ9JUGA/viewform" target="_blank" rel="noopener noreferrer" class="btn-soft-blue">
+                Drop a scattered note ↗
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Architectural Footer -->
+    <footer class="site-footer">
+        <div class="footer-top">
+            <!-- Brand & Vision -->
+            <div class="footer-brand">
+                <span class="logo-text footer-logo">Suwuyiku</span>
+                <h2>Visual curation and digital architecture</h2>
+                <p>
+                    Building timeless structures without restrictions. A visual diary, manga collection, and scattered thoughts by Suwuyiku. Founder of echoes under the april aozora. Built to last a thousand years.
+                </p>
+            </div>
+
+            <!-- Footer Link Columns -->
+            <div class="footer-links">
+                <div class="link-column">
+                    <h3>Ecosystem</h3>
+                    <ul>
+                        <li><a href="projects.html">About</a></li>
+                        <li><a href="library.html">Library</a></li>
+                        <li><a href="https://suwuyiku.bearblog.dev">Fragments</a></li>
+                        <li><a href="#">Shop</a></li>
+                    </ul>
+                </div>
+                
+                <div class="link-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="connections.html">Connections</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="https://github.com/Suwuyiku">GitHub</a></li>
+                    </ul>
+                </div>
+
+                <div class="link-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="https://github.com/Suwuyiku/suwuyiku.github.io/blob/main/LICENSE">MIT License</a></li>
+                        <li><a href="https://github.com/Suwuyiku/suwuyiku.github.io">Source Code</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Legal & Copyright Bar -->
+        <div class="footer-bottom">
+            <div class="footer-bottom-links">
+                <a href="legal/privacy-policy.html">Privacy Policy</a>
+                <span class="divider">|</span>
+                <a href="legal/terms-of-use.html">Terms of Use</a>
+                <span class="divider">|</span>
+                <a href="legal/shipping-and-refund.html">Shipping and Refund Policy</a>
+            </div>
+            <div class="copyright">
+                &copy; 2026 Suwuyiku. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interaction Script for Mobile Sidebar -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const hamburger = document.querySelector('.hamburger-btn');
+            const sidebar = document.querySelector('.mobile-sidebar');
+            const overlay = document.querySelector('.sidebar-overlay');
+            const closeBtn = document.querySelector('.close-sidebar-btn');
+
+            if (hamburger && sidebar && overlay && closeBtn) {
+                function toggleMenu() {
+                    sidebar.classList.toggle('active');
+                    overlay.classList.toggle('active');
+                    document.body.classList.toggle('no-scroll'); 
+                }
+
+                hamburger.addEventListener('click', toggleMenu);
+                closeBtn.addEventListener('click', toggleMenu);
+                overlay.addEventListener('click', toggleMenu);
+            }
+        });
+    </script>
+</body>
+</html>
