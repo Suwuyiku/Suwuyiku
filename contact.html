@@ -18,102 +18,6 @@
     
     <!-- Inter Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Specific Contact Page Styles -->
-    <style>
-        .contact-layout {
-            padding-top: 6rem;
-            padding-bottom: 6rem;
-            display: grid;
-            grid-template-columns: 1.2fr 1fr; /* 2-column layout */
-            align-items: stretch;
-            gap: 1.5rem;
-        }
-
-        /* Section 1: Official Lines Column */
-        .contact-routes-column {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem; /* Gap between the distinct boxes */
-        }
-        
-        .route-card { 
-            padding: 2rem; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center;
-        }
-
-        /* The little line separating grouped items inside a box */
-        .route-divider {
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .route-header { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            gap: 1rem; 
-            margin-bottom: 0.5rem; 
-        }
-        
-        .route-title { font-size: 1.1rem; font-weight: 700; color: var(--kodansha-black); }
-        .route-desc { font-size: 0.85rem; color: #777777; line-height: 1.5; padding-right: 1rem; margin: 0; }
-        
-        .btn-connect {
-            display: inline-block;
-            padding: 0.4rem 0.8rem;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--kodansha-black);
-            text-decoration: none;
-            transition: all 0.2s ease;
-            white-space: nowrap;
-        }
-        .btn-connect:hover { border-color: var(--kodansha-black); background-color: var(--kodansha-black); color: var(--bg-color); }
-
-        /* Section 2: Anonymous Drop */
-        .anonymous-card { 
-            padding: 3rem 2.5rem; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
-            text-align: center;
-            background-color: #FAFAFA;
-            height: 100%;
-        }
-        .anonymous-card h2 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
-        .anonymous-card p { font-size: 0.95rem; color: #777777; margin-bottom: 2rem; }
-        
-        .btn-soft-blue {
-            display: inline-block;
-            padding: 0.85rem 1.75rem;
-            background-color: #EBF4FA;
-            color: #3A7CA5;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
-        .btn-soft-blue:hover { background-color: #D6EAF8; color: #2C6385; transform: translateY(-1px); }
-
-        /* Mobile Adjustments */
-        @media (max-width: 48rem) {
-            .contact-layout { padding-top: 5rem; padding-bottom: 4rem; grid-template-columns: 1fr; }
-            .route-card { padding: 1.5rem; }
-            .route-header { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
-            .route-desc { padding-right: 0; margin-bottom: 0.5rem; }
-            .anonymous-card { padding: 4rem 1.5rem; }
-        }
-    </style>
 </head>
 <body>
 
@@ -176,61 +80,70 @@
     </div>
     <div class="sidebar-overlay"></div>
 
-    <!-- Contact Layout Dashboard -->
-    <main class="bento-container contact-layout">
+    <!-- Contact Page Container -->
+    <main class="contact-page-wrapper">
         
-        <!-- SECTION 1: The Direct Lines (Left Column) -->
-        <div class="contact-routes-column">
+        <!-- Page Header Banner -->
+        <div class="legal-header contact-page-header">
+            <h1>Contact</h1>
+            <p>Get in touch or leave a scattered note.</p>
+        </div>
+
+        <div class="contact-layout">
             
-            <!-- Box 1: Combined Chats & Business -->
-            <div class="bento-card route-card">
-                <!-- Creator Chats with Divider -->
-                <div class="route-divider">
-                    <div class="route-header">
-                        <span class="route-title">Creator Chats</span>
-                        <a href="mailto:hellosuwuyiku@gmail.com" class="btn-connect">Connect ↗</a>
+            <!-- SECTION 1: The Direct Lines (Left Column) -->
+            <div class="contact-routes-column">
+                
+                <!-- Box 1: Combined Chats & Business -->
+                <div class="bento-card route-card">
+                    <!-- Creator Chats with Divider -->
+                    <div class="route-divider">
+                        <div class="route-header">
+                            <span class="route-title">Creator Chats</span>
+                            <a href="mailto:hellosuwuyiku@gmail.com" class="btn-connect">Connect ↗</a>
+                        </div>
+                        <p class="route-desc">For saying hi and sharing creative thoughts.</p>
                     </div>
-                    <p class="route-desc">For saying hi and sharing creative thoughts.</p>
+                    <!-- Business -->
+                    <div>
+                        <div class="route-header">
+                            <span class="route-title">Business</span>
+                            <a href="mailto:hisuwuyiku@gmail.com" class="btn-connect">Connect ↗</a>
+                        </div>
+                        <p class="route-desc">For collaborations and curated community works.</p>
+                    </div>
                 </div>
-                <!-- Business (No divider below it) -->
-                <div>
+
+                <!-- Box 2: Shop Support -->
+                <div class="bento-card route-card">
                     <div class="route-header">
-                        <span class="route-title">Business</span>
+                        <span class="route-title">Shop Support</span>
                         <a href="mailto:hisuwuyiku@gmail.com" class="btn-connect">Connect ↗</a>
                     </div>
-                    <p class="route-desc">For collaborations and curated community works.</p>
+                    <p class="route-desc">For inquiries regarding physical and digital commerce.</p>
                 </div>
+
+                <!-- Box 3: Official & Licensing -->
+                <div class="bento-card route-card">
+                    <div class="route-header">
+                        <span class="route-title">Official & Licensing</span>
+                        <a href="mailto:suwuyiku.legal@gmail.com" class="btn-connect">Connect ↗</a>
+                    </div>
+                    <p class="route-desc">For official Udyam registry inquiries, IP, and architecture documentation.</p>
+                </div>
+
             </div>
 
-            <!-- Box 2: Shop Support -->
-            <div class="bento-card route-card">
-                <div class="route-header">
-                    <span class="route-title">Shop Support</span>
-                    <a href="mailto:hisuwuyiku@gmail.com" class="btn-connect">Connect ↗</a>
-                </div>
-                <p class="route-desc">For inquiries regarding physical and digital commerce.</p>
-            </div>
-
-            <!-- Box 3: Official & Licensing -->
-            <div class="bento-card route-card">
-                <div class="route-header">
-                    <span class="route-title">Official & Licensing</span>
-                    <a href="mailto:suwuyiku.legal@gmail.com" class="btn-connect">Connect ↗</a>
-                </div>
-                <p class="route-desc">For official Udyam registry inquiries, IP, and architecture documentation.</p>
+            <!-- SECTION 2: The Anonymous Drop (Right Column) -->
+            <div class="bento-card anonymous-card">
+                <h2>Leave a note</h2>
+                <p>A completely anonymous space. No identities collected.</p>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdtV7dzrC6yCSJwZFixK48ISk97aSJN41_iqpKTrkXcJ9JUGA/viewform" target="_blank" rel="noopener noreferrer" class="btn-soft-blue">
+                    Drop a scattered note ↗
+                </a>
             </div>
 
         </div>
-
-        <!-- SECTION 2: The Anonymous Drop (Right Column) -->
-        <div class="bento-card anonymous-card">
-            <h2>Leave a note</h2>
-            <p>A completely anonymous space. No identities collected.</p>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdtV7dzrC6yCSJwZFixK48ISk97aSJN41_iqpKTrkXcJ9JUGA/viewform" target="_blank" rel="noopener noreferrer" class="btn-soft-blue">
-                Drop a scattered note ↗
-            </a>
-        </div>
-
     </main>
 
     <!-- Architectural Footer -->
