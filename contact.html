@@ -24,18 +24,35 @@
         .contact-layout {
             padding-top: 6rem;
             padding-bottom: 6rem;
-            grid-template-columns: 1fr 1fr; /* 2-column layout for desktop */
+            grid-template-columns: 1.2fr 1fr; /* Slightly wider left column for the individual boxes */
             align-items: stretch;
+            gap: 1.5rem;
         }
 
-        /* Section 1: Official Lines */
-        .routing-card { padding: 2.5rem; display: flex; flex-direction: column; gap: 2rem; }
-        .route-group { border-bottom: 1px solid var(--border-color); padding-bottom: 1.5rem; }
-        .route-group:last-child { border-bottom: none; padding-bottom: 0; }
+        /* Section 1: Official Lines (Stacked Individual Boxes) */
+        .contact-routes-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
         
-        .route-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 0.5rem; }
+        .route-card { 
+            padding: 1.75rem 2rem; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center;
+        }
+        
+        .route-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            gap: 1rem; 
+            margin-bottom: 0.5rem; 
+        }
+        
         .route-title { font-size: 1.1rem; font-weight: 700; color: var(--kodansha-black); }
-        .route-desc { font-size: 0.85rem; color: #777777; line-height: 1.5; padding-right: 2rem; }
+        .route-desc { font-size: 0.85rem; color: #777777; line-height: 1.5; padding-right: 1rem; margin: 0; }
         
         .btn-connect {
             display: inline-block;
@@ -62,6 +79,7 @@
             align-items: center; 
             text-align: center;
             background-color: #FAFAFA; /* Slight visual contrast */
+            height: 100%;
         }
         .anonymous-card h2 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
         .anonymous-card p { font-size: 0.95rem; color: #777777; margin-bottom: 2rem; }
@@ -81,10 +99,11 @@
 
         /* Mobile Adjustments */
         @media (max-width: 48rem) {
-            .contact-layout { padding-top: 5rem; grid-template-columns: 1fr; } /* Stacks the cards */
-            .routing-card { padding: 1.5rem; gap: 1.5rem; }
+            .contact-layout { padding-top: 5rem; grid-template-columns: 1fr; } /* Stacks the columns */
+            .route-card { padding: 1.5rem; }
             .route-header { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
             .route-desc { padding-right: 0; margin-bottom: 0.5rem; }
+            .anonymous-card { padding: 4rem 1.5rem; }
         }
     </style>
 </head>
@@ -152,26 +171,34 @@
     <!-- Contact Layout Dashboard -->
     <main class="bento-container contact-layout">
         
-        <!-- SECTION 1: The Direct Lines (Email Routing) -->
-        <div class="bento-card routing-card">
+        <!-- SECTION 1: The Direct Lines (Individual Bento Cards) -->
+        <div class="contact-routes-column">
             
-            <div class="route-group">
+            <div class="bento-card route-card">
                 <div class="route-header">
-                    <span class="route-title">General & Creator Chats</span>
+                    <span class="route-title">Creator Chats</span>
                     <a href="mailto:hellosuwuyiku@gmail.com" class="btn-connect">Connect ↗</a>
                 </div>
-                <p class="route-desc">For saying hi, creative thoughts, or general connections.</p>
+                <p class="route-desc">For saying hi and sharing creative thoughts.</p>
             </div>
 
-            <div class="route-group">
+            <div class="bento-card route-card">
                 <div class="route-header">
-                    <span class="route-title">Business & The Shop</span>
+                    <span class="route-title">Business</span>
                     <a href="mailto:hisuwuyiku@gmail.com" class="btn-connect">Connect ↗</a>
                 </div>
-                <p class="route-desc">For collaborations, curated community works, and shop support.</p>
+                <p class="route-desc">For collaborations and curated community works.</p>
             </div>
 
-            <div class="route-group">
+            <div class="bento-card route-card">
+                <div class="route-header">
+                    <span class="route-title">Shop Support</span>
+                    <a href="mailto:hisuwuyiku@gmail.com" class="btn-connect">Connect ↗</a>
+                </div>
+                <p class="route-desc">For inquiries regarding physical and digital commerce.</p>
+            </div>
+
+            <div class="bento-card route-card">
                 <div class="route-header">
                     <span class="route-title">Official & Licensing</span>
                     <a href="mailto:suwuyiku.legal@gmail.com" class="btn-connect">Connect ↗</a>
