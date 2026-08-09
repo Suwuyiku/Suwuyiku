@@ -767,6 +767,130 @@ a:focus-visible, button:focus-visible {
 .no-scroll { overflow: hidden; }
 
 /* =========================================
+   CONTACT PAGE STYLING ENGINE
+   ========================================= */
+.contact-page-wrapper {
+    max-width: 65rem;
+    margin: 0 auto;
+    padding: 5rem 1.5rem 6rem 1.5rem;
+}
+
+.contact-page-header {
+    text-align: left;
+    margin-bottom: 3rem;
+    border-bottom: 0.125rem solid var(--kodansha-black);
+    padding-bottom: 1.5rem;
+}
+
+.contact-page-header h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--kodansha-black);
+    margin-bottom: 0.5rem;
+}
+
+.contact-page-header p {
+    font-size: 1rem;
+    color: #777777;
+}
+
+.contact-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 1.5rem;
+    align-items: stretch;
+}
+
+.contact-routes-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; 
+}
+
+.route-card { 
+    padding: 2rem; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center;
+}
+
+.route-divider {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.route-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    gap: 1rem; 
+    margin-bottom: 0.5rem; 
+}
+
+.route-title { font-size: 1.1rem; font-weight: 700; color: var(--kodansha-black); }
+.route-desc { font-size: 0.85rem; color: #777777; line-height: 1.5; padding-right: 1rem; margin: 0; }
+
+.btn-connect {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--kodansha-black);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+.btn-connect:hover { border-color: var(--kodansha-black); background-color: var(--kodansha-black); color: var(--bg-color); }
+
+.anonymous-card { 
+    padding: 3rem 2.5rem; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    text-align: center;
+    background-color: #FAFAFA;
+    height: 100%;
+    min-height: 20rem;
+}
+.anonymous-card h2 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+.anonymous-card p { font-size: 0.95rem; color: #777777; margin-bottom: 2rem; }
+
+.btn-soft-blue {
+    display: inline-block;
+    padding: 0.85rem 1.75rem;
+    background-color: #EBF4FA;
+    color: #3A7CA5;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+.btn-soft-blue:hover { background-color: #D6EAF8; color: #2C6385; transform: translateY(-1px); }
+
+/* Mobile Adjustments for Contact Page */
+@media (max-width: 48rem) {
+    .contact-page-wrapper { padding: 4rem 1.25rem 3rem 1.25rem; }
+    .contact-page-header h1 { font-size: 2rem; }
+    .contact-layout { 
+        grid-template-columns: 1fr; 
+        gap: 1.25rem;
+    }
+    .route-card { padding: 1.5rem; }
+    .route-divider { padding-bottom: 1.25rem; margin-bottom: 1.25rem; }
+    .route-header { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+    .route-desc { padding-right: 0; margin-bottom: 0.5rem; }
+    .anonymous-card { padding: 3rem 1.5rem; min-height: auto; }
+}
+
+/* =========================================
    6. MODERN MOBILE RESPONSIVENESS
    ========================================= */
 @media (max-width: 48rem) {
