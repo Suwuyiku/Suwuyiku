@@ -157,17 +157,6 @@ a:focus-visible, button:focus-visible {
     opacity: 0.45; 
 }
 
-.banner-fade {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 85%; 
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
-    z-index: 1;
-    pointer-events: none; 
-}
-
 .hero-content {
     position: relative;
     z-index: 2; 
@@ -259,20 +248,9 @@ a:focus-visible, button:focus-visible {
 }
 
 .mini-manga {
-    width: 4.5rem; 
-    height: auto;
-    border-radius: 4px; 
-    position: relative; 
-    box-sizing: border-box; 
-    border: 1px solid transparent; 
-    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.15); 
-    flex-shrink: 0;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    filter: contrast(1.02) saturate(1.05);
-    will-change: transform, margin, border-color, box-shadow;
-    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), margin 0.7s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, box-shadow 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-    cursor: pointer;
+    width: 4.5rem; height: auto; border-radius: 4px; position: relative; box-sizing: border-box; border: 1px solid transparent; box-shadow: 4px 0 10px rgba(0, 0, 0, 0.15); flex-shrink: 0;
+    -webkit-backface-visibility: hidden; backface-visibility: hidden; filter: contrast(1.02) saturate(1.05); will-change: transform, margin, border-color, box-shadow;
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), margin 0.7s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, box-shadow 0.7s cubic-bezier(0.22, 1, 0.36, 1); cursor: pointer;
 }
 
 .mini-manga:nth-child(1) { z-index: 5; transform: rotate(-3deg) translateY(2px); }
@@ -290,20 +268,10 @@ a:focus-visible, button:focus-visible {
 .library-card-special:hover .mini-manga:nth-child(4) { transform: rotate(2deg) translateY(0); }
 .library-card-special:hover .mini-manga:nth-child(5) { transform: rotate(4deg) translateY(0); }
 
-.library-card-special .mini-manga:nth-child(odd):hover {
-    transform: translate(0.25rem, -1.2rem) rotate(-3deg) scale(1.05) !important;
-    z-index: 10 !important; border-color: var(--kodansha-black); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-}
+.library-card-special .mini-manga:nth-child(odd):hover { transform: translate(0.25rem, -1.2rem) rotate(-3deg) scale(1.05) !important; z-index: 10 !important; border-color: var(--kodansha-black); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); }
+.library-card-special .mini-manga:nth-child(even):hover { transform: translate(0.25rem, -1.2rem) rotate(3deg) scale(1.05) !important; z-index: 10 !important; border-color: var(--kodansha-black); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); }
 
-.library-card-special .mini-manga:nth-child(even):hover {
-    transform: translate(0.25rem, -1.2rem) rotate(3deg) scale(1.05) !important;
-    z-index: 10 !important; border-color: var(--kodansha-black); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-}
-
-.protected-img {
-    -webkit-user-drag: none !important; user-select: none !important; -moz-user-select: none !important;
-    -webkit-user-select: none !important; -ms-user-select: none !important; pointer-events: auto;
-}
+.protected-img { -webkit-user-drag: none !important; user-select: none !important; -moz-user-select: none !important; -webkit-user-select: none !important; -ms-user-select: none !important; pointer-events: auto; }
 
 /* =========================================
    PREMIUM EASTER EGG GLINT ENGINE 
@@ -313,27 +281,11 @@ a:focus-visible, button:focus-visible {
     text-shadow: 0 0 12px rgba(255, 255, 255, 1), 0 0 25px rgba(255, 255, 255, 0.8); will-change: transform, opacity;
 }
 
-.library-card-special:has(.mini-manga:nth-child(1):hover)::after {
-    right: 20rem; bottom: 4.5rem; font-size: 1.2rem; animation: easter-glint-1 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 2.8s forwards;
-}
-
-.library-card-special:has(.mini-manga:nth-child(2):hover)::after {
-    right: 15rem; bottom: 5.5rem; font-size: 1.8rem; color: #88CCFF; 
-    text-shadow: 0 0 15px rgba(136, 204, 255, 1), 0 0 30px rgba(0, 119, 255, 0.9);
-    animation: easter-glint-2 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 3.5s forwards;
-}
-
-.library-card-special:has(.mini-manga:nth-child(3):hover)::after {
-    right: 11.5rem; bottom: 3.5rem; font-size: 0.9rem; animation: easter-glint-3 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 2.5s forwards;
-}
-
-.library-card-special:has(.mini-manga:nth-child(4):hover)::after {
-    right: 7.5rem; bottom: 6.5rem; font-size: 1.4rem; animation: easter-glint-4 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 3.2s forwards;
-}
-
-.library-card-special:has(.mini-manga:nth-child(5):hover)::after {
-    right: 3.5rem; bottom: 4rem; font-size: 1.1rem; animation: easter-glint-5 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 2.9s forwards;
-}
+.library-card-special:has(.mini-manga:nth-child(1):hover)::after { right: 20rem; bottom: 4.5rem; font-size: 1.2rem; animation: easter-glint-1 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 2.8s forwards; }
+.library-card-special:has(.mini-manga:nth-child(2):hover)::after { right: 15rem; bottom: 5.5rem; font-size: 1.8rem; color: #88CCFF; text-shadow: 0 0 15px rgba(136, 204, 255, 1), 0 0 30px rgba(0, 119, 255, 0.9); animation: easter-glint-2 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 3.5s forwards; }
+.library-card-special:has(.mini-manga:nth-child(3):hover)::after { right: 11.5rem; bottom: 3.5rem; font-size: 0.9rem; animation: easter-glint-3 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 2.5s forwards; }
+.library-card-special:has(.mini-manga:nth-child(4):hover)::after { right: 7.5rem; bottom: 6.5rem; font-size: 1.4rem; animation: easter-glint-4 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 3.2s forwards; }
+.library-card-special:has(.mini-manga:nth-child(5):hover)::after { right: 3.5rem; bottom: 4rem; font-size: 1.1rem; animation: easter-glint-5 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 2.9s forwards; }
 
 @keyframes easter-glint-1 { 0% { opacity: 0; transform: scale(0) rotate(-45deg); } 40% { opacity: 1; transform: scale(1.2) rotate(45deg); } 100% { opacity: 0; transform: scale(0) rotate(135deg); } }
 @keyframes easter-glint-2 { 0% { opacity: 0; transform: scale(0) rotate(0deg); filter: brightness(1); } 40% { opacity: 1; transform: scale(1.3) rotate(90deg); filter: brightness(1.5); } 100% { opacity: 0; transform: scale(0) rotate(180deg); filter: brightness(1); } }
@@ -344,12 +296,8 @@ a:focus-visible, button:focus-visible {
 /* =========================================
    DYNAMIC HOVER TITLES
    ========================================= */
-.dynamic-book-title {
-    color: var(--hover-gray); margin-left: 0.25rem; position: absolute; pointer-events: none; font-family: 'Inter', sans-serif; font-weight: 500; opacity: 0; transition: opacity 0.3s ease;
-}
-
+.dynamic-book-title { color: var(--hover-gray); margin-left: 0.25rem; position: absolute; pointer-events: none; font-family: 'Inter', sans-serif; font-weight: 500; opacity: 0; transition: opacity 0.3s ease; }
 .library-card-special:has(.mini-manga:hover) .dynamic-book-title { opacity: 1; }
-
 .book-title { display: none; opacity: 0; transition: opacity 0.3s ease; white-space: nowrap; }
 
 .library-card-special:has(.mini-manga:nth-child(1):hover) .title-1,
@@ -369,10 +317,7 @@ a:focus-visible, button:focus-visible {
    SHOP BENTO CARD (CREATOR AVATARS)
    ========================================= */
 .shop-card-special { position: relative; overflow: hidden; }
-
-.shop-creator-avatars {
-    display: flex; align-items: flex-end; justify-content: flex-end; width: 100%; margin-top: 1rem; padding-right: 1.5rem; padding-bottom: 0.5rem;
-}
+.shop-creator-avatars { display: flex; align-items: flex-end; justify-content: flex-end; width: 100%; margin-top: 1rem; padding-right: 1.5rem; padding-bottom: 0.5rem; }
 
 .creator-avatar {
     width: 3.5rem; height: 3.5rem; border-radius: 50%; object-fit: cover; position: relative; border: 0.12rem solid var(--bg-color); box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); background-color: var(--border-color); will-change: transform, box-shadow, border-color; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.8s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.5s ease-out; cursor: pointer;
@@ -388,14 +333,9 @@ a:focus-visible, button:focus-visible {
 .shop-card-special .creator-avatar:nth-child(1):hover { border-color: #F8E08E; box-shadow: 0 8px 20px rgba(248, 224, 142, 0.45); }
 .shop-card-special .creator-avatar:nth-child(2):hover { border-color: #D1C1FA; box-shadow: 0 8px 20px rgba(209, 193, 250, 0.45); }
 
-.dynamic-creator-title {
-    color: var(--hover-gray); margin-left: 0.35rem; position: absolute; pointer-events: none; font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.02rem; transform: translateY(0.15rem); opacity: 0; transition: opacity 0.3s ease;
-}
-
+.dynamic-creator-title { color: var(--hover-gray); margin-left: 0.35rem; position: absolute; pointer-events: none; font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.02rem; transform: translateY(0.15rem); opacity: 0; transition: opacity 0.3s ease; }
 .shop-card-special:has(.creator-avatar:hover) .dynamic-creator-title { opacity: 1; }
-
 .creator-name { display: none; opacity: 0; transition: opacity 0.3s ease; white-space: nowrap; }
-
 .shop-card-special:has(.creator-avatar:nth-child(1):hover) .creator-1,
 .shop-card-special:has(.creator-avatar:nth-child(2):hover) .creator-2 { display: inline-block; opacity: 1; }
 
@@ -477,12 +417,12 @@ a:focus-visible, button:focus-visible {
    10. CONTACT PAGE STYLING ENGINE
    ========================================= */
 .contact-page-wrapper {
-    display: block; /* FIX: Prevents shrinking to center */
-    width: 100%; /* FIX: Ensures full page width */
+    display: block; 
+    width: 100%; 
     max-width: 65rem;
     margin: 0 auto;
     padding: 3rem 1.5rem 6rem 1.5rem;
-    text-align: left; /* FIX: Forces all headers and grids to align correctly */
+    text-align: left; 
 }
 
 .contact-page-header {
@@ -503,9 +443,7 @@ a:focus-visible, button:focus-visible {
 .route-header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 0.5rem; }
 .route-desc { font-size: 0.85rem; color: #777777; line-height: 1.5; padding-right: 1rem; margin: 0; }
 
-.btn-connect {
-    display: inline-block; padding: 0.4rem 0.8rem; border: 1px solid var(--border-color); border-radius: 4px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--kodansha-black); text-decoration: none; transition: all 0.2s ease; white-space: nowrap;
-}
+.btn-connect { display: inline-block; padding: 0.4rem 0.8rem; border: 1px solid var(--border-color); border-radius: 4px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--kodansha-black); text-decoration: none; transition: all 0.2s ease; white-space: nowrap; }
 .btn-connect:hover { border-color: var(--kodansha-black); background-color: var(--kodansha-black); color: var(--bg-color); }
 
 .anonymous-card { padding: 3rem 2.5rem; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background-color: #FAFAFA; }
@@ -515,14 +453,14 @@ a:focus-visible, button:focus-visible {
 .btn-soft-blue:hover { background-color: #D6EAF8; color: #2C6385; transform: translateY(-1px); }
 
 /* =========================================
-   12. CONNECTIONS SEARCH & GRID LAYOUT
+   12. CONNECTIONS SEARCH & MASONRY LAYOUT
    ========================================= */
 .connections-header-wrapper {
     display: flex;
-    flex-direction: row; /* FIX: Locks layout horizontally */
+    flex-direction: row; 
     justify-content: space-between;
     align-items: flex-end;
-    width: 100%; /* FIX: Ensures it spans the entire container */
+    width: 100%; 
     margin-bottom: 3rem;
     border-bottom: 0.125rem solid var(--kodansha-black);
     padding-bottom: 1.5rem;
@@ -539,18 +477,22 @@ a:focus-visible, button:focus-visible {
 .search-icon { position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); width: 1rem; height: 1rem; fill: #888888; pointer-events: none; transition: fill 0.3s ease; }
 .search-input:focus + .search-icon { fill: var(--kodansha-black); }
 
-/* Desktop Grid Engine */
+/* FIX: Convert to Masonry Layout so blocks dynamically flow UP into empty spaces */
 .connections-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 columns exactly */
-    gap: 2rem; /* Massive gap to match Contact page */
-    width: 100%; /* Force grid to stretch */
+    column-count: 2;
+    column-gap: 1.5rem;
+    width: 100%;
+    display: block; 
 }
 
 .filterable-card {
-    padding: 2.5rem; /* Massive internal padding */
-    display: flex;
-    flex-direction: column;
+    padding: 2.5rem; 
+    display: inline-block; /* Forces perfect Masonry wrapping */
+    width: 100%;
+    margin-bottom: 1.5rem;
+    break-inside: avoid; /* Prevents card from splitting across columns */
+    -webkit-column-break-inside: avoid;
+    box-sizing: border-box;
 }
 
 .card-category { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: #A0A0A0; margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem; }
@@ -559,22 +501,22 @@ a:focus-visible, button:focus-visible {
 .route-title { font-size: 1rem; font-weight: 700; color: var(--kodansha-black); line-height: 1.2; transition: color 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
 .universal-handle { color: #A0A0A0; font-weight: 500; font-size: 0.75rem; letter-spacing: 0.02rem; margin-left: 0; }
 
-/* The new Breathing Room inside the Cards */
+/* FIX: Tighter breathing room so the elements aren't crushed, but aren't massively gapped */
 .platform-item { 
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 0.5rem 0; /* Top & bottom air */
+    padding: 0; 
     transition: opacity 0.3s ease; 
 }
 
 .platform-item .route-header { margin-bottom: 0.5rem; }
 
-/* Automatic Spacing System (Replaces manual route-dividers) */
+/* Perfected Spacing System */
 .platform-item:not(:last-child) {
     border-bottom: 1px solid var(--border-color);
-    padding-bottom: 2rem; /* Massive breathing room below item */
-    margin-bottom: 2rem; /* Massive breathing room above the next item */
+    padding-bottom: 1.25rem; 
+    margin-bottom: 1.25rem; 
 }
 
 /* =========================================
@@ -609,6 +551,7 @@ a:focus-visible, button:focus-visible {
 
 .platform-item.github:hover .platform-icon { fill: #888888; transform: scale(1.15); }
 .platform-item.github:hover .route-title { color: #888888; }
+
 
 /* =========================================
    11. MASTER MOBILE ENGINE (UNIFIED)
@@ -692,8 +635,8 @@ a:focus-visible, button:focus-visible {
     .route-desc { padding-right: 0; margin-bottom: 0.5rem; }
     .anonymous-card { padding: 3rem 1.5rem; }
 
-    /* Connections specific mobile fixes (Locked with !important to prevent shrinking) */
+    /* Connections specific mobile fixes */
     .connections-header-wrapper { flex-direction: column !important; align-items: flex-start !important; gap: 1.5rem; }
     .search-container, .search-input, .search-input:focus { width: 100%; }
-    .connections-grid { grid-template-columns: 1fr !important; }
+    .connections-grid { column-count: 1 !important; }
 }
