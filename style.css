@@ -1004,7 +1004,7 @@ a:focus-visible, button:focus-visible {
     .library-card-special:hover .mini-manga:not(:first-child) { margin-left: -2.7rem; }
     .dynamic-book-title, .dynamic-creator-title { display: none !important; }
 
-    /* 7. Clean Legal & Footer */
+/* 7. Clean Legal & Footer */
     .legal-container { margin: 1.5rem auto 4rem auto; padding: 0 1rem; }
     .legal-header h1 { font-size: 2.2rem; line-height: 1.2; }
     .legal-content h2 { font-size: 1.05rem; margin: 2rem 0 1rem 0; }
@@ -1014,9 +1014,17 @@ a:focus-visible, button:focus-visible {
     .manga-book { width: 8rem; box-shadow: -8px 0 15px rgba(0, 0, 0, 0.2); }
     .manga-book:not(:first-child) { margin-left: -5rem; }
     
-    .footer-top { flex-direction: column; gap: 3rem; }
+    /* Center the main brand logo and bio text on mobile */
+    .footer-top { flex-direction: column; gap: 3rem; text-align: center; }
     .footer-brand, .footer-links { flex: 1 1 auto; width: 100%; padding-right: 0; }
+    .footer-brand p { margin: 0 auto; } /* Keeps the bio text centered in the column */
+    
     .footer-links { grid-template-columns: 1fr; gap: 2.5rem; }
+    
+    /* FIX: Centers the 3 sections (Ecosystem, Resources, Legal) perfectly in the middle */
+    .link-column { text-align: center; }
+    .link-column ul { align-items: center; }
+    
     .footer-bottom { flex-direction: column; gap: 1.5rem; text-align: center; }
     
     .footer-bottom-links { flex-direction: column; gap: 0.85rem; }
