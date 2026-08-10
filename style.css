@@ -894,6 +894,48 @@ a:focus-visible, button:focus-visible {
 .platform-item { transition: opacity 0.3s ease; }
 
 /* =========================================
+   13. CONNECTIONS HOVER EASTER EGGS
+   ========================================= */
+.platform-icon {
+    width: 1.15rem;
+    height: 1.15rem;
+    fill: var(--kodansha-black);
+    transition: fill 0.3s cubic-bezier(0.22, 1, 0.36, 1), transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.route-title {
+    transition: color 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Individual Brand Glow-Ups on Hover */
+.platform-item.instagram:hover .platform-icon { fill: #E1306C; transform: scale(1.15); }
+.platform-item.instagram:hover .route-title { color: #E1306C; }
+
+.platform-item.fanbox:hover .platform-icon { fill: #F973A4; transform: scale(1.15); }
+.platform-item.fanbox:hover .route-title { color: #F973A4; }
+
+.platform-item.twitter:hover .platform-icon { fill: #1DA1F2; transform: scale(1.15); }
+.platform-item.twitter:hover .route-title { color: #1DA1F2; }
+
+.platform-item.youtube:hover .platform-icon { fill: #FF0000; transform: scale(1.15); }
+.platform-item.youtube:hover .route-title { color: #FF0000; }
+
+.platform-item.steam:hover .platform-icon { fill: #66C0F4; transform: scale(1.15); }
+.platform-item.steam:hover .route-title { color: #66C0F4; }
+
+.platform-item.xbox:hover .platform-icon { fill: #107C10; transform: scale(1.15); }
+.platform-item.xbox:hover .route-title { color: #107C10; }
+
+.platform-item.discord:hover .platform-icon { fill: #5865F2; transform: scale(1.15); }
+.platform-item.discord:hover .route-title { color: #5865F2; }
+
+.platform-item.spotify:hover .platform-icon { fill: #1DB954; transform: scale(1.15); }
+.platform-item.spotify:hover .route-title { color: #1DB954; }
+
+.platform-item.github:hover .platform-icon { fill: #888888; transform: scale(1.15); }
+.platform-item.github:hover .route-title { color: #888888; }
+
+/* =========================================
    11. MASTER MOBILE ENGINE (UNIFIED)
    ========================================= */
 @media (max-width: 48rem) {
