@@ -937,13 +937,17 @@ a:focus-visible, button:focus-visible {
     /* 4. Perfect Mobile Banner Scaling */
     .hero { 
         padding: 0 0 2rem 0; 
-        margin-top: -3.5rem; 
+        margin-top: 1.5rem; /* FIX: Pushes the banner down so it sits cleanly below the Nav bar */
     }
-    .hero-anime-banner { height: 60vw; } 
-    .hero-tint-img { 
-        object-fit: contain; 
-        object-position: center bottom; 
+    .hero-anime-banner { 
+        height: 60vw; 
+        width: calc(100% - 2rem); /* FIX: Pulls the image away from the phone edges */
+        margin: 0 auto; /* FIX: Aligns perfectly with the 1rem side margins of the other boxes */
     } 
+    .hero-tint-img { 
+        object-fit: cover; /* Fills the newly aligned dimensions perfectly */
+        object-position: center bottom; 
+    }
     
     /* 5. Mobile Box & Typographic Tuning - ALIGNMENT FIXED */
     .hero-content {
