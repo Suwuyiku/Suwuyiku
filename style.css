@@ -1148,3 +1148,7 @@ a:focus-visible, button:focus-visible {
     .route-desc { padding-right: 0; margin-bottom: 0.5rem; }
     .anonymous-card { padding: 3rem 1.5rem; }
 }
+
+.connections-header-wrapper { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+    .search-container, .search-input, .search-input:focus { width: 100%; }
+    .connections-grid { grid-template-columns: 1fr; }
