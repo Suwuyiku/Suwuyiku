@@ -60,7 +60,7 @@ a:focus-visible, button:focus-visible {
     border: 0.125rem solid var(--kodansha-black); 
     padding: 1rem 1.5rem; 
     background-color: var(--bg-color);
-    margin: 1rem 1.5vw 0 1.5vw; /* CHANGED: Bottom margin is now 0 */
+    margin: 1rem 1.5vw 0 1.5vw;
 }
 
 .nav-left { display: flex; align-items: center; }
@@ -133,15 +133,12 @@ a:focus-visible, button:focus-visible {
    ========================================= */
 .hero {
     position: relative;
-    
-    /* THE TOP GAP FIX: Changed to 0 so it touches the navigation bar perfectly */
     margin-top: 0; 
-    
     margin-bottom: 4rem;
     width: 100%; 
 }
 
-/* Constrained Banner Engine (Restored & Optimized) */
+/* Constrained Banner Engine */
 .hero-anime-banner {
     position: relative;
     width: 100%;
@@ -149,7 +146,6 @@ a:focus-visible, button:focus-visible {
     background-color: #84C1E9; 
     overflow: hidden;
     
-    /* The perfect natural blend mask is kept intact */
     -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
     mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
 }
@@ -158,12 +154,11 @@ a:focus-visible, button:focus-visible {
     width: 100%;
     height: 100%;
     object-fit: cover; 
-    object-position: center 10%; /* Restores the perfect framing of her face */
+    object-position: center 10%; 
     mix-blend-mode: multiply; 
-    opacity: 0.45; /* Restores the correct blue tint */
+    opacity: 0.45; 
 }
 
-/* THE BLEND FIX: Uses transparent white to avoid the muddy CSS glitch, and increased height to 85% for an ultra-smooth fade */
 .banner-fade {
     position: absolute;
     bottom: 0;
@@ -184,7 +179,7 @@ a:focus-visible, button:focus-visible {
     box-shadow: 4px 6px 14px rgba(0, 0, 0, 0.08); 
     
     padding: 1.25rem 2.25rem; 
-    max-width: 38rem; /* CHANGED: Increased from 34rem to 38rem for better text wrapping */
+    max-width: 38rem; 
     text-align: left; 
     margin-top: -4rem; 
     
@@ -194,7 +189,6 @@ a:focus-visible, button:focus-visible {
     user-select: none; 
 }
 
-/* Ensuring your exact text formatting remains completely untouched */
 .hero-content h1 {
     margin-top: 0;
     margin-bottom: 0.5rem;
@@ -209,26 +203,23 @@ a:focus-visible, button:focus-visible {
    ========================================= */
 .hero {
     position: relative;
-    padding: 0 3rem 2.5rem 3rem; /* CHANGED: Reduced bottom padding from 4rem to 1.5rem to shrink the gap */
+    padding: 0 3rem 2.5rem 3rem; 
     max-width: 75rem;
     margin: -4.7rem auto 0 auto; 
     width: 100%;
 }
 
-/* CHANGED: Reduced font-size from 3rem to 2.6rem */
 .hero h1 { font-size: 2.6rem; font-weight: 600; letter-spacing: -0.02rem; max-width: 50rem; line-height: 1.2; }
-.hero h2 { font-size: 1.1rem; font-weight: 400; color: #666666; margin-top: 1rem; letter-spacing: 0.02rem; line-height: 1.6; max-width: 100%; /* CHANGED: Set to 100% so it perfectly fills the new box width */ }
+.hero h2 { font-size: 1.1rem; font-weight: 400; color: #666666; margin-top: 1rem; letter-spacing: 0.02rem; line-height: 1.6; max-width: 100%; }
 
 /* Custom Suwuyiku Hover Glow */
 .name-glow {
-    /* Upgraded transition for a smoother, buttery fade */
     transition: color 0.4s cubic-bezier(0.22, 1, 0.36, 1), text-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     cursor: default; 
 }
 
 .name-glow:hover {
     color: #84C1E9; 
-    /* Layered shadows for a realistic, premium neon bloom */
     text-shadow: 
         0 0 8px rgba(132, 193, 233, 0.9),
         0 0 16px rgba(132, 193, 233, 0.6),
@@ -295,7 +286,6 @@ a:focus-visible, button:focus-visible {
     box-shadow: 4px 0 10px rgba(0, 0, 0, 0.15); 
     flex-shrink: 0;
     
-    /* Removed the pixelating crisp-edges code. Returned to smooth rendering. */
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     filter: contrast(1.02) saturate(1.05);
@@ -350,13 +340,12 @@ a:focus-visible, button:focus-visible {
     -moz-user-select: none !important;
     -webkit-user-select: none !important;
     -ms-user-select: none !important;
-    pointer-events: auto; /* Crucial: Keeps the hover state working */
+    pointer-events: auto;
 }
 
 /* =========================================
    PREMIUM EASTER EGG GLINT ENGINE (DELAYED & RARE BLUE)
    ========================================= */
-/* Base architecture for the localized light burst */
 .library-card-special::after {
     content: "✦";
     position: absolute;
@@ -368,53 +357,38 @@ a:focus-visible, button:focus-visible {
     will-change: transform, opacity;
 }
 
-/* 
-  MASSIVE DELAY INCREASE: 
-  Timers are now pushed to 2.5s - 3.5s. 
-  You MUST hold the hover peacefully to earn the Easter Egg.
-*/
-
-/* Book 1 (Your Lie in April - Far Left) */
 .library-card-special:has(.mini-manga:nth-child(1):hover)::after {
     right: 20rem; bottom: 4.5rem;
     font-size: 1.2rem;
     animation: easter-glint-1 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 2.8s forwards;
 }
 
-/* Book 2 (Blue Box - THE RARE BLUE SPARKLE) */
 .library-card-special:has(.mini-manga:nth-child(2):hover)::after {
     right: 15rem; bottom: 5.5rem;
     font-size: 1.8rem; 
-    color: #88CCFF; /* Ice Blue */
+    color: #88CCFF; 
     text-shadow: 0 0 15px rgba(136, 204, 255, 1), 0 0 30px rgba(0, 119, 255, 0.9);
     animation: easter-glint-2 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 3.5s forwards;
 }
 
-/* Book 3 (Kubo) */
 .library-card-special:has(.mini-manga:nth-child(3):hover)::after {
     right: 11.5rem; bottom: 3.5rem;
     font-size: 0.9rem; 
     animation: easter-glint-3 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 2.5s forwards;
 }
 
-/* Book 4 (Kaguya-sama) */
 .library-card-special:has(.mini-manga:nth-child(4):hover)::after {
     right: 7.5rem; bottom: 6.5rem;
     font-size: 1.4rem;
     animation: easter-glint-4 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 3.2s forwards;
 }
 
-/* Book 5 (Spy x Family - Far Right) */
 .library-card-special:has(.mini-manga:nth-child(5):hover)::after {
     right: 3.5rem; bottom: 4rem;
     font-size: 1.1rem;
     animation: easter-glint-5 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 2.9s forwards;
 }
 
-/* 
-  REFINED BEAUTIFUL ANIMATIONS:
-  Slightly longer duration, softer fade, and an elegant elastic spin.
-*/
 @keyframes easter-glint-1 {
     0% { opacity: 0; transform: scale(0) rotate(-45deg); }
     40% { opacity: 1; transform: scale(1.2) rotate(45deg); }
@@ -456,12 +430,10 @@ a:focus-visible, button:focus-visible {
     font-family: 'Inter', sans-serif;
     font-weight: 500;
     
-    /* THE FIX: Hide the entire container (including the dash) by default */
     opacity: 0;
     transition: opacity 0.3s ease;
 }
 
-/* THE FIX: Fade in the entire container when ANY book is hovered */
 .library-card-special:has(.mini-manga:hover) .dynamic-book-title {
     opacity: 1;
 }
@@ -473,7 +445,6 @@ a:focus-visible, button:focus-visible {
     white-space: nowrap;
 }
 
-/* Activate the correct title when a specific book is hovered */
 .library-card-special:has(.mini-manga:nth-child(1):hover) .title-1,
 .library-card-special:has(.mini-manga:nth-child(2):hover) .title-2,
 .library-card-special:has(.mini-manga:nth-child(3):hover) .title-3,
@@ -483,7 +454,6 @@ a:focus-visible, button:focus-visible {
     opacity: 1;
 }
 
-/* Pure Japanese Base Reset - Isolates it from the English fonts */
 .jp {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
     font-weight: 400 !important;
@@ -492,7 +462,6 @@ a:focus-visible, button:focus-visible {
     vertical-align: baseline;
 }
 
-/* Individual English Stylings */
 .title-1 .eng { font-family: 'Caveat', cursive; font-weight: 700; font-size: 1.15rem; display: inline-block; transform: translateY(0.12rem); }
 .title-2 .eng { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 0.9rem; letter-spacing: -0.02rem; }
 .title-3 .eng { font-family: 'Sniglet', cursive; font-weight: 400; font-size: 0.9rem; }
@@ -517,7 +486,6 @@ a:focus-visible, button:focus-visible {
     padding-bottom: 0.5rem;
 }
 
-/* Enforcing the Perfect Circle & Apple-Style Fluid Physics */
 .creator-avatar {
     width: 3.5rem; 
     height: 3.5rem;
@@ -530,19 +498,14 @@ a:focus-visible, button:focus-visible {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
     background-color: var(--border-color);
     
-    /* Hardware acceleration to force the browser to render this at 60fps */
     will-change: transform, box-shadow, border-color;
-    
-    /* THE FIX: True iPhone-style fluid animation curve */
     transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
                 box-shadow 0.8s cubic-bezier(0.16, 1, 0.3, 1),
                 border-color 0.5s ease-out;
     cursor: pointer;
 }
 
-/* Organic Base State */
 .creator-avatar:nth-child(1) {
-    /* THE Z-INDEX FIX: Left logo reverted back to the top */
     z-index: 2; 
     transform: rotate(-2deg);
 }
@@ -550,45 +513,27 @@ a:focus-visible, button:focus-visible {
 .creator-avatar:nth-child(2) {
     margin-left: -1.2rem; 
     transform: translateY(-4px) rotate(2deg); 
-    /* THE Z-INDEX FIX: Right logo tucked underneath again */
     z-index: 1; 
 }
 
-/* Base Card Hover: Gentle Separation */
-.shop-card-special:hover .creator-avatar:nth-child(1) {
-    transform: translateX(-0.4rem) rotate(-5deg);
-}
+.shop-card-special:hover .creator-avatar:nth-child(1) { transform: translateX(-0.4rem) rotate(-5deg); }
+.shop-card-special:hover .creator-avatar:nth-child(2) { transform: translateX(0.4rem) translateY(-4px) rotate(5deg); }
 
-.shop-card-special:hover .creator-avatar:nth-child(2) {
-    transform: translateX(0.4rem) translateY(-4px) rotate(5deg);
-}
-
-/* =========================================
-   INDIVIDUAL AVATAR HOVER (PERSONALIZED COLORS)
-   ========================================= */
-/* Base Hover Physics */
 .shop-card-special .creator-avatar:hover {
     z-index: 10 !important; 
     transform: translateY(-8px) rotate(0deg) !important; 
 }
 
-/* 1. Cosy Tales Art Studios - Warm Pastel Yellow Glow */
 .shop-card-special .creator-avatar:nth-child(1):hover {
     border-color: #F8E08E; 
-    /* Removed the hard ring, leaving only the soft ambient glow */
     box-shadow: 0 8px 20px rgba(248, 224, 142, 0.45);
 }
 
-/* 2. Zodingdi - Soft Pastel Lilac Glow */
 .shop-card-special .creator-avatar:nth-child(2):hover {
     border-color: #D1C1FA; 
-    /* Removed the hard ring, leaving only the soft ambient glow */
     box-shadow: 0 8px 20px rgba(209, 193, 250, 0.45);
 }
 
-/* =========================================
-   DYNAMIC CREATOR HOVER TITLES
-   ========================================= */
 .dynamic-creator-title {
     color: var(--hover-gray);
     margin-left: 0.35rem;
@@ -599,17 +544,13 @@ a:focus-visible, button:focus-visible {
     font-weight: 500;
     letter-spacing: 0.02rem; 
     
-    /* THE FIX: Precisely nudges the smaller text down to match the baseline of "Shop" */
     transform: translateY(0.15rem);
     
     opacity: 0;
     transition: opacity 0.3s ease;
 }
 
-/* Fades in the container when ANY avatar is hovered */
-.shop-card-special:has(.creator-avatar:hover) .dynamic-creator-title {
-    opacity: 1;
-}
+.shop-card-special:has(.creator-avatar:hover) .dynamic-creator-title { opacity: 1; }
 
 .creator-name {
     display: none;
@@ -618,7 +559,6 @@ a:focus-visible, button:focus-visible {
     white-space: nowrap;
 }
 
-/* Activate the correct creator name when hovered */
 .shop-card-special:has(.creator-avatar:nth-child(1):hover) .creator-1,
 .shop-card-special:has(.creator-avatar:nth-child(2):hover) .creator-2 {
     display: inline-block;
@@ -658,7 +598,6 @@ a:focus-visible, button:focus-visible {
     border: 1px solid transparent; 
     box-shadow: 10px 0 20px rgba(0, 0, 0, 0.15); 
     
-    /* Removed the pixelating crisp-edges code. Returned to smooth rendering. */
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     filter: contrast(1.02) saturate(1.05);
@@ -671,7 +610,6 @@ a:focus-visible, button:focus-visible {
     cursor: pointer;
 }
 
-/* Organic Base State */
 .manga-book:nth-child(1) { z-index: 8; transform: rotate(-3deg) translateY(3px); }
 .manga-book:nth-child(2) { z-index: 7; transform: rotate(1.5deg) translateY(-2px); }
 .manga-book:nth-child(3) { z-index: 6; transform: rotate(-2deg) translateY(4px); }
@@ -683,7 +621,6 @@ a:focus-visible, button:focus-visible {
 
 .manga-book:not(:first-child) { margin-left: -7.5rem; }
 
-/* Shelf Hover Spread */
 .manga-shelf:hover .manga-book:not(:first-child) { margin-left: -2rem; }
 
 .manga-shelf:hover .manga-book:nth-child(1) { transform: rotate(-7deg) translateY(0); }
@@ -695,7 +632,6 @@ a:focus-visible, button:focus-visible {
 .manga-shelf:hover .manga-book:nth-child(7) { transform: rotate(5deg) translateY(0); }
 .manga-shelf:hover .manga-book:nth-child(8) { transform: rotate(7deg) translateY(0); }
 
-/* Individual Book Focus */
 .manga-book:nth-child(odd):hover {
     transform: translate(0.5rem, -2.5rem) rotate(-3deg) scale(1.03) !important;
     z-index: 20 !important; 
@@ -711,7 +647,7 @@ a:focus-visible, button:focus-visible {
 }
 
 /* =========================================
-   4. LEGAL PAGES
+   8. LEGAL PAGES
    ========================================= */
 .legal-container { max-width: 50rem; margin: 4rem auto 8rem auto; padding: 0 3rem; width: 100%; }
 .legal-header { text-align: center; margin-bottom: 1.5rem; }
@@ -726,7 +662,7 @@ a:focus-visible, button:focus-visible {
 .legal-content a:hover { color: var(--hover-gray) !important; }
 
 /* =========================================
-   5. ARCHITECTURAL FOOTER
+   9. ARCHITECTURAL FOOTER
    ========================================= */
 .site-footer { background-color: var(--kodansha-black); color: var(--bg-color); padding: 5rem calc(1.5vw + 1.5rem) 2rem calc(1.5vw + 1.5rem); margin-top: auto; width: 100%; }
 .footer-top { display: flex; justify-content: space-between; width: 100%; }
@@ -746,7 +682,6 @@ a:focus-visible, button:focus-visible {
     width: 100%; 
     margin-top: 6rem; 
     padding-top: 2rem; 
-    /* THE FIX: Changed from border-bottom to border-top */
     border-top: 0.0625rem solid #333333; 
     font-size: 0.7rem; 
     font-weight: 700; 
@@ -759,20 +694,18 @@ a:focus-visible, button:focus-visible {
 .footer-bottom-links a:hover { color: var(--bg-color); }
 
 /* Hide Mobile Navigation Elements on Desktop */
-.hamburger-btn, .mobile-sidebar, .sidebar-overlay {
-    display: none;
-}
+.hamburger-btn, .mobile-sidebar, .sidebar-overlay { display: none; }
 
 /* Utility class to prevent background scrolling when mobile menu is open */
 .no-scroll { overflow: hidden; }
 
 /* =========================================
-   CONTACT PAGE STYLING ENGINE
+   10. CONTACT PAGE STYLING ENGINE
    ========================================= */
 .contact-page-wrapper {
     max-width: 65rem;
     margin: 0 auto;
-    padding: 3rem 1.5rem 6rem 1.5rem; /* CHANGED: Reduced top padding from 5rem to 3rem to perfectly match the legal pages */
+    padding: 3rem 1.5rem 6rem 1.5rem;
 }
 
 .contact-page-header {
@@ -799,7 +732,7 @@ a:focus-visible, button:focus-visible {
     display: grid;
     grid-template-columns: 1.2fr 1fr;
     gap: 1.5rem;
-    align-items: start; /* CHANGED: Prevents the right box from stretching to match the left column */
+    align-items: start;
 }
 
 .contact-routes-column {
@@ -856,7 +789,6 @@ a:focus-visible, button:focus-visible {
     align-items: center; 
     text-align: center;
     background-color: #FAFAFA;
-    /* CHANGED: Removed height constraints so it perfectly wraps the text/button */
 }
 .anonymous-card h2 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
 .anonymous-card p { font-size: 0.95rem; color: #777777; margin-bottom: 2rem; }
@@ -874,33 +806,9 @@ a:focus-visible, button:focus-visible {
 }
 .btn-soft-blue:hover { background-color: #D6EAF8; color: #2C6385; transform: translateY(-1px); }
 
-/* Mobile Adjustments for Contact Page */
-@media (max-width: 48rem) {
-    .contact-page-wrapper { padding: 2.5rem 1.25rem 3rem 1.25rem; } 
-    .contact-page-header h1 { font-size: 2rem; }
-    .contact-layout { 
-        grid-template-columns: 1fr; 
-        gap: 1.25rem;
-    }
-    .route-card { padding: 1.5rem; }
-    .route-divider { padding-bottom: 1.25rem; margin-bottom: 1.25rem; }
-    
-    /* CHANGED: Forces the title and button to stay on the same horizontal line */
-    .route-header { 
-        flex-direction: row; 
-        align-items: center; 
-        justify-content: space-between; 
-        gap: 0.5rem; 
-    }
-    /* Slightly smaller title on mobile so the button fits perfectly next to it */
-    .route-title { font-size: 1rem; } 
-    
-    .route-desc { padding-right: 0; margin-bottom: 0.5rem; }
-    .anonymous-card { padding: 3rem 1.5rem; }
-}
 
 /* =========================================
-   6. MODERN MOBILE RESPONSIVENESS
+   11. MASTER MOBILE ENGINE (UNIFIED)
    ========================================= */
 @media (max-width: 48rem) {
     body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
@@ -944,8 +852,8 @@ a:focus-visible, button:focus-visible {
         top: 0;
         right: 0;
         width: 18rem;
-        height: 100vh; /* Fallback for older phones */
-        height: 100dvh; /* FIX: Dynamic height stops mobile browser bars from hiding the footer */
+        height: 100vh;
+        height: 100dvh;
         background-color: var(--bg-color);
         border-left: 0.125rem solid var(--kodansha-black);
         z-index: 2000;
@@ -956,16 +864,14 @@ a:focus-visible, button:focus-visible {
     
     .mobile-sidebar.active { transform: translateX(0); }
     
-    /* Layout for the top links */
     .sidebar-menu-container {
-        padding: 3rem 1.5rem 0.5rem 1.5rem; /* CHANGED: Pushed higher up the screen */
+        padding: 3rem 1.5rem 0.5rem 1.5rem; 
         display: flex;
         flex-direction: column;
-        gap: 0.75rem; /* CHANGED: Tighter gap */
+        gap: 0.75rem; 
         width: 100%;
     }
     
-    /* Divided Link List */
     .sidebar-links { 
         list-style: none; 
         display: flex; 
@@ -973,22 +879,18 @@ a:focus-visible, button:focus-visible {
         padding: 0; 
         margin: 0; 
     }
-    .sidebar-links li { 
-        border-bottom: 1px solid var(--border-color); 
-        width: 100%; 
-    }
+    .sidebar-links li { border-bottom: 1px solid var(--border-color); width: 100%; }
     .sidebar-links li:first-child { border-top: 1px solid var(--border-color); }
     .sidebar-links li a { 
         display: block; 
-        padding: 0.5rem 0.5rem; /* CHANGED: Shrunk vertical padding */
-        font-size: 1rem; /* CHANGED: Shrunk link text to save height */
+        padding: 0.5rem 0.5rem; 
+        font-size: 1rem; 
         font-weight: 600; 
         color: var(--kodansha-black); 
         text-decoration: none; 
         text-align: left;
     }
     
-    /* Boxed Action Buttons (Shop & Contact) */
     .sidebar-actions { 
         display: flex; 
         flex-direction: column; 
@@ -1007,17 +909,16 @@ a:focus-visible, button:focus-visible {
     }
     
     .close-sidebar-btn { 
-        position: absolute; top: 0.75rem; right: 1.5rem; /* Nudged higher */
+        position: absolute; top: 0.75rem; right: 1.5rem; 
         background: none; border: none; font-size: 2.5rem; 
         cursor: pointer; color: var(--kodansha-black);
         z-index: 2001; 
     }
     
-    /* The Black Branding Footer */
     .sidebar-footer {
         background-color: var(--kodansha-black);
         color: var(--bg-color);
-        padding: 1rem 1.5rem; /* CHANGED: Made the black box slightly thinner */
+        padding: 1rem 1.5rem; 
         text-align: center;
         width: 100%; 
         margin-top: auto; 
@@ -1036,40 +937,38 @@ a:focus-visible, button:focus-visible {
     
     .sidebar-overlay {
         display: block; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-        height: 100dvh; /* FIX: Matches dynamic height */
+        height: 100dvh; 
         background: rgba(0,0,0,0.5); z-index: 1999; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
     }
     
     .sidebar-overlay.active { opacity: 1; pointer-events: auto; }
 
-    /* 4. Perfect Mobile Banner Scaling (No Cropping) */
+    /* 4. Perfect Mobile Banner Scaling */
     .hero { 
         padding: 0 0 2rem 0; 
         margin-top: -3.5rem; 
     }
-    .hero-anime-banner { 
-        height: 60vw; /* Scales height perfectly to the phone width */
-    } 
+    .hero-anime-banner { height: 60vw; } 
     .hero-tint-img { 
-        object-fit: contain; /* Prevents any cropping */
-        object-position: center bottom; /* Anchors the image to the fade */
+        object-fit: contain; 
+        object-position: center bottom; 
     } 
     
-    /* 5. Mobile Box & Typographic Tuning (Smaller Box) */
+    /* 5. Mobile Box & Typographic Tuning */
     .hero-content {
-        padding: 0.85rem 1.15rem; /* CHANGED: Tighter internal padding */
+        padding: 0.85rem 1.15rem; 
         margin: -2.5rem 1.25rem 0 1.25rem; 
         max-width: calc(100% - 2.5rem); 
         box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.08); 
     }
     .hero h1 { 
-        font-size: 1.5rem; /* CHANGED: Shrunk the main header */
+        font-size: 1.5rem; 
         letter-spacing: -0.02rem; 
         line-height: 1.15; 
     }
     .hero h2 { 
-        font-size: 0.75rem; /* CHANGED: Shrunk the subtext */
-        margin-top: 0.35rem; /* CHANGED: Pulled the subtext closer to the title */
+        font-size: 0.75rem; 
+        margin-top: 0.35rem; 
         line-height: 1.4; 
     }
     
@@ -1079,8 +978,6 @@ a:focus-visible, button:focus-visible {
     .bento-card { padding: 1.5rem; }
     
     .library-card-special:hover .mini-manga:not(:first-child) { margin-left: -2.7rem; }
-    
-    /* Disable dynamic hover effects on mobile */
     .dynamic-book-title, .dynamic-creator-title { display: none !important; }
 
     /* 7. Clean Legal & Footer */
@@ -1098,9 +995,29 @@ a:focus-visible, button:focus-visible {
     .footer-links { grid-template-columns: 1fr; gap: 2.5rem; }
     .footer-bottom { flex-direction: column; gap: 1.5rem; text-align: center; }
     
-    /* CHANGED: Stacks the links vertically and hides the dangling | lines */
     .footer-bottom-links { flex-direction: column; gap: 0.85rem; }
     .footer-bottom-links .divider { display: none; }
     
     .site-footer { padding: 4rem 1.25rem 2rem 1.25rem; }
+
+    /* 8. Contact Page Mobile Tweaks (Migrated & Fixed) */
+    .contact-page-wrapper { padding: 2.5rem 1.25rem 3rem 1.25rem; } 
+    .contact-page-header h1 { font-size: 2rem; }
+    .contact-layout { 
+        grid-template-columns: 1fr; 
+        gap: 1.25rem;
+    }
+    .route-divider { padding-bottom: 1.25rem; margin-bottom: 1.25rem; }
+    
+    /* Forces the title and button to stay on the same horizontal line */
+    .route-header { 
+        flex-direction: row; 
+        align-items: center; 
+        justify-content: space-between; 
+        gap: 0.5rem; 
+    }
+    .route-title { font-size: 1rem; } 
+    
+    .route-desc { padding-right: 0; margin-bottom: 0.5rem; }
+    .anonymous-card { padding: 3rem 1.5rem; }
 }
