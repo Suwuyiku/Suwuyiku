@@ -959,22 +959,23 @@ a:focus-visible, button:focus-visible {
     
     .sidebar-overlay.active { opacity: 1; pointer-events: auto; }
     
-    /* 4. Perfect Mobile Banner Scaling */
+   /* 4. Perfect Mobile Banner Scaling */
     .hero { 
         padding: 0 0 2rem 0; 
-        margin-top: -0.5rem; /* Tucks it perfectly under the Nav bar */
+        margin-top: -0.5rem; /* Keeps it tucked safely under the Nav bar */
     }
     
     .hero-anime-banner { 
-        height: 18rem; /* FIX: Hard-locks the height so it never stretches out of control */
+        /* FIX: Removed the hard-lock. Restored proportional fluid scaling! */
+        height: 65vw; 
         width: calc(100% - 2rem); 
         margin: 0 auto; 
     } 
     
     .hero-tint-img { 
         object-fit: cover; 
-        object-position: center 20%; /* FIX: Keeps her eyes beautifully centered in the new frame */
-    } 
+        object-position: center bottom; /* Restored to bottom to keep the framing perfect */
+    }
     
     /* 5. Mobile Box & Typographic Tuning - ALIGNMENT FIXED */
     .hero-content {
