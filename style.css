@@ -876,7 +876,7 @@ a:focus-visible, button:focus-visible {
 
 /* Mobile Adjustments for Contact Page */
 @media (max-width: 48rem) {
-    .contact-page-wrapper { padding: 2.5rem 1.25rem 3rem 1.25rem; } /* CHANGED: Tighter mobile top spacing */
+    .contact-page-wrapper { padding: 2.5rem 1.25rem 3rem 1.25rem; } 
     .contact-page-header h1 { font-size: 2rem; }
     .contact-layout { 
         grid-template-columns: 1fr; 
@@ -884,7 +884,17 @@ a:focus-visible, button:focus-visible {
     }
     .route-card { padding: 1.5rem; }
     .route-divider { padding-bottom: 1.25rem; margin-bottom: 1.25rem; }
-    .route-header { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+    
+    /* CHANGED: Forces the title and button to stay on the same horizontal line */
+    .route-header { 
+        flex-direction: row; 
+        align-items: center; 
+        justify-content: space-between; 
+        gap: 0.5rem; 
+    }
+    /* Slightly smaller title on mobile so the button fits perfectly next to it */
+    .route-title { font-size: 1rem; } 
+    
     .route-desc { padding-right: 0; margin-bottom: 0.5rem; }
     .anonymous-card { padding: 3rem 1.5rem; }
 }
