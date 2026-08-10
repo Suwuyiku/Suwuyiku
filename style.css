@@ -1,19 +1,24 @@
 /* =========================================
    1. GLOBAL RESET & BASE VARS
+   WHAT THIS DOES: Clears default browser styling and sets up reusable colors (variables) so you only have to change a color once to update the whole site.
    ========================================= */
+
+/* The 'html' selector sets the base size for the whole page */
 html {
     font-size: 100%;
     -webkit-text-size-adjust: 100%; 
-    scroll-behavior: smooth;
+    scroll-behavior: smooth; /* Makes clicking anchor links scroll smoothly instead of jumping */
 }
 
+/* The '*' means 'select everything'. This resets default margins and padding that browsers add. */
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box; /* Ensures borders/padding don't increase the total width of elements */
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
+/* ':root' is where we store variables. Use var(--name) to apply these later! */
 :root {
     --bg-color: #FFFFFF;
     --text-color: #111111;
@@ -24,24 +29,27 @@ html {
 
 /* =========================================
    CUSTOM TEXT SELECTION
+   WHAT THIS DOES: Changes the highlight color when a user clicks and drags over text.
    ========================================= */
 ::selection { background-color: var(--kodansha-black); color: var(--bg-color); }
-::-moz-selection { background-color: var(--kodansha-black); color: var(--bg-color); }
+::-moz-selection { background-color: var(--kodansha-black); color: var(--bg-color); } /* For Firefox */
 
 .site-footer ::selection, .site-footer *::selection { background-color: var(--bg-color); color: var(--kodansha-black); }
 .site-footer ::-moz-selection, .site-footer *::-moz-selection { background-color: var(--bg-color); color: var(--kodansha-black); }
 
+/* Defines the main body of the webpage */
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
     padding: 0; 
-    line-height: 1.6;
-    overflow-x: hidden; 
+    line-height: 1.6; /* Makes text easier to read by spacing out lines */
+    overflow-x: hidden; /* Prevents horizontal scrolling */
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 100vh; /* Ensures the footer stays at the bottom even if the page is short */
 }
 
+/* Accessibility feature: Adds a visible outline when navigating with the 'Tab' key */
 a:focus-visible, button:focus-visible {
     outline: 0.125rem solid var(--hover-gray);
     outline-offset: 0.125rem;
@@ -49,13 +57,14 @@ a:focus-visible, button:focus-visible {
 
 /* =========================================
    2. TOP NAVIGATION
+   WHAT THIS DOES: Styles the top menu bar and makes it "stick" to the top when scrolling.
    ========================================= */
 .top-nav {
-    position: sticky;
+    position: sticky; /* Keeps the nav visible at the top while scrolling */
     top: 1rem; 
-    z-index: 1000; 
-    display: flex;
-    justify-content: space-between;
+    z-index: 1000; /* Ensures the nav stays on top of other elements */
+    display: flex; /* Flexbox aligns items side-by-side */
+    justify-content: space-between; /* Pushes the logo left and links right */
     align-items: center;
     border: 0.125rem solid var(--kodansha-black); 
     padding: 1rem 1.5rem; 
@@ -75,16 +84,18 @@ a:focus-visible, button:focus-visible {
 .nav-right { display: flex; align-items: center; gap: 2rem; }
 .nav-links { list-style: none; display: flex; gap: 0.875rem; }
 
+/* The links in the top menu */
 .nav-links li a {
     position: relative;
-    text-decoration: none;
+    text-decoration: none; /* Removes the default underline */
     color: var(--kodansha-black);
     font-weight: 500; 
     font-size: 1.25rem; 
     padding-bottom: 0.25rem; 
-    transition: color 0.25s ease-out; 
+    transition: color 0.25s ease-out; /* Makes the color change smooth on hover */
 }
 
+/* The animated underline effect when hovering over menu links */
 .nav-links li a::after {
     content: '';
     position: absolute;
@@ -93,20 +104,21 @@ a:focus-visible, button:focus-visible {
     bottom: 0;
     left: 0;
     background-color: var(--kodansha-black);
-    transform: scaleX(0);
+    transform: scaleX(0); /* Starts hidden (width of 0) */
     transform-origin: bottom right;
     transition: transform 0.25s ease-out, background-color 0.25s ease-out;
 }
 
 .nav-links li a:hover { color: var(--hover-gray); }
 .nav-links li a:hover::after {
-    transform: scaleX(1);
+    transform: scaleX(1); /* Grows to full width on hover */
     transform-origin: bottom left;
     background-color: var(--hover-gray);
 }
 
 .nav-actions { display: flex; gap: 0.625rem; }
 
+/* Styles the buttons in the navigation bar */
 .btn-action {
     display: flex;
     align-items: center;
@@ -122,6 +134,7 @@ a:focus-visible, button:focus-visible {
     transition: all 0.2s ease;
 }
 
+/* Inverts colors when hovering over the button */
 .btn-action:hover {
     background-color: var(--kodansha-black);
     border-color: var(--kodansha-black);
@@ -130,6 +143,7 @@ a:focus-visible, button:focus-visible {
 
 /* =========================================
    HERO SECTION (KODANSHA REFINED LAYOUT)
+   WHAT THIS DOES: The big visual banner at the very top of the page.
    ========================================= */
 .hero {
     position: relative;
@@ -138,12 +152,14 @@ a:focus-visible, button:focus-visible {
     width: 100%; 
 }
 
+/* The colored background with a fading gradient mask at the bottom */
 .hero-anime-banner {
     position: relative;
     width: 100%;
     height: 36rem;
     background-color: #84C1E9; 
     overflow: hidden;
+    /* This mask creates a fade-out effect at the bottom of the image */
     -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
     mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
 }
@@ -151,12 +167,13 @@ a:focus-visible, button:focus-visible {
 .hero-tint-img {
     width: 100%;
     height: 100%;
-    object-fit: cover; 
+    object-fit: cover; /* Ensures the image fills the space without stretching */
     object-position: center 10%; 
-    mix-blend-mode: multiply; 
+    mix-blend-mode: multiply; /* Blends the image with the blue background color */
     opacity: 0.45; 
 }
 
+/* The text box that overlaps the hero image */
 .hero-content {
     position: relative;
     z-index: 2; 
@@ -166,7 +183,7 @@ a:focus-visible, button:focus-visible {
     padding: 1.25rem 2.25rem; 
     max-width: 38rem; 
     text-align: left; 
-    margin-top: -4rem; 
+    margin-top: -4rem; /* Pulls the content up so it overlaps the image */
     -webkit-user-select: none; 
     -moz-user-select: none;
     -ms-user-select: none;
@@ -178,6 +195,7 @@ a:focus-visible, button:focus-visible {
 
 /* =========================================
    3. HERO & BENTO DASHBOARD
+   WHAT THIS DOES: The grid layout showing different content cards below the main banner.
    ========================================= */
 .hero {
     position: relative;
@@ -190,6 +208,7 @@ a:focus-visible, button:focus-visible {
 .hero h1 { font-size: 2.6rem; font-weight: 600; letter-spacing: -0.02rem; max-width: 50rem; line-height: 1.2; }
 .hero h2 { font-size: 1.1rem; font-weight: 400; color: #666666; margin-top: 1rem; letter-spacing: 0.02rem; line-height: 1.6; max-width: 100%; }
 
+/* The glowing text effect on a specific name/title */
 .name-glow {
     transition: color 0.4s cubic-bezier(0.22, 1, 0.36, 1), text-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     cursor: default; 
@@ -200,13 +219,14 @@ a:focus-visible, button:focus-visible {
     text-shadow: 0 0 8px rgba(132, 193, 233, 0.9), 0 0 16px rgba(132, 193, 233, 0.6), 0 0 24px rgba(132, 193, 233, 0.3); 
 }
 
+/* CSS Grid layout for the Bento cards (3 columns) */
 .bento-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: 15rem;
+    grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+    grid-auto-rows: 15rem; /* Each row is 15rem tall */
     gap: 1rem;
     max-width: 75rem;
-    margin: 0 auto 6rem auto;
+    margin: 0 auto 6rem auto; /* Centers the container */
     padding: 0 3rem;
     width: 100%; 
 }
@@ -220,20 +240,22 @@ a:focus-visible, button:focus-visible {
     border: 0.0625rem solid var(--border-color);
     background-color: var(--bg-color);
     padding: 2rem;
-    transition: border-color 0.2s ease, transform 0.2s ease;
+    transition: border-color 0.2s ease, transform 0.2s ease; /* Smooth hover effects */
 }
 
 .card-content h2 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.25rem; }
 .card-content p { font-size: 0.85rem; color: #666666; }
 
-.card-large { grid-row: span 2; }
-.card-large-wide { grid-column: span 2; }
-.card-full-wide { grid-column: 1 / -1; }
+/* Special sizing classes to make cards take up more space in the grid */
+.card-large { grid-row: span 2; } /* Takes up 2 rows vertically */
+.card-large-wide { grid-column: span 2; } /* Takes up 2 columns horizontally */
+.card-full-wide { grid-column: 1 / -1; } /* Spans the entire width */
 
-.bento-card:hover { border-color: #4A5C6A; transform: translateY(-0.125rem); }
+.bento-card:hover { border-color: #4A5C6A; transform: translateY(-0.125rem); /* Slight lift effect */ }
 
 /* =========================================
    BENTO CARD MINI PREVIEWS
+   WHAT THIS DOES: The animated stack of mini manga books inside specific cards.
    ========================================= */
 .library-card-special { position: relative; overflow: hidden; }
 
@@ -253,14 +275,17 @@ a:focus-visible, button:focus-visible {
     transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), margin 0.7s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, box-shadow 0.7s cubic-bezier(0.22, 1, 0.36, 1); cursor: pointer;
 }
 
+/* Staggers the rotation and height of each mini book so they look messy */
 .mini-manga:nth-child(1) { z-index: 5; transform: rotate(-3deg) translateY(2px); }
 .mini-manga:nth-child(2) { z-index: 4; transform: rotate(1deg) translateY(-1px); }
 .mini-manga:nth-child(3) { z-index: 3; transform: rotate(-2deg) translateY(3px); }
 .mini-manga:nth-child(4) { z-index: 2; transform: rotate(2deg) translateY(0px); }
 .mini-manga:nth-child(5) { z-index: 1; transform: rotate(-1deg) translateY(2px); }
 
+/* Pulls the books over each other to create the overlapping stack */
 .mini-manga:not(:first-child) { margin-left: -2.7rem; }
 
+/* Spreads the books out slightly when hovering over the card container */
 .library-card-special:hover .mini-manga:not(:first-child) { margin-left: -0.5rem; }
 .library-card-special:hover .mini-manga:nth-child(1) { transform: rotate(-4deg) translateY(0); }
 .library-card-special:hover .mini-manga:nth-child(2) { transform: rotate(-2deg) translateY(0); }
@@ -268,25 +293,30 @@ a:focus-visible, button:focus-visible {
 .library-card-special:hover .mini-manga:nth-child(4) { transform: rotate(2deg) translateY(0); }
 .library-card-special:hover .mini-manga:nth-child(5) { transform: rotate(4deg) translateY(0); }
 
+/* Pops a specific book out when hovered over */
 .library-card-special .mini-manga:nth-child(odd):hover { transform: translate(0.25rem, -1.2rem) rotate(-3deg) scale(1.05) !important; z-index: 10 !important; border-color: var(--kodansha-black); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); }
 .library-card-special .mini-manga:nth-child(even):hover { transform: translate(0.25rem, -1.2rem) rotate(3deg) scale(1.05) !important; z-index: 10 !important; border-color: var(--kodansha-black); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); }
 
+/* Prevents images from being draggable, useful for UI elements */
 .protected-img { -webkit-user-drag: none !important; user-select: none !important; -moz-user-select: none !important; -webkit-user-select: none !important; -ms-user-select: none !important; pointer-events: auto; }
 
 /* =========================================
    PREMIUM EASTER EGG GLINT ENGINE 
+   WHAT THIS DOES: Adds sparkling star animations that appear when interacting with specific cards.
    ========================================= */
 .library-card-special::after {
     content: "✦"; position: absolute; color: #FFFFFF; opacity: 0; pointer-events: none; z-index: 100;
     text-shadow: 0 0 12px rgba(255, 255, 255, 1), 0 0 25px rgba(255, 255, 255, 0.8); will-change: transform, opacity;
 }
 
+/* Uses the ':has' selector to detect which book is hovered, and triggers specific animations */
 .library-card-special:has(.mini-manga:nth-child(1):hover)::after { right: 20rem; bottom: 4.5rem; font-size: 1.2rem; animation: easter-glint-1 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 2.8s forwards; }
 .library-card-special:has(.mini-manga:nth-child(2):hover)::after { right: 15rem; bottom: 5.5rem; font-size: 1.8rem; color: #88CCFF; text-shadow: 0 0 15px rgba(136, 204, 255, 1), 0 0 30px rgba(0, 119, 255, 0.9); animation: easter-glint-2 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 3.5s forwards; }
 .library-card-special:has(.mini-manga:nth-child(3):hover)::after { right: 11.5rem; bottom: 3.5rem; font-size: 0.9rem; animation: easter-glint-3 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 2.5s forwards; }
 .library-card-special:has(.mini-manga:nth-child(4):hover)::after { right: 7.5rem; bottom: 6.5rem; font-size: 1.4rem; animation: easter-glint-4 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 3.2s forwards; }
 .library-card-special:has(.mini-manga:nth-child(5):hover)::after { right: 3.5rem; bottom: 4rem; font-size: 1.1rem; animation: easter-glint-5 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 2.9s forwards; }
 
+/* The Keyframes tell the browser exactly how the animation should move over time */
 @keyframes easter-glint-1 { 0% { opacity: 0; transform: scale(0) rotate(-45deg); } 40% { opacity: 1; transform: scale(1.2) rotate(45deg); } 100% { opacity: 0; transform: scale(0) rotate(135deg); } }
 @keyframes easter-glint-2 { 0% { opacity: 0; transform: scale(0) rotate(0deg); filter: brightness(1); } 40% { opacity: 1; transform: scale(1.3) rotate(90deg); filter: brightness(1.5); } 100% { opacity: 0; transform: scale(0) rotate(180deg); filter: brightness(1); } }
 @keyframes easter-glint-3 { 0% { opacity: 0; transform: scale(0) rotate(30deg); } 40% { opacity: 1; transform: scale(1.5) rotate(120deg); } 100% { opacity: 0; transform: scale(0) rotate(210deg); } }
@@ -295,6 +325,7 @@ a:focus-visible, button:focus-visible {
 
 /* =========================================
    DYNAMIC HOVER TITLES
+   WHAT THIS DOES: Shows text titles depending on which mini-book you hover over.
    ========================================= */
 .dynamic-book-title { color: var(--hover-gray); margin-left: 0.25rem; position: absolute; pointer-events: none; font-family: 'Inter', sans-serif; font-weight: 500; opacity: 0; transition: opacity 0.3s ease; }
 .library-card-special:has(.mini-manga:hover) .dynamic-book-title { opacity: 1; }
@@ -306,6 +337,7 @@ a:focus-visible, button:focus-visible {
 .library-card-special:has(.mini-manga:nth-child(4):hover) .title-4,
 .library-card-special:has(.mini-manga:nth-child(5):hover) .title-5 { display: inline-block; opacity: 1; }
 
+/* Custom font styles for different titles */
 .jp { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important; font-weight: 400 !important; font-size: 0.9rem !important; letter-spacing: normal !important; vertical-align: baseline; }
 .title-1 .eng { font-family: 'Caveat', cursive; font-weight: 700; font-size: 1.15rem; display: inline-block; transform: translateY(0.12rem); }
 .title-2 .eng { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 0.9rem; letter-spacing: -0.02rem; }
@@ -315,6 +347,7 @@ a:focus-visible, button:focus-visible {
 
 /* =========================================
    SHOP BENTO CARD (CREATOR AVATARS)
+   WHAT THIS DOES: Animates circular avatar images in the shop card area.
    ========================================= */
 .shop-card-special { position: relative; overflow: hidden; }
 .shop-creator-avatars { display: flex; align-items: flex-end; justify-content: flex-end; width: 100%; margin-top: 1rem; padding-right: 1.5rem; padding-bottom: 0.5rem; }
@@ -341,12 +374,14 @@ a:focus-visible, button:focus-visible {
 
 /* =========================================
    7. LIBRARY / MANGA SHELF
+   WHAT THIS DOES: Animates a larger horizontal row of books (like a bookshelf)
    ========================================= */
 .library-container { max-width: 75rem; margin: 4rem auto 8rem auto; padding: 0 3rem; width: 100%; }
 .library-header { text-align: center; margin-bottom: 5rem; }
 .library-header h1 { font-size: 3rem; font-weight: 800; letter-spacing: -0.02rem; }
 .library-header p { color: #666666; margin-top: 1rem; font-size: 1.1rem; }
 
+/* Allows horizontal scrolling for touch devices */
 .manga-shelf { display: flex; justify-content: center; align-items: center; padding: 2rem 0 4rem 0; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
 .manga-book {
@@ -379,6 +414,7 @@ a:focus-visible, button:focus-visible {
 
 /* =========================================
    8. LEGAL PAGES
+   WHAT THIS DOES: Basic text styling for pages like Privacy Policy or Terms of Service.
    ========================================= */
 .legal-container { max-width: 50rem; margin: 4rem auto 8rem auto; padding: 0 3rem; width: 100%; }
 .legal-header { text-align: center; margin-bottom: 1.5rem; }
@@ -394,6 +430,7 @@ a:focus-visible, button:focus-visible {
 
 /* =========================================
    9. ARCHITECTURAL FOOTER
+   WHAT THIS DOES: The dark section at the very bottom of every page containing extra links.
    ========================================= */
 .site-footer { background-color: var(--kodansha-black); color: var(--bg-color); padding: 5rem calc(1.5vw + 1.5rem) 2rem calc(1.5vw + 1.5rem); margin-top: auto; width: 100%; }
 .footer-top { display: flex; justify-content: space-between; width: 100%; }
@@ -410,11 +447,12 @@ a:focus-visible, button:focus-visible {
 .footer-bottom-links { display: flex; align-items: center; flex-wrap: wrap; gap: 1.25rem; }
 .footer-bottom-links a { color: #777777; text-decoration: none; transition: color 0.2s ease; }
 .footer-bottom-links a:hover { color: var(--bg-color); }
-.hamburger-btn, .mobile-sidebar, .sidebar-overlay { display: none; }
+.hamburger-btn, .mobile-sidebar, .sidebar-overlay { display: none; } /* Hidden on desktop */
 .no-scroll { overflow: hidden; }
 
 /* =========================================
    10. CONTACT PAGE STYLING ENGINE
+   WHAT THIS DOES: Layout and design for contact forms, anonymous inputs, and route cards.
    ========================================= */
 .contact-page-wrapper {
     display: block; 
@@ -454,6 +492,7 @@ a:focus-visible, button:focus-visible {
 
 /* =========================================
    12. CONNECTIONS SEARCH & MASONRY LAYOUT
+   WHAT THIS DOES: Creates the dynamic grid of social links/platforms and the search bar above them.
    ========================================= */
 .connections-header-wrapper {
     display: flex;
@@ -477,9 +516,9 @@ a:focus-visible, button:focus-visible {
 .search-icon { position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); width: 1rem; height: 1rem; fill: #888888; pointer-events: none; transition: fill 0.3s ease; }
 .search-input:focus + .search-icon { fill: var(--kodansha-black); }
 
-/* FIX: Convert to Masonry Layout so blocks dynamically flow UP into empty spaces */
+/* Masonry Layout: This makes blocks dynamically flow UP into empty spaces instead of rigid rows */
 .connections-grid {
-    column-count: 2;
+    column-count: 2; /* Forces content into 2 columns */
     column-gap: 1.5rem;
     width: 100%;
     display: block; 
@@ -490,7 +529,7 @@ a:focus-visible, button:focus-visible {
     display: inline-block; /* Forces perfect Masonry wrapping */
     width: 100%;
     margin-bottom: 1.5rem;
-    break-inside: avoid; /* Prevents card from splitting across columns */
+    break-inside: avoid; /* Prevents a card from splitting in half across columns */
     -webkit-column-break-inside: avoid;
     box-sizing: border-box;
 }
@@ -501,7 +540,7 @@ a:focus-visible, button:focus-visible {
 .route-title { font-size: 1rem; font-weight: 700; color: var(--kodansha-black); line-height: 1.2; transition: color 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
 .universal-handle { color: #A0A0A0; font-weight: 500; font-size: 0.75rem; letter-spacing: 0.02rem; margin-left: 0; }
 
-/* FIX: Tighter breathing room so the elements aren't crushed, but aren't massively gapped */
+/* Styles the individual link/social row */
 .platform-item { 
     display: flex;
     flex-direction: column;
@@ -512,7 +551,12 @@ a:focus-visible, button:focus-visible {
 
 .platform-item .route-header { margin-bottom: 0.5rem; }
 
-/* Perfected Spacing System */
+/* 1. Aligns the description text perfectly under the username */
+.platform-item .route-desc {
+    padding-left: 1.9rem; /* Matches the exact width of the icon + gap */
+}
+
+/* Perfected Spacing System for lists */
 .platform-item:not(:last-child) {
     border-bottom: 1px solid var(--border-color);
     padding-bottom: 1.25rem; 
@@ -521,6 +565,7 @@ a:focus-visible, button:focus-visible {
 
 /* =========================================
    13. CONNECTIONS HOVER EASTER EGGS
+   WHAT THIS DOES: Changes colors and adds scaling animations to social icons when hovered.
    ========================================= */
 .platform-icon { width: 1.15rem; height: 1.15rem; fill: var(--kodansha-black); transition: fill 0.3s cubic-bezier(0.22, 1, 0.36, 1), transform 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
 
@@ -528,8 +573,9 @@ a:focus-visible, button:focus-visible {
 .platform-item.instagram:hover .platform-icon { fill: #E1306C; transform: scale(1.15); }
 .platform-item.instagram:hover .route-title { color: #E1306C; }
 
-.platform-item.fanbox:hover .platform-icon { fill: #F973A4; transform: scale(1.15); }
-.platform-item.fanbox:hover .route-title { color: #F973A4; }
+/* 2. Overrides Fanbox/Fanzai Hover Color to Deep Blue */
+.platform-item.fanbox:hover .platform-icon { fill: #0052CC; transform: scale(1.15); }
+.platform-item.fanbox:hover .route-title { color: #0052CC; }
 
 .platform-item.twitter:hover .platform-icon { fill: #1DA1F2; transform: scale(1.15); }
 .platform-item.twitter:hover .route-title { color: #1DA1F2; }
@@ -555,6 +601,7 @@ a:focus-visible, button:focus-visible {
 
 /* =========================================
    11. MASTER MOBILE ENGINE (UNIFIED)
+   WHAT THIS DOES: The '@media' query means "Only apply these styles if the screen is smaller than 48rem (mobile phones/tablets)". This restructures the layout for smaller screens.
    ========================================= */
 @media (max-width: 48rem) {
     body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
@@ -562,13 +609,15 @@ a:focus-visible, button:focus-visible {
     body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 1rem; background-color: var(--bg-color); z-index: 998; }
     
     .top-nav { margin: 1rem 1rem 0 1rem; top: 1rem; width: calc(100% - 2rem); padding: 0.8rem 1.25rem; border: 0.125rem solid var(--kodansha-black); }
-    .nav-links, .nav-actions { display: none; } 
+    .nav-links, .nav-actions { display: none; } /* Hides desktop nav links */
 
+    /* Creates the three-line mobile menu icon */
     .hamburger-btn { display: flex; flex-direction: column; justify-content: space-between; width: 1.5rem; height: 1.1rem; background: none; border: none; cursor: pointer; z-index: 1001; }
     .hamburger-btn .bar { height: 0.15rem; width: 100%; background-color: var(--kodansha-black); border-radius: 2px; }
 
+    /* The slide-out side menu for mobile */
     .mobile-sidebar { display: flex; flex-direction: column; position: fixed; top: 0; right: 0; width: 18rem; height: 100vh; height: 100dvh; background-color: var(--bg-color); border-left: 0.125rem solid var(--kodansha-black); z-index: 2000; transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); padding: 0; }
-    .mobile-sidebar.active { transform: translateX(0); }
+    .mobile-sidebar.active { transform: translateX(0); } /* Slides menu in when active class is added by JS */
 
     .sidebar-header { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 1.5rem 0 1.5rem; }
     .sidebar-logo { font-size: 1.4rem; font-weight: 800; letter-spacing: 0.05rem; color: var(--kodansha-black); }
@@ -590,6 +639,7 @@ a:focus-visible, button:focus-visible {
     .sidebar-overlay { display: block; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; height: 100dvh; background: rgba(0,0,0,0.5); z-index: 1999; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
     .sidebar-overlay.active { opacity: 1; pointer-events: auto; }
     
+    /* Shrinks the hero banner and margins to fit small screens */
     .hero { padding: 0 0 2rem 0; margin-top: -0.5rem; }
     .hero-anime-banner { height: 65vw; width: calc(100% - 2rem); margin: 0 auto; } 
     .hero-tint-img { object-fit: cover; object-position: center bottom; } 
@@ -598,6 +648,7 @@ a:focus-visible, button:focus-visible {
     .hero h1 { font-size: 1.5rem; letter-spacing: -0.02rem; line-height: 1.15; }
     .hero h2 { font-size: 0.75rem; margin-top: 0.35rem; line-height: 1.4; }
     
+    /* Converts Bento Grid from 3 columns to 1 column */
     .bento-container { grid-template-columns: 1fr; padding: 0 1rem; gap: 1rem; }
     .card-large, .card-large-wide, .card-full-wide { grid-row: span 1; grid-column: span 1; }
     .bento-card { padding: 1.5rem; }
@@ -614,6 +665,7 @@ a:focus-visible, button:focus-visible {
     .manga-book { width: 8rem; box-shadow: -8px 0 15px rgba(0, 0, 0, 0.2); }
     .manga-book:not(:first-child) { margin-left: -5rem; }
     
+    /* Stacks footer columns on top of each other */
     .footer-top { flex-direction: column; gap: 3rem; text-align: center; }
     .footer-brand, .footer-links { flex: 1 1 auto; width: 100%; padding-right: 0; }
     .footer-brand p { margin: 0 auto; }
@@ -635,7 +687,7 @@ a:focus-visible, button:focus-visible {
     .route-desc { padding-right: 0; margin-bottom: 0.5rem; }
     .anonymous-card { padding: 3rem 1.5rem; }
 
-    /* Connections specific mobile fixes */
+    /* Connections specific mobile fixes (1 column Masonry) */
     .connections-header-wrapper { flex-direction: column !important; align-items: flex-start !important; gap: 1.5rem; }
     .search-container, .search-input, .search-input:focus { width: 100%; }
     .connections-grid { column-count: 1 !important; }
