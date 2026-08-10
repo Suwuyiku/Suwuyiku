@@ -796,6 +796,102 @@ a:focus-visible, button:focus-visible {
 }
 .btn-soft-blue:hover { background-color: #D6EAF8; color: #2C6385; transform: translateY(-1px); }
 
+/* =========================================
+   12. CONNECTIONS SEARCH & GRID LAYOUT
+   ========================================= */
+.connections-header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 3rem;
+    border-bottom: 0.125rem solid var(--kodansha-black);
+    padding-bottom: 1.5rem;
+}
+
+.connections-header-left h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--kodansha-black);
+    margin-bottom: 0.5rem;
+}
+
+.connections-header-left p { font-size: 1rem; color: #777777; }
+
+/* The Dynamic Search Bar */
+.search-container { position: relative; }
+.search-input {
+    width: 14rem;
+    padding: 0.6rem 1rem 0.6rem 2.25rem;
+    border: 0.125rem solid var(--border-color);
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    outline: none;
+    background-color: #FAFAFA;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.search-input:focus {
+    width: 20rem; /* Smoothly expands when clicked */
+    border-color: var(--kodansha-black);
+    background-color: var(--bg-color);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.search-icon {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1rem;
+    height: 1rem;
+    fill: #888888;
+    pointer-events: none;
+    transition: fill 0.3s ease;
+}
+
+.search-input:focus + .search-icon { fill: var(--kodansha-black); }
+
+/* Grid Layout */
+.connections-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.card-category {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #A0A0A0;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+.platform-title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.platform-icon {
+    width: 1.15rem;
+    height: 1.15rem;
+    fill: var(--kodansha-black);
+}
+
+.universal-handle {
+    color: #A0A0A0;
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.02rem;
+    margin-left: 0.25rem;
+}
+
+.platform-item { transition: opacity 0.3s ease; }
 
 /* =========================================
    11. MASTER MOBILE ENGINE (UNIFIED)
