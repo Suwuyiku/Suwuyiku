@@ -772,7 +772,7 @@ a:focus-visible, button:focus-visible {
 .contact-page-wrapper {
     max-width: 65rem;
     margin: 0 auto;
-    padding: 5rem 1.5rem 6rem 1.5rem;
+    padding: 3rem 1.5rem 6rem 1.5rem; /* CHANGED: Reduced top padding from 5rem to 3rem to perfectly match the legal pages */
 }
 
 .contact-page-header {
@@ -799,7 +799,7 @@ a:focus-visible, button:focus-visible {
     display: grid;
     grid-template-columns: 1.2fr 1fr;
     gap: 1.5rem;
-    align-items: stretch;
+    align-items: start; /* CHANGED: Prevents the right box from stretching to match the left column */
 }
 
 .contact-routes-column {
@@ -856,8 +856,7 @@ a:focus-visible, button:focus-visible {
     align-items: center; 
     text-align: center;
     background-color: #FAFAFA;
-    height: 100%;
-    min-height: 20rem;
+    /* CHANGED: Removed height constraints so it perfectly wraps the text/button */
 }
 .anonymous-card h2 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
 .anonymous-card p { font-size: 0.95rem; color: #777777; margin-bottom: 2rem; }
@@ -877,7 +876,7 @@ a:focus-visible, button:focus-visible {
 
 /* Mobile Adjustments for Contact Page */
 @media (max-width: 48rem) {
-    .contact-page-wrapper { padding: 4rem 1.25rem 3rem 1.25rem; }
+    .contact-page-wrapper { padding: 2.5rem 1.25rem 3rem 1.25rem; } /* CHANGED: Tighter mobile top spacing */
     .contact-page-header h1 { font-size: 2rem; }
     .contact-layout { 
         grid-template-columns: 1fr; 
@@ -887,7 +886,7 @@ a:focus-visible, button:focus-visible {
     .route-divider { padding-bottom: 1.25rem; margin-bottom: 1.25rem; }
     .route-header { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
     .route-desc { padding-right: 0; margin-bottom: 0.5rem; }
-    .anonymous-card { padding: 3rem 1.5rem; min-height: auto; }
+    .anonymous-card { padding: 3rem 1.5rem; }
 }
 
 /* =========================================
