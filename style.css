@@ -937,7 +937,7 @@ a:focus-visible, button:focus-visible {
     /* 4. Perfect Mobile Banner Scaling */
     .hero { 
         padding: 0 0 2rem 0; 
-        margin-top: 1.5rem; /* FIX: Pushes the banner down so it sits cleanly below the Nav bar */
+        margin-top: -1.5rem; /* FIX: Pushes the banner down so it sits cleanly below the Nav bar */
     }
     .hero-anime-banner { 
         height: 60vw; 
