@@ -175,7 +175,6 @@ a:focus-visible, button:focus-visible {
     position: relative;
     z-index: 2; 
     background-color: var(--bg-color, #ffffff);
-    /* GLOBALLY ALIGNED BORDER THICKNESS */
     border: 0.125rem solid var(--kodansha-black); 
     box-shadow: 4px 6px 14px rgba(0, 0, 0, 0.08); 
     
@@ -805,6 +804,17 @@ a:focus-visible, button:focus-visible {
     body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
     
     /* 1. Detached Floating Header */
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 1rem;
+        background-color: var(--bg-color);
+        z-index: 998; /* FIX: Solid white blocker prevents the banner from showing above the Nav */
+    }
+    
     .top-nav { 
         margin: 1rem 1rem 0 1rem; 
         top: 1rem; 
@@ -854,9 +864,30 @@ a:focus-visible, button:focus-visible {
     }
     
     .mobile-sidebar.active { transform: translateX(0); }
+
+    /* NEW: Perfectly aligns the logo and the X at the top */
+    .sidebar-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.25rem 1.5rem 0 1.5rem;
+    }
+    
+    .sidebar-logo {
+        font-size: 1.4rem; 
+        font-weight: 800; 
+        letter-spacing: 0.05rem;
+        color: var(--kodansha-black);
+    }
+    
+    .close-sidebar-btn { 
+        background: none; border: none; font-size: 2.5rem; 
+        cursor: pointer; color: var(--kodansha-black);
+        line-height: 0.8; 
+    }
     
     .sidebar-menu-container {
-        padding: 5rem 1.5rem 0.5rem 1.5rem; /* FIX: Massive top padding increase so the text completely clears the X button */
+        padding: 2.5rem 1.5rem 0.5rem 1.5rem; /* Adjusted top padding since the header is there now */
         display: flex;
         flex-direction: column;
         gap: 0.75rem; 
@@ -874,53 +905,46 @@ a:focus-visible, button:focus-visible {
     .sidebar-links li:first-child { border-top: 1px solid var(--border-color); }
     .sidebar-links li a { 
         display: block; 
-        padding: 0.65rem 0.5rem; /* Gave the text links slightly more breathing room too */
+        padding: 0.65rem 0.5rem; 
         font-size: 1rem; 
         font-weight: 600; 
         color: var(--kodansha-black); 
         text-decoration: none; 
-        text-align: left;
+        text-align: center; /* FIX: Centers the navigation links */
     }
     
     .sidebar-actions { 
         display: flex; 
         flex-direction: column; 
-        gap: 0.85rem; /* FIX: Added space between the Shop and Contact boxes */
+        gap: 0.85rem; 
         padding: 0.5rem 0.5rem; 
         width: 100%;
     }
     .sidebar-btn-action {
         display: flex; 
-        justify-content: flex-start; /* FIX: Left-aligns the text so it matches the other links perfectly */
+        justify-content: center; /* FIX: Centers the button text */
         align-items: center;
         width: 100%; 
         text-decoration: none; 
         color: var(--kodansha-black);
         border: 0.125rem solid var(--kodansha-black);
-        padding: 0.85rem 1rem; /* FIX: Huge breathing room added so they aren't "juiced" */
+        padding: 0.85rem 1rem; 
         font-size: 0.75rem; 
         font-weight: 700;
         letter-spacing: 0.12rem; 
         text-transform: uppercase;
     }
     
-    .close-sidebar-btn { 
-        position: absolute; top: 1rem; right: 1.5rem; 
-        background: none; border: none; font-size: 2.5rem; 
-        cursor: pointer; color: var(--kodansha-black);
-        z-index: 2001; 
-    }
-    
     .sidebar-footer {
         background-color: var(--kodansha-black);
         padding: 1.5rem 1.5rem; 
-        text-align: left; /* FIX: Pushed the text to the left side */
+        text-align: center; /* FIX: Centers the copyright text */
         width: 100%; 
         margin-top: auto; 
     }
     
     .sidebar-footer .copyright { 
-        color: #777777; /* FIX: Changed to sleek gray */
+        color: #777777; 
         font-size: 0.65rem; 
         font-weight: 700; 
         letter-spacing: 0.08rem;
@@ -934,6 +958,23 @@ a:focus-visible, button:focus-visible {
     }
     
     .sidebar-overlay.active { opacity: 1; pointer-events: auto; }
+    
+    /* 4. Perfect Mobile Banner Scaling */
+    .hero { 
+        padding: 0 0 2rem 0; 
+        margin-top: -0.5rem; /* Tucks it perfectly under the Nav bar */
+    }
+    
+    .hero-anime-banner { 
+        height: 18rem; /* FIX: Hard-locks the height so it never stretches out of control */
+        width: calc(100% - 2rem); 
+        margin: 0 auto; 
+    } 
+    
+    .hero-tint-img { 
+        object-fit: cover; 
+        object-position: center 20%; /* FIX: Keeps her eyes beautifully centered in the new frame */
+    } 
     
     /* 5. Mobile Box & Typographic Tuning - ALIGNMENT FIXED */
     .hero-content {
