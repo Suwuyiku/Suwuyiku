@@ -23,6 +23,7 @@
         .fragment-item { padding: 2rem 0; border-bottom: 1px solid var(--border-color); cursor: pointer; transition: transform 0.3s ease, padding-left 0.3s ease; }
         .fragment-item:hover { transform: translateX(4px); padding-left: 0.5rem; }
         
+        /* Pushes category left, date right */
         .fragment-meta { display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: #A0A0A0; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
         .meta-category { font-weight: 700; color: var(--kodansha-black); }
         
@@ -41,18 +42,25 @@
         .canvas-body p { margin-bottom: 1.75rem; }
         .canvas-body h2, .canvas-body h3 { font-weight: 800; margin: 2.5rem 0 1rem 0; color: var(--kodansha-black); }
         
-        .canvas-image { max-width: 100%; border-radius: 4px; margin: 2rem 0; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        /* OPTIMIZED NOTION IMAGE STYLING */
+        .canvas-image { 
+            max-width: 100%; 
+            height: auto; 
+            border-radius: 6px; 
+            margin: 2.5rem auto; /* Centers the image nicely */
+            display: block;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06); 
+        }
 
         /* THE SPARK */
         .spark-container { margin-top: 5rem; padding-top: 3rem; border-top: 1px solid var(--border-color); display: flex; flex-direction: column; align-items: center; gap: 0.75rem; position: relative; }
         
-        /* Intro text moved below the counter, margin adjusted */
         .spark-intro { font-size: 0.85rem; color: #A0A0A0; font-style: italic; margin-top: 1rem; letter-spacing: 0.02em; }
         
+        /* Removed the annoying cursor: not-allowed */
         .btn-spark { background: none; border: none; font-size: 2rem; color: #DDDDDD; cursor: pointer; transition: color 0.3s ease; position: relative; z-index: 10; }
-        .btn-spark:hover:not(:disabled) { color: var(--hover-gray); }
+        .btn-spark:hover { color: var(--hover-gray); }
         .btn-spark.active { color: var(--kodansha-black); }
-        .btn-spark:disabled { cursor: not-allowed; }
         
         @keyframes sparkBurst {
             0% { transform: scale(1); text-shadow: 0 0 0px rgba(0,0,0,0); }
@@ -116,6 +124,7 @@
 
     <main class="contact-page-wrapper">
         
+        <!-- VIEW 1: THE INDEX FEED -->
         <div id="fragments-index">
             <div class="fragments-header">
                 <h1>Fragments</h1>
@@ -126,6 +135,7 @@
             </div>
         </div>
 
+        <!-- VIEW 2: THE READING CANVAS -->
         <div id="fragments-canvas">
             <button class="btn-back" onclick="closeCanvas()">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
@@ -218,8 +228,9 @@
         const sparkCounter = document.getElementById('spark-counter');
         const sparkBtn = document.getElementById('spark-btn');
 
-        // Master lock: Uses localStorage as the immediate source of truth
+        // State trackers
         let isSparked = localStorage.getItem("hasSparked") === "true";
+        let isProcessingSpark = false; // Invisible JS lock to prevent red error cursors
 
         async function fetchIndex() {
             try {
@@ -281,7 +292,8 @@
                     }
                     else if (block.type === 'image') {
                         const imageUrl = block.image.type === 'external' ? block.image.external.url : block.image.file.url;
-                        canvasBody.innerHTML += `<img src="${imageUrl}" class="canvas-image" loading="lazy" draggable="false" oncontextmenu="return false;">`;
+                        // Added loading="lazy" and decoding="async" for optimized rendering
+                        canvasBody.innerHTML += `<img src="${imageUrl}" class="canvas-image" loading="lazy" decoding="async" draggable="false" oncontextmenu="return false;">`;
                     }
                 });
             } catch (error) {
@@ -297,25 +309,18 @@
 
         async function setupSparks() {
             sparkBtn.classList.remove('animating');
-            sparkBtn.disabled = false;
-
-            // Apply immediate local state for a snappy UI
-            if (isSparked) {
-                sparkBtn.classList.add('active');
-            } else {
-                sparkBtn.classList.remove('active');
-            }
 
             try {
                 const response = await fetch(`${API_URL}/sparks`);
                 const data = await response.json();
-                sparkCounter.textContent = data.sparks;
                 
-                // If the server confirms a spark exists for this IP, ensure local state matches
-                if (data.hasSparked) {
-                    isSparked = true;
-                    localStorage.setItem("hasSparked", "true");
+                sparkCounter.textContent = data.sparks;
+                isSparked = data.hasSparked; 
+
+                if (isSparked) {
                     sparkBtn.classList.add('active');
+                } else {
+                    sparkBtn.classList.remove('active');
                 }
             } catch (error) {
                 sparkCounter.textContent = "0";
@@ -343,8 +348,9 @@
         }
 
         function triggerSpark(e) {
-            if (sparkBtn.disabled) return;
-            sparkBtn.disabled = true; // Lock button to prevent spam
+            // Invisible JS lock prevents spam without ugly red cursors
+            if (isProcessingSpark) return;
+            isProcessingSpark = true; 
 
             let currentSparks = parseInt(sparkCounter.textContent) || 0;
 
@@ -356,7 +362,6 @@
                 sparkBtn.classList.remove('animating');
                 sparkCounter.textContent = Math.max(0, currentSparks - 1);
 
-                // Send to backend blindly
                 fetch(`${API_URL}/sparks`, { 
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -375,7 +380,6 @@
                 sparkBtn.classList.add('animating');
                 if (e) createParticles(e.clientX, e.clientY);
 
-                // Send to backend blindly
                 fetch(`${API_URL}/sparks`, { 
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -383,8 +387,8 @@
                 }).catch(err => console.error(err));
             }
 
-            // Unlock button after animation completes (600ms)
-            setTimeout(() => { sparkBtn.disabled = false; }, 600);
+            // Unlock after a brief pause
+            setTimeout(() => { isProcessingSpark = false; }, 600);
         }
 
         document.addEventListener("DOMContentLoaded", () => {
