@@ -1,1 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- SEO & Google Verification -->
+    <meta name="google-site-verification" content="PBP_jXkzOYsuMUxEpSyD3RMMLK9uf7czmxw5eCV5MUw" />
+    <meta name="google-site-verification" content="3roOwsEGBObyATvMQgQGeNyHRKH-labRw-z3GWrNYgE" />
+    <meta name="description" content="Scattered thoughts, midnight journal entries, and deep-dive visual reviews by Suwuyiku.">
+
+    <title>Fragments • Suwuyiku</title>
+    
+    <link rel="icon" type="image/webp" href="assets/logo.png">
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- FRAGMENTS SPECIFIC ARCHITECTURE -->
+    <style>
+        /* 1. The Index Layout */
+        .fragments-header {
+            margin-bottom: 3rem;
+            border-bottom: 0.125rem solid var(--kodansha-black);
+            padding-bottom: 1.5rem;
+        }
+        
+        .fragments-header h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.03em; color: var(--kodansha-black); margin-bottom: 0.5rem; }
+        .fragments-header p { font-size: 1rem; color: #777777; }
+
+        .fragment-item {
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: transform 0.3s ease, padding-left 0.3s ease;
+        }
+
+        .fragment-item:hover {
+            transform: translateX(4px);
+            padding-left: 0.5rem;
+        }
+
+        .fragment-meta {
+            font-size: 0.75rem;
+            color: #A0A0A0;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.75rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .meta-category { font-weight: 700; color: var(--kodansha-black); }
+
+        .fragment-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--kodansha-black);
+            line-height: 1.3;
+            transition: color 0.2s ease;
+        }
+
+        .fragment-item:hover .fragment-title { color: var(--hover-gray); }
+
+        /* 2. The Canvas Layout (Reading Mode) */
+        #fragments-canvas {
+            display: none; /* Hidden by default */
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: none;
+            border: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #777777;
+            cursor: pointer;
+            margin-bottom: 3rem;
+            transition: color 0.2s ease;
+        }
+
+        .btn-back:hover { color: var(--kodansha-black); }
+
+        .canvas-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .canvas-body {
+            margin-top: 3rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #222222;
+        }
+
+        .canvas-body p { margin-bottom: 1.75rem; }
+        
+        .canvas-body h3 { 
+            font-size: 1.3rem; 
+            margin: 2.5rem 0 1rem 0; 
+            font-weight: 700; 
+        }
+
+        /* 3. The Spark Interaction */
+        .spark-container {
+            margin-top: 5rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .btn-spark {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: #DDDDDD;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .btn-spark:hover, .btn-spark.active {
+            color: var(--kodansha-black);
+            transform: scale(1.2);
+            text-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .spark-count {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #A0A0A0;
+            letter-spacing: 0.05em;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Strict Kodansha-Style Navigation Bar -->
+    <nav class="top-nav">
+        <div class="nav-left">
+            <a href="index.html" style="text-decoration: none;"><span class="logo-text">Suwuyiku</span></a>
+        </div>
+
+        <div class="nav-right">
+            <ul class="nav-links">
+                <li><a href="about.html">About</a></li>
+                <li><a href="connections.html">Connections</a></li>
+                <li><a href="library.html">Library</a></li>
+                <li><a href="fragments.html">Fragments</a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                <a href="https://suwuyiku.pages.dev/shop" class="btn-action">SHOP</a>
+                <a href="contact.html" class="btn-action">CONTACT</a>
+            </div>
+
+            <button class="hamburger-btn" aria-label="Open Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- The Sliding Mobile Sidebar & Overlay -->
+    <div class="mobile-sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="sidebar-logo" style="text-decoration: none;">Suwuyiku</a>
+            <button class="close-sidebar-btn" aria-label="Close Menu">&times;</button>
+        </div>
+        
+        <div class="sidebar-menu-container">
+            <ul class="sidebar-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="connections.html">Connections</a></li>
+                <li><a href="library.html">Library</a></li>
+                <li><a href="fragments.html">Fragments</a></li>
+            </ul>
+            
+            <div class="sidebar-actions">
+                <a href="https://suwuyiku.pages.dev/shop" class="sidebar-btn-action">SHOP</a>
+                <a href="contact.html" class="sidebar-btn-action">CONTACT</a>
+            </div>
+        </div>
+        <div class="sidebar-footer">
+            <span class="copyright">&copy; 2026 SUWUYIKU. ALL RIGHTS RESERVED.</span>
+        </div>
+    </div>
+    <div class="sidebar-overlay"></div>
+
+    <!-- MAIN FRAGMENTS WRAPPER -->
+    <main class="contact-page-wrapper">
+        
+        <!-- VIEW 1: THE INDEX -->
+        <div id="fragments-index">
+            <div class="fragments-header">
+                <h1>Fragments</h1>
+                <p>Scattered thoughts, ecosystem updates, and deep-dive reviews.</p>
+            </div>
+            
+            <!-- JavaScript will inject the Fragment Items here -->
+            <div id="index-container">
+                <!-- Loading State -->
+                <p style="color: #A0A0A0; font-size: 0.9rem; padding: 2rem 0;">Synchronizing with database...</p>
+            </div>
+        </div>
+
+        <!-- VIEW 2: THE CANVAS (READING ROOM) -->
+        <div id="fragments-canvas">
+            <button class="btn-back" onclick="closeCanvas()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                Return to Index
+            </button>
+
+            <div class="fragment-meta" style="margin-bottom: 1.5rem;">
+                <span class="meta-category" id="canvas-category">CATEGORY</span>
+                <span id="canvas-date">DATE</span>
+            </div>
+            
+            <h1 class="canvas-title" id="canvas-title">Post Title</h1>
+            
+            <div class="canvas-body" id="canvas-body">
+                <!-- JavaScript will inject the HTML payload here -->
+            </div>
+
+            <!-- The Minimalist Spark Interaction -->
+            <div class="spark-container">
+                <button class="btn-spark" id="spark-btn" onclick="triggerSpark()" aria-label="Spark this fragment">✦</button>
+                <span class="spark-count" id="spark-counter">0</span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Architectural Footer -->
+    <footer class="site-footer">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <span class="logo-text footer-logo">Suwuyiku</span>
+                <h2>Visual curation and digital architecture</h2>
+                <p>Building timeless structures without restrictions. A visual diary, manga collection, and scattered thoughts by Suwuyiku. Founder of echoes under the april aozora. Built to last a thousand years.</p>
+            </div>
+            <div class="footer-links">
+                <div class="link-column">
+                    <h3>Ecosystem</h3>
+                    <ul>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="library.html">Library</a></li>
+                        <li><a href="fragments.html">Fragments</a></li>
+                        <li><a href="https://suwuyiku.pages.dev/shop">Shop</a></li>
+                    </ul>
+                </div>
+                <div class="link-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="connections.html">Connections</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="https://github.com/Suwuyiku">GitHub</a></li>
+                    </ul>
+                </div>
+                <div class="link-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="legal/privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="legal/terms-of-use.html">Terms of Use</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-bottom-links">
+                <a href="legal/privacy-policy.html">Privacy Policy</a>
+                <span class="divider">|</span>
+                <a href="legal/terms-of-use.html">Terms of Use</a>
+                <span class="divider">|</span>
+                <a href="legal/shipping-and-refund.html">Shipping and Refund Policy</a>
+            </div>
+            <div class="copyright">&copy; 2026 Suwuyiku. All Rights Reserved.</div>
+        </div>
+    </footer>
+
+    <!-- Script Engine -->
+    <script>
+        // ---------------------------------------------------------
+        // 1. MOBILE SIDEBAR LOGIC
+        // ---------------------------------------------------------
+        document.addEventListener("DOMContentLoaded", () => {
+            const hamburger = document.querySelector('.hamburger-btn');
+            const sidebar = document.querySelector('.mobile-sidebar');
+            const overlay = document.querySelector('.sidebar-overlay');
+            const closeBtn = document.querySelector('.close-sidebar-btn');
+
+            if (hamburger && sidebar && overlay && closeBtn) {
+                function toggleMenu() {
+                    sidebar.classList.toggle('active');
+                    overlay.classList.toggle('active');
+                    document.body.classList.toggle('no-scroll'); 
+                }
+                hamburger.addEventListener('click', toggleMenu);
+                closeBtn.addEventListener('click', toggleMenu);
+                overlay.addEventListener('click', toggleMenu);
+            }
+            
+            // Initialize the Data Engine on load
+            fetchFragments();
+        });
+
+        // ---------------------------------------------------------
+        // 2. FRAGMENTS DATA ENGINE (NOTION API BRIDGE SKELETON)
+        // ---------------------------------------------------------
+        
+        // MOCK DATA: Replace this entirely when connecting to your Cloudflare Worker / Notion API
+        const mockDatabase = [
+            {
+                id: "post_001",
+                title: "The Quiet Architecture of Blue Box",
+                date: "August 10, 2026",
+                category: "Deep-Dive",
+                sparks: 42,
+                content: `
+                    <p>There is a specific cadence to how Kouji Miura panels emotional distance. It is rarely communicated through dialogue, but rather through the negative space separating characters inside a gymnasium.</p>
+                    <p>In the latest volume, the architecture of the sports hall acts as a cage for unspoken words. The strict lines of the badminton court reflect the strict boundaries the characters have drawn around themselves.</p>
+                    <h3>The Rule of Thirds</h3>
+                    <p>Notice how often characters are framed exactly on the intersecting lines of a rule-of-thirds grid when they are feeling isolated, pushing our eyes toward the empty space beside them rather than the characters themselves.</p>
+                `
+            },
+            {
+                id: "post_002",
+                title: "Midnight thoughts on digital permanence",
+                date: "August 02, 2026",
+                category: "Scattered Thoughts",
+                sparks: 18,
+                content: `
+                    <p>We build on platforms we do not own, hoping our echoes outlast the servers they are hosted on.</p>
+                    <p>This is why Fragments exists. A self-hosted architecture. No algorithms dictating visibility. No metrics forcing a specific type of performance. Just a quiet room, some text, and the intent to build something that lasts a thousand years.</p>
+                `
+            }
+        ];
+
+        // Core DOM Elements
+        const indexView = document.getElementById('fragments-index');
+        const canvasView = document.getElementById('fragments-canvas');
+        const indexContainer = document.getElementById('index-container');
+        
+        // Canvas DOM Elements
+        const canvasTitle = document.getElementById('canvas-title');
+        const canvasDate = document.getElementById('canvas-date');
+        const canvasCategory = document.getElementById('canvas-category');
+        const canvasBody = document.getElementById('canvas-body');
+        const sparkCounter = document.getElementById('spark-counter');
+        const sparkBtn = document.getElementById('spark-btn');
+
+        let currentPostId = null;
+
+        // Fetch Data Function
+        async function fetchFragments() {
+            try {
+                // FUTURE: const response = await fetch('YOUR_CLOUDFLARE_WORKER_URL');
+                // FUTURE: const data = await response.json();
+                
+                // Using Mock Data for now
+                const data = mockDatabase;
+                
+                renderIndex(data);
+            } catch (error) {
+                indexContainer.innerHTML = '<p style="color: red;">Failed to synchronize with the database.</p>';
+            }
+        }
+
+        // Render the List
+        function renderIndex(posts) {
+            indexContainer.innerHTML = ''; // Clear loading state
+            
+            posts.forEach(post => {
+                const item = document.createElement('div');
+                item.className = 'fragment-item';
+                item.onclick = () => openCanvas(post);
+                
+                item.innerHTML = `
+                    <div class="fragment-meta">
+                        <span class="meta-category">${post.category}</span>
+                        <span>${post.date}</span>
+                    </div>
+                    <div class="fragment-title">${post.title}</div>
+                `;
+                indexContainer.appendChild(item);
+            });
+        }
+
+        // ---------------------------------------------------------
+        // 3. UI INTERACTION LOGIC
+        // ---------------------------------------------------------
+
+        function openCanvas(post) {
+            // Populate Data
+            currentPostId = post.id;
+            canvasTitle.textContent = post.title;
+            canvasDate.textContent = post.date;
+            canvasCategory.textContent = post.category;
+            canvasBody.innerHTML = post.content;
+            sparkCounter.textContent = post.sparks;
+            
+            // Reset Spark Button State
+            sparkBtn.classList.remove('active');
+
+            // Swap Views
+            indexView.style.display = 'none';
+            canvasView.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function closeCanvas() {
+            canvasView.style.display = 'none';
+            indexView.style.display = 'block';
+            currentPostId = null;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // The Spark Logic
+        function triggerSpark() {
+            if (sparkBtn.classList.contains('active')) return; // Prevent spamming
+            
+            // UI Update
+            sparkBtn.classList.add('active');
+            let currentSparks = parseInt(sparkCounter.textContent);
+            sparkCounter.textContent = currentSparks + 1;
+
+            // FUTURE: Send a POST request to your Cloudflare Worker/KV to increment the database counter.
+            /*
+            fetch('YOUR_CLOUDFLARE_WORKER_URL/spark', {
+                method: 'POST',
+                body: JSON.stringify({ id: currentPostId })
+            });
+            */
+        }
+    </script>
+</body>
+</html>
