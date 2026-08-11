@@ -15,6 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
+        /* UNIFIED HEADER STYLING (Matches Contact Page) */
         .fragments-header { margin-bottom: 3rem; border-bottom: 0.125rem solid var(--kodansha-black); padding-bottom: 1.5rem; }
         .fragments-header h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.03em; color: var(--kodansha-black); margin-bottom: 0.5rem; }
         .fragments-header p { font-size: 1rem; color: #777777; }
@@ -41,13 +42,12 @@
         .canvas-body p { margin-bottom: 1.75rem; }
         .canvas-body h2, .canvas-body h3 { font-weight: 800; margin: 2.5rem 0 1rem 0; color: var(--kodansha-black); }
         
-        /* IMAGE LOADING MAGIC */
         .image-skeleton { background: #f4f4f4; border-radius: 6px; margin: 2.5rem auto; text-align: center; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
         .canvas-image { width: 100%; height: auto; display: block; opacity: 0; transition: opacity 0.5s ease-in; margin: 0; }
 
         /* THE SPARK */
         .spark-container { margin-top: 5rem; padding-top: 3rem; border-top: 1px solid var(--border-color); display: flex; flex-direction: column; align-items: center; gap: 0.75rem; position: relative; }
-        .spark-intro { font-size: 0.85rem; color: #A0A0A0; font-style: italic; margin-top: 1rem; letter-spacing: 0.02em; }
+        .spark-intro { font-size: 0.85rem; color: #A0A0A0; font-style: italic; margin-top: 1rem; letter-spacing: 0.02em; text-align: center; }
         
         .btn-spark { background: none; border: none; font-size: 2rem; color: #DDDDDD; cursor: pointer; transition: color 0.3s ease; position: relative; z-index: 10; }
         .btn-spark:hover:not(:disabled) { color: var(--hover-gray); }
@@ -76,6 +76,28 @@
         @keyframes shoot {
             0% { transform: translate(0, 0) scale(1); opacity: 1; }
             100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+        }
+
+        /* =========================================
+           MOBILE ENGINE FIXES
+           ========================================= */
+        @media (max-width: 48rem) {
+            .fragments-header { margin-bottom: 2rem; padding-bottom: 1.25rem; }
+            
+            /* Unifies Header sizes on mobile */
+            .fragments-header h1 { font-size: 2rem; }
+            .canvas-title { font-size: 1.8rem; }
+            
+            /* Fixes the Canvas text reading layout so it doesn't touch the edges */
+            .canvas-body { font-size: 1.05rem; margin-top: 2rem; }
+            
+            /* Realigns Meta tags to wrap if dates get too long on tiny screens */
+            .fragment-meta { flex-direction: column; align-items: flex-start; gap: 0.25rem; }
+            .fragment-title { font-size: 1.25rem; }
+            .fragment-item { padding: 1.5rem 0; }
+            
+            /* Stops hover transforms on touch screens */
+            .fragment-item:hover { transform: none; padding-left: 0; }
         }
     </style>
 </head>
@@ -108,6 +130,10 @@
                 <li><a href="library.html">Library</a></li>
                 <li><a href="fragments.html">Fragments</a></li>
             </ul>
+            <div class="sidebar-actions">
+                <a href="https://suwuyiku.pages.dev/shop" class="sidebar-btn-action">SHOP</a>
+                <a href="contact.html" class="sidebar-btn-action">CONTACT</a>
+            </div>
         </div>
         <div class="sidebar-footer"><span class="copyright">&copy; 2026 SUWUYIKU.</span></div>
     </div>
@@ -160,6 +186,7 @@
                 <h2>Visual curation and digital architecture</h2>
                 <p>Building timeless structures without restrictions. A visual diary, manga collection, and scattered thoughts by Suwuyiku. Founder of echoes under the april aozora. Built to last a thousand years.</p>
             </div>
+
             <div class="footer-links">
                 <div class="link-column">
                     <h3>Ecosystem</h3>
@@ -170,6 +197,7 @@
                         <li><a href="https://suwuyiku.pages.dev/shop">Shop</a></li>
                     </ul>
                 </div>
+                
                 <div class="link-column">
                     <h3>Resources</h3>
                     <ul>
@@ -178,6 +206,7 @@
                         <li><a href="https://github.com/Suwuyiku">GitHub</a></li>
                     </ul>
                 </div>
+
                 <div class="link-column">
                     <h3>Legal</h3>
                     <ul>
@@ -187,6 +216,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="footer-bottom">
             <div class="footer-bottom-links">
                 <a href="legal/privacy-policy.html">Privacy Policy</a>
@@ -214,7 +244,7 @@
 
         let isSparked = false;
         let isProcessing = false;
-        let currentPostId = null; // TRACKS WHICH POST IS OPEN
+        let currentPostId = null; 
 
         async function fetchIndex() {
             try {
@@ -226,13 +256,11 @@
                     const title = post.properties.Title.title[0]?.plain_text || "Untitled";
                     const category = post.properties.Category.rich_text[0]?.plain_text || "Uncategorized";
                     
-                    // BULLETPROOF DATE PARSER: Finds the time no matter what property type it is
                     const rawDate = post.properties.Time?.date?.start || post.properties.Time?.created_time || post.created_time;
                     
                     let formattedDate = "Unknown Time";
                     if (rawDate) {
                         const dateObj = new Date(rawDate);
-                        // Formats as: August 11, 2026 • 3:01 PM
                         formattedDate = dateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) 
                                       + " • " + 
                                       dateObj.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
@@ -257,7 +285,7 @@
         }
 
         async function openCanvas(pageId, title, category, date) {
-            currentPostId = pageId; // Lock in the specific post ID
+            currentPostId = pageId; 
             
             indexView.style.display = 'none';
             canvasView.style.display = 'block';
@@ -268,7 +296,7 @@
             canvasDate.textContent = date;
             canvasBody.innerHTML = '<p style="color: #A0A0A0;">Loading content...</p>';
 
-            setupSparks(pageId); // Fetch sparks ONLY for this post
+            setupSparks(pageId); 
 
             try {
                 const response = await fetch(`${API_URL}/content?id=${pageId}`);
@@ -287,7 +315,6 @@
                     }
                     else if (block.type === 'image') {
                         const imageUrl = block.image.type === 'external' ? block.image.external.url : block.image.file.url;
-                        // IMAGE OPTIMIZATION: Skeleton box + smooth fade in
                         canvasBody.innerHTML += `
                             <div class="image-skeleton">
                                 <img src="${imageUrl}" class="canvas-image" loading="lazy" decoding="async" onload="this.style.opacity=1" draggable="false" oncontextmenu="return false;">
@@ -354,7 +381,6 @@
             isProcessing = true;
             sparkBtn.disabled = true;
 
-            // Trigger animation only if turning ON
             if (!isSparked) {
                 sparkBtn.classList.remove('animating');
                 void sparkBtn.offsetWidth; 
@@ -363,7 +389,6 @@
             }
 
             try {
-                // Send specific post ID to Cloudflare
                 const response = await fetch(`${API_URL}/sparks`, { 
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
