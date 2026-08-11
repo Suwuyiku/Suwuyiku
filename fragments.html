@@ -23,6 +23,7 @@
         .fragment-item { padding: 2rem 0; border-bottom: 1px solid var(--border-color); cursor: pointer; transition: transform 0.3s ease, padding-left 0.3s ease; }
         .fragment-item:hover { transform: translateX(4px); padding-left: 0.5rem; }
         
+        /* Pushes category left, date right */
         .fragment-meta { display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: #A0A0A0; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
         .meta-category { font-weight: 700; color: var(--kodansha-black); }
         
@@ -41,6 +42,7 @@
         .canvas-body p { margin-bottom: 1.75rem; }
         .canvas-body h2, .canvas-body h3 { font-weight: 800; margin: 2.5rem 0 1rem 0; color: var(--kodansha-black); }
         
+        /* Notion Image Styling */
         .canvas-image { max-width: 100%; border-radius: 4px; margin: 2rem 0; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
 
         /* THE SPARK */
@@ -49,7 +51,7 @@
         .btn-spark:hover { color: var(--hover-gray); }
         .btn-spark.active { color: var(--kodansha-black); }
         
-        /* Spark Button Animation */
+        /* Sparkle Animation */
         @keyframes sparkBurst {
             0% { transform: scale(1); text-shadow: 0 0 0px rgba(0,0,0,0); }
             50% { transform: scale(1.4); text-shadow: 0 0 20px rgba(0,0,0,0.4); color: var(--kodansha-black); }
@@ -59,7 +61,7 @@
 
         .spark-count { font-size: 0.85rem; font-weight: 600; color: #A0A0A0; letter-spacing: 0.05em; }
 
-        /* NEW: Particle Explosion Physics */
+        /* Particle Explosion Physics */
         .particle {
             position: fixed;
             pointer-events: none;
@@ -127,7 +129,7 @@
         <div id="fragments-canvas">
             <button class="btn-back" onclick="closeCanvas()">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-                Return to Fragments <!-- FIX: Text updated per your request -->
+                Return to Fragments
             </button>
 
             <div class="fragment-meta" style="margin-bottom: 1.5rem;">
@@ -142,7 +144,6 @@
             </div>
 
             <div class="spark-container">
-                <!-- FIX: Added 'event' parameter so the particle engine knows where the mouse is -->
                 <button class="btn-spark" id="spark-btn" onclick="triggerSpark(event)" aria-label="Spark this fragment">✦</button>
                 <span class="spark-count" id="spark-counter">...</span>
             </div>
@@ -215,7 +216,8 @@
         const sparkCounter = document.getElementById('spark-counter');
         const sparkBtn = document.getElementById('spark-btn');
 
-        let isSparked = localStorage.getItem("hasSparked") === "true";
+        // Track user state dynamically from Cloudflare (No more localStorage)
+        let isSparked = false;
 
         async function fetchIndex() {
             try {
@@ -292,30 +294,31 @@
         }
 
         async function setupSparks() {
-            if (isSparked) {
-                sparkBtn.classList.add('active');
-            } else {
-                sparkBtn.classList.remove('active');
-            }
             sparkBtn.classList.remove('animating');
 
             try {
                 const response = await fetch(`${API_URL}/sparks`);
                 const data = await response.json();
+                
                 sparkCounter.textContent = data.sparks;
+                isSparked = data.hasSparked; // Server tells us if this IP address has sparked
+
+                if (isSparked) {
+                    sparkBtn.classList.add('active');
+                } else {
+                    sparkBtn.classList.remove('active');
+                }
             } catch (error) {
                 sparkCounter.textContent = "0";
             }
         }
 
-        // NEW: JavaScript Particle Engine
         function createParticles(x, y) {
             for (let i = 0; i < 8; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
                 document.body.appendChild(particle);
 
-                // Math to explode in a random circular pattern
                 const angle = Math.random() * Math.PI * 2;
                 const distance = Math.random() * 40 + 20; 
                 const tx = Math.cos(angle) * distance;
@@ -326,47 +329,42 @@
                 particle.style.setProperty('--tx', tx + 'px');
                 particle.style.setProperty('--ty', ty + 'px');
 
-                // Erase particle after animation completes to keep site fast
                 setTimeout(() => particle.remove(), 600);
             }
         }
 
         async function triggerSpark(e) {
             let currentSparks = parseInt(sparkCounter.textContent) || 0;
-            
+
             if (isSparked) {
-                // REMOVE SPARK: No animation, just quietly remove it
+                // Optimistic UI Update: Remove spark instantly
                 isSparked = false;
-                localStorage.setItem("hasSparked", "false");
                 sparkBtn.classList.remove('active');
-                sparkBtn.classList.remove('animating'); 
+                sparkBtn.classList.remove('animating');
                 sparkCounter.textContent = Math.max(0, currentSparks - 1);
-                
-                await fetch(`${API_URL}/sparks`, { 
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ action: "remove" })
-                });
             } else {
-                // ADD SPARK: Trigger burst animation and particles
+                // Optimistic UI Update: Add spark and burst instantly
                 isSparked = true;
-                localStorage.setItem("hasSparked", "true");
                 sparkBtn.classList.add('active');
                 sparkCounter.textContent = currentSparks + 1;
                 
-                // Fire CSS animation
                 sparkBtn.classList.remove('animating');
                 void sparkBtn.offsetWidth; 
                 sparkBtn.classList.add('animating');
 
-                // Fire JS Particles
-                createParticles(e.clientX, e.clientY);
+                if (e) createParticles(e.clientX, e.clientY);
+            }
+
+            // Sync with Server
+            try {
+                const response = await fetch(`${API_URL}/sparks`, { method: "POST" });
+                const data = await response.json();
                 
-                await fetch(`${API_URL}/sparks`, { 
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ action: "add" })
-                });
+                // Confirm server state
+                sparkCounter.textContent = data.sparks;
+                isSparked = data.hasSparked;
+            } catch (error) {
+                console.error("Failed to sync spark with server.");
             }
         }
 
