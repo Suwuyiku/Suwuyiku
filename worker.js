@@ -32,7 +32,7 @@ export default {
             if (request.method === "POST") {
                 let newSparkState = false;
 
-                // Simple Server-Side Toggle: If they have it, remove it. If not, add it.
+                // Simple Server-Side Toggle
                 if (userHasSparked) {
                     sparks = Math.max(0, sparks - 1);
                     await env.SPARKS_KV.delete(ipKey);
@@ -52,7 +52,7 @@ export default {
         }
 
         // =================================================--------
-        // ROUTE 2: Fetch Notion Database
+        // ROUTE 2: Fetch Notion Database (FIXED FOR 'Time' COLUMN)
         // =================================================--------
         if (url.pathname === "/posts") {
             try {
@@ -65,7 +65,8 @@ export default {
                     },
                     body: JSON.stringify({
                         filter: { property: "Status", status: { equals: "Published" } },
-                        sorts: [{ property: "Date", direction: "descending" }]
+                        // FIX: Now correctly sorts by your "Time" column
+                        sorts: [{ property: "Time", direction: "descending" }]
                     })
                 });
                 const data = await notionResponse.json();
