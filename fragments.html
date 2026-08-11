@@ -141,7 +141,7 @@
 
         let isSparkLocked = localStorage.getItem("hasSparked") === "true";
 
-        // 1. Fetch the Index
+       // 1. Fetch the Index
         async function fetchIndex() {
             try {
                 const response = await fetch(`${API_URL}/posts`);
@@ -150,7 +150,10 @@
 
                 data.results.forEach(post => {
                     const title = post.properties.Title.title[0]?.plain_text || "Untitled";
-                    const category = post.properties.Category.select?.name || "Uncategorized";
+                    
+                    // FIX: Changed from 'select?.name' to 'rich_text[0]?.plain_text'
+                    const category = post.properties.Category.rich_text[0]?.plain_text || "Uncategorized";
+                    
                     const rawDate = post.properties.Date.date?.start || "";
                     const dateObj = new Date(rawDate);
                     const formattedDate = dateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
