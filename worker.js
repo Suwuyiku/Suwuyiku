@@ -13,7 +13,7 @@ export default {
         const url = new URL(request.url);
 
         // =================================================--------
-        // ROUTE 1: Strict IP-Based Spark Engine
+        // ROUTE 1: Spark Engine (Fixed Eventual Consistency Bug)
         // =================================================--------
         if (url.pathname === "/sparks") {
             const clientIP = request.headers.get("cf-connecting-ip") || "anonymous_user";
@@ -33,12 +33,12 @@ export default {
                 const body = await request.json().catch(() => ({}));
                 let newSparkState = userHasSparked;
 
-                // STRICT CHECK: Only add if they haven't sparked, only remove if they have.
-                if (body.action === "add" && !userHasSparked) {
+                // Trusts the client action immediately to bypass KV cache delays
+                if (body.action === "add") {
                     sparks += 1;
                     await env.SPARKS_KV.put(ipKey, "true");
                     newSparkState = true;
-                } else if (body.action === "remove" && userHasSparked) {
+                } else if (body.action === "remove") {
                     sparks = Math.max(0, sparks - 1);
                     await env.SPARKS_KV.delete(ipKey);
                     newSparkState = false;
@@ -86,7 +86,7 @@ export default {
             if (!pageId) return new Response("Missing ID", { status: 400, headers: corsHeaders });
 
             try {
-                const notionResponse = await fetch(`https://api.api.notion.com/v1/blocks/${pageId}/children`, {
+                const notionResponse = await fetch(`https://api.notion.com/v1/blocks/${pageId}/children`, {
                     method: "GET",
                     headers: {
                         "Authorization": `Bearer ${env.NOTION_KEY}`,
