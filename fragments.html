@@ -23,7 +23,6 @@
         .fragment-item { padding: 2rem 0; border-bottom: 1px solid var(--border-color); cursor: pointer; transition: transform 0.3s ease, padding-left 0.3s ease; }
         .fragment-item:hover { transform: translateX(4px); padding-left: 0.5rem; }
         
-        /* Pushes category left, date right */
         .fragment-meta { display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: #A0A0A0; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
         .meta-category { font-weight: 700; color: var(--kodansha-black); }
         
@@ -42,14 +41,17 @@
         .canvas-body p { margin-bottom: 1.75rem; }
         .canvas-body h2, .canvas-body h3 { font-weight: 800; margin: 2.5rem 0 1rem 0; color: var(--kodansha-black); }
         
-        /* Notion Image Styling */
         .canvas-image { max-width: 100%; border-radius: 4px; margin: 2rem 0; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
 
         /* THE SPARK */
         .spark-container { margin-top: 5rem; padding-top: 3rem; border-top: 1px solid var(--border-color); display: flex; flex-direction: column; align-items: center; gap: 0.75rem; position: relative; }
+        
+        .spark-intro { font-size: 0.85rem; color: #A0A0A0; font-style: italic; margin-bottom: 0.25rem; letter-spacing: 0.02em; }
+        
         .btn-spark { background: none; border: none; font-size: 2rem; color: #DDDDDD; cursor: pointer; transition: color 0.3s ease; position: relative; z-index: 10; }
-        .btn-spark:hover { color: var(--hover-gray); }
+        .btn-spark:hover:not(:disabled) { color: var(--hover-gray); }
         .btn-spark.active { color: var(--kodansha-black); }
+        .btn-spark:disabled { cursor: not-allowed; }
         
         /* Sparkle Animation */
         @keyframes sparkBurst {
@@ -143,7 +145,9 @@
                 <p>Loading text...</p>
             </div>
 
+            <!-- Enhanced Spark Interface -->
             <div class="spark-container">
+                <p class="spark-intro">If this resonated with you, leave a spark.</p>
                 <button class="btn-spark" id="spark-btn" onclick="triggerSpark(event)" aria-label="Spark this fragment">✦</button>
                 <span class="spark-count" id="spark-counter">...</span>
             </div>
@@ -216,7 +220,6 @@
         const sparkCounter = document.getElementById('spark-counter');
         const sparkBtn = document.getElementById('spark-btn');
 
-        // Track user state dynamically from Cloudflare (No more localStorage)
         let isSparked = false;
 
         async function fetchIndex() {
@@ -295,13 +298,14 @@
 
         async function setupSparks() {
             sparkBtn.classList.remove('animating');
+            sparkBtn.disabled = false;
 
             try {
                 const response = await fetch(`${API_URL}/sparks`);
                 const data = await response.json();
                 
                 sparkCounter.textContent = data.sparks;
-                isSparked = data.hasSparked; // Server tells us if this IP address has sparked
+                isSparked = data.hasSparked; 
 
                 if (isSparked) {
                     sparkBtn.classList.add('active');
@@ -334,16 +338,31 @@
         }
 
         async function triggerSpark(e) {
+            if (sparkBtn.disabled) return; // Prevent spam clicking
+            sparkBtn.disabled = true; // Lock button
+
             let currentSparks = parseInt(sparkCounter.textContent) || 0;
 
             if (isSparked) {
-                // Optimistic UI Update: Remove spark instantly
+                // Remove Spark
                 isSparked = false;
                 sparkBtn.classList.remove('active');
                 sparkBtn.classList.remove('animating');
                 sparkCounter.textContent = Math.max(0, currentSparks - 1);
+
+                try {
+                    const response = await fetch(`${API_URL}/sparks`, { 
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ action: "remove" })
+                    });
+                    const data = await response.json();
+                    sparkCounter.textContent = data.sparks;
+                    isSparked = data.hasSparked;
+                } catch (error) { console.error(error); }
+
             } else {
-                // Optimistic UI Update: Add spark and burst instantly
+                // Add Spark
                 isSparked = true;
                 sparkBtn.classList.add('active');
                 sparkCounter.textContent = currentSparks + 1;
@@ -351,21 +370,22 @@
                 sparkBtn.classList.remove('animating');
                 void sparkBtn.offsetWidth; 
                 sparkBtn.classList.add('animating');
-
                 if (e) createParticles(e.clientX, e.clientY);
+
+                try {
+                    const response = await fetch(`${API_URL}/sparks`, { 
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ action: "add" })
+                    });
+                    const data = await response.json();
+                    sparkCounter.textContent = data.sparks;
+                    isSparked = data.hasSparked;
+                } catch (error) { console.error(error); }
             }
 
-            // Sync with Server
-            try {
-                const response = await fetch(`${API_URL}/sparks`, { method: "POST" });
-                const data = await response.json();
-                
-                // Confirm server state
-                sparkCounter.textContent = data.sparks;
-                isSparked = data.hasSparked;
-            } catch (error) {
-                console.error("Failed to sync spark with server.");
-            }
+            // Unlock button after a short delay
+            setTimeout(() => { sparkBtn.disabled = false; }, 500);
         }
 
         document.addEventListener("DOMContentLoaded", () => {
