@@ -27,7 +27,7 @@ export default {
             });
         }
 
-        // ROUTE 2: Fetch Notion Database (Titles, Dates, Categories)
+       // ROUTE 2: Fetch Notion Database (Titles, Dates, Categories)
         if (url.pathname === "/posts") {
             try {
                 const notionResponse = await fetch(`https://api.notion.com/v1/databases/${env.NOTION_DATABASE_ID}/query`, {
@@ -38,7 +38,8 @@ export default {
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
-                        filter: { property: "Status", select: { equals: "Published" } },
+                        // FIX: Changed 'select' to 'status' to match your Notion setup
+                        filter: { property: "Status", status: { equals: "Published" } },
                         sorts: [{ property: "Date", direction: "descending" }]
                     })
                 });
