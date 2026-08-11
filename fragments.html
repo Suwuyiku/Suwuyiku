@@ -41,7 +41,9 @@
         .canvas-body p { margin-bottom: 1.75rem; }
         .canvas-body h2, .canvas-body h3 { font-weight: 800; margin: 2.5rem 0 1rem 0; color: var(--kodansha-black); }
         
-        .canvas-image { max-width: 100%; height: auto; border-radius: 6px; margin: 2.5rem auto; display: block; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+        /* IMAGE LOADING MAGIC */
+        .image-skeleton { background: #f4f4f4; border-radius: 6px; margin: 2.5rem auto; text-align: center; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+        .canvas-image { width: 100%; height: auto; display: block; opacity: 0; transition: opacity 0.5s ease-in; margin: 0; }
 
         /* THE SPARK */
         .spark-container { margin-top: 5rem; padding-top: 3rem; border-top: 1px solid var(--border-color); display: flex; flex-direction: column; align-items: center; gap: 0.75rem; position: relative; }
@@ -113,6 +115,7 @@
 
     <main class="contact-page-wrapper">
         
+        <!-- VIEW 1: THE INDEX FEED -->
         <div id="fragments-index">
             <div class="fragments-header">
                 <h1>Fragments</h1>
@@ -123,6 +126,7 @@
             </div>
         </div>
 
+        <!-- VIEW 2: THE READING CANVAS -->
         <div id="fragments-canvas">
             <button class="btn-back" onclick="closeCanvas()">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
@@ -210,6 +214,7 @@
 
         let isSparked = false;
         let isProcessing = false;
+        let currentPostId = null; // TRACKS WHICH POST IS OPEN
 
         async function fetchIndex() {
             try {
@@ -221,11 +226,17 @@
                     const title = post.properties.Title.title[0]?.plain_text || "Untitled";
                     const category = post.properties.Category.rich_text[0]?.plain_text || "Uncategorized";
                     
-                    // FIX: Pointing specifically to your "Time" column
-                    const rawDate = post.properties.Time.date?.start || "";
+                    // BULLETPROOF DATE PARSER: Finds the time no matter what property type it is
+                    const rawDate = post.properties.Time?.date?.start || post.properties.Time?.created_time || post.created_time;
                     
-                    const dateObj = new Date(rawDate);
-                    const formattedDate = dateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                    let formattedDate = "Unknown Time";
+                    if (rawDate) {
+                        const dateObj = new Date(rawDate);
+                        // Formats as: August 11, 2026 • 3:01 PM
+                        formattedDate = dateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) 
+                                      + " • " + 
+                                      dateObj.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+                    }
 
                     const item = document.createElement('div');
                     item.className = 'fragment-item';
@@ -246,6 +257,8 @@
         }
 
         async function openCanvas(pageId, title, category, date) {
+            currentPostId = pageId; // Lock in the specific post ID
+            
             indexView.style.display = 'none';
             canvasView.style.display = 'block';
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -255,7 +268,7 @@
             canvasDate.textContent = date;
             canvasBody.innerHTML = '<p style="color: #A0A0A0;">Loading content...</p>';
 
-            setupSparks();
+            setupSparks(pageId); // Fetch sparks ONLY for this post
 
             try {
                 const response = await fetch(`${API_URL}/content?id=${pageId}`);
@@ -274,7 +287,12 @@
                     }
                     else if (block.type === 'image') {
                         const imageUrl = block.image.type === 'external' ? block.image.external.url : block.image.file.url;
-                        canvasBody.innerHTML += `<img src="${imageUrl}" class="canvas-image" loading="lazy" decoding="async" draggable="false" oncontextmenu="return false;">`;
+                        // IMAGE OPTIMIZATION: Skeleton box + smooth fade in
+                        canvasBody.innerHTML += `
+                            <div class="image-skeleton">
+                                <img src="${imageUrl}" class="canvas-image" loading="lazy" decoding="async" onload="this.style.opacity=1" draggable="false" oncontextmenu="return false;">
+                            </div>
+                        `;
                     }
                 });
             } catch (error) {
@@ -285,14 +303,17 @@
         function closeCanvas() {
             canvasView.style.display = 'none';
             indexView.style.display = 'block';
+            currentPostId = null;
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        async function setupSparks() {
+        async function setupSparks(pageId) {
             sparkBtn.classList.remove('animating');
+            sparkBtn.disabled = false;
+            sparkCounter.textContent = "...";
 
             try {
-                const response = await fetch(`${API_URL}/sparks`);
+                const response = await fetch(`${API_URL}/sparks?id=${pageId}`);
                 const data = await response.json();
                 
                 sparkCounter.textContent = data.sparks;
@@ -329,7 +350,7 @@
         }
 
         async function triggerSpark(e) {
-            if (isProcessing) return;
+            if (isProcessing || !currentPostId) return;
             isProcessing = true;
             sparkBtn.disabled = true;
 
@@ -342,11 +363,17 @@
             }
 
             try {
-                // Send toggle request to Cloudflare Worker
-                const response = await fetch(`${API_URL}/sparks`, { method: "POST" });
+                // Send specific post ID to Cloudflare
+                const response = await fetch(`${API_URL}/sparks`, { 
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ 
+                        action: isSparked ? "remove" : "add",
+                        id: currentPostId 
+                    })
+                });
                 const data = await response.json();
                 
-                // Sync exact server state
                 sparkCounter.textContent = data.sparks;
                 isSparked = data.hasSparked;
 
