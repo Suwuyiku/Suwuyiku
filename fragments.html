@@ -15,12 +15,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
-        /* UNIFIED HEADER STYLING (Matches Contact Page) */
         .fragments-header { margin-bottom: 3rem; border-bottom: 0.125rem solid var(--kodansha-black); padding-bottom: 1.5rem; }
         .fragments-header h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.03em; color: var(--kodansha-black); margin-bottom: 0.5rem; }
         .fragments-header p { font-size: 1rem; color: #777777; }
 
-        /* INDEX VIEW */
+        /* INDEX VIEW (Designed to stack perfectly) */
         .fragment-item { padding: 2rem 0; border-bottom: 1px solid var(--border-color); cursor: pointer; transition: transform 0.3s ease, padding-left 0.3s ease; }
         .fragment-item:hover { transform: translateX(4px); padding-left: 0.5rem; }
         
@@ -78,25 +77,14 @@
             100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
         }
 
-        /* =========================================
-           MOBILE ENGINE FIXES
-           ========================================= */
         @media (max-width: 48rem) {
             .fragments-header { margin-bottom: 2rem; padding-bottom: 1.25rem; }
-            
-            /* Unifies Header sizes on mobile */
             .fragments-header h1 { font-size: 2rem; }
             .canvas-title { font-size: 1.8rem; }
-            
-            /* Fixes the Canvas text reading layout so it doesn't touch the edges */
             .canvas-body { font-size: 1.05rem; margin-top: 2rem; }
-            
-            /* Realigns Meta tags to wrap if dates get too long on tiny screens */
             .fragment-meta { flex-direction: column; align-items: flex-start; gap: 0.25rem; }
             .fragment-title { font-size: 1.25rem; }
             .fragment-item { padding: 1.5rem 0; }
-            
-            /* Stops hover transforms on touch screens */
             .fragment-item:hover { transform: none; padding-left: 0; }
         }
     </style>
@@ -141,7 +129,6 @@
 
     <main class="contact-page-wrapper">
         
-        <!-- VIEW 1: THE INDEX FEED -->
         <div id="fragments-index">
             <div class="fragments-header">
                 <h1>Fragments</h1>
@@ -152,7 +139,6 @@
             </div>
         </div>
 
-        <!-- VIEW 2: THE READING CANVAS -->
         <div id="fragments-canvas">
             <button class="btn-back" onclick="closeCanvas()">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
