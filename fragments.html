@@ -23,7 +23,6 @@
         .fragment-item { padding: 2rem 0; border-bottom: 1px solid var(--border-color); cursor: pointer; transition: transform 0.3s ease, padding-left 0.3s ease; }
         .fragment-item:hover { transform: translateX(4px); padding-left: 0.5rem; }
         
-        /* Pushes category left, date right */
         .fragment-meta { display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: #A0A0A0; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
         .meta-category { font-weight: 700; color: var(--kodansha-black); }
         
@@ -38,22 +37,19 @@
         .btn-back:hover { color: var(--kodansha-black); }
         
         .canvas-title { font-size: 2.2rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 1rem; }
-        
-        /* Added overflow-wrap to prevent continuous text strings from breaking mobile layout */
         .canvas-body { margin-top: 3rem; font-size: 1.1rem; line-height: 1.8; color: #222222; min-height: 30vh; overflow-wrap: break-word; word-wrap: break-word; }
         .canvas-body p { margin-bottom: 1.75rem; }
         .canvas-body h2, .canvas-body h3 { font-weight: 800; margin: 2.5rem 0 1rem 0; color: var(--kodansha-black); }
         
-        /* Notion Image Styling */
         .canvas-image { max-width: 100%; border-radius: 4px; margin: 2rem 0; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
 
         /* THE SPARK */
-        .spark-container { margin-top: 5rem; padding-top: 3rem; border-top: 1px solid var(--border-color); display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
-        .btn-spark { background: none; border: none; font-size: 2rem; color: #DDDDDD; cursor: pointer; transition: color 0.3s ease; }
+        .spark-container { margin-top: 5rem; padding-top: 3rem; border-top: 1px solid var(--border-color); display: flex; flex-direction: column; align-items: center; gap: 0.75rem; position: relative; }
+        .btn-spark { background: none; border: none; font-size: 2rem; color: #DDDDDD; cursor: pointer; transition: color 0.3s ease; position: relative; z-index: 10; }
         .btn-spark:hover { color: var(--hover-gray); }
         .btn-spark.active { color: var(--kodansha-black); }
         
-        /* Sparkle Animation */
+        /* Spark Button Animation */
         @keyframes sparkBurst {
             0% { transform: scale(1); text-shadow: 0 0 0px rgba(0,0,0,0); }
             50% { transform: scale(1.4); text-shadow: 0 0 20px rgba(0,0,0,0.4); color: var(--kodansha-black); }
@@ -62,6 +58,22 @@
         .btn-spark.animating { animation: sparkBurst 0.5s ease forwards; }
 
         .spark-count { font-size: 0.85rem; font-weight: 600; color: #A0A0A0; letter-spacing: 0.05em; }
+
+        /* NEW: Particle Explosion Physics */
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            width: 5px;
+            height: 5px;
+            background-color: var(--kodansha-black);
+            border-radius: 50%;
+            z-index: 9999;
+            animation: shoot 0.6s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+        }
+        @keyframes shoot {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+        }
     </style>
 </head>
 <body>
@@ -115,7 +127,7 @@
         <div id="fragments-canvas">
             <button class="btn-back" onclick="closeCanvas()">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-                Return to Index
+                Return to Fragments <!-- FIX: Text updated per your request -->
             </button>
 
             <div class="fragment-meta" style="margin-bottom: 1.5rem;">
@@ -130,7 +142,8 @@
             </div>
 
             <div class="spark-container">
-                <button class="btn-spark" id="spark-btn" onclick="triggerSpark()" aria-label="Spark this fragment">✦</button>
+                <!-- FIX: Added 'event' parameter so the particle engine knows where the mouse is -->
+                <button class="btn-spark" id="spark-btn" onclick="triggerSpark(event)" aria-label="Spark this fragment">✦</button>
                 <span class="spark-count" id="spark-counter">...</span>
             </div>
         </div>
@@ -138,7 +151,6 @@
     </main>
 
     <footer class="site-footer">
-        <!-- Restored Footer Top Section -->
         <div class="footer-top">
             <div class="footer-brand">
                 <span class="logo-text footer-logo">Suwuyiku</span>
@@ -296,17 +308,38 @@
             }
         }
 
-        async function triggerSpark() {
+        // NEW: JavaScript Particle Engine
+        function createParticles(x, y) {
+            for (let i = 0; i < 8; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                document.body.appendChild(particle);
+
+                // Math to explode in a random circular pattern
+                const angle = Math.random() * Math.PI * 2;
+                const distance = Math.random() * 40 + 20; 
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance;
+
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                particle.style.setProperty('--tx', tx + 'px');
+                particle.style.setProperty('--ty', ty + 'px');
+
+                // Erase particle after animation completes to keep site fast
+                setTimeout(() => particle.remove(), 600);
+            }
+        }
+
+        async function triggerSpark(e) {
             let currentSparks = parseInt(sparkCounter.textContent) || 0;
             
-            sparkBtn.classList.remove('animating');
-            void sparkBtn.offsetWidth; 
-            sparkBtn.classList.add('animating');
-
             if (isSparked) {
+                // REMOVE SPARK: No animation, just quietly remove it
                 isSparked = false;
                 localStorage.setItem("hasSparked", "false");
                 sparkBtn.classList.remove('active');
+                sparkBtn.classList.remove('animating'); 
                 sparkCounter.textContent = Math.max(0, currentSparks - 1);
                 
                 await fetch(`${API_URL}/sparks`, { 
@@ -315,10 +348,19 @@
                     body: JSON.stringify({ action: "remove" })
                 });
             } else {
+                // ADD SPARK: Trigger burst animation and particles
                 isSparked = true;
                 localStorage.setItem("hasSparked", "true");
                 sparkBtn.classList.add('active');
                 sparkCounter.textContent = currentSparks + 1;
+                
+                // Fire CSS animation
+                sparkBtn.classList.remove('animating');
+                void sparkBtn.offsetWidth; 
+                sparkBtn.classList.add('animating');
+
+                // Fire JS Particles
+                createParticles(e.clientX, e.clientY);
                 
                 await fetch(`${API_URL}/sparks`, { 
                     method: "POST",
