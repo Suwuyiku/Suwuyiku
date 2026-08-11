@@ -12,13 +12,21 @@ export default {
 
         const url = new URL(request.url);
 
-        // ROUTE 1: The Spark Counter
+        // ROUTE 1: The Spark Counter (Now supports Adding AND Removing)
         if (url.pathname === "/sparks") {
             let sparks = await env.SPARKS_KV.get("total_sparks");
             sparks = sparks ? parseInt(sparks) : 0;
 
             if (request.method === "POST") {
-                sparks += 1;
+                // Read what the website is asking us to do
+                const body = await request.json().catch(() => ({}));
+                
+                if (body.action === "remove" && sparks > 0) {
+                    sparks -= 1; // Remove a spark
+                } else if (body.action === "add") {
+                    sparks += 1; // Add a spark
+                }
+                
                 await env.SPARKS_KV.put("total_sparks", sparks.toString());
             }
 
@@ -27,7 +35,7 @@ export default {
             });
         }
 
-       // ROUTE 2: Fetch Notion Database (Titles, Dates, Categories)
+        // ROUTE 2: Fetch Notion Database
         if (url.pathname === "/posts") {
             try {
                 const notionResponse = await fetch(`https://api.notion.com/v1/databases/${env.NOTION_DATABASE_ID}/query`, {
@@ -38,7 +46,6 @@ export default {
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
-                        // FIX: Changed 'select' to 'status' to match your Notion setup
                         filter: { property: "Status", status: { equals: "Published" } },
                         sorts: [{ property: "Date", direction: "descending" }]
                     })
@@ -52,7 +59,7 @@ export default {
             }
         }
 
-        // ROUTE 3: Fetch Actual Page Content (The Blocks)
+        // ROUTE 3: Fetch Actual Page Content
         if (url.pathname === "/content") {
             const pageId = url.searchParams.get("id");
             if (!pageId) return new Response("Missing ID", { status: 400, headers: corsHeaders });
