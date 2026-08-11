@@ -23,7 +23,6 @@
         .fragment-item { padding: 2rem 0; border-bottom: 1px solid var(--border-color); cursor: pointer; transition: transform 0.3s ease, padding-left 0.3s ease; }
         .fragment-item:hover { transform: translateX(4px); padding-left: 0.5rem; }
         
-        /* Pushes category left, date right */
         .fragment-meta { display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: #A0A0A0; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
         .meta-category { font-weight: 700; color: var(--kodansha-black); }
         
@@ -42,25 +41,16 @@
         .canvas-body p { margin-bottom: 1.75rem; }
         .canvas-body h2, .canvas-body h3 { font-weight: 800; margin: 2.5rem 0 1rem 0; color: var(--kodansha-black); }
         
-        /* OPTIMIZED NOTION IMAGE STYLING */
-        .canvas-image { 
-            max-width: 100%; 
-            height: auto; 
-            border-radius: 6px; 
-            margin: 2.5rem auto; /* Centers the image nicely */
-            display: block;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06); 
-        }
+        .canvas-image { max-width: 100%; height: auto; border-radius: 6px; margin: 2.5rem auto; display: block; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
 
         /* THE SPARK */
         .spark-container { margin-top: 5rem; padding-top: 3rem; border-top: 1px solid var(--border-color); display: flex; flex-direction: column; align-items: center; gap: 0.75rem; position: relative; }
-        
         .spark-intro { font-size: 0.85rem; color: #A0A0A0; font-style: italic; margin-top: 1rem; letter-spacing: 0.02em; }
         
-        /* Removed the annoying cursor: not-allowed */
         .btn-spark { background: none; border: none; font-size: 2rem; color: #DDDDDD; cursor: pointer; transition: color 0.3s ease; position: relative; z-index: 10; }
-        .btn-spark:hover { color: var(--hover-gray); }
+        .btn-spark:hover:not(:disabled) { color: var(--hover-gray); }
         .btn-spark.active { color: var(--kodansha-black); }
+        .btn-spark:disabled { cursor: default; }
         
         @keyframes sparkBurst {
             0% { transform: scale(1); text-shadow: 0 0 0px rgba(0,0,0,0); }
@@ -71,7 +61,6 @@
 
         .spark-count { font-size: 0.85rem; font-weight: 600; color: #A0A0A0; letter-spacing: 0.05em; }
 
-        /* Particle Explosion Physics */
         .particle {
             position: fixed;
             pointer-events: none;
@@ -124,7 +113,6 @@
 
     <main class="contact-page-wrapper">
         
-        <!-- VIEW 1: THE INDEX FEED -->
         <div id="fragments-index">
             <div class="fragments-header">
                 <h1>Fragments</h1>
@@ -135,7 +123,6 @@
             </div>
         </div>
 
-        <!-- VIEW 2: THE READING CANVAS -->
         <div id="fragments-canvas">
             <button class="btn-back" onclick="closeCanvas()">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
@@ -153,7 +140,6 @@
                 <p>Loading text...</p>
             </div>
 
-            <!-- Intro text moved below the counter -->
             <div class="spark-container">
                 <button class="btn-spark" id="spark-btn" onclick="triggerSpark(event)" aria-label="Spark this fragment">✦</button>
                 <span class="spark-count" id="spark-counter">...</span>
@@ -168,11 +154,8 @@
             <div class="footer-brand">
                 <span class="logo-text footer-logo">Suwuyiku</span>
                 <h2>Visual curation and digital architecture</h2>
-                <p>
-                    Building timeless structures without restrictions. A visual diary, manga collection, and scattered thoughts by Suwuyiku. Founder of echoes under the april aozora. Built to last a thousand years.
-                </p>
+                <p>Building timeless structures without restrictions. A visual diary, manga collection, and scattered thoughts by Suwuyiku. Founder of echoes under the april aozora. Built to last a thousand years.</p>
             </div>
-
             <div class="footer-links">
                 <div class="link-column">
                     <h3>Ecosystem</h3>
@@ -183,7 +166,6 @@
                         <li><a href="https://suwuyiku.pages.dev/shop">Shop</a></li>
                     </ul>
                 </div>
-                
                 <div class="link-column">
                     <h3>Resources</h3>
                     <ul>
@@ -192,7 +174,6 @@
                         <li><a href="https://github.com/Suwuyiku">GitHub</a></li>
                     </ul>
                 </div>
-
                 <div class="link-column">
                     <h3>Legal</h3>
                     <ul>
@@ -202,7 +183,6 @@
                 </div>
             </div>
         </div>
-        
         <div class="footer-bottom">
             <div class="footer-bottom-links">
                 <a href="legal/privacy-policy.html">Privacy Policy</a>
@@ -228,9 +208,8 @@
         const sparkCounter = document.getElementById('spark-counter');
         const sparkBtn = document.getElementById('spark-btn');
 
-        // State trackers
-        let isSparked = localStorage.getItem("hasSparked") === "true";
-        let isProcessingSpark = false; // Invisible JS lock to prevent red error cursors
+        let isSparked = false;
+        let isProcessing = false;
 
         async function fetchIndex() {
             try {
@@ -292,7 +271,6 @@
                     }
                     else if (block.type === 'image') {
                         const imageUrl = block.image.type === 'external' ? block.image.external.url : block.image.file.url;
-                        // Added loading="lazy" and decoding="async" for optimized rendering
                         canvasBody.innerHTML += `<img src="${imageUrl}" class="canvas-image" loading="lazy" decoding="async" draggable="false" oncontextmenu="return false;">`;
                     }
                 });
@@ -347,48 +325,42 @@
             }
         }
 
-        function triggerSpark(e) {
-            // Invisible JS lock prevents spam without ugly red cursors
-            if (isProcessingSpark) return;
-            isProcessingSpark = true; 
+        async function triggerSpark(e) {
+            if (isProcessing) return;
+            isProcessing = true;
+            sparkBtn.disabled = true;
 
-            let currentSparks = parseInt(sparkCounter.textContent) || 0;
-
-            if (isSparked) {
-                // REMOVE SPARK
-                isSparked = false;
-                localStorage.setItem("hasSparked", "false");
-                sparkBtn.classList.remove('active');
-                sparkBtn.classList.remove('animating');
-                sparkCounter.textContent = Math.max(0, currentSparks - 1);
-
-                fetch(`${API_URL}/sparks`, { 
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ action: "remove" })
-                }).catch(err => console.error(err));
-
-            } else {
-                // ADD SPARK
-                isSparked = true;
-                localStorage.setItem("hasSparked", "true");
-                sparkBtn.classList.add('active');
-                sparkCounter.textContent = currentSparks + 1;
-                
+            // Trigger animation only if turning ON
+            if (!isSparked) {
                 sparkBtn.classList.remove('animating');
                 void sparkBtn.offsetWidth; 
                 sparkBtn.classList.add('animating');
                 if (e) createParticles(e.clientX, e.clientY);
-
-                fetch(`${API_URL}/sparks`, { 
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ action: "add" })
-                }).catch(err => console.error(err));
             }
 
-            // Unlock after a brief pause
-            setTimeout(() => { isProcessingSpark = false; }, 600);
+            try {
+                // Send toggle request to Cloudflare Worker
+                const response = await fetch(`${API_URL}/sparks`, { method: "POST" });
+                const data = await response.json();
+                
+                // Sync exact server state
+                sparkCounter.textContent = data.sparks;
+                isSparked = data.hasSparked;
+
+                if (isSparked) {
+                    sparkBtn.classList.add('active');
+                } else {
+                    sparkBtn.classList.remove('active');
+                    sparkBtn.classList.remove('animating');
+                }
+            } catch (error) {
+                console.error("Failed to sync spark:", error);
+            }
+
+            setTimeout(() => {
+                isProcessing = false;
+                sparkBtn.disabled = false;
+            }, 500);
         }
 
         document.addEventListener("DOMContentLoaded", () => {
