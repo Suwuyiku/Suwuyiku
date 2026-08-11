@@ -13,7 +13,7 @@ export default {
         const url = new URL(request.url);
 
         // =================================================--------
-        // ROUTE 1: Spark Engine (Fixed Eventual Consistency Bug)
+        // ROUTE 1: Bulletproof Toggle Spark Engine
         // =================================================--------
         if (url.pathname === "/sparks") {
             const clientIP = request.headers.get("cf-connecting-ip") || "anonymous_user";
@@ -30,18 +30,17 @@ export default {
             }
 
             if (request.method === "POST") {
-                const body = await request.json().catch(() => ({}));
-                let newSparkState = userHasSparked;
+                let newSparkState = false;
 
-                // Trusts the client action immediately to bypass KV cache delays
-                if (body.action === "add") {
-                    sparks += 1;
-                    await env.SPARKS_KV.put(ipKey, "true");
-                    newSparkState = true;
-                } else if (body.action === "remove") {
+                // Simple Server-Side Toggle: If they have it, remove it. If not, add it.
+                if (userHasSparked) {
                     sparks = Math.max(0, sparks - 1);
                     await env.SPARKS_KV.delete(ipKey);
                     newSparkState = false;
+                } else {
+                    sparks += 1;
+                    await env.SPARKS_KV.put(ipKey, "true");
+                    newSparkState = true;
                 }
 
                 await env.SPARKS_KV.put("total_sparks", sparks.toString());
