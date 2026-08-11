@@ -46,14 +46,14 @@
         /* THE SPARK */
         .spark-container { margin-top: 5rem; padding-top: 3rem; border-top: 1px solid var(--border-color); display: flex; flex-direction: column; align-items: center; gap: 0.75rem; position: relative; }
         
-        .spark-intro { font-size: 0.85rem; color: #A0A0A0; font-style: italic; margin-bottom: 0.25rem; letter-spacing: 0.02em; }
+        /* Intro text moved below the counter, margin adjusted */
+        .spark-intro { font-size: 0.85rem; color: #A0A0A0; font-style: italic; margin-top: 1rem; letter-spacing: 0.02em; }
         
         .btn-spark { background: none; border: none; font-size: 2rem; color: #DDDDDD; cursor: pointer; transition: color 0.3s ease; position: relative; z-index: 10; }
         .btn-spark:hover:not(:disabled) { color: var(--hover-gray); }
         .btn-spark.active { color: var(--kodansha-black); }
         .btn-spark:disabled { cursor: not-allowed; }
         
-        /* Sparkle Animation */
         @keyframes sparkBurst {
             0% { transform: scale(1); text-shadow: 0 0 0px rgba(0,0,0,0); }
             50% { transform: scale(1.4); text-shadow: 0 0 20px rgba(0,0,0,0.4); color: var(--kodansha-black); }
@@ -116,7 +116,6 @@
 
     <main class="contact-page-wrapper">
         
-        <!-- VIEW 1: THE INDEX FEED -->
         <div id="fragments-index">
             <div class="fragments-header">
                 <h1>Fragments</h1>
@@ -127,7 +126,6 @@
             </div>
         </div>
 
-        <!-- VIEW 2: THE READING CANVAS -->
         <div id="fragments-canvas">
             <button class="btn-back" onclick="closeCanvas()">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
@@ -145,11 +143,11 @@
                 <p>Loading text...</p>
             </div>
 
-            <!-- Enhanced Spark Interface -->
+            <!-- Intro text moved below the counter -->
             <div class="spark-container">
-                <p class="spark-intro">If this resonated with you, leave a spark.</p>
                 <button class="btn-spark" id="spark-btn" onclick="triggerSpark(event)" aria-label="Spark this fragment">✦</button>
                 <span class="spark-count" id="spark-counter">...</span>
+                <p class="spark-intro">If this resonated with you, leave a spark.</p>
             </div>
         </div>
 
@@ -220,7 +218,8 @@
         const sparkCounter = document.getElementById('spark-counter');
         const sparkBtn = document.getElementById('spark-btn');
 
-        let isSparked = false;
+        // Master lock: Uses localStorage as the immediate source of truth
+        let isSparked = localStorage.getItem("hasSparked") === "true";
 
         async function fetchIndex() {
             try {
@@ -300,17 +299,23 @@
             sparkBtn.classList.remove('animating');
             sparkBtn.disabled = false;
 
+            // Apply immediate local state for a snappy UI
+            if (isSparked) {
+                sparkBtn.classList.add('active');
+            } else {
+                sparkBtn.classList.remove('active');
+            }
+
             try {
                 const response = await fetch(`${API_URL}/sparks`);
                 const data = await response.json();
-                
                 sparkCounter.textContent = data.sparks;
-                isSparked = data.hasSparked; 
-
-                if (isSparked) {
+                
+                // If the server confirms a spark exists for this IP, ensure local state matches
+                if (data.hasSparked) {
+                    isSparked = true;
+                    localStorage.setItem("hasSparked", "true");
                     sparkBtn.classList.add('active');
-                } else {
-                    sparkBtn.classList.remove('active');
                 }
             } catch (error) {
                 sparkCounter.textContent = "0";
@@ -337,33 +342,31 @@
             }
         }
 
-        async function triggerSpark(e) {
-            if (sparkBtn.disabled) return; // Prevent spam clicking
-            sparkBtn.disabled = true; // Lock button
+        function triggerSpark(e) {
+            if (sparkBtn.disabled) return;
+            sparkBtn.disabled = true; // Lock button to prevent spam
 
             let currentSparks = parseInt(sparkCounter.textContent) || 0;
 
             if (isSparked) {
-                // Remove Spark
+                // REMOVE SPARK
                 isSparked = false;
+                localStorage.setItem("hasSparked", "false");
                 sparkBtn.classList.remove('active');
                 sparkBtn.classList.remove('animating');
                 sparkCounter.textContent = Math.max(0, currentSparks - 1);
 
-                try {
-                    const response = await fetch(`${API_URL}/sparks`, { 
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ action: "remove" })
-                    });
-                    const data = await response.json();
-                    sparkCounter.textContent = data.sparks;
-                    isSparked = data.hasSparked;
-                } catch (error) { console.error(error); }
+                // Send to backend blindly
+                fetch(`${API_URL}/sparks`, { 
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ action: "remove" })
+                }).catch(err => console.error(err));
 
             } else {
-                // Add Spark
+                // ADD SPARK
                 isSparked = true;
+                localStorage.setItem("hasSparked", "true");
                 sparkBtn.classList.add('active');
                 sparkCounter.textContent = currentSparks + 1;
                 
@@ -372,20 +375,16 @@
                 sparkBtn.classList.add('animating');
                 if (e) createParticles(e.clientX, e.clientY);
 
-                try {
-                    const response = await fetch(`${API_URL}/sparks`, { 
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ action: "add" })
-                    });
-                    const data = await response.json();
-                    sparkCounter.textContent = data.sparks;
-                    isSparked = data.hasSparked;
-                } catch (error) { console.error(error); }
+                // Send to backend blindly
+                fetch(`${API_URL}/sparks`, { 
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ action: "add" })
+                }).catch(err => console.error(err));
             }
 
-            // Unlock button after a short delay
-            setTimeout(() => { sparkBtn.disabled = false; }, 500);
+            // Unlock button after animation completes (600ms)
+            setTimeout(() => { sparkBtn.disabled = false; }, 600);
         }
 
         document.addEventListener("DOMContentLoaded", () => {
