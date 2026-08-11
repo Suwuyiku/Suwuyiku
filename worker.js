@@ -13,11 +13,11 @@ export default {
         const url = new URL(request.url);
 
         // =================================================--------
-        // ROUTE 1: Per-Post Spark Engine
+        // ROUTE 1: Per-Post Spark Engine (Separates counts by Post ID)
         // =================================================--------
         if (url.pathname === "/sparks") {
             const clientIP = request.headers.get("cf-connecting-ip") || "anonymous_user";
-            
+
             if (request.method === "GET") {
                 const pageId = url.searchParams.get("id");
                 if (!pageId) return new Response("Missing ID", { status: 400, headers: corsHeaders });
@@ -48,6 +48,7 @@ export default {
 
                 let newSparkState = userHasSparked;
 
+                // Safely Add or Remove based on the specific Post ID
                 if (body.action === "add" && !userHasSparked) {
                     sparks += 1;
                     await env.SPARKS_KV.put(ipKey, "true");
