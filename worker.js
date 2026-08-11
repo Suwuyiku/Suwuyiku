@@ -13,37 +13,52 @@ export default {
         const url = new URL(request.url);
 
         // =================================================--------
-        // ROUTE 1: Bulletproof Toggle Spark Engine
+        // ROUTE 1: Per-Post Spark Engine
         // =================================================--------
         if (url.pathname === "/sparks") {
             const clientIP = request.headers.get("cf-connecting-ip") || "anonymous_user";
-            const ipKey = `spark_ip_${clientIP}`;
-
-            let sparks = await env.SPARKS_KV.get("total_sparks");
-            sparks = sparks ? parseInt(sparks) : 0;
-            const userHasSparked = (await env.SPARKS_KV.get(ipKey)) === "true";
-
+            
             if (request.method === "GET") {
+                const pageId = url.searchParams.get("id");
+                if (!pageId) return new Response("Missing ID", { status: 400, headers: corsHeaders });
+
+                const ipKey = `spark_ip_${clientIP}_${pageId}`;
+                const countKey = `sparks_count_${pageId}`;
+
+                let sparks = await env.SPARKS_KV.get(countKey);
+                sparks = sparks ? parseInt(sparks) : 0;
+                const userHasSparked = (await env.SPARKS_KV.get(ipKey)) === "true";
+
                 return new Response(JSON.stringify({ sparks, hasSparked: userHasSparked }), {
                     headers: { ...corsHeaders, "Content-Type": "application/json" }
                 });
             }
 
             if (request.method === "POST") {
-                let newSparkState = false;
+                const body = await request.json().catch(() => ({}));
+                const pageId = body.id;
+                if (!pageId) return new Response("Missing ID", { status: 400, headers: corsHeaders });
 
-                // Simple Server-Side Toggle
-                if (userHasSparked) {
-                    sparks = Math.max(0, sparks - 1);
-                    await env.SPARKS_KV.delete(ipKey);
-                    newSparkState = false;
-                } else {
+                const ipKey = `spark_ip_${clientIP}_${pageId}`;
+                const countKey = `sparks_count_${pageId}`;
+
+                let sparks = await env.SPARKS_KV.get(countKey);
+                sparks = sparks ? parseInt(sparks) : 0;
+                const userHasSparked = (await env.SPARKS_KV.get(ipKey)) === "true";
+
+                let newSparkState = userHasSparked;
+
+                if (body.action === "add" && !userHasSparked) {
                     sparks += 1;
                     await env.SPARKS_KV.put(ipKey, "true");
                     newSparkState = true;
+                } else if (body.action === "remove" && userHasSparked) {
+                    sparks = Math.max(0, sparks - 1);
+                    await env.SPARKS_KV.delete(ipKey);
+                    newSparkState = false;
                 }
 
-                await env.SPARKS_KV.put("total_sparks", sparks.toString());
+                await env.SPARKS_KV.put(countKey, sparks.toString());
 
                 return new Response(JSON.stringify({ sparks, hasSparked: newSparkState }), {
                     headers: { ...corsHeaders, "Content-Type": "application/json" }
@@ -52,7 +67,7 @@ export default {
         }
 
         // =================================================--------
-        // ROUTE 2: Fetch Notion Database (FIXED FOR 'Time' COLUMN)
+        // ROUTE 2: Fetch Notion Database
         // =================================================--------
         if (url.pathname === "/posts") {
             try {
@@ -65,7 +80,6 @@ export default {
                     },
                     body: JSON.stringify({
                         filter: { property: "Status", status: { equals: "Published" } },
-                        // FIX: Now correctly sorts by your "Time" column
                         sorts: [{ property: "Time", direction: "descending" }]
                     })
                 });
