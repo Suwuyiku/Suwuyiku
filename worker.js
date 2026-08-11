@@ -12,30 +12,54 @@ export default {
 
         const url = new URL(request.url);
 
-        // ROUTE 1: The Spark Counter (Now supports Adding AND Removing)
+        // =================================================--------
+        // ROUTE 1: Smart IP-Based Spark Engine
+        // =================================================--------
         if (url.pathname === "/sparks") {
+            // Get user's IP Address directly from Cloudflare network
+            const clientIP = request.headers.get("cf-connecting-ip") || "anonymous_user";
+            const ipKey = `spark_ip_${clientIP}`;
+
+            // Read total sparks and check if THIS specific IP address has sparked
             let sparks = await env.SPARKS_KV.get("total_sparks");
             sparks = sparks ? parseInt(sparks) : 0;
 
-            if (request.method === "POST") {
-                // Read what the website is asking us to do
-                const body = await request.json().catch(() => ({}));
-                
-                if (body.action === "remove" && sparks > 0) {
-                    sparks -= 1; // Remove a spark
-                } else if (body.action === "add") {
-                    sparks += 1; // Add a spark
-                }
-                
-                await env.SPARKS_KV.put("total_sparks", sparks.toString());
+            const userHasSparked = (await env.SPARKS_KV.get(ipKey)) === "true";
+
+            // GET Request: Return total sparks AND whether THIS user's IP address has sparked
+            if (request.method === "GET") {
+                return new Response(JSON.stringify({ sparks, hasSparked: userHasSparked }), {
+                    headers: { ...corsHeaders, "Content-Type": "application/json" }
+                });
             }
 
-            return new Response(JSON.stringify({ sparks }), {
-                headers: { ...corsHeaders, "Content-Type": "application/json" }
-            });
+            // POST Request: Toggle Spark state server-side
+            if (request.method === "POST") {
+                let newSparkState = false;
+
+                if (userHasSparked) {
+                    // User already sparked -> REMOVE SPARK
+                    sparks = Math.max(0, sparks - 1);
+                    await env.SPARKS_KV.delete(ipKey); // Remove IP record
+                    newSparkState = false;
+                } else {
+                    // User hasn't sparked -> ADD SPARK
+                    sparks += 1;
+                    await env.SPARKS_KV.put(ipKey, "true"); // Save IP record
+                    newSparkState = true;
+                }
+
+                await env.SPARKS_KV.put("total_sparks", sparks.toString());
+
+                return new Response(JSON.stringify({ sparks, hasSparked: newSparkState }), {
+                    headers: { ...corsHeaders, "Content-Type": "application/json" }
+                });
+            }
         }
 
+        // =================================================--------
         // ROUTE 2: Fetch Notion Database
+        // =================================================--------
         if (url.pathname === "/posts") {
             try {
                 const notionResponse = await fetch(`https://api.notion.com/v1/databases/${env.NOTION_DATABASE_ID}/query`, {
@@ -59,7 +83,9 @@ export default {
             }
         }
 
-        // ROUTE 3: Fetch Actual Page Content
+        // =================================================--------
+        // ROUTE 3: Fetch Page Content Blocks
+        // =================================================--------
         if (url.pathname === "/content") {
             const pageId = url.searchParams.get("id");
             if (!pageId) return new Response("Missing ID", { status: 400, headers: corsHeaders });
