@@ -12,105 +12,44 @@
     
     <link rel="icon" type="image/webp" href="assets/logo.png">
     <link rel="stylesheet" href="style.css">
-    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- FRAGMENTS UI STYLING -->
     <style>
-        .fragments-header {
-            margin-bottom: 3rem;
-            border-bottom: 0.125rem solid var(--kodansha-black);
-            padding-bottom: 1.5rem;
-        }
+        .fragments-header { margin-bottom: 3rem; border-bottom: 0.125rem solid var(--kodansha-black); padding-bottom: 1.5rem; }
         .fragments-header h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.03em; color: var(--kodansha-black); margin-bottom: 0.5rem; }
         .fragments-header p { font-size: 1rem; color: #777777; }
 
-        .fragment-card {
-            padding: 3rem 0;
-            border-bottom: 1px solid var(--border-color);
-            animation: fadeIn 0.6s ease forwards;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .fragment-meta {
-            font-size: 0.75rem;
-            color: #A0A0A0;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 1rem;
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
+        /* INDEX VIEW */
+        .fragment-item { padding: 2rem 0; border-bottom: 1px solid var(--border-color); cursor: pointer; transition: transform 0.3s ease, padding-left 0.3s ease; }
+        .fragment-item:hover { transform: translateX(4px); padding-left: 0.5rem; }
+        .fragment-meta { font-size: 0.75rem; color: #A0A0A0; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; display: flex; gap: 1rem; align-items: center; }
         .meta-category { font-weight: 700; color: var(--kodansha-black); }
+        .fragment-title { font-size: 1.5rem; font-weight: 700; color: var(--kodansha-black); line-height: 1.3; transition: color 0.2s ease; }
+        .fragment-item:hover .fragment-title { color: var(--hover-gray); }
 
-        .fragment-title {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--kodansha-black);
-            line-height: 1.2;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.02em;
-        }
+        /* CANVAS (READING) VIEW */
+        #fragments-canvas { display: none; animation: fadeIn 0.5s ease forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .btn-back { display: inline-flex; align-items: center; gap: 0.5rem; background: none; border: none; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #777777; cursor: pointer; margin-bottom: 3rem; transition: color 0.2s ease; }
+        .btn-back:hover { color: var(--kodansha-black); }
+        
+        .canvas-title { font-size: 2.2rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 1rem; }
+        .canvas-body { margin-top: 3rem; font-size: 1.1rem; line-height: 1.8; color: #222222; min-height: 30vh; }
+        .canvas-body p { margin-bottom: 1.75rem; }
 
-        .fragment-content {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #222222;
-        }
-
-        /* Spark Counter Elements */
-        .spark-wrapper {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: #FAFAFA;
-            padding: 1.5rem 2rem;
-            border: 1px solid var(--border-color);
-            margin-bottom: 3rem;
-            border-radius: 4px;
-        }
-
-        .spark-btn {
-            background: var(--kodansha-black);
-            color: var(--bg-color);
-            border: none;
-            padding: 0.75rem 1.5rem;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            cursor: pointer;
-            transition: transform 0.2s ease, background-color 0.2s ease;
-        }
-
-        .spark-btn:hover {
-            transform: translateY(-2px);
-            background-color: var(--hover-gray);
-        }
-
-        .spark-tally {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #777777;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
-
-        #spark-count { color: var(--kodansha-black); font-size: 1.1rem; margin-left: 0.5rem; }
+        /* THE SPARK */
+        .spark-container { margin-top: 5rem; padding-top: 3rem; border-top: 1px solid var(--border-color); display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
+        .btn-spark { background: none; border: none; font-size: 2rem; color: #DDDDDD; cursor: pointer; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .btn-spark:hover:not(:disabled) { color: var(--kodansha-black); transform: scale(1.2); }
+        .btn-spark.active { color: var(--kodansha-black); transform: scale(1.1); cursor: default; }
+        .spark-count { font-size: 0.85rem; font-weight: 600; color: #A0A0A0; letter-spacing: 0.05em; }
     </style>
 </head>
 <body>
 
     <nav class="top-nav">
-        <div class="nav-left">
-            <a href="index.html" style="text-decoration: none;"><span class="logo-text">Suwuyiku</span></a>
-        </div>
+        <div class="nav-left"><a href="index.html" style="text-decoration: none;"><span class="logo-text">Suwuyiku</span></a></div>
         <div class="nav-right">
             <ul class="nav-links">
                 <li><a href="about.html">About</a></li>
@@ -122,17 +61,12 @@
                 <a href="https://suwuyiku.pages.dev/shop" class="btn-action">SHOP</a>
                 <a href="contact.html" class="btn-action">CONTACT</a>
             </div>
-            <button class="hamburger-btn" aria-label="Open Menu">
-                <span class="bar"></span><span class="bar"></span><span class="bar"></span>
-            </button>
+            <button class="hamburger-btn" aria-label="Open Menu"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button>
         </div>
     </nav>
 
     <div class="mobile-sidebar">
-        <div class="sidebar-header">
-            <a href="index.html" class="sidebar-logo" style="text-decoration: none;">Suwuyiku</a>
-            <button class="close-sidebar-btn" aria-label="Close Menu">&times;</button>
-        </div>
+        <div class="sidebar-header"><a href="index.html" class="sidebar-logo" style="text-decoration: none;">Suwuyiku</a><button class="close-sidebar-btn">&times;</button></div>
         <div class="sidebar-menu-container">
             <ul class="sidebar-links">
                 <li><a href="index.html">Home</a></li>
@@ -141,169 +75,171 @@
                 <li><a href="library.html">Library</a></li>
                 <li><a href="fragments.html">Fragments</a></li>
             </ul>
-            <div class="sidebar-actions">
-                <a href="https://suwuyiku.pages.dev/shop" class="sidebar-btn-action">SHOP</a>
-                <a href="contact.html" class="sidebar-btn-action">CONTACT</a>
-            </div>
         </div>
-        <div class="sidebar-footer">
-            <span class="copyright">&copy; 2026 SUWUYIKU. ALL RIGHTS RESERVED.</span>
-        </div>
+        <div class="sidebar-footer"><span class="copyright">&copy; 2026 SUWUYIKU.</span></div>
     </div>
     <div class="sidebar-overlay"></div>
 
     <main class="contact-page-wrapper">
         
-        <div class="fragments-header">
-            <h1>Fragments</h1>
-            <p>Scattered thoughts, ecosystem updates, and deep-dive reviews.</p>
+        <!-- VIEW 1: THE INDEX FEED -->
+        <div id="fragments-index">
+            <div class="fragments-header">
+                <h1>Fragments</h1>
+                <p>Scattered thoughts, ecosystem updates, and deep-dive reviews.</p>
+            </div>
+            <div id="index-container">
+                <p style="color: #A0A0A0; font-size: 0.9rem; padding: 2rem 0;">Synchronizing with ecosystem...</p>
+            </div>
         </div>
 
-        <!-- Global Ecosystem Spark Counter -->
-        <div class="spark-wrapper">
-            <button id="spark-button" class="spark-btn">✦ Add Spark</button>
-            <span class="spark-tally">Total Sparks: <span id="spark-count">...</span></span>
-        </div>
+        <!-- VIEW 2: THE READING CANVAS -->
+        <div id="fragments-canvas">
+            <button class="btn-back" onclick="closeCanvas()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                Return to Index
+            </button>
 
-        <!-- Notion Post Feed -->
-        <div id="live-fragments-feed">
-            <p style="color: #A0A0A0; font-size: 0.9rem; padding: 2rem 0;">Synchronizing with ecosystem...</p>
+            <div class="fragment-meta" style="margin-bottom: 1.5rem;">
+                <span class="meta-category" id="canvas-category">...</span>
+                <span id="canvas-date">...</span>
+            </div>
+            
+            <h1 class="canvas-title" id="canvas-title">...</h1>
+            
+            <div class="canvas-body" id="canvas-body">
+                <p>Loading text...</p>
+            </div>
+
+            <div class="spark-container">
+                <button class="btn-spark" id="spark-btn" onclick="triggerSpark()" aria-label="Spark this fragment">✦</button>
+                <span class="spark-count" id="spark-counter">...</span>
+            </div>
         </div>
 
     </main>
 
     <footer class="site-footer">
-        <div class="footer-top">
-            <div class="footer-brand">
-                <span class="logo-text footer-logo">Suwuyiku</span>
-                <h2>Visual curation and digital architecture</h2>
-                <p>Building timeless structures without restrictions. A visual diary, manga collection, and scattered thoughts by Suwuyiku. Founder of echoes under the april aozora. Built to last a thousand years.</p>
-            </div>
-            <div class="footer-links">
-                <div class="link-column">
-                    <h3>Ecosystem</h3>
-                    <ul>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="library.html">Library</a></li>
-                        <li><a href="fragments.html">Fragments</a></li>
-                        <li><a href="https://suwuyiku.pages.dev/shop">Shop</a></li>
-                    </ul>
-                </div>
-                <div class="link-column">
-                    <h3>Resources</h3>
-                    <ul>
-                        <li><a href="connections.html">Connections</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="https://github.com/Suwuyiku">GitHub</a></li>
-                    </ul>
-                </div>
-                <div class="link-column">
-                    <h3>Legal</h3>
-                    <ul>
-                        <li><a href="legal/privacy-policy.html">Privacy Policy</a></li>
-                        <li><a href="legal/terms-of-use.html">Terms of Use</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
         <div class="footer-bottom">
-            <div class="footer-bottom-links">
-                <a href="legal/privacy-policy.html">Privacy Policy</a>
-                <span class="divider">|</span>
-                <a href="legal/terms-of-use.html">Terms of Use</a>
-                <span class="divider">|</span>
-                <a href="legal/shipping-and-refund.html">Shipping and Refund Policy</a>
-            </div>
             <div class="copyright">&copy; 2026 Suwuyiku. All Rights Reserved.</div>
         </div>
     </footer>
 
-    <!-- LIVE FETCH ENGINE & SIDEBAR LOGIC -->
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            // Sidebar Logic
-            const hamburger = document.querySelector('.hamburger-btn');
-            const sidebar = document.querySelector('.mobile-sidebar');
-            const overlay = document.querySelector('.sidebar-overlay');
-            const closeBtn = document.querySelector('.close-sidebar-btn');
+        const API_URL = "https://suwuyiku-fragments-api.suwuyiku.workers.dev";
 
-            if (hamburger && sidebar && overlay && closeBtn) {
-                function toggleMenu() {
-                    sidebar.classList.toggle('active');
-                    overlay.classList.toggle('active');
-                    document.body.classList.toggle('no-scroll'); 
-                }
-                hamburger.addEventListener('click', toggleMenu);
-                closeBtn.addEventListener('click', toggleMenu);
-                overlay.addEventListener('click', toggleMenu);
-            }
+        const indexView = document.getElementById('fragments-index');
+        const canvasView = document.getElementById('fragments-canvas');
+        const indexContainer = document.getElementById('index-container');
+        const canvasTitle = document.getElementById('canvas-title');
+        const canvasDate = document.getElementById('canvas-date');
+        const canvasCategory = document.getElementById('canvas-category');
+        const canvasBody = document.getElementById('canvas-body');
+        const sparkCounter = document.getElementById('spark-counter');
+        const sparkBtn = document.getElementById('spark-btn');
 
-            // --- API LOGIC ---
-            const API_URL = "https://suwuyiku-fragments-api.suwuyiku.workers.dev";
+        let isSparkLocked = localStorage.getItem("hasSparked") === "true";
 
-            async function fetchFragments() {
-                const feedContainer = document.getElementById('live-fragments-feed');
-                
-                try {
-                    const response = await fetch(`${API_URL}/posts`);
-                    const data = await response.json();
+        // 1. Fetch the Index
+        async function fetchIndex() {
+            try {
+                const response = await fetch(`${API_URL}/posts`);
+                const data = await response.json();
+                indexContainer.innerHTML = ''; 
+
+                data.results.forEach(post => {
+                    const title = post.properties.Title.title[0]?.plain_text || "Untitled";
+                    const category = post.properties.Category.select?.name || "Uncategorized";
+                    const rawDate = post.properties.Date.date?.start || "";
+                    const dateObj = new Date(rawDate);
+                    const formattedDate = dateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
+                    const item = document.createElement('div');
+                    item.className = 'fragment-item';
+                    item.onclick = () => openCanvas(post.id, title, category, formattedDate);
                     
-                    feedContainer.innerHTML = ''; // Clear loading text
-
-                    data.results.forEach(post => {
-                        const title = post.properties.Title.title[0]?.plain_text || "Untitled Fragment";
-                        const category = post.properties.Category.select?.name || "Uncategorized";
-                        const rawDate = post.properties.Date.date?.start || "";
-                        
-                        let formattedDate = "Unknown Date";
-                        if (rawDate) {
-                            const dateObj = new Date(rawDate);
-                            formattedDate = dateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-                        }
-
-                        const postElement = document.createElement('div');
-                        postElement.className = 'fragment-card';
-                        postElement.innerHTML = `
-                            <div class="fragment-meta">
-                                <span class="meta-category">${category}</span>
-                                <span>${formattedDate}</span>
-                            </div>
-                            <h2 class="fragment-title">${title}</h2>
-                            <div class="fragment-content">
-                                <p><em>(Post content successfully fetched from Notion!)</em></p>
-                            </div>
-                        `;
-                        feedContainer.appendChild(postElement);
-                    });
-                    
-                } catch (error) {
-                    feedContainer.innerHTML = "<p>Oops! Failed to load Fragments.</p>";
-                    console.error("Error fetching Notion posts:", error);
-                }
-            }
-
-            async function handleSparks() {
-                const sparkCountDisplay = document.getElementById('spark-count');
-                const sparkButton = document.getElementById('spark-button');
-
-                try {
-                    const response = await fetch(`${API_URL}/sparks`);
-                    const data = await response.json();
-                    sparkCountDisplay.innerText = data.sparks;
-                } catch (error) {
-                    sparkCountDisplay.innerText = "0";
-                }
-
-                sparkButton.addEventListener('click', async () => {
-                    let currentSparks = parseInt(sparkCountDisplay.innerText) || 0;
-                    sparkCountDisplay.innerText = currentSparks + 1;
-                    await fetch(`${API_URL}/sparks`, { method: "POST" });
+                    item.innerHTML = `
+                        <div class="fragment-meta">
+                            <span class="meta-category">${category}</span>
+                            <span>${formattedDate}</span>
+                        </div>
+                        <div class="fragment-title">${title}</div>
+                    `;
+                    indexContainer.appendChild(item);
                 });
+            } catch (error) {
+                indexContainer.innerHTML = '<p style="color: red;">Failed to connect to the database.</p>';
             }
+        }
 
-            fetchFragments();
-            handleSparks();
-        });
+        // 2. Open Canvas & Fetch Content
+        async function openCanvas(pageId, title, category, date) {
+            indexView.style.display = 'none';
+            canvasView.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            canvasTitle.textContent = title;
+            canvasCategory.textContent = category;
+            canvasDate.textContent = date;
+            canvasBody.innerHTML = '<p style="color: #A0A0A0;">Loading text...</p>';
+
+            setupSparks();
+
+            try {
+                const response = await fetch(`${API_URL}/content?id=${pageId}`);
+                const data = await response.json();
+                canvasBody.innerHTML = ''; 
+
+                // Simple parser for Notion Paragraphs
+                data.results.forEach(block => {
+                    if (block.type === 'paragraph') {
+                        const text = block.paragraph.rich_text.map(t => t.plain_text).join("");
+                        if(text) canvasBody.innerHTML += `<p>${text}</p>`;
+                        else canvasBody.innerHTML += `<br>`;
+                    }
+                });
+            } catch (error) {
+                canvasBody.innerHTML = '<p style="color: red;">Failed to load content.</p>';
+            }
+        }
+
+        function closeCanvas() {
+            canvasView.style.display = 'none';
+            indexView.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 3. Spark Logic
+        async function setupSparks() {
+            if (isSparkLocked) {
+                sparkBtn.classList.add('active');
+                sparkBtn.disabled = true;
+            }
+            try {
+                const response = await fetch(`${API_URL}/sparks`);
+                const data = await response.json();
+                sparkCounter.textContent = data.sparks;
+            } catch (error) {
+                sparkCounter.textContent = "0";
+            }
+        }
+
+        async function triggerSpark() {
+            if (isSparkLocked) return;
+            
+            isSparkLocked = true;
+            localStorage.setItem("hasSparked", "true");
+            
+            sparkBtn.classList.add('active');
+            sparkBtn.disabled = true;
+            
+            let currentSparks = parseInt(sparkCounter.textContent) || 0;
+            sparkCounter.textContent = currentSparks + 1;
+
+            await fetch(`${API_URL}/sparks`, { method: "POST" });
+        }
+
+        document.addEventListener("DOMContentLoaded", fetchIndex);
     </script>
 </body>
 </html>
