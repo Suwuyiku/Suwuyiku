@@ -287,6 +287,7 @@ a:focus-visible, button:focus-visible { outline: 0.125rem solid var(--hover-gray
 .book-meta { display: flex; flex-direction: column; }
 .book-title { font-size: 0.85rem; font-weight: 700; color: var(--kodansha-black); line-height: 1.2; }
 .book-author { font-size: 0.7rem; color: #888888; margin-top: 0.2rem; }
+body.is-searching .library-header p { opacity: 0.3; transition: opacity 0.3s ease; }
 
 /* =========================================
    08. PAGE: FRAGMENTS
