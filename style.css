@@ -617,41 +617,48 @@ a:focus-visible, button:focus-visible {
 }
 .about-card-special:hover .about-anchor-mark { opacity: 0.15; }
 
-/* =========================================
-   FIXED FRAGMENTS CARD & LIVE MONITOR
-   ========================================= */
+/* 2. Fragments Live Monitor (FIXED STACK) */
 .fragments-card-special .card-content { 
     display: flex; 
     flex-direction: column; 
-    justify-content: flex-start; /* Keeps items naturally stacked at the top */
+    justify-content: flex-start; /* Keeps it strictly top-aligned */
     height: 100%; 
 }
-
 .fragments-card-special .card-content p {
-    margin-bottom: 0.5rem; /* Tightens the gap between subtitle and live text */
+    margin-bottom: 0; 
 }
-
 .live-monitor {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.8rem;
-    color: #777777; /* Clean faded gray */
+    font-family: 'Inter', monospace;
+    font-size: 0.75rem;
+    color: #999999;
+    margin-top: 0.75rem; /* Replaced 'auto' so it tightly hugs the text above it */
     display: flex;
     align-items: center;
-    gap: 0.4rem;
-    margin-top: auto; /* Pushes it neatly to the bottom of the content area */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
-
 .monitor-bullet {
     font-size: 0.75rem;
-    color: var(--kodansha-black); /* Matches your minimalist black aesthetic */
+    color: var(--kodansha-black);
+    margin-right: 0.4rem;
 }
 
-/* 3. Connections Visual Directory */
-.connections-card-special { flex-direction: row; align-items: center; justify-content: space-between; }
-.connections-preview-icons { display: flex; gap: 1rem; align-items: center; padding-left: 1rem; }
+/* 3. Connections Visual Directory (FIXED ALIGNMENT) */
+.connections-card-special { 
+    flex-direction: column; /* Restores the standard top-to-bottom layout */
+    justify-content: space-between; 
+}
+.connections-preview-icons { 
+    display: flex; 
+    gap: 1.25rem; 
+    align-items: flex-end; 
+    justify-content: flex-end; /* Pushes the icons to the far right */
+    width: 100%;
+}
 .connections-preview-icons svg {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1.35rem;
+    height: 1.35rem;
     fill: #CCCCCC;
     transition: fill 0.2s ease, transform 0.2s ease;
 }
