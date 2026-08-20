@@ -137,9 +137,11 @@
         </div>
     </footer>
 
-    <!-- 5. INTERACTION SCRIPT -->
+    <!-- 5. INTERACTION & API SCRIPT -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
+            
+            // --- 1. MOBILE SIDEBAR LOGIC ---
             const hamburger = document.querySelector('.hamburger-btn');
             const sidebar = document.querySelector('.mobile-sidebar');
             const overlay = document.querySelector('.sidebar-overlay');
@@ -155,7 +157,56 @@
                 closeBtn.addEventListener('click', toggleMenu);
                 overlay.addEventListener('click', toggleMenu);
             }
+
+            // --- 2. LIBRARY SEARCH ENGINE ---
+            const searchInput = document.getElementById('librarySearch');
+            const noResultsMsg = document.getElementById('noResultsMsg');
+
+            if (searchInput) {
+                // Un-focus the search bar if the user presses "Enter" on mobile
+                searchInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') searchInput.blur();
+                });
+
+                // Instantly filter books as the user types
+                searchInput.addEventListener('input', (e) => {
+                    const query = e.target.value.toLowerCase().trim();
+                    const bookItems = document.querySelectorAll('.book-item'); // Grabs all loaded books
+                    let totalVisibleCount = 0;
+
+                    // If the API hasn't loaded books yet, don't run the search
+                    if (bookItems.length === 0) return; 
+
+                    bookItems.forEach(book => {
+                        const titleText = book.querySelector('.book-title')?.textContent.toLowerCase() || '';
+                        const authorText = book.querySelector('.book-author')?.textContent.toLowerCase() || '';
+
+                        // If the title or author matches the search, show it. Otherwise, hide it.
+                        if (titleText.includes(query) || authorText.includes(query)) {
+                            book.style.display = 'flex';
+                            totalVisibleCount++;
+                        } else {
+                            book.style.display = 'none';
+                        }
+                    });
+
+                    // Show "No records found" if everything is hidden
+                    if (totalVisibleCount === 0 && query !== '') {
+                        noResultsMsg.style.display = 'block';
+                    } else {
+                        noResultsMsg.style.display = 'none';
+                    }
+                });
+            }
         });
+
+        // --- 3. NOTION API PIPELINE (WAITING FOR BACKEND) ---
+        async function loadLibrary() {
+            // We will inject the Cloudflare Worker fetch code right here!
+            // This function will pull your books from Notion and instantly build the grid.
+        }
+        
+        loadLibrary();
     </script>
 </body>
 </html>
