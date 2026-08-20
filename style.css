@@ -719,13 +719,11 @@ a:focus-visible, button:focus-visible {
 
 /* =========================================
    14. FRAGMENTS PAGE STYLING ENGINE
-   WHAT THIS DOES: Styles for the journal index, the reading canvas, and the spark interaction.
    ========================================= */
 .fragments-header { margin-bottom: 3rem; border-bottom: 0.125rem solid var(--kodansha-black); padding-bottom: 1.5rem; }
 .fragments-header h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.03em; color: var(--kodansha-black); margin-bottom: 0.5rem; }
 .fragments-header p { font-size: 1rem; color: #777777; }
 
-/* INDEX VIEW (Designed to stack perfectly) */
 .fragment-item { padding: 2rem 0; border-bottom: 1px solid var(--border-color); cursor: pointer; transition: transform 0.3s ease, padding-left 0.3s ease; }
 .fragment-item:hover { transform: translateX(4px); padding-left: 0.5rem; }
 
@@ -735,7 +733,6 @@ a:focus-visible, button:focus-visible {
 .fragment-title { font-size: 1.5rem; font-weight: 700; color: var(--kodansha-black); line-height: 1.3; transition: color 0.2s ease; }
 .fragment-item:hover .fragment-title { color: var(--hover-gray); }
 
-/* CANVAS (READING) VIEW */
 #fragments-canvas { display: none; animation: fadeIn 0.5s ease forwards; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -750,7 +747,6 @@ a:focus-visible, button:focus-visible {
 .image-skeleton { background: #f4f4f4; border-radius: 6px; margin: 2.5rem auto; text-align: center; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
 .canvas-image { width: 100%; height: auto; display: block; opacity: 0; transition: opacity 0.5s ease-in; margin: 0; }
 
-/* THE SPARK */
 .spark-container { margin-top: 5rem; padding-top: 3rem; border-top: 1px solid var(--border-color); display: flex; flex-direction: column; align-items: center; gap: 0.75rem; position: relative; }
 .spark-intro { font-size: 0.85rem; color: #A0A0A0; font-style: italic; margin-top: 1rem; letter-spacing: 0.02em; text-align: center; }
 
@@ -765,22 +761,11 @@ a:focus-visible, button:focus-visible {
     100% { transform: scale(1.1); text-shadow: 0 0 5px rgba(0,0,0,0.1); color: var(--kodansha-black); }
 }
 .btn-spark.animating { animation: sparkBurst 0.5s ease forwards; }
-
 .spark-count { font-size: 0.85rem; font-weight: 600; color: #A0A0A0; letter-spacing: 0.05em; }
 
 .particle {
-    position: fixed;
-    pointer-events: none;
-    width: 5px;
-    height: 5px;
-    background-color: var(--kodansha-black);
-    border-radius: 50%;
-    z-index: 9999;
-    animation: shoot 0.6s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+    position: fixed; pointer-events: none; width: 5px; height: 5px; background-color: var(--kodansha-black); border-radius: 50%; z-index: 9999; animation: shoot 0.6s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
 }
-@keyframes shoot {
-    0% { transform: translate(0, 0) scale(1); opacity: 1; }
-    100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
-}
+@keyframes shoot { 0% { transform: translate(0, 0) scale(1); opacity: 1; } 100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; } }
    
 
