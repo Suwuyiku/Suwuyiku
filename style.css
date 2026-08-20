@@ -601,7 +601,7 @@ a:focus-visible, button:focus-visible {
 
 /* =========================================
    11. MASTER MOBILE ENGINE (UNIFIED)
-   WHAT THIS DOES: The '@media' query means "Only apply these styles if the screen is smaller than 48rem (mobile phones/tablets)". This restructures the layout for smaller screens.
+   WHAT THIS DOES: Restructures the layout and neutralizes desktop interactions for touch screens.
    ========================================= */
 @media (max-width: 48rem) {
     body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
@@ -611,15 +611,16 @@ a:focus-visible, button:focus-visible {
     .top-nav { margin: 1rem 1rem 0 1rem; top: 1rem; width: calc(100% - 2rem); padding: 0.8rem 1.25rem; border: 0.125rem solid var(--kodansha-black); }
     .nav-links, .nav-actions { display: none; } /* Hides desktop nav links */
 
-    /* Creates the three-line mobile menu icon */
-    .hamburger-btn { display: flex; flex-direction: column; justify-content: space-between; width: 1.5rem; height: 1.1rem; background: none; border: none; cursor: pointer; z-index: 1001; }
+    /* Creates the three-line mobile menu icon with an expanded invisible thumb-target */
+    .hamburger-btn { display: flex; flex-direction: column; justify-content: space-between; width: 1.5rem; height: 1.1rem; background: none; border: none; cursor: pointer; z-index: 1001; padding: 0.5rem; margin: -0.5rem; box-sizing: content-box; }
     .hamburger-btn .bar { height: 0.15rem; width: 100%; background-color: var(--kodansha-black); border-radius: 2px; }
 
     /* The slide-out side menu for mobile */
     .mobile-sidebar { display: flex; flex-direction: column; position: fixed; top: 0; right: 0; width: 18rem; height: 100vh; height: 100dvh; background-color: var(--bg-color); border-left: 0.125rem solid var(--kodansha-black); z-index: 2000; transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); padding: 0; }
     .mobile-sidebar.active { transform: translateX(0); } /* Slides menu in when active class is added by JS */
 
-    .sidebar-header { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 1.5rem 0 1.5rem; }
+    /* iOS Notch Safe Area implemented here */
+    .sidebar-header { display: flex; justify-content: space-between; align-items: center; padding: max(1.25rem, env(safe-area-inset-top)) 1.5rem 0 1.5rem; }
     .sidebar-logo { font-size: 1.4rem; font-weight: 800; letter-spacing: 0.05rem; color: var(--kodansha-black); }
     .close-sidebar-btn { background: none; border: none; font-size: 2.5rem; cursor: pointer; color: var(--kodansha-black); line-height: 0.8; }
     
@@ -646,7 +647,8 @@ a:focus-visible, button:focus-visible {
     
     .hero-content { padding: 1rem 1.25rem; margin: -2.5rem 1rem 0 1rem; width: auto; max-width: none; box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.08); }
     .hero h1 { font-size: 1.5rem; letter-spacing: -0.02rem; line-height: 1.15; }
-    .hero h2 { font-size: 0.75rem; margin-top: 0.35rem; line-height: 1.4; }
+    /* Upgraded Typography for legibility */
+    .hero h2 { font-size: 0.85rem; margin-top: 0.5rem; line-height: 1.5; }
     
     /* Converts Bento Grid from 3 columns to 1 column */
     .bento-container { grid-template-columns: 1fr; padding: 0 1rem; gap: 1rem; }
@@ -691,4 +693,17 @@ a:focus-visible, button:focus-visible {
     .connections-header-wrapper { flex-direction: column !important; align-items: flex-start !important; gap: 1.5rem; }
     .search-container, .search-input, .search-input:focus { width: 100%; }
     .connections-grid { column-count: 1 !important; }
+
+    /* Neutralize "Sticky" Hovers on Touch Screens */
+    .library-card-special .mini-manga:nth-child(n):hover,
+    .shop-card-special .creator-avatar:nth-child(n):hover,
+    .manga-book:nth-child(n):hover { 
+        transform: none !important; 
+        z-index: auto !important; 
+        border-color: transparent !important; 
+    }
+    
+    /* Restore the default mobile shadow that gets wiped by the hover kill-switch */
+    .manga-book:nth-child(n):hover { box-shadow: -8px 0 15px rgba(0, 0, 0, 0.2) !important; }
+    .library-card-special .mini-manga:nth-child(n):hover { box-shadow: 4px 0 10px rgba(0, 0, 0, 0.15) !important; }
 }
