@@ -1,7 +1,10 @@
 export default {
     async fetch(request, env) {
+        // =================================================--------
+        // SECURITY UPGRADE: Locks the API to your official domain only
+        // =================================================--------
         const corsHeaders = {
-            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Origin": "https://suwuyiku.pages.dev",
             "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
             "Access-Control-Allow-Headers": "Content-Type, Authorization",
         };
@@ -22,6 +25,7 @@ export default {
                 const pageId = url.searchParams.get("id");
                 if (!pageId) return new Response("Missing ID", { status: 400, headers: corsHeaders });
 
+                // Creates unique buckets for each individual post
                 const ipKey = `spark_ip_${clientIP}_${pageId}`;
                 const countKey = `sparks_count_${pageId}`;
 
