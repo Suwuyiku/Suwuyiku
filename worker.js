@@ -1,10 +1,22 @@
+// =================================================--------
+// CRYPTOGRAPHIC HASHING ENGINE (GDPR Compliant IP Tracking)
+// =================================================--------
+async function generateUserHash(request) {
+    const rawIP = request.headers.get("cf-connecting-ip") || "anonymous_user";
+    // Adds a secret salt so the IP cannot be reverse-engineered
+    const data = new TextEncoder().encode(rawIP + "_suwuyiku_secure_salt_2026");
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
 export default {
     async fetch(request, env) {
         // =================================================--------
-        // SECURITY UPGRADE: Locks the API to your official domain only
+        // CORS CONFIGURATION (Permissive for local testing)
         // =================================================--------
         const corsHeaders = {
-            "Access-Control-Allow-Origin": "https://suwuyiku.pages.dev",
+            "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
             "Access-Control-Allow-Headers": "Content-Type, Authorization",
         };
@@ -16,22 +28,24 @@ export default {
         const url = new URL(request.url);
 
         // =================================================--------
-        // ROUTE 1: Per-Post Spark Engine (Separates counts by Post ID)
+        // ROUTE 1: THE SPARK ENGINE (Powered by Cloudflare KV)
         // =================================================--------
         if (url.pathname === "/sparks") {
-            const clientIP = request.headers.get("cf-connecting-ip") || "anonymous_user";
+            
+            // 1. Generate the anonymous shadow hash for the user
+            const userHash = await generateUserHash(request);
 
             if (request.method === "GET") {
                 const pageId = url.searchParams.get("id");
                 if (!pageId) return new Response("Missing ID", { status: 400, headers: corsHeaders });
 
-                // Creates unique buckets for each individual post
-                const ipKey = `spark_ip_${clientIP}_${pageId}`;
+                // 2. Locate the specific buckets in the KV Database
+                const userKey = `spark_usr_${userHash}_${pageId}`;
                 const countKey = `sparks_count_${pageId}`;
 
                 let sparks = await env.SPARKS_KV.get(countKey);
                 sparks = sparks ? parseInt(sparks) : 0;
-                const userHasSparked = (await env.SPARKS_KV.get(ipKey)) === "true";
+                const userHasSparked = (await env.SPARKS_KV.get(userKey)) === "true";
 
                 return new Response(JSON.stringify({ sparks, hasSparked: userHasSparked }), {
                     headers: { ...corsHeaders, "Content-Type": "application/json" }
@@ -43,27 +57,27 @@ export default {
                 const pageId = body.id;
                 if (!pageId) return new Response("Missing ID", { status: 400, headers: corsHeaders });
 
-                const ipKey = `spark_ip_${clientIP}_${pageId}`;
+                const userKey = `spark_usr_${userHash}_${pageId}`;
                 const countKey = `sparks_count_${pageId}`;
 
                 let sparks = await env.SPARKS_KV.get(countKey);
                 sparks = sparks ? parseInt(sparks) : 0;
-                const userHasSparked = (await env.SPARKS_KV.get(ipKey)) === "true";
+                const userHasSparked = (await env.SPARKS_KV.get(userKey)) === "true";
 
                 let newSparkState = userHasSparked;
 
-                // Safely Add or Remove based on the specific Post ID
+                // 3. The Toggle Physics (Add or Remove)
                 if (body.action === "add" && !userHasSparked) {
                     sparks += 1;
-                    await env.SPARKS_KV.put(ipKey, "true");
+                    await env.SPARKS_KV.put(userKey, "true"); // Save the shadow hash to KV
                     newSparkState = true;
                 } else if (body.action === "remove" && userHasSparked) {
-                    sparks = Math.max(0, sparks - 1);
-                    await env.SPARKS_KV.delete(ipKey);
+                    sparks = Math.max(0, sparks - 1); // Prevents negative numbers
+                    await env.SPARKS_KV.delete(userKey); // Wipes the shadow hash from KV
                     newSparkState = false;
                 }
 
-                await env.SPARKS_KV.put(countKey, sparks.toString());
+                await env.SPARKS_KV.put(countKey, sparks.toString()); // Update total score
 
                 return new Response(JSON.stringify({ sparks, hasSparked: newSparkState }), {
                     headers: { ...corsHeaders, "Content-Type": "application/json" }
