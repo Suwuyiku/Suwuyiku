@@ -1,24 +1,26 @@
 /* =========================================
-   1. GLOBAL RESET & BASE VARS
-   WHAT THIS DOES: Clears default browser styling and sets up reusable colors (variables) so you only have to change a color once to update the whole site.
+   SUWUYIKU • MASTER STYLESHEET
+   
+   TABLE OF CONTENTS:
+   01. CORE & VARIABLES
+   02. NAVIGATION & FOOTER
+   03. HOME PAGE: HERO & BENTO GRID
+   04. HOME PAGE: BENTO CARD COMPONENTS
+   05. PAGE: ABOUT (Reserved Room)
+   06. PAGE: SHOP (Reserved Room)
+   07. PAGE: LIBRARY
+   08. PAGE: FRAGMENTS
+   09. PAGE: CONNECTIONS
+   10. PAGE: CONTACT & LEGAL
+   11. MOBILE RESPONSIVE ENGINE (Must remain at bottom)
    ========================================= */
 
-/* The 'html' selector sets the base size for the whole page */
-html {
-    font-size: 100%;
-    -webkit-text-size-adjust: 100%; 
-    scroll-behavior: smooth; /* Makes clicking anchor links scroll smoothly instead of jumping */
-}
+/* =========================================
+   01. CORE & VARIABLES
+   ========================================= */
+html { font-size: 100%; -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
 
-/* The '*' means 'select everything'. This resets default margins and padding that browsers add. */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box; /* Ensures borders/padding don't increase the total width of elements */
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-}
-
-/* ':root' is where we store variables. Use var(--name) to apply these later! */
 :root {
     --bg-color: #FFFFFF;
     --text-color: #111111;
@@ -27,411 +29,33 @@ html {
     --hover-gray: #888888; 
 }
 
-/* =========================================
-   CUSTOM TEXT SELECTION
-   WHAT THIS DOES: Changes the highlight color when a user clicks and drags over text.
-   ========================================= */
 ::selection { background-color: var(--kodansha-black); color: var(--bg-color); }
-::-moz-selection { background-color: var(--kodansha-black); color: var(--bg-color); } /* For Firefox */
-
+::-moz-selection { background-color: var(--kodansha-black); color: var(--bg-color); }
 .site-footer ::selection, .site-footer *::selection { background-color: var(--bg-color); color: var(--kodansha-black); }
 .site-footer ::-moz-selection, .site-footer *::-moz-selection { background-color: var(--bg-color); color: var(--kodansha-black); }
 
-/* Defines the main body of the webpage */
-body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    padding: 0; 
-    line-height: 1.6; /* Makes text easier to read by spacing out lines */
-    overflow-x: hidden; /* Prevents horizontal scrolling */
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Ensures the footer stays at the bottom even if the page is short */
-}
-
-/* Accessibility feature: Adds a visible outline when navigating with the 'Tab' key */
-a:focus-visible, button:focus-visible {
-    outline: 0.125rem solid var(--hover-gray);
-    outline-offset: 0.125rem;
-}
-
-/* =========================================
-   2. TOP NAVIGATION
-   WHAT THIS DOES: Styles the top menu bar and makes it "stick" to the top when scrolling.
-   ========================================= */
-.top-nav {
-    position: sticky; /* Keeps the nav visible at the top while scrolling */
-    top: 1rem; 
-    z-index: 1000; /* Ensures the nav stays on top of other elements */
-    display: flex; /* Flexbox aligns items side-by-side */
-    justify-content: space-between; /* Pushes the logo left and links right */
-    align-items: center;
-    border: 0.125rem solid var(--kodansha-black); 
-    padding: 1rem 1.5rem; 
-    background-color: var(--bg-color);
-    margin: 1rem 1.5vw 0 1.5vw;
-}
-
-.nav-left { display: flex; align-items: center; }
-
-.logo-text {
-    font-size: 1.4rem; 
-    font-weight: 800; 
-    letter-spacing: 0.05rem;
-    color: var(--kodansha-black);
-}
-
-.nav-right { display: flex; align-items: center; gap: 2rem; }
-.nav-links { list-style: none; display: flex; gap: 0.875rem; }
-
-/* The links in the top menu */
-.nav-links li a {
-    position: relative;
-    text-decoration: none; /* Removes the default underline */
-    color: var(--kodansha-black);
-    font-weight: 500; 
-    font-size: 1.25rem; 
-    padding-bottom: 0.25rem; 
-    transition: color 0.25s ease-out; /* Makes the color change smooth on hover */
-}
-
-/* The animated underline effect when hovering over menu links */
-.nav-links li a::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 0.125rem;
-    bottom: 0;
-    left: 0;
-    background-color: var(--kodansha-black);
-    transform: scaleX(0); /* Starts hidden (width of 0) */
-    transform-origin: bottom right;
-    transition: transform 0.25s ease-out, background-color 0.25s ease-out;
-}
-
-.nav-links li a:hover { color: var(--hover-gray); }
-.nav-links li a:hover::after {
-    transform: scaleX(1); /* Grows to full width on hover */
-    transform-origin: bottom left;
-    background-color: var(--hover-gray);
-}
-
-.nav-actions { display: flex; gap: 0.625rem; }
-
-/* Styles the buttons in the navigation bar */
-.btn-action {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    color: var(--kodansha-black);
-    border: 0.125rem solid var(--kodansha-black);
-    padding: 0.375rem 0.875rem;
-    font-size: 0.75rem; 
-    font-weight: 700;
-    letter-spacing: 0.12rem; 
-    text-transform: uppercase;
-    transition: all 0.2s ease;
-}
-
-/* Inverts colors when hovering over the button */
-.btn-action:hover {
-    background-color: var(--kodansha-black);
-    border-color: var(--kodansha-black);
-    color: var(--bg-color);
-}
-
-/* =========================================
-   HERO SECTION (KODANSHA REFINED LAYOUT)
-   WHAT THIS DOES: The big visual banner at the very top of the page.
-   ========================================= */
-.hero {
-    position: relative;
-    margin-top: 0; 
-    margin-bottom: 4rem;
-    width: 100%; 
-}
-
-/* The colored background with a fading gradient mask at the bottom */
-.hero-anime-banner {
-    position: relative;
-    width: 100%;
-    height: 36rem;
-    background-color: #84C1E9; 
-    overflow: hidden;
-    /* This mask creates a fade-out effect at the bottom of the image */
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
-    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
-}
-
-.hero-tint-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensures the image fills the space without stretching */
-    object-position: center 10%; 
-    mix-blend-mode: multiply; /* Blends the image with the blue background color */
-    opacity: 0.45; 
-}
-
-/* The text box that overlaps the hero image */
-.hero-content {
-    position: relative;
-    z-index: 2; 
-    background-color: var(--bg-color, #ffffff);
-    border: 0.125rem solid var(--kodansha-black); 
-    box-shadow: 4px 6px 14px rgba(0, 0, 0, 0.08); 
-    padding: 1.25rem 2.25rem; 
-    max-width: 38rem; 
-    text-align: left; 
-    margin-top: -4rem; /* Pulls the content up so it overlaps the image */
-    -webkit-user-select: none; 
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none; 
-}
-
-.hero-content h1 { margin-top: 0; margin-bottom: 0.5rem; }
-.hero-content h2 { margin-bottom: 0; }
-
-/* =========================================
-   3. HERO & BENTO DASHBOARD
-   WHAT THIS DOES: The grid layout showing different content cards below the main banner.
-   ========================================= */
-.hero {
-    position: relative;
-    padding: 0 3rem 2.5rem 3rem; 
-    max-width: 75rem;
-    margin: -4.7rem auto 0 auto; 
-    width: 100%;
-}
-
-.hero h1 { font-size: 2.6rem; font-weight: 600; letter-spacing: -0.02rem; max-width: 50rem; line-height: 1.2; }
-.hero h2 { font-size: 1.1rem; font-weight: 400; color: #666666; margin-top: 1rem; letter-spacing: 0.02rem; line-height: 1.6; max-width: 100%; }
-
-/* The glowing text effect on a specific name/title */
-.name-glow {
-    transition: color 0.4s cubic-bezier(0.22, 1, 0.36, 1), text-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-    cursor: default; 
-}
-
-.name-glow:hover {
-    color: #84C1E9; 
-    text-shadow: 0 0 8px rgba(132, 193, 233, 0.9), 0 0 16px rgba(132, 193, 233, 0.6), 0 0 24px rgba(132, 193, 233, 0.3); 
-}
-
-/* CSS Grid layout for the Bento cards (3 columns) */
-.bento-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
-    grid-auto-rows: 15rem; /* Each row is 15rem tall */
-    gap: 1rem;
-    max-width: 75rem;
-    margin: 0 auto 6rem auto; /* Centers the container */
-    padding: 0 3rem;
-    width: 100%; 
-}
-
-.bento-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    text-decoration: none;
-    color: var(--text-color);
-    border: 0.0625rem solid var(--border-color);
-    background-color: var(--bg-color);
-    padding: 2rem;
-    transition: border-color 0.2s ease, transform 0.2s ease; /* Smooth hover effects */
-}
-
-.card-content h2 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.25rem; }
-.card-content p { font-size: 0.85rem; color: #666666; }
-
-/* Special sizing classes to make cards take up more space in the grid */
-.card-large { grid-row: span 2; } /* Takes up 2 rows vertically */
-.card-large-wide { grid-column: span 2; } /* Takes up 2 columns horizontally */
-.card-full-wide { grid-column: 1 / -1; } /* Spans the entire width */
-
-.bento-card:hover { border-color: #4A5C6A; transform: translateY(-0.125rem); /* Slight lift effect */ }
-
-/* =========================================
-   BENTO CARD MINI PREVIEWS
-   WHAT THIS DOES: The animated stack of mini manga books inside specific cards.
-   ========================================= */
-.library-card-special { position: relative; overflow: hidden; }
-
-.mini-manga-stack {
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end; 
-    width: 100%;
-    margin-top: 1rem;
-    padding-right: 2rem; 
-    padding-bottom: 0.5rem;
-}
-
-.mini-manga {
-    width: 4.5rem; height: auto; border-radius: 4px; position: relative; box-sizing: border-box; border: 1px solid transparent; box-shadow: 4px 0 10px rgba(0, 0, 0, 0.15); flex-shrink: 0;
-    -webkit-backface-visibility: hidden; backface-visibility: hidden; filter: contrast(1.02) saturate(1.05); will-change: transform, margin, border-color, box-shadow;
-    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), margin 0.7s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, box-shadow 0.7s cubic-bezier(0.22, 1, 0.36, 1); cursor: pointer;
-}
-
-/* Staggers the rotation and height of each mini book so they look messy */
-.mini-manga:nth-child(1) { z-index: 5; transform: rotate(-3deg) translateY(2px); }
-.mini-manga:nth-child(2) { z-index: 4; transform: rotate(1deg) translateY(-1px); }
-.mini-manga:nth-child(3) { z-index: 3; transform: rotate(-2deg) translateY(3px); }
-.mini-manga:nth-child(4) { z-index: 2; transform: rotate(2deg) translateY(0px); }
-.mini-manga:nth-child(5) { z-index: 1; transform: rotate(-1deg) translateY(2px); }
-
-/* Pulls the books over each other to create the overlapping stack */
-.mini-manga:not(:first-child) { margin-left: -2.7rem; }
-
-/* Spreads the books out slightly when hovering over the card container */
-.library-card-special:hover .mini-manga:not(:first-child) { margin-left: -0.5rem; }
-.library-card-special:hover .mini-manga:nth-child(1) { transform: rotate(-4deg) translateY(0); }
-.library-card-special:hover .mini-manga:nth-child(2) { transform: rotate(-2deg) translateY(0); }
-.library-card-special:hover .mini-manga:nth-child(3) { transform: rotate(0deg) translateY(0); }
-.library-card-special:hover .mini-manga:nth-child(4) { transform: rotate(2deg) translateY(0); }
-.library-card-special:hover .mini-manga:nth-child(5) { transform: rotate(4deg) translateY(0); }
-
-/* Pops a specific book out when hovered over */
-.library-card-special .mini-manga:nth-child(odd):hover { transform: translate(0.25rem, -1.2rem) rotate(-3deg) scale(1.05) !important; z-index: 10 !important; border-color: var(--kodansha-black); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); }
-.library-card-special .mini-manga:nth-child(even):hover { transform: translate(0.25rem, -1.2rem) rotate(3deg) scale(1.05) !important; z-index: 10 !important; border-color: var(--kodansha-black); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); }
-
-/* Prevents images from being draggable, useful for UI elements */
+body { background-color: var(--bg-color); color: var(--text-color); padding: 0; line-height: 1.6; overflow-x: hidden; display: flex; flex-direction: column; min-height: 100vh; }
+a:focus-visible, button:focus-visible { outline: 0.125rem solid var(--hover-gray); outline-offset: 0.125rem; }
 .protected-img { -webkit-user-drag: none !important; user-select: none !important; -moz-user-select: none !important; -webkit-user-select: none !important; -ms-user-select: none !important; pointer-events: auto; }
 
-/* =========================================
-   PREMIUM EASTER EGG GLINT ENGINE 
-   WHAT THIS DOES: Adds sparkling star animations that appear when interacting with specific cards.
-   ========================================= */
-.library-card-special::after {
-    content: "✦"; position: absolute; color: #FFFFFF; opacity: 0; pointer-events: none; z-index: 100;
-    text-shadow: 0 0 12px rgba(255, 255, 255, 1), 0 0 25px rgba(255, 255, 255, 0.8); will-change: transform, opacity;
-}
-
-/* Uses the ':has' selector to detect which book is hovered, and triggers specific animations */
-.library-card-special:has(.mini-manga:nth-child(1):hover)::after { right: 20rem; bottom: 4.5rem; font-size: 1.2rem; animation: easter-glint-1 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 2.8s forwards; }
-.library-card-special:has(.mini-manga:nth-child(2):hover)::after { right: 15rem; bottom: 5.5rem; font-size: 1.8rem; color: #88CCFF; text-shadow: 0 0 15px rgba(136, 204, 255, 1), 0 0 30px rgba(0, 119, 255, 0.9); animation: easter-glint-2 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 3.5s forwards; }
-.library-card-special:has(.mini-manga:nth-child(3):hover)::after { right: 11.5rem; bottom: 3.5rem; font-size: 0.9rem; animation: easter-glint-3 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 2.5s forwards; }
-.library-card-special:has(.mini-manga:nth-child(4):hover)::after { right: 7.5rem; bottom: 6.5rem; font-size: 1.4rem; animation: easter-glint-4 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 3.2s forwards; }
-.library-card-special:has(.mini-manga:nth-child(5):hover)::after { right: 3.5rem; bottom: 4rem; font-size: 1.1rem; animation: easter-glint-5 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 2.9s forwards; }
-
-/* The Keyframes tell the browser exactly how the animation should move over time */
-@keyframes easter-glint-1 { 0% { opacity: 0; transform: scale(0) rotate(-45deg); } 40% { opacity: 1; transform: scale(1.2) rotate(45deg); } 100% { opacity: 0; transform: scale(0) rotate(135deg); } }
-@keyframes easter-glint-2 { 0% { opacity: 0; transform: scale(0) rotate(0deg); filter: brightness(1); } 40% { opacity: 1; transform: scale(1.3) rotate(90deg); filter: brightness(1.5); } 100% { opacity: 0; transform: scale(0) rotate(180deg); filter: brightness(1); } }
-@keyframes easter-glint-3 { 0% { opacity: 0; transform: scale(0) rotate(30deg); } 40% { opacity: 1; transform: scale(1.5) rotate(120deg); } 100% { opacity: 0; transform: scale(0) rotate(210deg); } }
-@keyframes easter-glint-4 { 0% { opacity: 0; transform: scale(0) rotate(-90deg); } 40% { opacity: 1; transform: scale(1.1) rotate(0deg); } 100% { opacity: 0; transform: scale(0) rotate(90deg); } }
-@keyframes easter-glint-5 { 0% { opacity: 0; transform: scale(0) rotate(15deg); } 40% { opacity: 1; transform: scale(1.3) rotate(105deg); } 100% { opacity: 0; transform: scale(0) rotate(195deg); } }
 
 /* =========================================
-   DYNAMIC HOVER TITLES
-   WHAT THIS DOES: Shows text titles depending on which mini-book you hover over.
+   02. NAVIGATION & FOOTER
    ========================================= */
-.dynamic-book-title { color: var(--hover-gray); margin-left: 0.25rem; position: absolute; pointer-events: none; font-family: 'Inter', sans-serif; font-weight: 500; opacity: 0; transition: opacity 0.3s ease; }
-.library-card-special:has(.mini-manga:hover) .dynamic-book-title { opacity: 1; }
-.book-title { display: none; opacity: 0; transition: opacity 0.3s ease; white-space: nowrap; }
+.top-nav { position: sticky; top: 1rem; z-index: 1000; display: flex; justify-content: space-between; align-items: center; border: 0.125rem solid var(--kodansha-black); padding: 1rem 1.5rem; background-color: var(--bg-color); margin: 1rem 1.5vw 0 1.5vw; }
+.nav-left { display: flex; align-items: center; }
+.logo-text { font-size: 1.4rem; font-weight: 800; letter-spacing: 0.05rem; color: var(--kodansha-black); }
+.nav-right { display: flex; align-items: center; gap: 2rem; }
+.nav-links { list-style: none; display: flex; gap: 0.875rem; }
+.nav-links li a { position: relative; text-decoration: none; color: var(--kodansha-black); font-weight: 500; font-size: 1.25rem; padding-bottom: 0.25rem; transition: color 0.25s ease-out; }
+.nav-links li a::after { content: ''; position: absolute; width: 100%; height: 0.125rem; bottom: 0; left: 0; background-color: var(--kodansha-black); transform: scaleX(0); transform-origin: bottom right; transition: transform 0.25s ease-out, background-color 0.25s ease-out; }
+.nav-links li a:hover { color: var(--hover-gray); }
+.nav-links li a:hover::after { transform: scaleX(1); transform-origin: bottom left; background-color: var(--hover-gray); }
 
-.library-card-special:has(.mini-manga:nth-child(1):hover) .title-1,
-.library-card-special:has(.mini-manga:nth-child(2):hover) .title-2,
-.library-card-special:has(.mini-manga:nth-child(3):hover) .title-3,
-.library-card-special:has(.mini-manga:nth-child(4):hover) .title-4,
-.library-card-special:has(.mini-manga:nth-child(5):hover) .title-5 { display: inline-block; opacity: 1; }
+.nav-actions { display: flex; gap: 0.625rem; }
+.btn-action { display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--kodansha-black); border: 0.125rem solid var(--kodansha-black); padding: 0.375rem 0.875rem; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12rem; text-transform: uppercase; transition: all 0.2s ease; }
+.btn-action:hover { background-color: var(--kodansha-black); border-color: var(--kodansha-black); color: var(--bg-color); }
 
-/* Custom font styles for different titles */
-.jp { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important; font-weight: 400 !important; font-size: 0.9rem !important; letter-spacing: normal !important; vertical-align: baseline; }
-.title-1 .eng { font-family: 'Caveat', cursive; font-weight: 700; font-size: 1.15rem; display: inline-block; transform: translateY(0.12rem); }
-.title-2 .eng { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 0.9rem; letter-spacing: -0.02rem; }
-.title-3 .eng { font-family: 'Sniglet', cursive; font-weight: 400; font-size: 0.9rem; }
-.title-4 .eng { font-family: 'Teko', sans-serif; font-weight: 600; font-size: 1.1rem; letter-spacing: 0.05rem; display: inline-block; transform: translateY(0.08rem); }
-.title-5 .eng { font-family: 'Bebas Neue', sans-serif; font-weight: 400; font-size: 1.05rem; letter-spacing: 0.05rem; display: inline-block; transform: translateY(0.08rem); }
-
-/* =========================================
-   SHOP BENTO CARD (CREATOR AVATARS)
-   WHAT THIS DOES: Animates circular avatar images in the shop card area.
-   ========================================= */
-.shop-card-special { position: relative; overflow: hidden; }
-.shop-creator-avatars { display: flex; align-items: flex-end; justify-content: flex-end; width: 100%; margin-top: 1rem; padding-right: 1.5rem; padding-bottom: 0.5rem; }
-
-.creator-avatar {
-    width: 3.5rem; height: 3.5rem; border-radius: 50%; object-fit: cover; position: relative; border: 0.12rem solid var(--bg-color); box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); background-color: var(--border-color); will-change: transform, box-shadow, border-color; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.8s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.5s ease-out; cursor: pointer;
-}
-
-.creator-avatar:nth-child(1) { z-index: 2; transform: rotate(-2deg); }
-.creator-avatar:nth-child(2) { margin-left: -1.2rem; transform: translateY(-4px) rotate(2deg); z-index: 1; }
-
-.shop-card-special:hover .creator-avatar:nth-child(1) { transform: translateX(-0.4rem) rotate(-5deg); }
-.shop-card-special:hover .creator-avatar:nth-child(2) { transform: translateX(0.4rem) translateY(-4px) rotate(5deg); }
-.shop-card-special .creator-avatar:hover { z-index: 10 !important; transform: translateY(-8px) rotate(0deg) !important; }
-
-.shop-card-special .creator-avatar:nth-child(1):hover { border-color: #F8E08E; box-shadow: 0 8px 20px rgba(248, 224, 142, 0.45); }
-.shop-card-special .creator-avatar:nth-child(2):hover { border-color: #D1C1FA; box-shadow: 0 8px 20px rgba(209, 193, 250, 0.45); }
-
-.dynamic-creator-title { color: var(--hover-gray); margin-left: 0.35rem; position: absolute; pointer-events: none; font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.02rem; transform: translateY(0.15rem); opacity: 0; transition: opacity 0.3s ease; }
-.shop-card-special:has(.creator-avatar:hover) .dynamic-creator-title { opacity: 1; }
-.creator-name { display: none; opacity: 0; transition: opacity 0.3s ease; white-space: nowrap; }
-.shop-card-special:has(.creator-avatar:nth-child(1):hover) .creator-1,
-.shop-card-special:has(.creator-avatar:nth-child(2):hover) .creator-2 { display: inline-block; opacity: 1; }
-
-/* =========================================
-   7. LIBRARY / MANGA SHELF
-   WHAT THIS DOES: Animates a larger horizontal row of books (like a bookshelf)
-   ========================================= */
-.library-container { max-width: 75rem; margin: 4rem auto 8rem auto; padding: 0 3rem; width: 100%; }
-.library-header { text-align: center; margin-bottom: 5rem; }
-.library-header h1 { font-size: 3rem; font-weight: 800; letter-spacing: -0.02rem; }
-.library-header p { color: #666666; margin-top: 1rem; font-size: 1.1rem; }
-
-/* Allows horizontal scrolling for touch devices */
-.manga-shelf { display: flex; justify-content: center; align-items: center; padding: 2rem 0 4rem 0; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-
-.manga-book {
-    width: 12rem; height: auto; flex-shrink: 0; border-radius: 6px; position: relative; box-sizing: border-box; border: 1px solid transparent; box-shadow: 10px 0 20px rgba(0, 0, 0, 0.15); -webkit-backface-visibility: hidden; backface-visibility: hidden; filter: contrast(1.02) saturate(1.05); will-change: transform, margin, border-color, box-shadow; transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), margin 0.7s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, box-shadow 0.7s cubic-bezier(0.22, 1, 0.36, 1); cursor: pointer;
-}
-
-.manga-book:nth-child(1) { z-index: 8; transform: rotate(-3deg) translateY(3px); }
-.manga-book:nth-child(2) { z-index: 7; transform: rotate(1.5deg) translateY(-2px); }
-.manga-book:nth-child(3) { z-index: 6; transform: rotate(-2deg) translateY(4px); }
-.manga-book:nth-child(4) { z-index: 5; transform: rotate(2.5deg) translateY(-1px); }
-.manga-book:nth-child(5) { z-index: 4; transform: rotate(-1.5deg) translateY(2px); }
-.manga-book:nth-child(6) { z-index: 3; transform: rotate(3deg) translateY(-3px); }
-.manga-book:nth-child(7) { z-index: 2; transform: rotate(-2.5deg) translateY(1px); }
-.manga-book:nth-child(8) { z-index: 1; transform: rotate(1deg) translateY(2px); }
-
-.manga-book:not(:first-child) { margin-left: -7.5rem; }
-
-.manga-shelf:hover .manga-book:not(:first-child) { margin-left: -2rem; }
-.manga-shelf:hover .manga-book:nth-child(1) { transform: rotate(-7deg) translateY(0); }
-.manga-shelf:hover .manga-book:nth-child(2) { transform: rotate(-5deg) translateY(0); }
-.manga-shelf:hover .manga-book:nth-child(3) { transform: rotate(-3deg) translateY(0); }
-.manga-shelf:hover .manga-book:nth-child(4) { transform: rotate(-1deg) translateY(0); }
-.manga-shelf:hover .manga-book:nth-child(5) { transform: rotate(1deg) translateY(0); }
-.manga-shelf:hover .manga-book:nth-child(6) { transform: rotate(3deg) translateY(0); }
-.manga-shelf:hover .manga-book:nth-child(7) { transform: rotate(5deg) translateY(0); }
-.manga-shelf:hover .manga-book:nth-child(8) { transform: rotate(7deg) translateY(0); }
-
-.manga-book:nth-child(odd):hover { transform: translate(0.5rem, -2.5rem) rotate(-3deg) scale(1.03) !important; z-index: 20 !important; border-color: var(--kodansha-black); box-shadow: 0 25px 45px rgba(0, 0, 0, 0.4); }
-.manga-book:nth-child(even):hover { transform: translate(0.5rem, -2.5rem) rotate(3deg) scale(1.03) !important; z-index: 20 !important; border-color: var(--kodansha-black); box-shadow: 0 25px 45px rgba(0, 0, 0, 0.4); }
-
-/* =========================================
-   8. LEGAL PAGES
-   WHAT THIS DOES: Basic text styling for pages like Privacy Policy or Terms of Service.
-   ========================================= */
-.legal-container { max-width: 50rem; margin: 4rem auto 8rem auto; padding: 0 3rem; width: 100%; }
-.legal-header { text-align: center; margin-bottom: 1.5rem; }
-.legal-header h1 { font-size: 3rem; font-weight: 800; letter-spacing: -0.02rem; }
-.legal-content { font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif; }
-.legal-content h2 { font-size: 1.1rem; font-weight: 700; text-transform: uppercase; margin: 3rem 0 1rem 0; letter-spacing: 0.05rem; }
-.legal-content p, .legal-content ul { margin-bottom: 1.5rem; color: #111111; line-height: 1.7; font-size: 0.95rem; }
-.legal-content strong { font-weight: 700; color: #000000; }
-.legal-content ul { padding-left: 2rem; }
-.legal-content li { margin-bottom: 0.75rem; }
-.legal-content a { color: var(--kodansha-black) !important; font-weight: 600; text-decoration: underline; text-decoration-thickness: 0.125rem; text-underline-offset: 0.2rem; transition: color 0.2s ease; }
-.legal-content a:hover { color: var(--hover-gray) !important; }
-
-/* =========================================
-   9. ARCHITECTURAL FOOTER
-   WHAT THIS DOES: The dark section at the very bottom of every page containing extra links.
-   ========================================= */
 .site-footer { background-color: var(--kodansha-black); color: var(--bg-color); padding: 5rem calc(1.5vw + 1.5rem) 2rem calc(1.5vw + 1.5rem); margin-top: auto; width: 100%; }
 .footer-top { display: flex; justify-content: space-between; width: 100%; }
 .footer-brand { width: 42%; padding-right: 3rem; }
@@ -447,315 +71,350 @@ a:focus-visible, button:focus-visible {
 .footer-bottom-links { display: flex; align-items: center; flex-wrap: wrap; gap: 1.25rem; }
 .footer-bottom-links a { color: #777777; text-decoration: none; transition: color 0.2s ease; }
 .footer-bottom-links a:hover { color: var(--bg-color); }
-.hamburger-btn, .mobile-sidebar, .sidebar-overlay { display: none; } /* Hidden on desktop */
+.hamburger-btn, .mobile-sidebar, .sidebar-overlay { display: none; } 
 .no-scroll { overflow: hidden; }
 
+
 /* =========================================
-   10. CONTACT PAGE STYLING ENGINE
-   WHAT THIS DOES: Layout and design for contact forms, anonymous inputs, and route cards.
+   03. HOME PAGE: HERO & BENTO GRID
    ========================================= */
-.contact-page-wrapper {
-    display: block; 
-    width: 100%; 
-    max-width: 65rem;
-    margin: 0 auto;
-    padding: 3rem 1.5rem 6rem 1.5rem;
-    text-align: left; 
-}
+.hero { position: relative; padding: 0 3rem 2.5rem 3rem; max-width: 75rem; margin: -4.7rem auto 0 auto; width: 100%; }
+.hero-anime-banner { position: relative; width: 100%; height: 36rem; background-color: #84C1E9; overflow: hidden; -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%); mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%); }
+.hero-tint-img { width: 100%; height: 100%; object-fit: cover; object-position: center 10%; mix-blend-mode: multiply; opacity: 0.45; }
+.hero-content { position: relative; z-index: 2; background-color: var(--bg-color); border: 0.125rem solid var(--kodansha-black); box-shadow: 4px 6px 14px rgba(0, 0, 0, 0.08); padding: 1.25rem 2.25rem; max-width: 38rem; text-align: left; margin-top: -4rem; user-select: none; }
+.hero-content h1 { margin-top: 0; margin-bottom: 0.5rem; font-size: 2.6rem; font-weight: 600; letter-spacing: -0.02rem; line-height: 1.2; }
+.hero-content h2 { font-size: 1.1rem; font-weight: 400; color: #666666; margin-top: 1rem; letter-spacing: 0.02rem; line-height: 1.6; }
+.name-glow { transition: color 0.4s ease, text-shadow 0.4s ease; cursor: default; }
+.name-glow:hover { color: #84C1E9; text-shadow: 0 0 8px rgba(132, 193, 233, 0.9), 0 0 16px rgba(132, 193, 233, 0.6); }
 
-.contact-page-header {
-    text-align: left;
-    margin-bottom: 3rem;
-    border-bottom: 0.125rem solid var(--kodansha-black);
-    padding-bottom: 1.5rem;
-}
+.bento-container { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 15rem; gap: 1rem; max-width: 75rem; margin: 0 auto 6rem auto; padding: 0 3rem; width: 100%; }
+.bento-card { display: flex; flex-direction: column; justify-content: space-between; text-decoration: none; color: var(--text-color); border: 0.0625rem solid var(--border-color); background-color: var(--bg-color); padding: 2rem; transition: border-color 0.2s ease, transform 0.2s ease; }
+.card-content h2 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.25rem; }
+.card-content p { font-size: 0.85rem; color: #666666; }
+.bento-card:hover { border-color: #4A5C6A; transform: translateY(-0.125rem); }
 
+.card-large { grid-row: span 2; } 
+.card-large-wide { grid-column: span 2; } 
+.card-full-wide { grid-column: 1 / -1; } 
+
+
+/* =========================================
+   04. HOME PAGE: BENTO CARD COMPONENTS
+   ========================================= */
+/* About Box Anchor */
+.about-card-special { position: relative; overflow: hidden; }
+.about-anchor-mark { position: absolute; bottom: 1.5rem; left: 1.5rem; width: 3.5rem; height: auto; opacity: 0.08; filter: grayscale(100%); pointer-events: none; transition: opacity 0.3s ease; }
+.about-card-special:hover .about-anchor-mark { opacity: 0.15; }
+
+/* Fragments Dual-Live Monitor */
+.fragments-card-special .card-content { display: flex; flex-direction: column; justify-content: flex-start; height: 100%; }
+.fragments-card-special .card-content p { margin-bottom: 0; }
+.live-monitor { display: flex; flex-direction: column; gap: 0.25rem; margin-top: 0.75rem; }
+.monitor-row { font-family: 'Inter', monospace; font-size: 0.75rem; color: #777777; display: flex; align-items: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.monitor-row.faded { opacity: 0.45; font-size: 0.7rem; }
+.monitor-bullet { font-size: 0.75rem; color: var(--kodansha-black); margin-right: 0.4rem; }
+
+/* Connections Visual Directory */
+.connections-card-special { flex-direction: column; justify-content: space-between; }
+.connections-preview-icons { display: flex; gap: 1.25rem; align-items: flex-end; justify-content: flex-end; width: 100%; }
+.connections-preview-icons svg { width: 1.35rem; height: 1.35rem; fill: #CCCCCC; transition: fill 0.2s ease, transform 0.2s ease; }
+.connections-card-special:hover .connections-preview-icons svg { fill: var(--kodansha-black); }
+.connections-card-special:hover .connections-preview-icons svg:nth-child(1) { transform: translateY(-2px); transition-delay: 0s; }
+.connections-card-special:hover .connections-preview-icons svg:nth-child(2) { transform: translateY(-2px); transition-delay: 0.05s; }
+.connections-card-special:hover .connections-preview-icons svg:nth-child(3) { transform: translateY(-2px); transition-delay: 0.1s; }
+
+/* Shop Creator Avatars */
+.shop-card-special { position: relative; overflow: hidden; }
+.shop-creator-avatars { display: flex; align-items: flex-end; justify-content: flex-end; width: 100%; margin-top: 1rem; padding-right: 1.5rem; padding-bottom: 0.5rem; }
+.creator-avatar { width: 3.5rem; height: 3.5rem; border-radius: 50%; object-fit: cover; position: relative; border: 0.12rem solid var(--bg-color); box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); background-color: var(--border-color); transition: transform 0.8s ease, box-shadow 0.8s ease, border-color 0.5s ease; cursor: pointer; }
+.creator-avatar:nth-child(1) { z-index: 2; transform: rotate(-2deg); }
+.creator-avatar:nth-child(2) { margin-left: -1.2rem; transform: translateY(-4px) rotate(2deg); z-index: 1; }
+.shop-card-special:hover .creator-avatar:nth-child(1) { transform: translateX(-0.4rem) rotate(-5deg); }
+.shop-card-special:hover .creator-avatar:nth-child(2) { transform: translateX(0.4rem) translateY(-4px) rotate(5deg); }
+.shop-card-special .creator-avatar:hover { z-index: 10 !important; transform: translateY(-8px) rotate(0deg) !important; }
+.shop-card-special .creator-avatar:nth-child(1):hover { border-color: #F8E08E; box-shadow: 0 8px 20px rgba(248, 224, 142, 0.45); }
+.shop-card-special .creator-avatar:nth-child(2):hover { border-color: #D1C1FA; box-shadow: 0 8px 20px rgba(209, 193, 250, 0.45); }
+.dynamic-creator-title { color: var(--hover-gray); margin-left: 0.35rem; position: absolute; pointer-events: none; font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 500; opacity: 0; transition: opacity 0.3s ease; }
+.shop-card-special:has(.creator-avatar:hover) .dynamic-creator-title { opacity: 1; }
+.creator-name { display: none; opacity: 0; transition: opacity 0.3s ease; white-space: nowrap; }
+.shop-card-special:has(.creator-avatar:nth-child(1):hover) .creator-1,
+.shop-card-special:has(.creator-avatar:nth-child(2):hover) .creator-2 { display: inline-block; opacity: 1; }
+
+/* Library Mini Manga Stack */
+.library-card-special { position: relative; overflow: hidden; }
+.mini-manga-stack { display: flex; align-items: flex-end; justify-content: flex-end; width: 100%; margin-top: 1rem; padding-right: 2rem; padding-bottom: 0.5rem; }
+.mini-manga { width: 4.5rem; height: auto; border-radius: 4px; position: relative; border: 1px solid transparent; box-shadow: 4px 0 10px rgba(0, 0, 0, 0.15); flex-shrink: 0; transition: transform 0.7s ease, margin 0.7s ease, border-color 0.3s ease, box-shadow 0.7s ease; cursor: pointer; }
+.mini-manga:nth-child(1) { z-index: 5; transform: rotate(-3deg) translateY(2px); }
+.mini-manga:nth-child(2) { z-index: 4; transform: rotate(1deg) translateY(-1px); }
+.mini-manga:nth-child(3) { z-index: 3; transform: rotate(-2deg) translateY(3px); }
+.mini-manga:nth-child(4) { z-index: 2; transform: rotate(2deg) translateY(0px); }
+.mini-manga:nth-child(5) { z-index: 1; transform: rotate(-1deg) translateY(2px); }
+.mini-manga:not(:first-child) { margin-left: -2.7rem; }
+.library-card-special:hover .mini-manga:not(:first-child) { margin-left: -0.5rem; }
+.library-card-special:hover .mini-manga:nth-child(1) { transform: rotate(-4deg) translateY(0); }
+.library-card-special:hover .mini-manga:nth-child(2) { transform: rotate(-2deg) translateY(0); }
+.library-card-special:hover .mini-manga:nth-child(3) { transform: rotate(0deg) translateY(0); }
+.library-card-special:hover .mini-manga:nth-child(4) { transform: rotate(2deg) translateY(0); }
+.library-card-special:hover .mini-manga:nth-child(5) { transform: rotate(4deg) translateY(0); }
+.library-card-special .mini-manga:nth-child(odd):hover { transform: translate(0.25rem, -1.2rem) rotate(-3deg) scale(1.05) !important; z-index: 10 !important; border-color: var(--kodansha-black); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); }
+.library-card-special .mini-manga:nth-child(even):hover { transform: translate(0.25rem, -1.2rem) rotate(3deg) scale(1.05) !important; z-index: 10 !important; border-color: var(--kodansha-black); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); }
+
+/* Library Glint Animation Engine */
+.library-card-special::after { content: "✦"; position: absolute; color: #FFFFFF; opacity: 0; pointer-events: none; z-index: 100; text-shadow: 0 0 12px rgba(255, 255, 255, 1), 0 0 25px rgba(255, 255, 255, 0.8); }
+.library-card-special:has(.mini-manga:nth-child(1):hover)::after { right: 20rem; bottom: 4.5rem; font-size: 1.2rem; animation: easter-glint-1 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 2.8s forwards; }
+.library-card-special:has(.mini-manga:nth-child(2):hover)::after { right: 15rem; bottom: 5.5rem; font-size: 1.8rem; color: #88CCFF; text-shadow: 0 0 15px rgba(136, 204, 255, 1), 0 0 30px rgba(0, 119, 255, 0.9); animation: easter-glint-2 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 3.5s forwards; }
+.library-card-special:has(.mini-manga:nth-child(3):hover)::after { right: 11.5rem; bottom: 3.5rem; font-size: 0.9rem; animation: easter-glint-3 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 2.5s forwards; }
+.library-card-special:has(.mini-manga:nth-child(4):hover)::after { right: 7.5rem; bottom: 6.5rem; font-size: 1.4rem; animation: easter-glint-4 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 3.2s forwards; }
+.library-card-special:has(.mini-manga:nth-child(5):hover)::after { right: 3.5rem; bottom: 4rem; font-size: 1.1rem; animation: easter-glint-5 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 2.9s forwards; }
+@keyframes easter-glint-1 { 0% { opacity: 0; transform: scale(0) rotate(-45deg); } 40% { opacity: 1; transform: scale(1.2) rotate(45deg); } 100% { opacity: 0; transform: scale(0) rotate(135deg); } }
+@keyframes easter-glint-2 { 0% { opacity: 0; transform: scale(0) rotate(0deg); filter: brightness(1); } 40% { opacity: 1; transform: scale(1.3) rotate(90deg); filter: brightness(1.5); } 100% { opacity: 0; transform: scale(0) rotate(180deg); filter: brightness(1); } }
+@keyframes easter-glint-3 { 0% { opacity: 0; transform: scale(0) rotate(30deg); } 40% { opacity: 1; transform: scale(1.5) rotate(120deg); } 100% { opacity: 0; transform: scale(0) rotate(210deg); } }
+@keyframes easter-glint-4 { 0% { opacity: 0; transform: scale(0) rotate(-90deg); } 40% { opacity: 1; transform: scale(1.1) rotate(0deg); } 100% { opacity: 0; transform: scale(0) rotate(90deg); } }
+@keyframes easter-glint-5 { 0% { opacity: 0; transform: scale(0) rotate(15deg); } 40% { opacity: 1; transform: scale(1.3) rotate(105deg); } 100% { opacity: 0; transform: scale(0) rotate(195deg); } }
+
+/* Library Hover Dynamic Titles */
+.dynamic-book-title { color: var(--hover-gray); margin-left: 0.25rem; position: absolute; pointer-events: none; font-family: 'Inter', sans-serif; font-weight: 500; opacity: 0; transition: opacity 0.3s ease; }
+.library-card-special:has(.mini-manga:hover) .dynamic-book-title { opacity: 1; }
+.book-title { display: none; opacity: 0; transition: opacity 0.3s ease; white-space: nowrap; }
+.library-card-special:has(.mini-manga:nth-child(1):hover) .title-1, .library-card-special:has(.mini-manga:nth-child(2):hover) .title-2, .library-card-special:has(.mini-manga:nth-child(3):hover) .title-3, .library-card-special:has(.mini-manga:nth-child(4):hover) .title-4, .library-card-special:has(.mini-manga:nth-child(5):hover) .title-5 { display: inline-block; opacity: 1; }
+.jp { font-family: 'Inter', sans-serif !important; font-weight: 400 !important; font-size: 0.9rem !important; letter-spacing: normal !important; vertical-align: baseline; }
+.title-1 .eng { font-family: 'Caveat', cursive; font-weight: 700; font-size: 1.15rem; display: inline-block; transform: translateY(0.12rem); }
+.title-2 .eng { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 0.9rem; letter-spacing: -0.02rem; }
+.title-3 .eng { font-family: 'Sniglet', cursive; font-weight: 400; font-size: 0.9rem; }
+.title-4 .eng { font-family: 'Teko', sans-serif; font-weight: 600; font-size: 1.1rem; letter-spacing: 0.05rem; display: inline-block; transform: translateY(0.08rem); }
+.title-5 .eng { font-family: 'Bebas Neue', sans-serif; font-weight: 400; font-size: 1.05rem; letter-spacing: 0.05rem; display: inline-block; transform: translateY(0.08rem); }
+
+
+/* =========================================
+   05. PAGE: ABOUT (Reserved Room)
+   ========================================= */
+/* Future About Page styling will go here */
+
+
+/* =========================================
+   06. PAGE: SHOP (Reserved Room)
+   ========================================= */
+/* Future Shop / Commerce styling will go here */
+
+
+/* =========================================
+   07. PAGE: LIBRARY
+   ========================================= */
+.library-container { max-width: 75rem; margin: 4rem auto 8rem auto; padding: 0 3rem; width: 100%; }
+.library-header { text-align: center; margin-bottom: 5rem; }
+.library-header h1 { font-size: 3rem; font-weight: 800; letter-spacing: -0.02rem; }
+.library-header p { color: #666666; margin-top: 1rem; font-size: 1.1rem; }
+
+.manga-shelf { display: flex; justify-content: center; align-items: center; padding: 2rem 0 4rem 0; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.manga-book { width: 12rem; height: auto; flex-shrink: 0; border-radius: 6px; position: relative; border: 1px solid transparent; box-shadow: 10px 0 20px rgba(0, 0, 0, 0.15); transition: transform 0.7s ease, margin 0.7s ease, border-color 0.3s ease, box-shadow 0.7s ease; cursor: pointer; }
+.manga-book:nth-child(1) { z-index: 8; transform: rotate(-3deg) translateY(3px); }
+.manga-book:nth-child(2) { z-index: 7; transform: rotate(1.5deg) translateY(-2px); }
+.manga-book:nth-child(3) { z-index: 6; transform: rotate(-2deg) translateY(4px); }
+.manga-book:nth-child(4) { z-index: 5; transform: rotate(2.5deg) translateY(-1px); }
+.manga-book:nth-child(5) { z-index: 4; transform: rotate(-1.5deg) translateY(2px); }
+.manga-book:nth-child(6) { z-index: 3; transform: rotate(3deg) translateY(-3px); }
+.manga-book:nth-child(7) { z-index: 2; transform: rotate(-2.5deg) translateY(1px); }
+.manga-book:nth-child(8) { z-index: 1; transform: rotate(1deg) translateY(2px); }
+.manga-book:not(:first-child) { margin-left: -7.5rem; }
+.manga-shelf:hover .manga-book:not(:first-child) { margin-left: -2rem; }
+.manga-shelf:hover .manga-book:nth-child(1) { transform: rotate(-7deg) translateY(0); }
+.manga-shelf:hover .manga-book:nth-child(2) { transform: rotate(-5deg) translateY(0); }
+.manga-shelf:hover .manga-book:nth-child(3) { transform: rotate(-3deg) translateY(0); }
+.manga-shelf:hover .manga-book:nth-child(4) { transform: rotate(-1deg) translateY(0); }
+.manga-shelf:hover .manga-book:nth-child(5) { transform: rotate(1deg) translateY(0); }
+.manga-shelf:hover .manga-book:nth-child(6) { transform: rotate(3deg) translateY(0); }
+.manga-shelf:hover .manga-book:nth-child(7) { transform: rotate(5deg) translateY(0); }
+.manga-shelf:hover .manga-book:nth-child(8) { transform: rotate(7deg) translateY(0); }
+.manga-book:nth-child(odd):hover { transform: translate(0.5rem, -2.5rem) rotate(-3deg) scale(1.03) !important; z-index: 20 !important; border-color: var(--kodansha-black); box-shadow: 0 25px 45px rgba(0, 0, 0, 0.4); }
+.manga-book:nth-child(even):hover { transform: translate(0.5rem, -2.5rem) rotate(3deg) scale(1.03) !important; z-index: 20 !important; border-color: var(--kodansha-black); box-shadow: 0 25px 45px rgba(0, 0, 0, 0.4); }
+
+
+/* =========================================
+   08. PAGE: FRAGMENTS
+   ========================================= */
+.fragments-header { margin-bottom: 3rem; border-bottom: 0.125rem solid var(--kodansha-black); padding-bottom: 1.5rem; }
+.fragments-header h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.03em; color: var(--kodansha-black); margin-bottom: 0.5rem; }
+.fragments-header p { font-size: 1rem; color: #777777; }
+.fragment-item { padding: 2rem 0; border-bottom: 1px solid var(--border-color); cursor: pointer; transition: transform 0.3s ease, padding-left 0.3s ease; }
+.fragment-item:hover { transform: translateX(4px); padding-left: 0.5rem; }
+.fragment-meta { display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: #A0A0A0; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
+.meta-category { font-weight: 700; color: var(--kodansha-black); }
+.fragment-title { font-size: 1.5rem; font-weight: 700; color: var(--kodansha-black); line-height: 1.3; transition: color 0.2s ease; }
+.fragment-item:hover .fragment-title { color: var(--hover-gray); }
+
+#fragments-canvas { display: none; animation: fadeIn 0.5s ease forwards; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.btn-back { display: inline-flex; align-items: center; gap: 0.5rem; background: none; border: none; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #777777; cursor: pointer; margin-bottom: 3rem; transition: color 0.2s ease; }
+.btn-back:hover { color: var(--kodansha-black); }
+.canvas-title { font-size: 2.2rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 1rem; }
+.canvas-body { margin-top: 3rem; font-size: 1.1rem; line-height: 1.8; color: #222222; min-height: 30vh; overflow-wrap: break-word; word-wrap: break-word; }
+.canvas-body p { margin-bottom: 1.75rem; }
+.canvas-body h2, .canvas-body h3 { font-weight: 800; margin: 2.5rem 0 1rem 0; color: var(--kodansha-black); }
+.image-skeleton { background: #f4f4f4; border-radius: 6px; margin: 2.5rem auto; text-align: center; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+.canvas-image { width: 100%; height: auto; display: block; opacity: 0; transition: opacity 0.5s ease-in; margin: 0; }
+
+.spark-container { margin-top: 5rem; padding-top: 3rem; border-top: 1px solid var(--border-color); display: flex; flex-direction: column; align-items: center; gap: 0.75rem; position: relative; }
+.spark-intro { font-size: 0.85rem; color: #A0A0A0; font-style: italic; margin-top: 1rem; letter-spacing: 0.02em; text-align: center; }
+.btn-spark { background: none; border: none; font-size: 2rem; color: #DDDDDD; cursor: pointer; transition: color 0.3s ease; position: relative; z-index: 10; }
+.btn-spark:hover:not(:disabled) { color: var(--hover-gray); }
+.btn-spark.active { color: var(--kodansha-black); }
+.btn-spark:disabled { cursor: default; }
+
+@keyframes sparkBurst { 0% { transform: scale(1); text-shadow: 0 0 0px rgba(0,0,0,0); } 50% { transform: scale(1.4); text-shadow: 0 0 20px rgba(0,0,0,0.4); color: var(--kodansha-black); } 100% { transform: scale(1.1); text-shadow: 0 0 5px rgba(0,0,0,0.1); color: var(--kodansha-black); } }
+.btn-spark.animating { animation: sparkBurst 0.5s ease forwards; }
+.spark-count { font-size: 0.85rem; font-weight: 600; color: #A0A0A0; letter-spacing: 0.05em; }
+.particle { position: fixed; pointer-events: none; width: 5px; height: 5px; background-color: var(--kodansha-black); border-radius: 50%; z-index: 9999; animation: shoot 0.6s cubic-bezier(0.1, 0.8, 0.3, 1) forwards; }
+@keyframes shoot { 0% { transform: translate(0, 0) scale(1); opacity: 1; } 100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; } }
+
+
+/* =========================================
+   09. PAGE: CONNECTIONS
+   ========================================= */
+.connections-header-wrapper { display: flex; flex-direction: row; justify-content: space-between; align-items: flex-end; width: 100%; margin-bottom: 3rem; border-bottom: 0.125rem solid var(--kodansha-black); padding-bottom: 1.5rem; }
+.connections-header-left { text-align: left; }
+.connections-header-left h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.03em; color: var(--kodansha-black); margin-bottom: 0.5rem; }
+.connections-header-left p { font-size: 1rem; color: #777777; }
+
+/* Search Bar */
+.search-container { position: relative; }
+.search-input { width: 14rem; padding: 0.6rem 1rem 0.6rem 2.25rem; border: 0.125rem solid var(--border-color); border-radius: 4px; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 500; outline: none; background-color: #FAFAFA; transition: all 0.4s ease; }
+.search-input:focus { width: 20rem; border-color: var(--kodansha-black); background-color: var(--bg-color); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+.search-icon { position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); width: 1rem; height: 1rem; fill: #888888; pointer-events: none; transition: fill 0.3s ease; }
+.search-input:focus + .search-icon { fill: var(--kodansha-black); }
+
+/* Grid Layout */
+.connections-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start; width: 100%; }
+.filterable-card { padding: 2.5rem; width: 100%; box-sizing: border-box; }
+body.is-searching .card-category { opacity: 0.3; transition: opacity 0.3s ease; } 
+
+.card-category { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: #A0A0A0; margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem; }
+.platform-title-wrapper { display: flex; align-items: center; gap: 0.75rem; }
+.platform-text-block { display: flex; flex-direction: column; gap: 0.15rem; text-align: left; }
+.route-title { font-size: 1rem; font-weight: 700; color: var(--kodansha-black); line-height: 1.2; transition: color 0.3s ease; }
+.universal-handle { color: #A0A0A0; font-weight: 500; font-size: 0.75rem; letter-spacing: 0.02rem; margin-left: 0; }
+
+.platform-item { display: flex; flex-direction: column; width: 100%; padding: 0; transition: opacity 0.3s ease; }
+.platform-item .route-header { margin-bottom: 0.5rem; }
+.platform-item .route-desc { padding-left: 1.9rem; }
+.platform-item:not(:last-child) { border-bottom: 1px solid var(--border-color); padding-bottom: 1.25rem; margin-bottom: 1.25rem; }
+
+/* Connection Hover Engine */
+.platform-icon { width: 1.15rem; height: 1.15rem; fill: var(--kodansha-black); transition: fill 0.3s ease, transform 0.3s ease; }
+.platform-item.instagram:hover .platform-icon { fill: #E1306C; transform: scale(1.15); }
+.platform-item.instagram:hover .route-title { color: #E1306C; }
+.platform-item.fanbox:hover .platform-icon { fill: #0052CC; transform: scale(1.15); }
+.platform-item.fanbox:hover .route-title { color: #0052CC; }
+.platform-item.twitter:hover .platform-icon { fill: #1DA1F2; transform: scale(1.15); }
+.platform-item.twitter:hover .route-title { color: #1DA1F2; }
+.platform-item.youtube:hover .platform-icon { fill: #FF0000; transform: scale(1.15); }
+.platform-item.youtube:hover .route-title { color: #FF0000; }
+.platform-item.steam:hover .platform-icon { fill: #66C0F4; transform: scale(1.15); }
+.platform-item.steam:hover .route-title { color: #66C0F4; }
+.platform-item.xbox:hover .platform-icon { fill: #107C10; transform: scale(1.15); }
+.platform-item.xbox:hover .route-title { color: #107C10; }
+.platform-item.discord:hover .platform-icon { fill: #5865F2; transform: scale(1.15); }
+.platform-item.discord:hover .route-title { color: #5865F2; }
+.platform-item.spotify:hover .platform-icon { fill: #1DB954; transform: scale(1.15); }
+.platform-item.spotify:hover .route-title { color: #1DB954; }
+.platform-item.github:hover .platform-icon { fill: #888888; transform: scale(1.15); }
+.platform-item.github:hover .route-title { color: #888888; }
+
+
+/* =========================================
+   10. PAGE: CONTACT & LEGAL
+   ========================================= */
+.contact-page-wrapper { display: block; width: 100%; max-width: 65rem; margin: 0 auto; padding: 3rem 1.5rem 6rem 1.5rem; text-align: left; }
+.contact-page-header { text-align: left; margin-bottom: 3rem; border-bottom: 0.125rem solid var(--kodansha-black); padding-bottom: 1.5rem; }
 .contact-page-header h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.03em; color: var(--kodansha-black); margin-bottom: 0.5rem; }
 .contact-page-header p { font-size: 1rem; color: #777777; }
-
 .contact-layout { display: grid; grid-template-columns: 1.2fr 1fr; gap: 1.5rem; align-items: start; }
 .contact-routes-column { display: flex; flex-direction: column; gap: 1.5rem; }
-
 .route-card { padding: 2rem; display: flex; flex-direction: column; justify-content: center; }
 .route-divider { border-bottom: 1px solid var(--border-color); padding-bottom: 1.5rem; margin-bottom: 1.5rem; }
 .route-header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 0.5rem; }
 .route-desc { font-size: 0.85rem; color: #777777; line-height: 1.5; padding-right: 1rem; margin: 0; }
-
 .btn-connect { display: inline-block; padding: 0.4rem 0.8rem; border: 1px solid var(--border-color); border-radius: 4px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--kodansha-black); text-decoration: none; transition: all 0.2s ease; white-space: nowrap; }
 .btn-connect:hover { border-color: var(--kodansha-black); background-color: var(--kodansha-black); color: var(--bg-color); }
-
 .anonymous-card { padding: 3rem 2.5rem; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background-color: #FAFAFA; }
 .anonymous-card h2 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
 .anonymous-card p { font-size: 0.95rem; color: #777777; margin-bottom: 2rem; }
 .btn-soft-blue { display: inline-block; padding: 0.85rem 1.75rem; background-color: #EBF4FA; color: #3A7CA5; border-radius: 8px; font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: all 0.2s ease; }
 .btn-soft-blue:hover { background-color: #D6EAF8; color: #2C6385; transform: translateY(-1px); }
 
-/* =========================================
-   12. CONNECTIONS SEARCH & MASONRY LAYOUT
-   WHAT THIS DOES: Creates the dynamic grid of social links/platforms and the search bar above them.
-   ========================================= */
-.connections-header-wrapper {
-    display: flex;
-    flex-direction: row; 
-    justify-content: space-between;
-    align-items: flex-end;
-    width: 100%; 
-    margin-bottom: 3rem;
-    border-bottom: 0.125rem solid var(--kodansha-black);
-    padding-bottom: 1.5rem;
-}
+.legal-container { max-width: 50rem; margin: 4rem auto 8rem auto; padding: 0 3rem; width: 100%; }
+.legal-header { text-align: center; margin-bottom: 1.5rem; }
+.legal-header h1 { font-size: 3rem; font-weight: 800; letter-spacing: -0.02rem; }
+.legal-content { font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif; }
+.legal-content h2 { font-size: 1.1rem; font-weight: 700; text-transform: uppercase; margin: 3rem 0 1rem 0; letter-spacing: 0.05rem; }
+.legal-content p, .legal-content ul { margin-bottom: 1.5rem; color: #111111; line-height: 1.7; font-size: 0.95rem; }
+.legal-content strong { font-weight: 700; color: #000000; }
+.legal-content ul { padding-left: 2rem; }
+.legal-content li { margin-bottom: 0.75rem; }
+.legal-content a { color: var(--kodansha-black) !important; font-weight: 600; text-decoration: underline; text-decoration-thickness: 0.125rem; text-underline-offset: 0.2rem; transition: color 0.2s ease; }
+.legal-content a:hover { color: var(--hover-gray) !important; }
 
-.connections-header-left { text-align: left; }
-.connections-header-left h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.03em; color: var(--kodansha-black); margin-bottom: 0.5rem; }
-.connections-header-left p { font-size: 1rem; color: #777777; }
-
-/* The Dynamic Search Bar */
-.search-container { position: relative; }
-.search-input { width: 14rem; padding: 0.6rem 1rem 0.6rem 2.25rem; border: 0.125rem solid var(--border-color); border-radius: 4px; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 500; outline: none; background-color: #FAFAFA; transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-.search-input:focus { width: 20rem; border-color: var(--kodansha-black); background-color: var(--bg-color); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-.search-icon { position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); width: 1rem; height: 1rem; fill: #888888; pointer-events: none; transition: fill 0.3s ease; }
-.search-input:focus + .search-icon { fill: var(--kodansha-black); }
-
-/* Masonry Layout: This makes blocks dynamically flow UP into empty spaces instead of rigid rows */
-.connections-grid {
-    column-count: 2; /* Forces content into 2 columns */
-    column-gap: 1.5rem;
-    width: 100%;
-    display: block; 
-}
-
-.filterable-card {
-    padding: 2.5rem; 
-    display: inline-block; /* Forces perfect Masonry wrapping */
-    width: 100%;
-    margin-bottom: 1.5rem;
-    break-inside: avoid; /* Prevents a card from splitting in half across columns */
-    -webkit-column-break-inside: avoid;
-    box-sizing: border-box;
-}
-
-.card-category { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: #A0A0A0; margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem; }
-.platform-title-wrapper { display: flex; align-items: center; gap: 0.75rem; }
-.platform-text-block { display: flex; flex-direction: column; gap: 0.15rem; text-align: left; }
-.route-title { font-size: 1rem; font-weight: 700; color: var(--kodansha-black); line-height: 1.2; transition: color 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
-.universal-handle { color: #A0A0A0; font-weight: 500; font-size: 0.75rem; letter-spacing: 0.02rem; margin-left: 0; }
-
-/* Styles the individual link/social row */
-.platform-item { 
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding: 0; 
-    transition: opacity 0.3s ease; 
-}
-
-.platform-item .route-header { margin-bottom: 0.5rem; }
-
-/* 1. Aligns the description text perfectly under the username */
-.platform-item .route-desc {
-    padding-left: 1.9rem; /* Matches the exact width of the icon + gap */
-}
-
-/* Perfected Spacing System for lists */
-.platform-item:not(:last-child) {
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 1.25rem; 
-    margin-bottom: 1.25rem; 
-}
 
 /* =========================================
-   13. CONNECTIONS HOVER EASTER EGGS
-   WHAT THIS DOES: Changes colors and adds scaling animations to social icons when hovered.
-   ========================================= */
-.platform-icon { width: 1.15rem; height: 1.15rem; fill: var(--kodansha-black); transition: fill 0.3s cubic-bezier(0.22, 1, 0.36, 1), transform 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
-
-/* Individual Brand Glow-Ups on Hover */
-.platform-item.instagram:hover .platform-icon { fill: #E1306C; transform: scale(1.15); }
-.platform-item.instagram:hover .route-title { color: #E1306C; }
-
-/* 2. Overrides Fanbox/Fanzai Hover Color to Deep Blue */
-.platform-item.fanbox:hover .platform-icon { fill: #0052CC; transform: scale(1.15); }
-.platform-item.fanbox:hover .route-title { color: #0052CC; }
-
-.platform-item.twitter:hover .platform-icon { fill: #1DA1F2; transform: scale(1.15); }
-.platform-item.twitter:hover .route-title { color: #1DA1F2; }
-
-.platform-item.youtube:hover .platform-icon { fill: #FF0000; transform: scale(1.15); }
-.platform-item.youtube:hover .route-title { color: #FF0000; }
-
-.platform-item.steam:hover .platform-icon { fill: #66C0F4; transform: scale(1.15); }
-.platform-item.steam:hover .route-title { color: #66C0F4; }
-
-.platform-item.xbox:hover .platform-icon { fill: #107C10; transform: scale(1.15); }
-.platform-item.xbox:hover .route-title { color: #107C10; }
-
-.platform-item.discord:hover .platform-icon { fill: #5865F2; transform: scale(1.15); }
-.platform-item.discord:hover .route-title { color: #5865F2; }
-
-.platform-item.spotify:hover .platform-icon { fill: #1DB954; transform: scale(1.15); }
-.platform-item.spotify:hover .route-title { color: #1DB954; }
-
-.platform-item.github:hover .platform-icon { fill: #888888; transform: scale(1.15); }
-.platform-item.github:hover .route-title { color: #888888; }
-
-/* =========================================
-   NEW BENTO GRID UPGRADES (About, Fragments, Connections)
-   ========================================= */
-
-/* 1. About Box Vertical Anchor */
-.about-card-special { position: relative; overflow: hidden; }
-.about-anchor-mark {
-    position: absolute;
-    bottom: 1.5rem;
-    left: 1.5rem;
-    width: 3.5rem;
-    height: auto;
-    opacity: 0.08; /* Extremely faint watermark effect */
-    filter: grayscale(100%);
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-}
-.about-card-special:hover .about-anchor-mark { opacity: 0.15; }
-
-/* 2. Fragments Dual-Live Monitor */
-.fragments-card-special .card-content { 
-    display: flex; 
-    flex-direction: column; 
-    justify-content: flex-start; 
-    height: 100%; 
-}
-.fragments-card-special .card-content p {
-    margin-bottom: 0; 
-}
-.live-monitor {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    margin-top: 0.75rem; 
-}
-.monitor-row {
-    font-family: 'Inter', monospace;
-    font-size: 0.75rem;
-    color: #777777;
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-.monitor-row.faded {
-    opacity: 0.45; /* Drops the visibility for the older entry */
-    font-size: 0.7rem; /* Slight scale down for hierarchy */
-}
-.monitor-bullet {
-    font-size: 0.75rem;
-    color: var(--kodansha-black);
-    margin-right: 0.4rem;
-}
-
-/* 3. Connections Visual Directory (FIXED ALIGNMENT) */
-.connections-card-special { 
-    flex-direction: column; /* Restores the standard top-to-bottom layout */
-    justify-content: space-between; 
-}
-.connections-preview-icons { 
-    display: flex; 
-    gap: 1.25rem; 
-    align-items: flex-end; 
-    justify-content: flex-end; /* Pushes the icons to the far right */
-    width: 100%;
-}
-.connections-preview-icons svg {
-    width: 1.35rem;
-    height: 1.35rem;
-    fill: #CCCCCC;
-    transition: fill 0.2s ease, transform 0.2s ease;
-}
-.connections-card-special:hover .connections-preview-icons svg { fill: var(--kodansha-black); }
-.connections-card-special:hover .connections-preview-icons svg:nth-child(1) { transform: translateY(-2px); transition-delay: 0s; }
-.connections-card-special:hover .connections-preview-icons svg:nth-child(2) { transform: translateY(-2px); transition-delay: 0.05s; }
-.connections-card-special:hover .connections-preview-icons svg:nth-child(3) { transform: translateY(-2px); transition-delay: 0.1s; }
-
-/* =========================================
-   11. MASTER MOBILE ENGINE (UNIFIED)
-   WHAT THIS DOES: Restructures the layout and neutralizes desktop interactions for touch screens.
+   11. MOBILE RESPONSIVE ENGINE
    ========================================= */
 @media (max-width: 48rem) {
     body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-    
     body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 1rem; background-color: var(--bg-color); z-index: 998; }
     
     .top-nav { margin: 1rem 1rem 0 1rem; top: 1rem; width: calc(100% - 2rem); padding: 0.8rem 1.25rem; border: 0.125rem solid var(--kodansha-black); }
-    .nav-links, .nav-actions { display: none; } /* Hides desktop nav links */
-
-    /* Creates the three-line mobile menu icon with an expanded invisible thumb-target */
+    .nav-links, .nav-actions { display: none; } 
     .hamburger-btn { display: flex; flex-direction: column; justify-content: space-between; width: 1.5rem; height: 1.1rem; background: none; border: none; cursor: pointer; z-index: 1001; padding: 0.5rem; margin: -0.5rem; box-sizing: content-box; }
     .hamburger-btn .bar { height: 0.15rem; width: 100%; background-color: var(--kodansha-black); border-radius: 2px; }
 
-    /* The slide-out side menu for mobile */
-    .mobile-sidebar { display: flex; flex-direction: column; position: fixed; top: 0; right: 0; width: 18rem; height: 100vh; height: 100dvh; background-color: var(--bg-color); border-left: 0.125rem solid var(--kodansha-black); z-index: 2000; transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); padding: 0; }
-    .mobile-sidebar.active { transform: translateX(0); } /* Slides menu in when active class is added by JS */
-
-    /* iOS Notch Safe Area implemented here */
+    .mobile-sidebar { display: flex; flex-direction: column; position: fixed; top: 0; right: 0; width: 18rem; height: 100vh; height: 100dvh; background-color: var(--bg-color); border-left: 0.125rem solid var(--kodansha-black); z-index: 2000; transform: translateX(100%); transition: transform 0.4s ease; padding: 0; }
+    .mobile-sidebar.active { transform: translateX(0); } 
     .sidebar-header { display: flex; justify-content: space-between; align-items: center; padding: max(1.25rem, env(safe-area-inset-top)) 1.5rem 0 1.5rem; }
     .sidebar-logo { font-size: 1.4rem; font-weight: 800; letter-spacing: 0.05rem; color: var(--kodansha-black); }
     .close-sidebar-btn { background: none; border: none; font-size: 2.5rem; cursor: pointer; color: var(--kodansha-black); line-height: 0.8; }
-    
     .sidebar-menu-container { padding: 2.5rem 1.5rem 0.5rem 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; width: 100%; }
-    
     .sidebar-links { list-style: none; display: flex; flex-direction: column; padding: 0; margin: 0; }
     .sidebar-links li { border-bottom: 1px solid var(--border-color); width: 100%; }
     .sidebar-links li:first-child { border-top: 1px solid var(--border-color); }
     .sidebar-links li a { display: block; padding: 0.65rem 0.5rem; font-size: 1rem; font-weight: 600; color: var(--kodansha-black); text-decoration: none; text-align: center; }
-    
     .sidebar-actions { display: flex; flex-direction: column; gap: 0.85rem; padding: 0.5rem 0.5rem; width: 100%; }
     .sidebar-btn-action { display: flex; justify-content: center; align-items: center; width: 100%; text-decoration: none; color: var(--kodansha-black); border: 0.125rem solid var(--kodansha-black); padding: 0.85rem 1rem; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12rem; text-transform: uppercase; }
-    
     .sidebar-footer { background-color: var(--kodansha-black); padding: 1.5rem 1.5rem; text-align: center; width: 100%; margin-top: auto; }
     .sidebar-footer .copyright { color: #777777; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08rem; display: block; }
-    
     .sidebar-overlay { display: block; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; height: 100dvh; background: rgba(0,0,0,0.5); z-index: 1999; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
     .sidebar-overlay.active { opacity: 1; pointer-events: auto; }
     
-    /* Shrinks the hero banner and margins to fit small screens */
     .hero { padding: 0 0 2rem 0; margin-top: -0.5rem; }
     .hero-anime-banner { height: 65vw; width: calc(100% - 2rem); margin: 0 auto; } 
     .hero-tint-img { object-fit: cover; object-position: center bottom; } 
-    
     .hero-content { padding: 1rem 1.25rem; margin: -2.5rem 1rem 0 1rem; width: auto; max-width: none; box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.08); }
     .hero h1 { font-size: 1.5rem; letter-spacing: -0.02rem; line-height: 1.15; }
-    /* Upgraded Typography for legibility */
     .hero h2 { font-size: 0.85rem; margin-top: 0.5rem; line-height: 1.5; }
     
-    /* Converts Bento Grid from 3 columns to 1 column */
     .bento-container { grid-template-columns: 1fr; padding: 0 1rem; gap: 1rem; }
     .card-large, .card-large-wide, .card-full-wide { grid-row: span 1; grid-column: span 1; }
     .bento-card { padding: 1.5rem; }
-    
-    .library-card-special:hover .mini-manga:not(:first-child) { margin-left: -2.7rem; }
     .dynamic-book-title, .dynamic-creator-title { display: none !important; }
 
-    .legal-container { margin: 1.5rem auto 4rem auto; padding: 0 1rem; }
-    .legal-header h1 { font-size: 2.2rem; line-height: 1.2; }
-    .legal-content h2 { font-size: 1.05rem; margin: 2rem 0 1rem 0; }
-    .legal-content p, .legal-content ul { font-size: 0.95rem; line-height: 1.6; }
-    
-    .manga-shelf { justify-content: flex-start; padding-bottom: 2rem; }
-    .manga-book { width: 8rem; box-shadow: -8px 0 15px rgba(0, 0, 0, 0.2); }
-    .manga-book:not(:first-child) { margin-left: -5rem; }
-    
-    /* Stacks footer columns on top of each other */
-    .footer-top { flex-direction: column; gap: 3rem; text-align: center; }
-    .footer-brand, .footer-links { flex: 1 1 auto; width: 100%; padding-right: 0; }
-    .footer-brand p { margin: 0 auto; }
-    .footer-links { grid-template-columns: 1fr; gap: 2.5rem; }
-    .link-column { text-align: center; }
-    .link-column ul { align-items: center; }
-    
-    .footer-bottom { flex-direction: column; gap: 1.5rem; text-align: center; }
-    .footer-bottom-links { flex-direction: column; gap: 0.85rem; }
-    .footer-bottom-links .divider { display: none; }
-    .site-footer { padding: 4rem 1rem 2rem 1rem; }
+    /* Neutralize Sticky Hovers on Touch Screens */
+    .library-card-special .mini-manga:nth-child(n):hover,
+    .shop-card-special .creator-avatar:nth-child(n):hover,
+    .manga-book:nth-child(n):hover { transform: none !important; z-index: auto !important; border-color: transparent !important; }
+    .manga-book:nth-child(n):hover { box-shadow: -8px 0 15px rgba(0, 0, 0, 0.2) !important; }
+    .library-card-special .mini-manga:nth-child(n):hover { box-shadow: 4px 0 10px rgba(0, 0, 0, 0.15) !important; }
+    .library-card-special:hover .mini-manga:not(:first-child) { margin-left: -2.7rem; }
+
+    .fragments-header { margin-bottom: 2rem; padding-bottom: 1.25rem; }
+    .fragments-header h1 { font-size: 2rem; }
+    .canvas-title { font-size: 1.8rem; }
+    .canvas-body { font-size: 1.05rem; margin-top: 2rem; }
+    .fragment-meta { flex-direction: column; align-items: flex-start; gap: 0.25rem; }
+    .fragment-title { font-size: 1.25rem; }
+    .fragment-item { padding: 1.5rem 0; }
+    .fragment-item:hover { transform: none; padding-left: 0; }
+
+    .connections-header-wrapper { flex-direction: column !important; align-items: flex-start !important; gap: 1.5rem; }
+    .search-container, .search-input, .search-input:focus { width: 100%; }
+    .connections-grid { grid-template-columns: 1fr !important; }
 
     .contact-page-wrapper { padding: 2.5rem 1rem 3rem 1rem; } 
     .contact-page-header h1 { font-size: 2rem; }
@@ -766,83 +425,23 @@ a:focus-visible, button:focus-visible {
     .route-desc { padding-right: 0; margin-bottom: 0.5rem; }
     .anonymous-card { padding: 3rem 1.5rem; }
 
-    /* Connections specific mobile fixes (1 column Masonry) */
-    .connections-header-wrapper { flex-direction: column !important; align-items: flex-start !important; gap: 1.5rem; }
-    .search-container, .search-input, .search-input:focus { width: 100%; }
-    .connections-grid { column-count: 1 !important; }
+    .manga-shelf { justify-content: flex-start; padding-bottom: 2rem; }
+    .manga-book { width: 8rem; box-shadow: -8px 0 15px rgba(0, 0, 0, 0.2); }
+    .manga-book:not(:first-child) { margin-left: -5rem; }
 
-    /* Neutralize "Sticky" Hovers on Touch Screens */
-    .library-card-special .mini-manga:nth-child(n):hover,
-    .shop-card-special .creator-avatar:nth-child(n):hover,
-    .manga-book:nth-child(n):hover { 
-        transform: none !important; 
-        z-index: auto !important; 
-        border-color: transparent !important; 
-    }
-    
-    /* Restore the default mobile shadow that gets wiped by the hover kill-switch */
-    .manga-book:nth-child(n):hover { box-shadow: -8px 0 15px rgba(0, 0, 0, 0.2) !important; }
-    .library-card-special .mini-manga:nth-child(n):hover { box-shadow: 4px 0 10px rgba(0, 0, 0, 0.15) !important; }
+    .legal-container { margin: 1.5rem auto 4rem auto; padding: 0 1rem; }
+    .legal-header h1 { font-size: 2.2rem; line-height: 1.2; }
+    .legal-content h2 { font-size: 1.05rem; margin: 2rem 0 1rem 0; }
+    .legal-content p, .legal-content ul { font-size: 0.95rem; line-height: 1.6; }
 
-   /* Fragments Mobile Adjustments */
-    .fragments-header { margin-bottom: 2rem; padding-bottom: 1.25rem; }
-    .fragments-header h1 { font-size: 2rem; }
-    .canvas-title { font-size: 1.8rem; }
-    .canvas-body { font-size: 1.05rem; margin-top: 2rem; }
-    .fragment-meta { flex-direction: column; align-items: flex-start; gap: 0.25rem; }
-    .fragment-title { font-size: 1.25rem; }
-    .fragment-item { padding: 1.5rem 0; }
-    .fragment-item:hover { transform: none; padding-left: 0; }
-
-/* =========================================
-   14. FRAGMENTS PAGE STYLING ENGINE
-   ========================================= */
-.fragments-header { margin-bottom: 3rem; border-bottom: 0.125rem solid var(--kodansha-black); padding-bottom: 1.5rem; }
-.fragments-header h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.03em; color: var(--kodansha-black); margin-bottom: 0.5rem; }
-.fragments-header p { font-size: 1rem; color: #777777; }
-
-.fragment-item { padding: 2rem 0; border-bottom: 1px solid var(--border-color); cursor: pointer; transition: transform 0.3s ease, padding-left 0.3s ease; }
-.fragment-item:hover { transform: translateX(4px); padding-left: 0.5rem; }
-
-.fragment-meta { display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: #A0A0A0; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
-.meta-category { font-weight: 700; color: var(--kodansha-black); }
-
-.fragment-title { font-size: 1.5rem; font-weight: 700; color: var(--kodansha-black); line-height: 1.3; transition: color 0.2s ease; }
-.fragment-item:hover .fragment-title { color: var(--hover-gray); }
-
-#fragments-canvas { display: none; animation: fadeIn 0.5s ease forwards; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-.btn-back { display: inline-flex; align-items: center; gap: 0.5rem; background: none; border: none; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #777777; cursor: pointer; margin-bottom: 3rem; transition: color 0.2s ease; }
-.btn-back:hover { color: var(--kodansha-black); }
-
-.canvas-title { font-size: 2.2rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 1rem; }
-.canvas-body { margin-top: 3rem; font-size: 1.1rem; line-height: 1.8; color: #222222; min-height: 30vh; overflow-wrap: break-word; word-wrap: break-word; }
-.canvas-body p { margin-bottom: 1.75rem; }
-.canvas-body h2, .canvas-body h3 { font-weight: 800; margin: 2.5rem 0 1rem 0; color: var(--kodansha-black); }
-
-.image-skeleton { background: #f4f4f4; border-radius: 6px; margin: 2.5rem auto; text-align: center; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
-.canvas-image { width: 100%; height: auto; display: block; opacity: 0; transition: opacity 0.5s ease-in; margin: 0; }
-
-.spark-container { margin-top: 5rem; padding-top: 3rem; border-top: 1px solid var(--border-color); display: flex; flex-direction: column; align-items: center; gap: 0.75rem; position: relative; }
-.spark-intro { font-size: 0.85rem; color: #A0A0A0; font-style: italic; margin-top: 1rem; letter-spacing: 0.02em; text-align: center; }
-
-.btn-spark { background: none; border: none; font-size: 2rem; color: #DDDDDD; cursor: pointer; transition: color 0.3s ease; position: relative; z-index: 10; }
-.btn-spark:hover:not(:disabled) { color: var(--hover-gray); }
-.btn-spark.active { color: var(--kodansha-black); }
-.btn-spark:disabled { cursor: default; }
-
-@keyframes sparkBurst {
-    0% { transform: scale(1); text-shadow: 0 0 0px rgba(0,0,0,0); }
-    50% { transform: scale(1.4); text-shadow: 0 0 20px rgba(0,0,0,0.4); color: var(--kodansha-black); }
-    100% { transform: scale(1.1); text-shadow: 0 0 5px rgba(0,0,0,0.1); color: var(--kodansha-black); }
+    .footer-top { flex-direction: column; gap: 3rem; text-align: center; }
+    .footer-brand, .footer-links { flex: 1 1 auto; width: 100%; padding-right: 0; }
+    .footer-brand p { margin: 0 auto; }
+    .footer-links { grid-template-columns: 1fr; gap: 2.5rem; }
+    .link-column { text-align: center; }
+    .link-column ul { align-items: center; }
+    .footer-bottom { flex-direction: column; gap: 1.5rem; text-align: center; }
+    .footer-bottom-links { flex-direction: column; gap: 0.85rem; }
+    .footer-bottom-links .divider { display: none; }
+    .site-footer { padding: 4rem 1rem 2rem 1rem; }
 }
-.btn-spark.animating { animation: sparkBurst 0.5s ease forwards; }
-.spark-count { font-size: 0.85rem; font-weight: 600; color: #A0A0A0; letter-spacing: 0.05em; }
-
-.particle {
-    position: fixed; pointer-events: none; width: 5px; height: 5px; background-color: var(--kodansha-black); border-radius: 50%; z-index: 9999; animation: shoot 0.6s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
-}
-@keyframes shoot { 0% { transform: translate(0, 0) scale(1); opacity: 1; } 100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; } }
-   
-
