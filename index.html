@@ -227,7 +227,7 @@
         // Upgraded Fragments Dual-Live Monitor Engine
         async function initFragmentsMonitor() {
             try {
-                const response = await fetch("https://fragmentsapi.suwuyiku.workers.dev/posts");
+                const response = await fetch("https://api.suwuyiku.workers.dev/posts");
                 const data = await response.json();
                 
                 if (data.results && data.results.length > 0) {
