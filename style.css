@@ -617,31 +617,33 @@ a:focus-visible, button:focus-visible {
 }
 .about-card-special:hover .about-anchor-mark { opacity: 0.15; }
 
-/* 2. Fragments Live Monitor */
-.fragments-card-special .card-content { display: flex; flex-direction: column; justify-content: space-between; height: 100%; }
+/* =========================================
+   FIXED FRAGMENTS CARD & LIVE MONITOR
+   ========================================= */
+.fragments-card-special .card-content { 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: flex-start; /* Keeps items naturally stacked at the top */
+    height: 100%; 
+}
+
+.fragments-card-special .card-content p {
+    margin-bottom: 0.5rem; /* Tightens the gap between subtitle and live text */
+}
+
 .live-monitor {
-    font-family: 'Inter', monospace;
-    font-size: 0.75rem;
-    color: #999999;
-    margin-top: 1rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    color: #777777; /* Clean faded gray */
     display: flex;
     align-items: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    gap: 0.4rem;
+    margin-top: auto; /* Pushes it neatly to the bottom of the content area */
 }
-.pulsing-dot {
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    background-color: #4CAF50;
-    border-radius: 50%;
-    margin-right: 8px;
-    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7);
-    animation: pulse-dot 2s infinite cubic-bezier(0.66, 0, 0, 1);
-}
-@keyframes pulse-dot {
-    to { box-shadow: 0 0 0 8px rgba(76, 175, 80, 0); }
+
+.monitor-bullet {
+    font-size: 0.75rem;
+    color: var(--kodansha-black); /* Matches your minimalist black aesthetic */
 }
 
 /* 3. Connections Visual Directory */
