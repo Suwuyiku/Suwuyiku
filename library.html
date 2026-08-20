@@ -62,18 +62,36 @@
     </div>
     <div class="sidebar-overlay"></div>
 
-    <!-- 3. MAIN LIBRARY CANVAS -->
+  <!-- 3. MAIN LIBRARY CANVAS -->
     <main class="contact-page-wrapper">
         
-        <div class="library-header">
-            <h1>The Archive</h1>
-            <p>A curated collection of manga and literature.</p>
+        <!-- Reusing the unified search header architecture -->
+        <div class="connections-header-wrapper">
+            <div class="connections-header-left">
+                <h1>The Archive</h1>
+                <p>A curated collection of manga and literature.</p>
+            </div>
+            
+            <div class="search-container">
+                <input type="text" id="librarySearch" class="search-input" placeholder="Search titles, authors...">
+                <svg class="search-icon" viewBox="0 0 24 24">
+                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                </svg>
+            </div>
         </div>
 
-        <!-- WE WILL BUILD THE SHELVES HERE -->
+        <!-- The Empty Grid (Waiting for the API) -->
+        <div id="library-grid" class="library-grid">
+            <p style="color: #A0A0A0; font-size: 0.9rem; padding: 2rem 0; width: 100%; text-align: left;">Synchronizing with ecosystem...</p>
+        </div>
+
+        <!-- Hidden Empty State Message -->
+        <div id="noResultsMsg" style="display: none; text-align: left; width: 100%; padding: 2rem 0; color: #777777; font-weight: 500;">
+            No records found in the archive.
+        </div>
 
     </main>
-
+    
     <!-- 4. UNIFIED FOOTER -->
     <footer class="site-footer">
         <div class="footer-top">
