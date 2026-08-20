@@ -200,13 +200,30 @@ a:focus-visible, button:focus-visible { outline: 0.125rem solid var(--hover-gray
 /* =========================================
    07. PAGE: LIBRARY
    ========================================= */
-.library-container { max-width: 75rem; margin: 4rem auto 8rem auto; padding: 0 3rem; width: 100%; }
-.library-header { text-align: center; margin-bottom: 5rem; }
-.library-header h1 { font-size: 3rem; font-weight: 800; letter-spacing: -0.02rem; }
-.library-header p { color: #666666; margin-top: 1rem; font-size: 1.1rem; }
+/* Unified Left-Aligned Header */
+.library-header { 
+    text-align: left; 
+    margin-bottom: 3rem; 
+    border-bottom: 0.125rem solid var(--kodansha-black); 
+    padding-bottom: 1.5rem; 
+}
+.library-header h1 { 
+    font-size: 2.5rem; 
+    font-weight: 800; 
+    letter-spacing: -0.03em; 
+    color: var(--kodansha-black); 
+    margin-bottom: 0.5rem; 
+}
+.library-header p { 
+    font-size: 1rem; 
+    color: #777777; 
+}
 
-.manga-shelf { display: flex; justify-content: center; align-items: center; padding: 2rem 0 4rem 0; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-.manga-book { width: 12rem; height: auto; flex-shrink: 0; border-radius: 6px; position: relative; border: 1px solid transparent; box-shadow: 10px 0 20px rgba(0, 0, 0, 0.15); transition: transform 0.7s ease, margin 0.7s ease, border-color 0.3s ease, box-shadow 0.7s ease; cursor: pointer; }
+/* Horizontal Manga Shelf Engine */
+.manga-shelf { display: flex; justify-content: flex-start; align-items: center; padding: 2rem 0 4rem 0; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.manga-book { width: 12rem; height: auto; flex-shrink: 0; border-radius: 6px; position: relative; box-sizing: border-box; border: 1px solid transparent; box-shadow: 10px 0 20px rgba(0, 0, 0, 0.15); -webkit-backface-visibility: hidden; backface-visibility: hidden; filter: contrast(1.02) saturate(1.05); transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), margin 0.7s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, box-shadow 0.7s cubic-bezier(0.22, 1, 0.36, 1); cursor: pointer; }
+
+/* Book Staggering Math */
 .manga-book:nth-child(1) { z-index: 8; transform: rotate(-3deg) translateY(3px); }
 .manga-book:nth-child(2) { z-index: 7; transform: rotate(1.5deg) translateY(-2px); }
 .manga-book:nth-child(3) { z-index: 6; transform: rotate(-2deg) translateY(4px); }
@@ -216,6 +233,8 @@ a:focus-visible, button:focus-visible { outline: 0.125rem solid var(--hover-gray
 .manga-book:nth-child(7) { z-index: 2; transform: rotate(-2.5deg) translateY(1px); }
 .manga-book:nth-child(8) { z-index: 1; transform: rotate(1deg) translateY(2px); }
 .manga-book:not(:first-child) { margin-left: -7.5rem; }
+
+/* Hover Expansion */
 .manga-shelf:hover .manga-book:not(:first-child) { margin-left: -2rem; }
 .manga-shelf:hover .manga-book:nth-child(1) { transform: rotate(-7deg) translateY(0); }
 .manga-shelf:hover .manga-book:nth-child(2) { transform: rotate(-5deg) translateY(0); }
@@ -225,9 +244,10 @@ a:focus-visible, button:focus-visible { outline: 0.125rem solid var(--hover-gray
 .manga-shelf:hover .manga-book:nth-child(6) { transform: rotate(3deg) translateY(0); }
 .manga-shelf:hover .manga-book:nth-child(7) { transform: rotate(5deg) translateY(0); }
 .manga-shelf:hover .manga-book:nth-child(8) { transform: rotate(7deg) translateY(0); }
+
+/* Individual Book Hover Elevation */
 .manga-book:nth-child(odd):hover { transform: translate(0.5rem, -2.5rem) rotate(-3deg) scale(1.03) !important; z-index: 20 !important; border-color: var(--kodansha-black); box-shadow: 0 25px 45px rgba(0, 0, 0, 0.4); }
 .manga-book:nth-child(even):hover { transform: translate(0.5rem, -2.5rem) rotate(3deg) scale(1.03) !important; z-index: 20 !important; border-color: var(--kodansha-black); box-shadow: 0 25px 45px rgba(0, 0, 0, 0.4); }
-
 
 /* =========================================
    08. PAGE: FRAGMENTS
