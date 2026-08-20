@@ -617,26 +617,35 @@ a:focus-visible, button:focus-visible {
 }
 .about-card-special:hover .about-anchor-mark { opacity: 0.15; }
 
-/* 2. Fragments Live Monitor (FIXED STACK) */
+/* 2. Fragments Dual-Live Monitor */
 .fragments-card-special .card-content { 
     display: flex; 
     flex-direction: column; 
-    justify-content: flex-start; /* Keeps it strictly top-aligned */
+    justify-content: flex-start; 
     height: 100%; 
 }
 .fragments-card-special .card-content p {
     margin-bottom: 0; 
 }
 .live-monitor {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-top: 0.75rem; 
+}
+.monitor-row {
     font-family: 'Inter', monospace;
     font-size: 0.75rem;
-    color: #999999;
-    margin-top: 0.75rem; /* Replaced 'auto' so it tightly hugs the text above it */
+    color: #777777;
     display: flex;
     align-items: center;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+.monitor-row.faded {
+    opacity: 0.45; /* Drops the visibility for the older entry */
+    font-size: 0.7rem; /* Slight scale down for hierarchy */
 }
 .monitor-bullet {
     font-size: 0.75rem;
