@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="PBP_jXkzOYsuMUxEpSyD3RMMLK9uf7czmxw5eCV5MUw" />
+    <meta name="description" content="The official manga and book archive of Suwuyiku.">
+
+    <title>Library • Suwuyiku</title>
+    
+    <link rel="icon" type="image/webp" href="assets/logo.png">
+    <link rel="stylesheet" href="style.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- 1. UNIFIED NAVIGATION -->
+    <nav class="top-nav">
+        <div class="nav-left">
+            <a href="/" style="text-decoration: none;"><span class="logo-text">Suwuyiku</span></a>
+        </div>
+        <div class="nav-right">
+            <ul class="nav-links">
+                <li><a href="/about">About</a></li>
+                <li><a href="/connections">Connections</a></li>
+                <li><a href="/library" style="color: var(--hover-gray);">Library</a></li>
+                <li><a href="/fragments">Fragments</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="https://suwuyiku.pages.dev/shop" class="btn-action">SHOP</a>
+                <a href="/contact" class="btn-action">CONTACT</a>
+            </div>
+            <button class="hamburger-btn" aria-label="Open Menu">
+                <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 2. MOBILE SIDEBAR -->
+    <div class="mobile-sidebar">
+        <div class="sidebar-header">
+            <a href="/" class="sidebar-logo" style="text-decoration: none;">Suwuyiku</a>
+            <button class="close-sidebar-btn" aria-label="Close Menu">&times;</button>
+        </div>
+        <div class="sidebar-menu-container">
+            <ul class="sidebar-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/connections">Connections</a></li>
+                <li><a href="/library">Library</a></li>
+                <li><a href="/fragments">Fragments</a></li>
+            </ul>
+            <div class="sidebar-actions">
+                <a href="https://suwuyiku.pages.dev/shop" class="sidebar-btn-action">SHOP</a>
+                <a href="/contact" class="sidebar-btn-action">CONTACT</a>
+            </div>
+        </div>
+        <div class="sidebar-footer">
+            <span class="copyright">&copy; 2026 SUWUYIKU. ALL RIGHTS RESERVED.</span>
+        </div>
+    </div>
+    <div class="sidebar-overlay"></div>
+
+    <!-- 3. MAIN LIBRARY CANVAS -->
+    <main class="library-container">
+        
+        <div class="library-header">
+            <h1>The Archive</h1>
+            <p>A curated collection of manga and literature.</p>
+        </div>
+
+        <!-- WE WILL BUILD THE SHELVES HERE -->
+
+    </main>
+
+    <!-- 4. UNIFIED FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <span class="logo-text footer-logo">Suwuyiku</span>
+                <h2>Visual curation and digital architecture</h2>
+                <p>Building timeless structures without restrictions. A visual diary, manga collection, and scattered thoughts by Suwuyiku. Founder of echoes under the april aozora. Built to last a thousand years.</p>
+            </div>
+            <div class="footer-links">
+                <div class="link-column">
+                    <h3>Ecosystem</h3>
+                    <ul>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/library">Library</a></li>
+                        <li><a href="/fragments">Fragments</a></li>
+                        <li><a href="https://suwuyiku.pages.dev/shop">Shop</a></li>
+                    </ul>
+                </div>
+                <div class="link-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="/connections">Connections</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                        <li><a href="https://github.com/Suwuyiku">GitHub</a></li>
+                    </ul>
+                </div>
+                <div class="link-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="https://github.com/Suwuyiku/suwuyiku/blob/main/LICENSE">MIT License</a></li>
+                        <li><a href="https://github.com/Suwuyiku/suwuyiku">Source Code</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-bottom-links">
+                <a href="/legal/privacy-policy">Privacy Policy</a><span class="divider">|</span>
+                <a href="/legal/terms-of-use">Terms of Use</a><span class="divider">|</span>
+                <a href="/legal/shipping-and-refund">Shipping and Refund Policy</a>
+            </div>
+            <div class="copyright">&copy; 2026 Suwuyiku. All Rights Reserved.</div>
+        </div>
+    </footer>
+
+    <!-- 5. INTERACTION SCRIPT -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const hamburger = document.querySelector('.hamburger-btn');
+            const sidebar = document.querySelector('.mobile-sidebar');
+            const overlay = document.querySelector('.sidebar-overlay');
+            const closeBtn = document.querySelector('.close-sidebar-btn');
+
+            if (hamburger && sidebar && overlay && closeBtn) {
+                function toggleMenu() {
+                    sidebar.classList.toggle('active');
+                    overlay.classList.toggle('active');
+                    document.body.classList.toggle('no-scroll'); 
+                }
+                hamburger.addEventListener('click', toggleMenu);
+                closeBtn.addEventListener('click', toggleMenu);
+                overlay.addEventListener('click', toggleMenu);
+            }
+        });
+    </script>
+</body>
+</html>
