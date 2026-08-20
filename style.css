@@ -249,6 +249,45 @@ a:focus-visible, button:focus-visible { outline: 0.125rem solid var(--hover-gray
 .manga-book:nth-child(odd):hover { transform: translate(0.5rem, -2.5rem) rotate(-3deg) scale(1.03) !important; z-index: 20 !important; border-color: var(--kodansha-black); box-shadow: 0 25px 45px rgba(0, 0, 0, 0.4); }
 .manga-book:nth-child(even):hover { transform: translate(0.5rem, -2.5rem) rotate(3deg) scale(1.03) !important; z-index: 20 !important; border-color: var(--kodansha-black); box-shadow: 0 25px 45px rgba(0, 0, 0, 0.4); }
 
+/* Library API Grid Architecture */
+.library-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 2.5rem 1.5rem;
+    align-items: start;
+    width: 100%;
+    padding-bottom: 4rem;
+}
+
+.book-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+}
+
+.book-item:hover { transform: translateY(-4px); }
+
+.book-cover {
+    width: 100%;
+    aspect-ratio: 2 / 3; /* Forces standard manga/book dimensions */
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 4px 6px 15px rgba(0,0,0,0.08);
+    border: 1px solid var(--border-color);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.book-item:hover .book-cover { 
+    box-shadow: 6px 10px 20px rgba(0,0,0,0.15); 
+    border-color: var(--hover-gray); 
+}
+
+.book-meta { display: flex; flex-direction: column; }
+.book-title { font-size: 0.85rem; font-weight: 700; color: var(--kodansha-black); line-height: 1.2; }
+.book-author { font-size: 0.7rem; color: #888888; margin-top: 0.2rem; }
+
 /* =========================================
    08. PAGE: FRAGMENTS
    ========================================= */
