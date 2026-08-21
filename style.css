@@ -233,11 +233,11 @@ body.is-searching .library-header p { opacity: 0.3; }
     -webkit-user-drag: none;
 }
 
-/* Kodansha Grey Box: Exactly calculated 1 : 1.52 ratio */
-.cover-wrapper { 
-    background-color: #F4F4F4; 
-    aspect-ratio: 1 / 1.52; 
-    padding: 2.2rem 1.6rem; 
+/* 1. Kodansha Grey Box: Taller, deeper gray, perfect breathing room */
+.cover-wrapper, .detail-cover-wrapper { 
+    background-color: #EBEBEB; 
+    aspect-ratio: 1 / 1.45; 
+    padding: 1.5rem; 
     display: flex; 
     justify-content: center; 
     align-items: center; 
@@ -245,7 +245,7 @@ body.is-searching .library-header p { opacity: 0.3; }
 }
 
 /* ULTIMATE ANTI-RIP SHIELD: Transparent block completely covering the box */
-.cover-wrapper::after {
+.cover-wrapper::after, .detail-cover-wrapper::after {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -257,14 +257,14 @@ body.is-searching .library-header p { opacity: 0.3; }
     background-color: #EAEAEA; 
 }
 
-/* The Book Cover: Perfectly scales inside padding */
-.book-cover { 
+/* 2. The Cover Shadow: Crucial for making it look like a physical monument */
+.book-cover, .detail-cover { 
     max-width: 100%; 
     max-height: 100%; 
     width: auto; 
     height: auto; 
     object-fit: contain; 
-    box-shadow: 2px 6px 16px rgba(0, 0, 0, 0.18); 
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.18), -1px -1px 3px rgba(255,255,255,0.6); 
     
     /* Disables all native browser interactions on the image itself */
     pointer-events: none;
@@ -273,29 +273,28 @@ body.is-searching .library-header p { opacity: 0.3; }
     -webkit-touch-callout: none;
 }
 
-/* Typography alignment */
+/* 3. Editorial Typography: Smaller, elegant, tighter spacing */
 .card-text { 
     display: flex; 
     flex-direction: column; 
-    gap: 0.3rem; 
-    margin-top: 1.2rem; 
+    gap: 0.15rem; 
+    margin-top: 1rem; 
     z-index: 1000;
     position: relative;
 }
 
-/* Kodansha Typography */
 .series-title { 
-    font-size: 1.05rem; 
+    font-size: 0.9rem; 
     font-weight: 800; 
     color: #000000; 
-    line-height: 1.2; 
-    letter-spacing: -0.01em;
+    line-height: 1.3; 
+    letter-spacing: 0.01em;
 }
 
 .series-author { 
-    font-size: 0.85rem; 
-    color: #666666; 
-    font-weight: 600; 
+    font-size: 0.75rem; 
+    color: #777777; 
+    font-weight: 500; 
 }
 
 /* The Detail View (The Dossier) */
@@ -342,32 +341,6 @@ body.is-searching .library-header p { opacity: 0.3; }
 .detail-cover-wrapper { 
     flex: 1;
     max-width: 400px;
-    background-color: #F4F4F4; 
-    aspect-ratio: 1 / 1.52; 
-    padding: 2.2rem 1.6rem; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    position: relative;
-}
-
-/* Anti-Rip Shield for Detail Image */
-.detail-cover-wrapper::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    z-index: 999;
-}
-
-.detail-cover { 
-    max-width: 100%; 
-    max-height: 100%; 
-    width: auto; 
-    height: auto; 
-    object-fit: contain; 
-    box-shadow: 2px 6px 16px rgba(0, 0, 0, 0.18); 
-    pointer-events: none;
-    -webkit-user-drag: none;
 }
 
 /* Detail Text - Flex Column 2 */
