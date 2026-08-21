@@ -62,32 +62,70 @@
     </div>
     <div class="sidebar-overlay"></div>
 
-  <!-- 3. MAIN LIBRARY CANVAS -->
+ <!-- 3. MAIN LIBRARY CANVAS -->
     <main class="contact-page-wrapper">
         
         <!-- Reusing the unified search header architecture -->
-        <div class="connections-header-wrapper">
+        <div class="connections-header-wrapper" id="library-header-bar">
             <div class="connections-header-left">
                 <h1>The Archive</h1>
                 <p>A curated collection of manga and literature.</p>
             </div>
             
             <div class="search-container">
-                <input type="text" id="librarySearch" class="search-input" placeholder="Search titles, authors...">
+                <input type="text" id="librarySearch" class="search-input" placeholder="Search series or authors...">
                 <svg class="search-icon" viewBox="0 0 24 24">
                     <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
                 </svg>
             </div>
         </div>
 
-        <!-- The Empty Grid (Waiting for the API) -->
-        <div id="library-grid" class="library-grid">
-            <p style="color: #A0A0A0; font-size: 0.9rem; padding: 2rem 0; width: 100%; text-align: left;">Synchronizing with ecosystem...</p>
+        <!-- VIEW 1: THE MAIN GRID -->
+        <div id="main-view">
+            <div id="library-grid" class="library-grid">
+                <p style="color: #A0A0A0; font-size: 0.9rem; padding: 2rem 0; width: 100%; text-align: left;">Synchronizing with ecosystem...</p>
+            </div>
+            <div id="noResultsMsg" style="display: none; text-align: left; width: 100%; padding: 2rem 0; color: #777777; font-weight: 500;">
+                No records found in the archive.
+            </div>
         </div>
 
-        <!-- Hidden Empty State Message -->
-        <div id="noResultsMsg" style="display: none; text-align: left; width: 100%; padding: 2rem 0; color: #777777; font-weight: 500;">
-            No records found in the archive.
+        <!-- VIEW 2: THE KODANSHA DETAIL DOSSIER -->
+        <div id="detail-view" class="detail-view">
+            <div class="detail-top">
+                <div class="detail-cover-wrapper">
+                    <img id="det-cover" src="" class="detail-cover" alt="Volume Cover">
+                </div>
+                <div class="detail-info">
+                    <h2 id="det-title" class="detail-title">Series Title</h2>
+                    <p id="det-author" class="detail-author">By Author</p>
+                    
+                    <!-- The Review Body -->
+                    <div id="det-review" class="detail-review"></div>
+                    
+                    <!-- Official Publisher Link -->
+                    <a id="det-link" href="#" target="_blank" class="kodansha-btn">Visit Official Publisher ↗</a>
+                    
+                    <!-- Brutalist Volume Info Table -->
+                    <div class="volume-info-table">
+                        <div class="info-cell"><span class="info-label">Category</span><span id="det-category" class="info-value">-</span></div>
+                        <div class="info-cell"><span class="info-label">Publisher</span><span id="det-publisher" class="info-value">-</span></div>
+                        <div class="info-cell"><span class="info-label">Date Acquired</span><span id="det-date" class="info-value">-</span></div>
+                        <div class="tags-row">
+                            <span class="info-label" style="margin-right: 0.5rem;">Tags</span>
+                            <div id="det-tags" style="display: flex; gap: 0.5rem; flex-wrap: wrap;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mini Shelf for Other Volumes -->
+            <h3 class="other-volumes-header">Other Volumes in This Series</h3>
+            <div id="mini-shelf" class="mini-shelf"></div>
+
+            <button class="btn-back-series" onclick="closeDetailView()">
+                ← Back to Archive
+            </button>
         </div>
 
     </main>
@@ -139,9 +177,12 @@
 
     <!-- 5. INTERACTION & SMART API SCRIPT -->
     <script>
+        // Data Storage
+        let groupedSeries = {};
+
         document.addEventListener("DOMContentLoaded", () => {
             
-            // --- 1. MOBILE SIDEBAR LOGIC ---
+            // --- MOBILE SIDEBAR ---
             const hamburger = document.querySelector('.hamburger-btn');
             const sidebar = document.querySelector('.mobile-sidebar');
             const overlay = document.querySelector('.sidebar-overlay');
@@ -158,66 +199,157 @@
                 overlay.addEventListener('click', toggleMenu);
             }
 
-            // --- 2. SMART LIBRARY SEARCH ENGINE ---
+            // --- SMART SEARCH ---
             const searchInput = document.getElementById('librarySearch');
             const noResultsMsg = document.getElementById('noResultsMsg');
 
-            // Built-in smart aliases for the archive (expand these as you add books)
-            const libraryKeywordMap = {
-                'lie': 'your lie in april',
-                'box': 'blue box',
-                'kaguya': 'love is war',
-                'spy': 'spy x family'
-            };
-
             if (searchInput) {
-                searchInput.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter') searchInput.blur();
-                });
-
                 searchInput.addEventListener('input', (e) => {
-                    let rawQuery = e.target.value.toLowerCase().trim();
-                    let query = libraryKeywordMap[rawQuery] || rawQuery; 
+                    const query = e.target.value.toLowerCase().trim();
+                    const cards = document.querySelectorAll('.kodansha-card'); 
+                    let visible = 0;
 
-                    const bookItems = document.querySelectorAll('.book-item'); 
-                    let totalVisibleCount = 0;
+                    if (query !== '') document.body.classList.add('is-searching');
+                    else document.body.classList.remove('is-searching');
 
-                    // Replicates the Connections 'is-searching' reaction
-                    if (query !== '') {
-                        document.body.classList.add('is-searching');
-                    } else {
-                        document.body.classList.remove('is-searching');
-                    }
-
-                    if (bookItems.length === 0) return; 
-
-                    bookItems.forEach(book => {
-                        const titleText = book.querySelector('.book-title')?.textContent.toLowerCase() || '';
-                        const authorText = book.querySelector('.book-author')?.textContent.toLowerCase() || '';
-
-                        if (titleText.includes(query) || authorText.includes(query)) {
-                            book.style.display = 'flex';
-                            totalVisibleCount++;
+                    cards.forEach(card => {
+                        const searchData = card.getAttribute('data-search');
+                        if (searchData.includes(query)) {
+                            card.style.display = 'flex';
+                            visible++;
                         } else {
-                            book.style.display = 'none';
+                            card.style.display = 'none';
                         }
                     });
 
-                    if (totalVisibleCount === 0 && query !== '') {
-                        noResultsMsg.style.display = 'block';
-                    } else {
-                        noResultsMsg.style.display = 'none';
-                    }
+                    noResultsMsg.style.display = (visible === 0 && query !== '') ? 'block' : 'none';
                 });
             }
+
+            // INITIALIZE DATA FETCH
+            loadLibrary();
         });
 
-        // --- 3. NOTION API PIPELINE (WAITING FOR BACKEND) ---
+        // --- NOTION API PIPELINE & GROUPING ENGINE ---
         async function loadLibrary() {
-            // Worker fetch goes here!
+            const grid = document.getElementById('library-grid');
+            
+            try {
+                // Fetch from the Unified Cloudflare Gateway
+                const response = await fetch('https://api.suwuyiku.workers.dev/library');
+                const rawBooks = await response.json();
+
+                if (rawBooks.error) throw new Error("API Error");
+
+                grid.innerHTML = ""; // Clear loading message
+
+                // The Grouping Engine: Combines individual volumes into Series Stacks
+                rawBooks.forEach(book => {
+                    if (!groupedSeries[book.series]) {
+                        groupedSeries[book.series] = {
+                            seriesName: book.series,
+                            author: book.author,
+                            publisher: book.publisher,
+                            volumes: []
+                        };
+                    }
+                    groupedSeries[book.series].volumes.push(book);
+                });
+
+                // Sort volumes within each series numerically
+                Object.values(groupedSeries).forEach(series => {
+                    series.volumes.sort((a, b) => a.volumeNumber - b.volumeNumber);
+                });
+
+                // Build the Main Grid (Showing ONLY Volume 1)
+                Object.values(groupedSeries).forEach(series => {
+                    const firstVol = series.volumes[0];
+                    if (!firstVol) return;
+
+                    const coverUrl = firstVol.covers.length > 0 ? firstVol.covers[0] : 'assets/placeholder.png';
+                    const searchData = `${series.seriesName} ${series.author} ${firstVol.genres.join(' ')}`.toLowerCase();
+
+                    const card = document.createElement('div');
+                    card.className = 'kodansha-card';
+                    card.setAttribute('data-search', searchData);
+                    card.onclick = () => openDetailView(series.seriesName, 0);
+
+                    card.innerHTML = `
+                        <div class="cover-wrapper">
+                            <img src="${coverUrl}" class="book-cover" alt="Cover">
+                        </div>
+                        <div class="card-text">
+                            <h3 class="series-title">${series.seriesName}</h3>
+                            <p class="series-author">By ${series.author}</p>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+
+            } catch (error) {
+                console.error("Library Sync Failed:", error);
+                grid.innerHTML = '<p style="color: #FF0000; padding: 2rem 0;">Error synchronizing with the ecosystem. Please check back later.</p>';
+            }
         }
-        
-        loadLibrary();
+
+        // --- DOSSIER INTERACTION LOGIC ---
+        function openDetailView(seriesName, volumeIndex) {
+            const series = groupedSeries[seriesName];
+            const activeVol = series.volumes[volumeIndex];
+
+            // Hide main grid, show Dossier
+            document.getElementById('main-view').style.display = 'none';
+            document.getElementById('library-header-bar').style.display = 'none';
+            document.getElementById('detail-view').style.display = 'flex';
+            window.scrollTo(0, 0); // Scroll to top
+
+            // Populate Main Info
+            document.getElementById('det-cover').src = activeVol.covers[0] || 'assets/placeholder.png';
+            document.getElementById('det-title').textContent = activeVol.title; // e.g. "Spy x Family, Vol. 1"
+            document.getElementById('det-author').textContent = `By ${activeVol.author}`;
+            document.getElementById('det-review').textContent = activeVol.review || "No ecosystem data recorded for this volume yet.";
+            
+            // Populate Table
+            document.getElementById('det-category').textContent = activeVol.category || "-";
+            document.getElementById('det-publisher').textContent = activeVol.publisher || "-";
+            document.getElementById('det-date').textContent = activeVol.dateAcquired || "-";
+
+            // Populate Publisher Link
+            const linkBtn = document.getElementById('det-link');
+            if (activeVol.purchaseLink) {
+                linkBtn.href = activeVol.purchaseLink;
+                linkBtn.style.display = 'inline-flex';
+            } else {
+                linkBtn.style.display = 'none';
+            }
+
+            // Populate Tags (Genres)
+            const tagsContainer = document.getElementById('det-tags');
+            tagsContainer.innerHTML = activeVol.genres.map(g => `<span class="tag-badge">${g}</span>`).join('');
+
+            // Build the Mini-Shelf
+            const miniShelf = document.getElementById('mini-shelf');
+            miniShelf.innerHTML = "";
+            
+            series.volumes.forEach((vol, idx) => {
+                const mini = document.createElement('div');
+                mini.className = `mini-volume ${idx === volumeIndex ? 'active' : ''}`;
+                mini.onclick = () => openDetailView(seriesName, idx); // Changes active volume
+                
+                const miniCover = vol.covers[0] || 'assets/placeholder.png';
+                mini.innerHTML = `
+                    <img src="${miniCover}" alt="Vol ${vol.volumeNumber}">
+                    <span class="mini-vol-num">${vol.volumeNumber}</span>
+                `;
+                miniShelf.appendChild(mini);
+            });
+        }
+
+        function closeDetailView() {
+            document.getElementById('detail-view').style.display = 'none';
+            document.getElementById('main-view').style.display = 'block';
+            document.getElementById('library-header-bar').style.display = 'flex';
+        }
     </script>
 </body>
 </html>
