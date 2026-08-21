@@ -220,10 +220,9 @@ body.is-searching .library-header p { opacity: 0.3; }
 /* The Main Brutalist Grid - EXACT Kodansha Replica */
 .library-grid { 
     display: grid; 
-    /* 1. INCREASED MIN-WIDTH: This forces the boxes to be significantly larger */
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); 
-    /* 2. TIGHTER GAPS: Brings them closer together like Kodansha */
-    gap: 3rem 1.25rem; 
+    /* 1. SMALLER MIN-WIDTH: Drops it down so 4 items fit perfectly across the screen */
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); 
+    gap: 3rem 1.5rem; 
     width: 100%; 
     padding-bottom: 4rem; 
 }
@@ -239,12 +238,13 @@ body.is-searching .library-header p { opacity: 0.3; }
     -webkit-user-drag: none;
 }
 
-/* Kodansha Grey Box: Perfected for 1:1.42 manga volumes */
+/* Kodansha Grey Box: TALLER frame, perfect breathing room */
 .cover-wrapper, .detail-cover-wrapper { 
     background-color: #EBEBEB; 
-    /* 3. THE GOLDEN RATIO: 1.32 gives that robust, monumental wide frame */
-    aspect-ratio: 1 / 1.32; 
-    padding: 1.8rem; /* Perfectly balances the internal cover without choking it */
+    /* 2. THE TALL RATIO: 1.52 makes the box height bigger than the width again */
+    aspect-ratio: 1 / 1.52; 
+    /* 3. PADDING: Keeps the image from touching the edges of the tall box */
+    padding: 1.5rem; 
     display: flex; 
     justify-content: center; 
     align-items: center; 
