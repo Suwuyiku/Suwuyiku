@@ -221,14 +221,13 @@ body.is-searching .library-header p { opacity: 0.3; }
     cursor: pointer; 
 }
 
-/* Kodansha Grey Box: Precise poster proportions */
+/* Kodansha Grey Box: Shrink-wraps perfectly to the image */
 .cover-wrapper { 
     background-color: #F0F0F0; 
-    padding: 12%; 
+    padding: 10% 12%; 
     display: flex; 
     justify-content: center; 
     align-items: center; 
-    aspect-ratio: 1 / 1.35; 
     transition: background-color 0.2s ease; 
 }
 
@@ -237,11 +236,11 @@ body.is-searching .library-header p { opacity: 0.3; }
     background-color: #E2E2E2; 
 }
 
-/* The Book Cover: Flush, realistic shadow */
+/* The Book Cover: Enforces the manga poster shape */
 .book-cover { 
     width: 100%; 
-    height: 100%; 
-    object-fit: contain; 
+    aspect-ratio: 1 / 1.45;
+    object-fit: cover; 
     box-shadow: 2px 4px 12px rgba(0,0,0,0.15); 
 }
 
