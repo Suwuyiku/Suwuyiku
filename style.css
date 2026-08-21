@@ -8,7 +8,7 @@
    04. HOME PAGE: BENTO CARD COMPONENTS
    05. PAGE: ABOUT (Reserved Room)
    06. PAGE: SHOP (Reserved Room)
-   07. PAGE: LIBRARY
+   07. PAGE: LIBRARY (KODANSHA EDITORIAL ENGINE)
    08. PAGE: FRAGMENTS
    09. PAGE: CONNECTIONS
    10. PAGE: CONTACT & LEGAL
@@ -196,6 +196,15 @@ a:focus-visible, button:focus-visible { outline: 0.125rem solid var(--hover-gray
    ========================================= */
 /* Future Shop / Commerce styling will go here */
 
+
+/* =========================================
+   07. PAGE: LIBRARY (KODANSHA EDITORIAL ENGINE)
+   ========================================= */
+.library-header { text-align: left; margin-bottom: 3rem; border-bottom: 0.25rem solid var(--kodansha-black); padding-bottom: 1.5rem; }
+.library-header h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.04em; color: var(--kodansha-black); margin-bottom: 0.5rem; }
+.library-header p { font-size: 1.1rem; color: #666666; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; transition: opacity 0.3s ease; }
+body.is-searching .library-header p { opacity: 0.3; }
+
 /* The Main Brutalist Grid - EXACT Kodansha Replica */
 .library-grid { 
     display: grid; 
@@ -283,12 +292,66 @@ a:focus-visible, button:focus-visible { outline: 0.125rem solid var(--hover-gray
 
 /* The Detail View (The Dossier) */
 .detail-view { display: none; flex-direction: column; width: 100%; animation: fadeIn 0.4s ease; padding-bottom: 4rem; }
+
+/* Top Breadcrumb Navigation */
+.breadcrumbs {
+    width: 100%;
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+}
+
+.btn-breadcrumb {
+    background: transparent;
+    border: none;
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #666666;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    padding: 0;
+}
+
+.btn-breadcrumb:hover {
+    color: #000000;
+}
+
 .detail-top { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; margin-bottom: 3rem; align-items: start; }
 
 @media (max-width: 48rem) { .detail-top { grid-template-columns: 1fr; gap: 2rem; } }
 
-.detail-cover-wrapper { background-color: #F4F4F4; padding: 2.5rem; display: flex; justify-content: center; }
-.detail-cover { width: 100%; max-width: 300px; aspect-ratio: 1 / 1.45; object-fit: cover; box-shadow: 5px 10px 20px rgba(0,0,0,0.1); }
+/* Detail View Image Frame - Matches Grid Exactly */
+.detail-cover-wrapper { 
+    background-color: #F4F4F4; 
+    aspect-ratio: 1 / 1.52; 
+    padding: 2.2rem 1.6rem; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    position: relative;
+    max-width: 320px;
+}
+
+/* Anti-Rip Shield for Detail Image */
+.detail-cover-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 999;
+}
+
+.detail-cover { 
+    max-width: 100%; 
+    max-height: 100%; 
+    width: auto; 
+    height: auto; 
+    object-fit: contain; 
+    box-shadow: 2px 6px 16px rgba(0, 0, 0, 0.18); 
+    pointer-events: none;
+    -webkit-user-drag: none;
+}
 
 .detail-info { display: flex; flex-direction: column; gap: 1rem; }
 .detail-title { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; color: #000000; }
