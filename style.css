@@ -207,12 +207,12 @@ a:focus-visible, button:focus-visible { outline: 0.125rem solid var(--hover-gray
 body.is-searching .library-header p { opacity: 0.3; }
 
 /* The Main Brutalist Grid */
-.library-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 3rem 2rem; width: 100%; padding-bottom: 4rem; }
+.library-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 3rem 2rem; width: 100%; padding-bottom: 4rem; }
 
-.kodansha-card { display: flex; flex-direction: column; cursor: pointer; transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-.kodansha-card:hover { transform: translateY(-5px); }
+.kodansha-card { display: flex; flex-direction: column; cursor: pointer; }
+/* Notice: I removed the translateY(-5px) jump animation completely! */
 
-/* Perfect Grid Uniformity */
+/* Perfect Grid Uniformity - Taller and Narrower */
 .cover-wrapper { 
     background-color: #F4F4F4; 
     padding: 1.5rem; 
@@ -220,21 +220,35 @@ body.is-searching .library-header p { opacity: 0.3; }
     justify-content: center; 
     align-items: center; 
     margin-bottom: 1rem; 
-    aspect-ratio: 3 / 4; 
+    aspect-ratio: 2 / 3; /* This makes the box taller and narrower like Kodansha */
     overflow: hidden;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth fade setup */
 }
+
+/* Hover Effect: The gray box gently darkens and gains a soft shadow */
+.kodansha-card:hover .cover-wrapper {
+    background-color: #E8E8E8; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
 .book-cover { 
     width: 100%; 
     height: 100%; 
     object-fit: contain; 
-    box-shadow: 4px 6px 15px rgba(0,0,0,0.08); 
+    box-shadow: 3px 5px 12px rgba(0,0,0,0.08); 
     transition: box-shadow 0.3s ease; 
 }
-.kodansha-card:hover .book-cover { box-shadow: 8px 12px 25px rgba(0,0,0,0.15); }
 
-.card-text { display: flex; flex-direction: column; gap: 0.25rem; }
-.series-title { font-size: 1.1rem; font-weight: 800; color: var(--kodansha-black); line-height: 1.2; letter-spacing: -0.01em; }
-.series-author { font-size: 0.85rem; color: #777777; font-weight: 500; }
+/* The book shadow slightly deepens on hover to simulate lighting */
+.kodansha-card:hover .book-cover { 
+    box-shadow: 6px 10px 20px rgba(0,0,0,0.12); 
+}
+
+.card-text { display: flex; flex-direction: column; gap: 0.2rem; }
+
+/* Micro-Typography: Small, sharp, and elegant */
+.series-title { font-size: 0.9rem; font-weight: 800; color: var(--kodansha-black); line-height: 1.3; letter-spacing: -0.01em; }
+.series-author { font-size: 0.7rem; color: #777777; font-weight: 500; }
 
 /* The Detail View (The Dossier) */
 .detail-view { display: none; flex-direction: column; width: 100%; animation: fadeIn 0.4s ease; padding-bottom: 4rem; }
