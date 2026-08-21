@@ -244,15 +244,16 @@ body.is-searching .library-header p { opacity: 0.3; }
     position: relative; 
 }
 
-/* ULTIMATE ANTI-RIP SHIELD: Transparent block completely covering the box */
-.cover-wrapper::after, .detail-cover-wrapper::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    z-index: 999;
-    background: transparent;
+/* 1. Kodansha Grey Box: Mathematically perfected for 1:1.42 manga volumes */
+.cover-wrapper, .detail-cover-wrapper { 
+    background-color: #EBEBEB; 
+    aspect-ratio: 1 / 1.34; /* Corrected from 1.45 */
+    padding: 1.25rem; /* Corrected from 1.5rem */
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    position: relative; 
 }
-
 .kodansha-card:hover .cover-wrapper {
     background-color: #EAEAEA; 
 }
