@@ -210,7 +210,7 @@ body.is-searching .library-header p { opacity: 0.3; }
 .library-grid { 
     display: grid; 
     grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); 
-    gap: 3rem 1.5rem; 
+    gap: 3rem 2rem; 
     width: 100%; 
     padding-bottom: 4rem; 
 }
@@ -221,10 +221,13 @@ body.is-searching .library-header p { opacity: 0.3; }
     cursor: pointer; 
 }
 
-/* Kodansha Grey Box: Shrink-wraps perfectly to the image */
+/* Kodansha Grey Box: STRICT TALL RECTANGLE */
 .cover-wrapper { 
     background-color: #F0F0F0; 
-    padding: 10% 12%; 
+    /* Force the box to be much taller than it is wide (like a poster) */
+    aspect-ratio: 1 / 1.45; 
+    /* Equal padding on all sides so the book sits perfectly centered */
+    padding: 1.5rem; 
     display: flex; 
     justify-content: center; 
     align-items: center; 
@@ -236,11 +239,12 @@ body.is-searching .library-header p { opacity: 0.3; }
     background-color: #E2E2E2; 
 }
 
-/* The Book Cover: Enforces the manga poster shape */
+/* The Book Cover: Maximize size without breaking the box */
 .book-cover { 
-    width: 100%; 
-    aspect-ratio: 1 / 1.45;
-    object-fit: cover; 
+    /* Ensure the book grows as tall/wide as possible without overflowing the padding */
+    max-width: 100%; 
+    max-height: 100%; 
+    object-fit: contain; 
     box-shadow: 2px 4px 12px rgba(0,0,0,0.15); 
 }
 
@@ -249,7 +253,7 @@ body.is-searching .library-header p { opacity: 0.3; }
     display: flex; 
     flex-direction: column; 
     gap: 0.25rem; 
-    margin-top: 1rem; 
+    margin-top: 0.8rem; 
 }
 
 /* Kodansha Typography: Small, punchy, ultra-clean */
