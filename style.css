@@ -199,12 +199,6 @@ a:focus-visible, button:focus-visible { outline: 0.125rem solid var(--hover-gray
 /* =========================================
    07. PAGE: LIBRARY (KODANSHA EDITORIAL ENGINE)
    ========================================= */
-.library-header { text-align: left; margin-bottom: 3rem; border-bottom: 0.25rem solid var(--kodansha-black); padding-bottom: 1.5rem; }
-.library-header h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.04em; color: var(--kodansha-black); margin-bottom: 0.5rem; }
-.library-header p { font-size: 1.1rem; color: #666666; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; transition: opacity 0.3s ease; }
-
-/* Search Fade Effect */
-body.is-searching .library-header p { opacity: 0.3; }
 
 /* The Main Brutalist Grid */
 .library-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 3rem 2rem; width: 100%; padding-bottom: 4rem; }
@@ -254,12 +248,12 @@ body.is-searching .library-header p { opacity: 0.3; }
 .mini-volume { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; cursor: pointer; width: 80px; flex-shrink: 0; opacity: 0.6; transition: opacity 0.2s, transform 0.2s; }
 .mini-volume:hover { opacity: 1; transform: translateY(-3px); }
 .mini-volume.active { opacity: 1; }
-.mini-volume img { width: 100%; aspect-ratio: 2 / 3; object-fit: cover; border: 2px solid transparent; }
+.mini-volume img { width: 100%; aspect-ratio: 2 / 3; object-fit: cover; border: 2px solid transparent; transition: border-color 0.2s ease; }
 .mini-volume.active img { border-color: var(--kodansha-black); }
 .mini-vol-num { font-size: 0.75rem; font-weight: 800; }
 
 .btn-back-series { display: inline-flex; margin: 3rem auto 0 auto; justify-content: center; align-items: center; gap: 0.5rem; border: 1px solid var(--border-color); padding: 0.75rem 1.5rem; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--kodansha-black); cursor: pointer; background: transparent; transition: all 0.2s ease; }
-.btn-back-series:hover { border-color: var(--kodansha-black); }
+.btn-back-series:hover { border-color: var(--kodansha-black); background-color: #FAFAFA; }
 
 /* =========================================
    08. PAGE: FRAGMENTS
