@@ -230,7 +230,7 @@
             loadLibrary();
         });
 
-        // --- NOTION API PIPELINE & GROUPING ENGINE ---
+// --- NOTION API PIPELINE & GROUPING ENGINE ---
         async function loadLibrary() {
             const grid = document.getElementById('library-grid');
             
@@ -239,7 +239,10 @@
                 const response = await fetch('https://api.suwuyiku.workers.dev/library');
                 const rawBooks = await response.json();
 
-                if (rawBooks.error) throw new Error("API Error");
+                // SMART ERROR LOGGING: If the backend fails, print the exact reason to the screen
+                if (rawBooks.error) {
+                    throw new Error(rawBooks.error);
+                }
 
                 grid.innerHTML = ""; // Clear loading message
 
@@ -288,10 +291,11 @@
 
             } catch (error) {
                 console.error("Library Sync Failed:", error);
-                grid.innerHTML = '<p style="color: #FF0000; padding: 2rem 0;">Error synchronizing with the ecosystem. Please check back later.</p>';
+                // This will now print the exact Notion block message so we know what is wrong
+                grid.innerHTML = `<p style="color: #FF0000; padding: 2rem 0; line-height: 1.6;"><strong>System Error:</strong><br>${error.message}</p>`;
             }
         }
-
+        
         // --- DOSSIER INTERACTION LOGIC ---
         function openDetailView(seriesName, volumeIndex) {
             const series = groupedSeries[seriesName];
