@@ -210,7 +210,7 @@ body.is-searching .library-header p { opacity: 0.3; }
 .library-grid { 
     display: grid; 
     grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); 
-    gap: 3rem 2rem; 
+    gap: 3rem 1.5rem; 
     width: 100%; 
     padding-bottom: 4rem; 
 }
@@ -219,15 +219,19 @@ body.is-searching .library-header p { opacity: 0.3; }
     display: flex; 
     flex-direction: column; 
     cursor: pointer; 
+    
+    /* Disable all text highlighting/selection */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
-/* Kodansha Grey Box: STRICT TALL RECTANGLE */
+/* Kodansha Grey Box: Fixed identical aspect ratio, completely uniform */
 .cover-wrapper { 
-    background-color: #F0F0F0; 
-    /* Force the box to be much taller than it is wide (like a poster) */
-    aspect-ratio: 1 / 1.45; 
-    /* Equal padding on all sides so the book sits perfectly centered */
-    padding: 1.5rem; 
+    background-color: #F4F4F4; 
+    aspect-ratio: 1 / 1.42; /* The exact Kodansha vertical rectangle ratio */
+    padding: 1.5rem; /* Strict, even padding on all sides */
     display: flex; 
     justify-content: center; 
     align-items: center; 
@@ -236,16 +240,19 @@ body.is-searching .library-header p { opacity: 0.3; }
 
 /* Perfect hover: Grey box darkens, no jumping */
 .kodansha-card:hover .cover-wrapper {
-    background-color: #E2E2E2; 
+    background-color: #E5E5E5; 
 }
 
-/* The Book Cover: Maximize size without breaking the box */
+/* The Book Cover: Fits exactly inside the padding bounds with correct shadow */
 .book-cover { 
-    /* Ensure the book grows as tall/wide as possible without overflowing the padding */
-    max-width: 100%; 
-    max-height: 100%; 
+    width: 100%; 
+    height: 100%; 
     object-fit: contain; 
-    box-shadow: 2px 4px 12px rgba(0,0,0,0.15); 
+    box-shadow: 2px 4px 15px rgba(0, 0, 0, 0.15); 
+    
+    /* Anti-Rip Protection: Disables right-click, saving, and dragging */
+    pointer-events: none; 
+    -webkit-user-drag: none;
 }
 
 /* Typography alignment */
@@ -253,7 +260,7 @@ body.is-searching .library-header p { opacity: 0.3; }
     display: flex; 
     flex-direction: column; 
     gap: 0.25rem; 
-    margin-top: 0.8rem; 
+    margin-top: 1rem; 
 }
 
 /* Kodansha Typography: Small, punchy, ultra-clean */
