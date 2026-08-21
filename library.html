@@ -90,12 +90,12 @@
             </div>
         </div>
 
-        <!-- VIEW 2: THE KODANSHA DETAIL DOSSIER -->
+<!-- VIEW 2: THE KODANSHA DETAIL DOSSIER -->
         <div id="detail-view" class="detail-view">
             
-            <!-- Breadcrumbs / Back Button at the TOP -->
+            <!-- FIX 2: The "bozo" button is replaced by the good-looking boxed button -->
             <div class="breadcrumbs">
-                <button class="btn-breadcrumb" onclick="closeDetailView()">
+                <button class="btn-back-series" style="margin: 0;" onclick="closeDetailView()">
                     ← Back to Archive
                 </button>
             </div>
@@ -131,14 +131,8 @@
             <h3 class="other-volumes-header">Other Volumes in This Series</h3>
             <div id="mini-shelf" class="mini-shelf"></div>
 
-        </div>
-        
-            <button class="btn-back-series" onclick="closeDetailView()">
-                ← Back to Archive
-            </button>
-        </div>
-
-    </main>
+        </div> 
+        <!-- FIX 1: The stray </div> and redundant bottom button have been removed -->
     
     <!-- 4. UNIFIED FOOTER -->
     <footer class="site-footer">
