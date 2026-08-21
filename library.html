@@ -230,7 +230,7 @@
             loadLibrary();
         });
 
-// --- NOTION API PIPELINE & GROUPING ENGINE ---
+        // --- NOTION API PIPELINE & GROUPING ENGINE ---
         async function loadLibrary() {
             const grid = document.getElementById('library-grid');
             
@@ -318,11 +318,39 @@
             document.getElementById('det-publisher').textContent = activeVol.publisher || "-";
             document.getElementById('det-date').textContent = activeVol.dateAcquired || "-";
 
-            // Populate Publisher Link
+            // --- DYNAMIC PUBLISHER LOGO SYSTEM ---
             const linkBtn = document.getElementById('det-link');
+            
+            // The Master Library of Publisher Logos (Keys are lowercase for bulletproof matching)
+            const publisherLogos = {
+                "viz media": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Viz_Media_logo.svg/512px-Viz_Media_logo.svg.png",
+                "kodansha": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Kodansha_logo.svg/512px-Kodansha_logo.svg.png",
+                "kodansha comics": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Kodansha_logo.svg/512px-Kodansha_logo.svg.png",
+                "yen press": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Yen_Press_logo.svg/512px-Yen_Press_logo.svg.png",
+                "seven seas": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Seven_Seas_Entertainment_logo.svg/512px-Seven_Seas_Entertainment_logo.svg.png",
+                "seven seas entertainment": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Seven_Seas_Entertainment_logo.svg/512px-Seven_Seas_Entertainment_logo.svg.png",
+                "dark horse": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Dark_Horse_Comics_logo.svg/512px-Dark_Horse_Comics_logo.svg.png",
+                "dark horse comics": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Dark_Horse_Comics_logo.svg/512px-Dark_Horse_Comics_logo.svg.png",
+                "square enix": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Square_Enix_logo.svg/512px-Square_Enix_logo.svg.png",
+                "shueisha": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Shueisha_logo.svg/512px-Shueisha_logo.svg.png",
+                "vertical": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Kodansha_logo.svg/512px-Kodansha_logo.svg.png", // Vertical is an imprint of Kodansha
+                "penguin random house": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Penguin_Random_House_logo.svg/512px-Penguin_Random_House_logo.svg.png",
+                "macmillan": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Macmillan_Publishers_logo.svg/512px-Macmillan_Publishers_logo.svg.png"
+            };
+
             if (activeVol.purchaseLink) {
                 linkBtn.href = activeVol.purchaseLink;
                 linkBtn.style.display = 'inline-flex';
+                
+                // Normalizes the Notion text to lowercase to prevent typo errors
+                const cleanPublisherName = activeVol.publisher ? activeVol.publisher.toLowerCase().trim() : "";
+
+                // If we have a logo match, inject it. Otherwise, fallback to clean text.
+                if (cleanPublisherName && publisherLogos[cleanPublisherName]) {
+                    linkBtn.innerHTML = `Official Site <img src="${publisherLogos[cleanPublisherName]}" alt="${activeVol.publisher}" style="height: 1.2rem; margin-left: 0.75rem; filter: grayscale(100%) contrast(1.2);">`;
+                } else {
+                    linkBtn.innerHTML = "Visit Official Publisher ↗";
+                }
             } else {
                 linkBtn.style.display = 'none';
             }
