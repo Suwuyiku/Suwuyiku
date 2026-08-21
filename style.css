@@ -200,6 +200,14 @@ a:focus-visible, button:focus-visible { outline: 0.125rem solid var(--hover-gray
 /* =========================================
    07. PAGE: LIBRARY (KODANSHA EDITORIAL ENGINE)
    ========================================= */
+
+/* Widescreen Expansion - Mimics Kodansha's wide layout */
+.contact-page-wrapper {
+    max-width: 1200px;
+    margin: 0 auto; 
+    padding: 3rem 20px 6rem 20px;
+}
+
 .library-header { text-align: left; margin-bottom: 3rem; border-bottom: 0.25rem solid var(--kodansha-black); padding-bottom: 1.5rem; }
 .library-header h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.04em; color: var(--kodansha-black); margin-bottom: 0.5rem; }
 .library-header p { font-size: 1.1rem; color: #666666; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; transition: opacity 0.3s ease; }
@@ -318,12 +326,22 @@ body.is-searching .library-header p { opacity: 0.3; }
     color: #000000;
 }
 
-.detail-top { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; margin-bottom: 3rem; align-items: start; }
+/* Flexbox Layout Upgrade: Wide proportioned split */
+.detail-top { 
+    display: flex;
+    gap: 40px; 
+    align-items: flex-start;
+    margin-bottom: 3rem; 
+}
 
-@media (max-width: 48rem) { .detail-top { grid-template-columns: 1fr; gap: 2rem; } }
+@media (max-width: 48rem) { 
+    .detail-top { flex-direction: column; gap: 2rem; } 
+}
 
-/* Detail View Image Frame - Matches Grid Exactly */
+/* Detail View Image Frame - Flex Column 1 */
 .detail-cover-wrapper { 
+    flex: 1;
+    max-width: 400px;
     background-color: #F4F4F4; 
     aspect-ratio: 1 / 1.52; 
     padding: 2.2rem 1.6rem; 
@@ -331,7 +349,6 @@ body.is-searching .library-header p { opacity: 0.3; }
     justify-content: center; 
     align-items: center; 
     position: relative;
-    max-width: 320px;
 }
 
 /* Anti-Rip Shield for Detail Image */
@@ -353,10 +370,25 @@ body.is-searching .library-header p { opacity: 0.3; }
     -webkit-user-drag: none;
 }
 
-.detail-info { display: flex; flex-direction: column; gap: 1rem; }
+/* Detail Text - Flex Column 2 */
+.detail-info { 
+    flex: 2;
+    display: flex; 
+    flex-direction: column; 
+    gap: 1rem; 
+}
+
 .detail-title { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; color: #000000; }
 .detail-author { font-size: 1rem; font-weight: 600; color: #555555; text-transform: uppercase; letter-spacing: 0.05em; }
-.detail-review { font-size: 1.05rem; line-height: 1.8; color: #222222; margin: 1rem 0; white-space: pre-wrap; }
+
+/* Enhanced Typography for Review */
+.detail-review { 
+    font-size: 1.1rem; 
+    line-height: 1.6; 
+    color: #333333; 
+    margin: 1rem 0; 
+    white-space: pre-wrap; 
+}
 
 /* Publisher Button */
 .kodansha-btn { display: inline-flex; justify-content: center; align-items: center; border: 0.15rem solid #000000; background: transparent; color: #000000; padding: 0.85rem 1.5rem; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; text-decoration: none; transition: all 0.2s ease; max-width: 250px; }
