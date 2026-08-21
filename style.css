@@ -199,6 +199,12 @@ a:focus-visible, button:focus-visible { outline: 0.125rem solid var(--hover-gray
 /* =========================================
    07. PAGE: LIBRARY (KODANSHA EDITORIAL ENGINE)
    ========================================= */
+.library-header { text-align: left; margin-bottom: 3rem; border-bottom: 0.25rem solid var(--kodansha-black); padding-bottom: 1.5rem; }
+.library-header h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.04em; color: var(--kodansha-black); margin-bottom: 0.5rem; }
+.library-header p { font-size: 1.1rem; color: #666666; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; transition: opacity 0.3s ease; }
+
+/* Search Fade Effect */
+body.is-searching .library-header p { opacity: 0.3; }
 
 /* The Main Brutalist Grid */
 .library-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 3rem 2rem; width: 100%; padding-bottom: 4rem; }
@@ -206,8 +212,24 @@ a:focus-visible, button:focus-visible { outline: 0.125rem solid var(--hover-gray
 .kodansha-card { display: flex; flex-direction: column; cursor: pointer; transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
 .kodansha-card:hover { transform: translateY(-5px); }
 
-.cover-wrapper { background-color: #F4F4F4; padding: 1.5rem; display: flex; justify-content: center; align-items: center; margin-bottom: 1rem; }
-.book-cover { width: 100%; aspect-ratio: 2 / 3; object-fit: cover; box-shadow: 4px 6px 15px rgba(0,0,0,0.08); transition: box-shadow 0.3s ease; }
+/* Perfect Grid Uniformity */
+.cover-wrapper { 
+    background-color: #F4F4F4; 
+    padding: 1.5rem; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    margin-bottom: 1rem; 
+    aspect-ratio: 3 / 4; 
+    overflow: hidden;
+}
+.book-cover { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: contain; 
+    box-shadow: 4px 6px 15px rgba(0,0,0,0.08); 
+    transition: box-shadow 0.3s ease; 
+}
 .kodansha-card:hover .book-cover { box-shadow: 8px 12px 25px rgba(0,0,0,0.15); }
 
 .card-text { display: flex; flex-direction: column; gap: 0.25rem; }
@@ -232,9 +254,24 @@ a:focus-visible, button:focus-visible { outline: 0.125rem solid var(--hover-gray
 .kodansha-btn { display: inline-flex; justify-content: center; align-items: center; border: 0.125rem solid var(--kodansha-black); background: transparent; color: var(--kodansha-black); padding: 0.85rem 1.5rem; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; text-decoration: none; transition: all 0.2s ease; max-width: 250px; }
 .kodansha-btn:hover { background: var(--kodansha-black); color: var(--bg-color); }
 
-/* Volume Info Table */
-.volume-info-table { width: 100%; border-top: 0.125rem solid var(--kodansha-black); border-bottom: 0.125rem solid var(--kodansha-black); margin-top: 2rem; display: flex; flex-wrap: wrap; }
-.info-cell { flex: 1 1 33%; padding: 1rem; border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 0.25rem; }
+/* Manager's Padding Fix for the Table */
+.volume-info-table { 
+    width: 100%; 
+    border-top: 0.125rem solid var(--kodansha-black); 
+    border-bottom: 0.125rem solid var(--kodansha-black); 
+    margin-top: 2.5rem; 
+    display: flex; 
+    flex-wrap: wrap; 
+}
+.info-cell { 
+    flex: 1 1 33%; 
+    padding: 1.5rem 1rem; /* Elegant vertical breathing room */
+    border-right: 1px solid var(--border-color); 
+    border-bottom: 1px solid var(--border-color); 
+    display: flex; 
+    flex-direction: column; 
+    gap: 0.25rem; 
+}
 .info-cell:last-child, .info-cell:nth-child(3) { border-right: none; }
 .info-label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: #888888; letter-spacing: 0.05em; }
 .info-value { font-size: 0.9rem; font-weight: 600; color: var(--kodansha-black); }
