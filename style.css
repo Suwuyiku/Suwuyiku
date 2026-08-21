@@ -196,98 +196,70 @@ a:focus-visible, button:focus-visible { outline: 0.125rem solid var(--hover-gray
    ========================================= */
 /* Future Shop / Commerce styling will go here */
 
-
 /* =========================================
-   07. PAGE: LIBRARY
+   07. PAGE: LIBRARY (KODANSHA EDITORIAL ENGINE)
    ========================================= */
-/* Unified Left-Aligned Header */
-.library-header { 
-    text-align: left; 
-    margin-bottom: 3rem; 
-    border-bottom: 0.125rem solid var(--kodansha-black); 
-    padding-bottom: 1.5rem; 
-}
-.library-header h1 { 
-    font-size: 2.5rem; 
-    font-weight: 800; 
-    letter-spacing: -0.03em; 
-    color: var(--kodansha-black); 
-    margin-bottom: 0.5rem; 
-}
-.library-header p { 
-    font-size: 1rem; 
-    color: #777777; 
-}
+.library-header { text-align: left; margin-bottom: 3rem; border-bottom: 0.25rem solid var(--kodansha-black); padding-bottom: 1.5rem; }
+.library-header h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.04em; color: var(--kodansha-black); margin-bottom: 0.5rem; }
+.library-header p { font-size: 1.1rem; color: #666666; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; transition: opacity 0.3s ease; }
 
-/* Horizontal Manga Shelf Engine */
-.manga-shelf { display: flex; justify-content: flex-start; align-items: center; padding: 2rem 0 4rem 0; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-.manga-book { width: 12rem; height: auto; flex-shrink: 0; border-radius: 6px; position: relative; box-sizing: border-box; border: 1px solid transparent; box-shadow: 10px 0 20px rgba(0, 0, 0, 0.15); -webkit-backface-visibility: hidden; backface-visibility: hidden; filter: contrast(1.02) saturate(1.05); transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), margin 0.7s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, box-shadow 0.7s cubic-bezier(0.22, 1, 0.36, 1); cursor: pointer; }
+/* Search Fade Effect */
+body.is-searching .library-header p { opacity: 0.3; }
 
-/* Book Staggering Math */
-.manga-book:nth-child(1) { z-index: 8; transform: rotate(-3deg) translateY(3px); }
-.manga-book:nth-child(2) { z-index: 7; transform: rotate(1.5deg) translateY(-2px); }
-.manga-book:nth-child(3) { z-index: 6; transform: rotate(-2deg) translateY(4px); }
-.manga-book:nth-child(4) { z-index: 5; transform: rotate(2.5deg) translateY(-1px); }
-.manga-book:nth-child(5) { z-index: 4; transform: rotate(-1.5deg) translateY(2px); }
-.manga-book:nth-child(6) { z-index: 3; transform: rotate(3deg) translateY(-3px); }
-.manga-book:nth-child(7) { z-index: 2; transform: rotate(-2.5deg) translateY(1px); }
-.manga-book:nth-child(8) { z-index: 1; transform: rotate(1deg) translateY(2px); }
-.manga-book:not(:first-child) { margin-left: -7.5rem; }
+/* The Main Brutalist Grid */
+.library-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 3rem 2rem; width: 100%; padding-bottom: 4rem; }
 
-/* Hover Expansion */
-.manga-shelf:hover .manga-book:not(:first-child) { margin-left: -2rem; }
-.manga-shelf:hover .manga-book:nth-child(1) { transform: rotate(-7deg) translateY(0); }
-.manga-shelf:hover .manga-book:nth-child(2) { transform: rotate(-5deg) translateY(0); }
-.manga-shelf:hover .manga-book:nth-child(3) { transform: rotate(-3deg) translateY(0); }
-.manga-shelf:hover .manga-book:nth-child(4) { transform: rotate(-1deg) translateY(0); }
-.manga-shelf:hover .manga-book:nth-child(5) { transform: rotate(1deg) translateY(0); }
-.manga-shelf:hover .manga-book:nth-child(6) { transform: rotate(3deg) translateY(0); }
-.manga-shelf:hover .manga-book:nth-child(7) { transform: rotate(5deg) translateY(0); }
-.manga-shelf:hover .manga-book:nth-child(8) { transform: rotate(7deg) translateY(0); }
+.kodansha-card { display: flex; flex-direction: column; cursor: pointer; transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+.kodansha-card:hover { transform: translateY(-5px); }
 
-/* Individual Book Hover Elevation */
-.manga-book:nth-child(odd):hover { transform: translate(0.5rem, -2.5rem) rotate(-3deg) scale(1.03) !important; z-index: 20 !important; border-color: var(--kodansha-black); box-shadow: 0 25px 45px rgba(0, 0, 0, 0.4); }
-.manga-book:nth-child(even):hover { transform: translate(0.5rem, -2.5rem) rotate(3deg) scale(1.03) !important; z-index: 20 !important; border-color: var(--kodansha-black); box-shadow: 0 25px 45px rgba(0, 0, 0, 0.4); }
+.cover-wrapper { background-color: #F4F4F4; padding: 1.5rem; display: flex; justify-content: center; align-items: center; margin-bottom: 1rem; }
+.book-cover { width: 100%; aspect-ratio: 2 / 3; object-fit: cover; box-shadow: 4px 6px 15px rgba(0,0,0,0.08); transition: box-shadow 0.3s ease; }
+.kodansha-card:hover .book-cover { box-shadow: 8px 12px 25px rgba(0,0,0,0.15); }
 
-/* Library API Grid Architecture */
-.library-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-    gap: 2.5rem 1.5rem;
-    align-items: start;
-    width: 100%;
-    padding-bottom: 4rem;
-}
+.card-text { display: flex; flex-direction: column; gap: 0.25rem; }
+.series-title { font-size: 1.1rem; font-weight: 800; color: var(--kodansha-black); line-height: 1.2; letter-spacing: -0.01em; }
+.series-author { font-size: 0.85rem; color: #777777; font-weight: 500; }
 
-.book-item {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    cursor: pointer;
-}
+/* The Detail View (The Dossier) */
+.detail-view { display: none; flex-direction: column; width: 100%; animation: fadeIn 0.4s ease; padding-bottom: 4rem; }
+.detail-top { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; margin-bottom: 3rem; align-items: start; }
 
-.book-item:hover { transform: translateY(-4px); }
+@media (max-width: 48rem) { .detail-top { grid-template-columns: 1fr; gap: 2rem; } }
 
-.book-cover {
-    width: 100%;
-    aspect-ratio: 2 / 3; /* Forces standard manga/book dimensions */
-    object-fit: cover;
-    border-radius: 4px;
-    box-shadow: 4px 6px 15px rgba(0,0,0,0.08);
-    border: 1px solid var(--border-color);
-    transition: box-shadow 0.3s ease, border-color 0.3s ease;
-}
+.detail-cover-wrapper { background-color: #F4F4F4; padding: 2.5rem; display: flex; justify-content: center; }
+.detail-cover { width: 100%; max-width: 300px; aspect-ratio: 2 / 3; object-fit: cover; box-shadow: 5px 10px 20px rgba(0,0,0,0.1); }
 
-.book-item:hover .book-cover { 
-    box-shadow: 6px 10px 20px rgba(0,0,0,0.15); 
-    border-color: var(--hover-gray); 
-}
+.detail-info { display: flex; flex-direction: column; gap: 1rem; }
+.detail-title { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; }
+.detail-author { font-size: 1rem; font-weight: 600; color: #555555; text-transform: uppercase; letter-spacing: 0.05em; }
+.detail-review { font-size: 1.05rem; line-height: 1.8; color: #222222; margin: 1rem 0; white-space: pre-wrap; }
 
-.book-meta { display: flex; flex-direction: column; }
-.book-title { font-size: 0.85rem; font-weight: 700; color: var(--kodansha-black); line-height: 1.2; }
-.book-author { font-size: 0.7rem; color: #888888; margin-top: 0.2rem; }
-body.is-searching .library-header p { opacity: 0.3; transition: opacity 0.3s ease; }
+/* Publisher Button */
+.kodansha-btn { display: inline-flex; justify-content: center; align-items: center; border: 0.125rem solid var(--kodansha-black); background: transparent; color: var(--kodansha-black); padding: 0.85rem 1.5rem; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; text-decoration: none; transition: all 0.2s ease; max-width: 250px; }
+.kodansha-btn:hover { background: var(--kodansha-black); color: var(--bg-color); }
+
+/* Volume Info Table */
+.volume-info-table { width: 100%; border-top: 0.125rem solid var(--kodansha-black); border-bottom: 0.125rem solid var(--kodansha-black); margin-top: 2rem; display: flex; flex-wrap: wrap; }
+.info-cell { flex: 1 1 33%; padding: 1rem; border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 0.25rem; }
+.info-cell:last-child, .info-cell:nth-child(3) { border-right: none; }
+.info-label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: #888888; letter-spacing: 0.05em; }
+.info-value { font-size: 0.9rem; font-weight: 600; color: var(--kodansha-black); }
+
+.tags-row { width: 100%; padding: 1rem; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+.tag-badge { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; border: 1px solid var(--border-color); padding: 0.25rem 0.5rem; color: #555555; }
+
+/* Other Volumes Shelf */
+.other-volumes-header { font-size: 1.2rem; font-weight: 800; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; }
+.mini-shelf { display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 1rem; -webkit-overflow-scrolling: touch; }
+.mini-volume { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; cursor: pointer; width: 80px; flex-shrink: 0; opacity: 0.6; transition: opacity 0.2s, transform 0.2s; }
+.mini-volume:hover { opacity: 1; transform: translateY(-3px); }
+.mini-volume.active { opacity: 1; }
+.mini-volume img { width: 100%; aspect-ratio: 2 / 3; object-fit: cover; border: 2px solid transparent; }
+.mini-volume.active img { border-color: var(--kodansha-black); }
+.mini-vol-num { font-size: 0.75rem; font-weight: 800; }
+
+.btn-back-series { display: inline-flex; margin: 3rem auto 0 auto; justify-content: center; align-items: center; gap: 0.5rem; border: 1px solid var(--border-color); padding: 0.75rem 1.5rem; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--kodansha-black); cursor: pointer; background: transparent; transition: all 0.2s ease; }
+.btn-back-series:hover { border-color: var(--kodansha-black); }
 
 /* =========================================
    08. PAGE: FRAGMENTS
