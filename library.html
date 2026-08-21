@@ -92,6 +92,14 @@
 
         <!-- VIEW 2: THE KODANSHA DETAIL DOSSIER -->
         <div id="detail-view" class="detail-view">
+            
+            <!-- Breadcrumbs / Back Button at the TOP -->
+            <div class="breadcrumbs">
+                <button class="btn-breadcrumb" onclick="closeDetailView()">
+                    ← Back to Archive
+                </button>
+            </div>
+
             <div class="detail-top">
                 <div class="detail-cover-wrapper">
                     <img id="det-cover" src="" class="detail-cover" alt="Volume Cover">
@@ -123,6 +131,8 @@
             <h3 class="other-volumes-header">Other Volumes in This Series</h3>
             <div id="mini-shelf" class="mini-shelf"></div>
 
+        </div>
+        
             <button class="btn-back-series" onclick="closeDetailView()">
                 ← Back to Archive
             </button>
@@ -318,10 +328,10 @@
             document.getElementById('det-publisher').textContent = activeVol.publisher || "-";
             document.getElementById('det-date').textContent = activeVol.dateAcquired || "-";
 
-            // --- DYNAMIC PUBLISHER LOGO SYSTEM ---
+         // --- DYNAMIC PUBLISHER LOGO SYSTEM ---
             const linkBtn = document.getElementById('det-link');
             
-            // The Master Library of Publisher Logos (Keys are lowercase for bulletproof matching)
+            // The Master Library of Publisher Logos
             const publisherLogos = {
                 "viz media": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Viz_Media_logo.svg/512px-Viz_Media_logo.svg.png",
                 "kodansha": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Kodansha_logo.svg/512px-Kodansha_logo.svg.png",
@@ -333,7 +343,7 @@
                 "dark horse comics": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Dark_Horse_Comics_logo.svg/512px-Dark_Horse_Comics_logo.svg.png",
                 "square enix": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Square_Enix_logo.svg/512px-Square_Enix_logo.svg.png",
                 "shueisha": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Shueisha_logo.svg/512px-Shueisha_logo.svg.png",
-                "vertical": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Kodansha_logo.svg/512px-Kodansha_logo.svg.png", // Vertical is an imprint of Kodansha
+                "vertical": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Kodansha_logo.svg/512px-Kodansha_logo.svg.png",
                 "penguin random house": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Penguin_Random_House_logo.svg/512px-Penguin_Random_House_logo.svg.png",
                 "macmillan": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Macmillan_Publishers_logo.svg/512px-Macmillan_Publishers_logo.svg.png"
             };
@@ -342,19 +352,18 @@
                 linkBtn.href = activeVol.purchaseLink;
                 linkBtn.style.display = 'inline-flex';
                 
-                // Normalizes the Notion text to lowercase to prevent typo errors
                 const cleanPublisherName = activeVol.publisher ? activeVol.publisher.toLowerCase().trim() : "";
 
-                // If we have a logo match, inject it. Otherwise, fallback to clean text.
                 if (cleanPublisherName && publisherLogos[cleanPublisherName]) {
-                    linkBtn.innerHTML = `Official Site <img src="${publisherLogos[cleanPublisherName]}" alt="${activeVol.publisher}" style="height: 1.2rem; margin-left: 0.75rem; filter: grayscale(100%) contrast(1.2);">`;
+                    // Removed the grayscale filter so logos appear in their original color
+                    linkBtn.innerHTML = `OFFICIAL SITE <img src="${publisherLogos[cleanPublisherName]}" alt="${activeVol.publisher}" style="height: 1.2rem; margin-left: 0.75rem;">`;
                 } else {
-                    linkBtn.innerHTML = "Visit Official Publisher ↗";
+                    linkBtn.innerHTML = "VISIT OFFICIAL PUBLISHER ↗";
                 }
             } else {
                 linkBtn.style.display = 'none';
             }
-
+            
             // Populate Tags (Genres)
             const tagsContainer = document.getElementById('det-tags');
             tagsContainer.innerHTML = activeVol.genres.map(g => `<span class="tag-badge">${g}</span>`).join('');
