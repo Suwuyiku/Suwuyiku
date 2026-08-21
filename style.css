@@ -220,22 +220,33 @@ body.is-searching .library-header p { opacity: 0.3; }
     flex-direction: column; 
     cursor: pointer; 
     
-    /* Disable all text highlighting/selection */
+    /* Disables text highlighting */
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
 }
 
-/* Kodansha Grey Box: Fixed identical aspect ratio, completely uniform */
+/* Kodansha Grey Box: Strict vertical poster rectangle */
 .cover-wrapper { 
     background-color: #F4F4F4; 
-    aspect-ratio: 1 / 1.42; /* The exact Kodansha vertical rectangle ratio */
-    padding: 1.5rem; /* Strict, even padding on all sides */
+    aspect-ratio: 1 / 1.42; 
+    padding: 1.5rem; 
     display: flex; 
     justify-content: center; 
     align-items: center; 
     transition: background-color 0.2s ease; 
+    
+    /* CRITICAL: Required for the invisible anti-rip shield */
+    position: relative; 
+}
+
+/* ULTIMATE ANTI-RIP SHIELD: An invisible layer physically blocking the image */
+.cover-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 10;
 }
 
 /* Perfect hover: Grey box darkens, no jumping */
@@ -243,15 +254,18 @@ body.is-searching .library-header p { opacity: 0.3; }
     background-color: #E5E5E5; 
 }
 
-/* The Book Cover: Fits exactly inside the padding bounds with correct shadow */
+/* The Book Cover: Perfectly scales inside the box without breaking */
 .book-cover { 
-    width: 100%; 
-    height: 100%; 
+    /* Max-bounds allow the image to size naturally without the flex-crop glitch */
+    max-width: 100%; 
+    max-height: 100%; 
+    width: auto; 
+    height: auto; 
     object-fit: contain; 
     box-shadow: 2px 4px 15px rgba(0, 0, 0, 0.15); 
     
-    /* Anti-Rip Protection: Disables right-click, saving, and dragging */
-    pointer-events: none; 
+    /* Prevents clicking and dragging the ghost image */
+    pointer-events: none;
     -webkit-user-drag: none;
 }
 
