@@ -238,13 +238,13 @@ body.is-searching .library-header p { opacity: 0.3; }
     -webkit-user-drag: none;
 }
 
-/* Kodansha Grey Box: TALLER frame, perfect breathing room */
+/* Kodansha Grey Box: Taller frame, tighter sides for the perfect portrait monument */
 .cover-wrapper, .detail-cover-wrapper { 
     background-color: #EBEBEB; 
-    /* 2. THE TALL RATIO: 1.52 makes the box height bigger than the width again */
-    aspect-ratio: 1 / 1.52; 
-    /* 3. PADDING: Keeps the image from touching the edges of the tall box */
-    padding: 1.5rem; 
+    /* 1. TALLER RATIO: Stretches the vertical height */
+    aspect-ratio: 1 / 1.65; 
+    /* 2. ASYMMETRIC PADDING: 1.8rem top/bottom, 1.1rem left/right (makes it less wide) */
+    padding: 1.8rem 1.1rem; 
     display: flex; 
     justify-content: center; 
     align-items: center; 
