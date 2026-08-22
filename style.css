@@ -238,14 +238,13 @@ body.is-searching .library-header p { opacity: 0.3; }
 @media (max-width: 950px) { .library-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 700px) { .library-grid { grid-template-columns: repeat(2, 1fr); } }
 
-/* Kodansha Grey Box: The 7/10 Aspect Ratio */
+/* Kodansha Grey Box: The Tall Pedestal Calculation */
 .cover-wrapper, .detail-cover-wrapper { 
-    /* Kodansha uses a slightly lighter gray */
     background-color: #F4F4F4; 
-    /* The exact mathematical ratio of their portrait box */
-    aspect-ratio: 7 / 10; 
-    /* Uniform breathing room on all sides */
-    padding: 1.5rem; 
+    /* The calculated Kodansha tall aspect ratio */
+    aspect-ratio: 1 / 1.55; 
+    /* ZERO padding. The box size is absolute, and the image floats inside it. */
+    padding: 0; 
     display: flex; 
     justify-content: center; 
     align-items: center; 
@@ -265,13 +264,13 @@ body.is-searching .library-header p { opacity: 0.3; }
     background-color: #EAEAEA; 
 }
 
-/* The Cover: Fluid Containment */
+/* The Cover: Decoupled Magic Sizing */
 .book-cover, .detail-cover { 
-    /* The image completely fills the inner space left by the 1.5rem padding */
-    width: 100%; 
-    height: 100%; 
+    /* Setting to 75% width mathematically creates tight side gaps and massive top/bottom gaps */
+    width: 75%; 
+    height: auto; 
     object-fit: contain; 
-    box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.12); 
+    box-shadow: 4px 6px 14px rgba(0, 0, 0, 0.15), -1px -1px 3px rgba(255,255,255,0.5); 
     pointer-events: none;
     -webkit-user-drag: none;
     user-select: none;
