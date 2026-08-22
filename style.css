@@ -211,17 +211,23 @@ a:focus-visible, button:focus-visible { outline: 0.125rem solid var(--hover-gray
 .library-header h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.04em; color: var(--kodansha-black); margin-bottom: 0.5rem; }
 .library-header p { font-size: 1.1rem; color: #666666; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; transition: opacity 0.3s ease; }
 body.is-searching .library-header p { opacity: 0.3; }
-
 /* =========================================
    THE GRID & THE MONUMENTAL BOXES
    ========================================= */
 
+/* Widescreen Expansion - THE PERFECT 4-COLUMN CONTAINER */
+.contact-page-wrapper {
+    max-width: 1240px; /* Locks the page width perfectly for 4 items */
+    margin: 0 auto; 
+    padding: 3rem 20px 6rem 20px;
+}
+
 /* The Main Brutalist Grid */
 .library-grid { 
     display: grid; 
-    grid-template-columns: repeat(auto-fill, minmax(220px, 260px)); 
-    justify-content: start; 
-    gap: 3rem 1.5rem; 
+    /* auto-fill creates invisible phantom columns so 2 books never stretch */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+    gap: 3.5rem 1.5rem; 
     width: 100%; 
     padding-bottom: 4rem; 
 }
@@ -237,12 +243,12 @@ body.is-searching .library-header p { opacity: 0.3; }
     -webkit-user-drag: none;
 }
 
-/* Kodansha Grey Box: The Independent Pedestal */
+/* Kodansha Grey Box: The Flawless Pedestal Math */
 .cover-wrapper, .detail-cover-wrapper { 
     background-color: #EBEBEB; 
-    /* 1. Sets the pure rectangular shape of the gray box */
-    aspect-ratio: 1 / 1.48; 
-    /* 2. ZERO PADDING. We completely decouple the box from the image. */
+    /* The exact Kodansha grey box outer proportion */
+    aspect-ratio: 1 / 1.56; 
+    /* ZERO padding. We decouple the image to do the magic sizing. */
     padding: 0; 
     display: flex; 
     justify-content: center; 
@@ -263,16 +269,13 @@ body.is-searching .library-header p { opacity: 0.3; }
     background-color: #EAEAEA; 
 }
 
-/* The Cover Shadow & Independent Sizing */
+/* The Cover Magic Sizing */
 .book-cover, .detail-cover { 
-    /* 3. THE MAGIC FIX: The image explicitly takes up exactly 72% of the box width */
-    width: 72%; 
-    /* 4. Height stays auto so it never, ever squishes */
+    /* The Magic Math: 78% width creates tight sides and massive top/bottom space naturally */
+    width: 78%; 
     height: auto; 
-    /* 5. A safety rail just in case you upload an unusually tall cover */
-    max-height: 85%; 
     object-fit: contain; 
-    box-shadow: 4px 6px 15px rgba(0, 0, 0, 0.18), -1px -1px 3px rgba(255,255,255,0.6); 
+    box-shadow: 4px 6px 14px rgba(0, 0, 0, 0.15), -1px -1px 3px rgba(255,255,255,0.5); 
     pointer-events: none;
     -webkit-user-drag: none;
     user-select: none;
