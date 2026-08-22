@@ -315,10 +315,12 @@ body.is-searching .library-header p { opacity: 0.3; }
 
 .detail-view { display: none; flex-direction: column; width: 100%; animation: fadeIn 0.4s ease; padding-bottom: 4rem; }
 
-/* Top Breadcrumb Navigation */
+/* Top Breadcrumb Navigation: Contact-Style Margin & Line */
 .breadcrumbs {
     width: 100%;
-    margin-bottom: 1.5rem;
+    margin-bottom: 3rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #000000; /* Adds the structural line like your Contact page */
     display: block; 
 }
 
@@ -331,7 +333,8 @@ body.is-searching .library-header p { opacity: 0.3; }
     letter-spacing: 2px;
     background: #ffffff;
     color: #000000;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
@@ -350,19 +353,18 @@ body.is-searching .library-header p { opacity: 0.3; }
     .detail-top { grid-template-columns: 1fr; gap: 2.5rem; } 
 }
 
-/* FIX: SMALLER GRAY BOX! */
+/* FIX: SHRUNK GRAY BOX */
 .detail-cover-wrapper { 
     width: 100%;
-    max-width: 380px; /* This stops the gray box from ballooning across the screen */
-    margin: 0 auto; /* Centers the tight box inside the grid column */
+    max-width: 320px; /* Drastically shrunk the footprint */
+    margin: 0 auto; 
     background-color: #f2f2f2; 
-    padding: 2rem; /* Perfect, snug breathing room */
+    padding: 1.25rem; /* Tighter padding */
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* The Cover Image */
 .detail-cover {
     width: 100%;
     height: auto;
@@ -374,10 +376,11 @@ body.is-searching .library-header p { opacity: 0.3; }
 .detail-info { 
     display: flex; 
     flex-direction: column; 
-    gap: 1.25rem; 
+    gap: 1rem; 
 }
 
-.detail-title { font-size: 2.25rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; color: #000000; margin: 0; }
+/* FIX: SHRUNK TITLE */
+.detail-title { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; color: #000000; margin: 0; }
 .detail-author { font-size: 1rem; font-weight: 600; color: #555555; text-transform: uppercase; letter-spacing: 0.05em; margin: 0; }
 
 .detail-review { 
@@ -396,22 +399,21 @@ body.is-searching .library-header p { opacity: 0.3; }
     border: 2px solid #000000; 
     background: transparent; 
     color: #000000; 
-    padding: 1rem 1.5rem; 
+    padding: 0.85rem 1.25rem; 
     font-size: 0.85rem; 
     font-weight: 800; 
     text-transform: uppercase; 
-    letter-spacing: 0.1em; 
+    letter-spacing: 0.05em; 
     text-decoration: none; 
     transition: all 0.2s ease; 
     width: 100%;
-    max-width: 320px;
-    gap: 1rem; 
+    max-width: 280px;
 }
 .kodansha-btn:hover { background: #EAEAEA; }
 
 /* FIX: Forces the injected HTML image logo to display perfectly */
 .kodansha-btn img {
-    height: 1.4rem !important;
+    height: 1.25rem !important;
     width: auto;
     object-fit: contain;
     display: block;
