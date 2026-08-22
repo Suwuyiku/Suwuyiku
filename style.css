@@ -211,37 +211,41 @@ a:focus-visible, button:focus-visible { outline: 0.125rem solid var(--hover-gray
 .library-header h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.04em; color: var(--kodansha-black); margin-bottom: 0.5rem; }
 .library-header p { font-size: 1.1rem; color: #666666; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; transition: opacity 0.3s ease; }
 body.is-searching .library-header p { opacity: 0.3; }
+
 /* =========================================
    THE GRID & THE MONUMENTAL BOXES
    ========================================= */
 
-/* Widescreen Expansion */
+/* The Widescreen Container */
 .contact-page-wrapper {
     max-width: 1200px;
     margin: 0 auto; 
     padding: 3rem 20px 6rem 20px;
 }
 
-/* The Main Brutalist Grid - EXACT 4 COLUMNS & WIDER GAPS */
+/* The Main Brutalist Grid - EXACT 4 COLUMNS */
 .library-grid { 
     display: grid; 
+    /* This forces exactly 4 columns. It will never stretch your 2 books. */
     grid-template-columns: repeat(4, 1fr); 
-    /* THE GAP FIX: 3rem vertical gap, but a massive 4rem horizontal gap to match Kodansha */
-    gap: 3rem 4rem; 
+    /* Matches Kodansha's exact spacing: 3rem vertical, 2rem horizontal */
+    gap: 3rem 2rem; 
     width: 100%; 
     padding-bottom: 4rem; 
 }
 
 /* Media Queries to keep it looking good on smaller screens */
-@media (max-width: 950px) { .library-grid { grid-template-columns: repeat(3, 1fr); gap: 3rem 2rem; } }
-@media (max-width: 700px) { .library-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem 1.5rem; } }
+@media (max-width: 950px) { .library-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 700px) { .library-grid { grid-template-columns: repeat(2, 1fr); } }
 
-/* Kodansha Grey Box: The Tall Slender Rectangle */
+/* Kodansha Grey Box: The 7/10 Aspect Ratio */
 .cover-wrapper, .detail-cover-wrapper { 
-    background-color: #EBEBEB; 
-    /* THE SHAPE FIX: Massive 2.8rem top/bottom padding, but a microscopic 0.6rem on the sides. 
-       This forces the box into that exact tall, slender rectangular shape with tiny side gaps! */
-    padding: 2.8rem 0.6rem; 
+    /* Kodansha uses a slightly lighter gray */
+    background-color: #F4F4F4; 
+    /* The exact mathematical ratio of their portrait box */
+    aspect-ratio: 7 / 10; 
+    /* Uniform breathing room on all sides */
+    padding: 1.5rem; 
     display: flex; 
     justify-content: center; 
     align-items: center; 
@@ -261,12 +265,13 @@ body.is-searching .library-header p { opacity: 0.3; }
     background-color: #EAEAEA; 
 }
 
-/* The Cover: Native Scaling */
+/* The Cover: Fluid Containment */
 .book-cover, .detail-cover { 
+    /* The image completely fills the inner space left by the 1.5rem padding */
     width: 100%; 
-    height: auto; 
-    display: block; 
-    box-shadow: 4px 6px 14px rgba(0, 0, 0, 0.15), -1px -1px 3px rgba(255,255,255,0.5); 
+    height: 100%; 
+    object-fit: contain; 
+    box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.12); 
     pointer-events: none;
     -webkit-user-drag: none;
     user-select: none;
@@ -280,33 +285,26 @@ body.is-searching .library-header p { opacity: 0.3; }
 .card-text { 
     display: flex; 
     flex-direction: column; 
-    gap: 0 !important; 
-    margin-top: 0.5rem !important; 
+    gap: 0.2rem; 
+    margin-top: 1.2rem; 
     z-index: 1000;
     position: relative;
 }
 
 .series-title { 
-    /* FIX 3: Shrunk back down to a sleek, professional size */
-    font-size: 0.9rem !important; 
+    font-size: 0.95rem; 
     font-weight: 800; 
     color: #000000; 
-    line-height: 1.2 !important; 
-    margin: 0 0 0.15rem 0 !important; 
-    padding: 0 !important;
-    letter-spacing: -0.01em;
+    line-height: 1.2; 
+    margin: 0;
 }
 
 .series-author { 
-    /* FIX 4: Author text made smaller and lighter */
-    font-size: 0.75rem !important; 
-    color: #888888; 
+    font-size: 0.8rem; 
+    color: #777777; 
     font-weight: 400; 
     font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif; 
-    letter-spacing: 0.01em;
-    margin: 0 !important; 
-    padding: 0 !important;
-    line-height: 1.3 !important;
+    margin: 0;
 }
 
 /* The Detail View (The Dossier) */
