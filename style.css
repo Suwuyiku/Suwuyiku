@@ -211,45 +211,38 @@ a:focus-visible, button:focus-visible { outline: 0.125rem solid var(--hover-gray
 .library-header h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.04em; color: var(--kodansha-black); margin-bottom: 0.5rem; }
 .library-header p { font-size: 1.1rem; color: #666666; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; transition: opacity 0.3s ease; }
 body.is-searching .library-header p { opacity: 0.3; }
+
 /* =========================================
    THE GRID & THE MONUMENTAL BOXES
    ========================================= */
 
-/* Widescreen Expansion - THE PERFECT 4-COLUMN CONTAINER */
+/* Widescreen Expansion */
 .contact-page-wrapper {
-    max-width: 1240px; /* Locks the page width perfectly for 4 items */
+    max-width: 1200px;
     margin: 0 auto; 
     padding: 3rem 20px 6rem 20px;
 }
 
-/* The Main Brutalist Grid */
+/* The Main Brutalist Grid - EXACT 4 COLUMNS */
 .library-grid { 
     display: grid; 
-    /* auto-fill creates invisible phantom columns so 2 books never stretch */
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
-    gap: 3.5rem 1.5rem; 
+    /* THE ABSOLUTE FIX: Hardcode 4 equal columns. They will never stretch, even if you only have 1 book. */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 3rem 1.5rem; 
     width: 100%; 
     padding-bottom: 4rem; 
 }
 
-.kodansha-card { 
-    display: flex; 
-    flex-direction: column; 
-    cursor: pointer; 
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    -webkit-user-drag: none;
-}
+/* Media Queries to keep it looking good on smaller screens */
+@media (max-width: 950px) { .library-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 700px) { .library-grid { grid-template-columns: repeat(2, 1fr); } }
 
-/* Kodansha Grey Box: The Flawless Pedestal Math */
+/* Kodansha Grey Box: Pure Padding Pedestal */
 .cover-wrapper, .detail-cover-wrapper { 
     background-color: #EBEBEB; 
-    /* The exact Kodansha grey box outer proportion */
-    aspect-ratio: 1 / 1.56; 
-    /* ZERO padding. We decouple the image to do the magic sizing. */
-    padding: 0; 
+    /* NO ASPECT RATIO. Pure padding builds the box around the image natively. */
+    /* 2.5rem top/bottom for the tall pedestal, 1.25rem sides for the tight hug */
+    padding: 2.5rem 1.25rem; 
     display: flex; 
     justify-content: center; 
     align-items: center; 
@@ -269,12 +262,12 @@ body.is-searching .library-header p { opacity: 0.3; }
     background-color: #EAEAEA; 
 }
 
-/* The Cover Magic Sizing */
+/* The Cover: Native Scaling */
 .book-cover, .detail-cover { 
-    /* The Magic Math: 78% width creates tight sides and massive top/bottom space naturally */
-    width: 78%; 
+    /* Fills the inside of the box perfectly without fighting the code */
+    width: 100%; 
     height: auto; 
-    object-fit: contain; 
+    display: block; 
     box-shadow: 4px 6px 14px rgba(0, 0, 0, 0.15), -1px -1px 3px rgba(255,255,255,0.5); 
     pointer-events: none;
     -webkit-user-drag: none;
