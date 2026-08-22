@@ -247,9 +247,8 @@ body.is-searching .library-header p { opacity: 0.3; }
 .card-text { 
     display: flex; 
     flex-direction: column; 
-    /* FIX 4: Zero gap. We control the space tightly with margin now. */
-    gap: 0; 
-    margin-top: 0.8rem; 
+    gap: 0; /* Kills the flexbox gap */
+    margin-top: 0.35rem; /* Pulls the text up flush against the gray box */
     z-index: 1000;
     position: relative;
 }
@@ -257,18 +256,20 @@ body.is-searching .library-header p { opacity: 0.3; }
 .series-title { 
     font-size: 0.85rem; 
     font-weight: 800; 
-    color: #111111; 
-    line-height: 1.2; 
-    margin-bottom: 0.15rem; /* Tiny space between title and author */
+    color: #000000; 
+    line-height: 1.1; /* Squashes the invisible browser padding around the text */
+    margin-bottom: 0.1rem; /* Pulls the author line right up to the title */
+    margin-top: 0;
 }
 
 .series-author { 
     font-size: 0.75rem; 
-    color: #666666; 
+    color: #888888; 
     font-weight: 400; 
-    /* FIX 5: THE SECRET KODANSHA FONT! They use a Serif font for the author. */
-    font-family: Georgia, "Times New Roman", Times, serif; 
-    letter-spacing: 0.01em;
+    /* THE REAL KODANSHA FONT: A clean, crisp Sans-Serif */
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif; 
+    letter-spacing: 0;
+    margin: 0;
 }
 
 /* The Detail View (The Dossier) */
