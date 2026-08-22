@@ -195,16 +195,15 @@ a:focus-visible, button:focus-visible { outline: 0.125rem solid var(--hover-gray
    06. PAGE: SHOP (Reserved Room)
    ========================================= */
 /* Future Shop / Commerce styling will go here */
-
 /* =========================================
    07. PAGE: LIBRARY (KODANSHA EDITORIAL ENGINE)
    ========================================= */
 
-/* Widescreen Expansion - MATCHING KODANSHA'S ACTUAL WIDTH */
+/* Widescreen Expansion - RESTORED TO KODANSHA'S TRUE WIDTH */
 .contact-page-wrapper {
-    max-width: 1400px; /* FIX 1: Increased from 1200px. This makes the whole layout massive like Kodansha. */
+    max-width: 1200px; /* Locks the page width so boxes don't stretch */
     margin: 0 auto; 
-    padding: 3rem 40px 6rem 40px;
+    padding: 3rem 20px 6rem 20px;
 }
 
 .library-header { text-align: left; margin-bottom: 3rem; border-bottom: 0.25rem solid var(--kodansha-black); padding-bottom: 1.5rem; }
@@ -219,9 +218,9 @@ body.is-searching .library-header p { opacity: 0.3; }
 /* The Main Brutalist Grid - MATHEMATICALLY CALIBRATED */
 .library-grid { 
     display: grid; 
-    /* FIX 2: Increased from 240px to 280px. This forces the boxes to render huge on screen. */
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
-    gap: 3.5rem 2rem; 
+    /* Strictly 220px forces 4 invisible columns, keeping your 2 books the exact right size */
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+    gap: 3rem 1.5rem; 
     width: 100%; 
     padding-bottom: 4rem; 
 }
@@ -237,20 +236,20 @@ body.is-searching .library-header p { opacity: 0.3; }
     -webkit-user-drag: none;
 }
 
-/* Kodansha Grey Box: Calculated for 1:1.41 manga covers (based on 400.avif) */
+/* Kodansha Grey Box: The True 1:1.48 Portrait Monument */
 .cover-wrapper, .detail-cover-wrapper { 
     background-color: #EBEBEB; 
-    /* FIX 3: TALLER RATIO. 1.58 forces the box to be much taller and less wide. */
-    aspect-ratio: 1 / 1.58; 
-    /* FIX 4: EXTREME ASYMMETRIC PADDING. 3rem top/bottom, 1.2rem sides. */
-    padding: 3rem 1.2rem; 
+    /* The exact aspect ratio of the Kodansha tall frame */
+    aspect-ratio: 1 / 1.48; 
+    /* ASYMMETRIC PADDING: Massive 2.2rem top/bottom, tight 1.2rem sides */
+    padding: 2.2rem 1.2rem; 
     display: flex; 
     justify-content: center; 
     align-items: center; 
     position: relative; 
 }
 
-/* ULTIMATE ANTI-RIP SHIELD: Transparent block completely covering the box */
+/* ULTIMATE ANTI-RIP SHIELD */
 .cover-wrapper::after {
     content: '';
     position: absolute;
@@ -263,7 +262,7 @@ body.is-searching .library-header p { opacity: 0.3; }
     background-color: #EAEAEA; 
 }
 
-/* The Cover Shadow: Crucial for making it look like a physical monument */
+/* The Cover Shadow */
 .book-cover, .detail-cover { 
     max-width: 100%; 
     max-height: 100%; 
@@ -271,8 +270,6 @@ body.is-searching .library-header p { opacity: 0.3; }
     height: auto; 
     object-fit: contain; 
     box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.18), -1px -1px 3px rgba(255,255,255,0.6); 
-    
-    /* Disables all native browser interactions on the image itself */
     pointer-events: none;
     -webkit-user-drag: none;
     user-select: none;
