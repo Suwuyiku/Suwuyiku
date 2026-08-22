@@ -243,9 +243,9 @@ body.is-searching .library-header p { opacity: 0.3; }
 .cover-wrapper, .detail-cover-wrapper { 
     background-color: #EBEBEB; 
     /* 3. The exact outer proportion of the Kodansha box */
-    aspect-ratio: 1 / 1.6; 
+    aspect-ratio: 1 / 1.9; 
     /* 4. Perfect Asymmetric Padding: 2rem top/bottom, 1rem sides */
-    padding: 3.5rem 0.3rem; 
+    padding: 3.8rem 0.3rem; 
     display: flex; 
     justify-content: center; 
     align-items: center; 
