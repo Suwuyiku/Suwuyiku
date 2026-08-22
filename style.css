@@ -38,7 +38,6 @@ body { background-color: var(--bg-color); color: var(--text-color); padding: 0; 
 a:focus-visible, button:focus-visible { outline: 0.125rem solid var(--hover-gray); outline-offset: 0.125rem; }
 .protected-img { -webkit-user-drag: none !important; user-select: none !important; -moz-user-select: none !important; -webkit-user-select: none !important; -ms-user-select: none !important; pointer-events: auto; }
 
-
 /* =========================================
    02. NAVIGATION & FOOTER
    ========================================= */
@@ -74,7 +73,6 @@ a:focus-visible, button:focus-visible { outline: 0.125rem solid var(--hover-gray
 .hamburger-btn, .mobile-sidebar, .sidebar-overlay { display: none; } 
 .no-scroll { overflow: hidden; }
 
-
 /* =========================================
    03. HOME PAGE: HERO & BENTO GRID
    ========================================= */
@@ -96,7 +94,6 @@ a:focus-visible, button:focus-visible { outline: 0.125rem solid var(--hover-gray
 .card-large { grid-row: span 2; } 
 .card-large-wide { grid-column: span 2; } 
 .card-full-wide { grid-column: 1 / -1; } 
-
 
 /* =========================================
    04. HOME PAGE: BENTO CARD COMPONENTS
@@ -184,12 +181,10 @@ a:focus-visible, button:focus-visible { outline: 0.125rem solid var(--hover-gray
 .title-4 .eng { font-family: 'Teko', sans-serif; font-weight: 600; font-size: 1.1rem; letter-spacing: 0.05rem; display: inline-block; transform: translateY(0.08rem); }
 .title-5 .eng { font-family: 'Bebas Neue', sans-serif; font-weight: 400; font-size: 1.05rem; letter-spacing: 0.05rem; display: inline-block; transform: translateY(0.08rem); }
 
-
 /* =========================================
    05. PAGE: ABOUT (Reserved Room)
    ========================================= */
 /* Future About Page styling will go here */
-
 
 /* =========================================
    06. PAGE: SHOP (Reserved Room)
@@ -199,7 +194,6 @@ a:focus-visible, button:focus-visible { outline: 0.125rem solid var(--hover-gray
 /* =========================================
    07. PAGE: LIBRARY (KODANSHA EDITORIAL ENGINE)
    ========================================= */
-
 /* Widescreen Container */
 .contact-page-wrapper {
     max-width: 1200px;
@@ -216,7 +210,6 @@ body.is-searching .library-header p { opacity: 0.3; }
 /* =========================================
    THE GRID & THE MONUMENTAL BOXES
    ========================================= */
-
 /* The Main Brutalist Grid - EXACT 4 COLUMNS */
 .library-grid { 
     display: grid; 
@@ -285,38 +278,32 @@ body.is-searching .library-header p { opacity: 0.3; }
 /* =========================================
    SKELETON LOADING ANIMATION
    ========================================= */
-
 @keyframes shimmer {
     0% { background-position: -200% 0; }
     100% { background-position: 200% 0; }
 }
-
 .skeleton-card {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
-
 /* The gradient that moves left to right */
 .skeleton-cover, .skeleton-text {
     background: linear-gradient(90deg, #EBEBEB 25%, #F4F4F4 50%, #EBEBEB 75%);
     background-size: 200% 100%;
     animation: shimmer 1.5s infinite linear;
 }
-
 /* Mimics the exact size of the Kodansha Gray Box */
 .skeleton-cover {
     width: 100%;
     aspect-ratio: 1 / 1.45; 
 }
-
 /* Mimics the Title */
 .skeleton-text.title {
     width: 75%;
     height: 1.1rem;
     margin-top: 0.5rem;
 }
-
 /* Mimics the Author Name */
 .skeleton-text.author {
     width: 45%;
@@ -326,7 +313,6 @@ body.is-searching .library-header p { opacity: 0.3; }
 /* =========================================
    EDITORIAL TYPOGRAPHY
    ========================================= */
-
 .card-text { 
     display: flex; 
     flex-direction: column; 
@@ -335,7 +321,6 @@ body.is-searching .library-header p { opacity: 0.3; }
     z-index: 1000;
     position: relative;
 }
-
 .series-title { 
     font-size: 0.9rem; 
     font-weight: 800; 
@@ -344,7 +329,6 @@ body.is-searching .library-header p { opacity: 0.3; }
     letter-spacing: 0.01em;
     margin: 0;
 }
-
 .series-author { 
     font-size: 0.75rem; 
     color: #777777; 
@@ -355,7 +339,6 @@ body.is-searching .library-header p { opacity: 0.3; }
 /* =========================================
    THE DETAIL VIEW (THE DOSSIER)
    ========================================= */
-
 .detail-view { display: none; flex-direction: column; width: 100%; animation: fadeIn 0.4s ease; padding-bottom: 4rem; }
 
 /* Top Breadcrumb Navigation */
@@ -366,7 +349,6 @@ body.is-searching .library-header p { opacity: 0.3; }
     border-bottom: 1px solid var(--border-color, #dddddd);
     display: block; 
 }
-
 /* The Perfect Back Button */
 .btn-breadcrumb {
     padding: 0.4rem 1.25rem;
@@ -382,7 +364,6 @@ body.is-searching .library-header p { opacity: 0.3; }
     cursor: pointer;
     transition: all 0.2s ease;
 }
-
 .btn-breadcrumb:hover { 
     background-color: #f4f4f4; 
 }
@@ -394,7 +375,6 @@ body.is-searching .library-header p { opacity: 0.3; }
     gap: 3rem; 
     align-items: start;
 }
-
 @media (max-width: 55rem) { 
     .detail-top { grid-template-columns: 1fr; gap: 2.5rem; } 
 }
@@ -473,8 +453,8 @@ body.is-searching .library-header p { opacity: 0.3; }
     width: auto;
     object-fit: contain;
     object-position: left;
+    margin-top: 0.5rem; /* Clean drop down beneath the button */
 }
-
 
 /* =========================================
    NEW FULL-WIDTH VOLUME INFO BOARD
@@ -487,7 +467,6 @@ body.is-searching .library-header p { opacity: 0.3; }
     margin-bottom: 4rem;
     align-items: stretch;
 }
-
 .volume-info-heading {
     flex: 0 0 25%;
     font-size: 3.5rem;
@@ -497,20 +476,17 @@ body.is-searching .library-header p { opacity: 0.3; }
     margin: 0;
     color: #000000;
 }
-
 .volume-info-board {
     flex: 1;
     display: flex;
     flex-direction: column;
     border: 2px solid #000000;
 }
-
 .info-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     border-bottom: 2px solid #000000;
 }
-
 .info-cell {
     padding: 1.2rem 1.5rem;
     border-right: 2px solid #000000;
@@ -518,12 +494,9 @@ body.is-searching .library-header p { opacity: 0.3; }
     flex-direction: column;
     gap: 0.25rem;
 }
-
 .info-cell:last-child { border-right: none; }
-
 .info-label { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: #888888; letter-spacing: 0.05em; }
 .info-value { font-size: 1rem; font-weight: 700; color: #000000; }
-
 .tags-row { display: flex; align-items: center; padding: 1.2rem 1.5rem; gap: 1.5rem; }
 .tag-badge { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; border: 1px solid var(--border-color); padding: 0.35rem 0.6rem; color: #444444; background: transparent; }
 
@@ -583,7 +556,6 @@ body.is-searching .library-header p { opacity: 0.3; }
 .particle { position: fixed; pointer-events: none; width: 5px; height: 5px; background-color: var(--kodansha-black); border-radius: 50%; z-index: 9999; animation: shoot 0.6s cubic-bezier(0.1, 0.8, 0.3, 1) forwards; }
 @keyframes shoot { 0% { transform: translate(0, 0) scale(1); opacity: 1; } 100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; } }
 
-
 /* =========================================
    09. PAGE: CONNECTIONS
    ========================================= */
@@ -635,7 +607,6 @@ body.is-searching .card-category { opacity: 0.3; transition: opacity 0.3s ease; 
 .platform-item.spotify:hover .route-title { color: #1DB954; }
 .platform-item.github:hover .platform-icon { fill: #888888; transform: scale(1.15); }
 .platform-item.github:hover .route-title { color: #888888; }
-
 
 /* =========================================
    10. PAGE: CONTACT & LEGAL
