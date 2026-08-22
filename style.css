@@ -215,11 +215,13 @@ body.is-searching .library-header p { opacity: 0.3; }
    THE GRID & THE MONUMENTAL BOXES
    ========================================= */
 
-/* The Main Brutalist Grid */
+/* The Main Brutalist Grid - EXACT 4-COLUMN MATH */
 .library-grid { 
     display: grid; 
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
-    gap: 3rem 1.5rem; 
+    /* 1. minmax(260px) forces exactly 4 columns across a 1200px container */
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); 
+    /* 2. Matches Kodansha's exact spacing between the boxes */
+    gap: 2.5rem 1.5rem; 
     width: 100%; 
     padding-bottom: 4rem; 
 }
@@ -235,13 +237,13 @@ body.is-searching .library-header p { opacity: 0.3; }
     -webkit-user-drag: none;
 }
 
-/* Kodansha Grey Box: THE TALL PEDESTAL FIX */
+/* Kodansha Grey Box: The Flawless Pedestal Math */
 .cover-wrapper, .detail-cover-wrapper { 
     background-color: #EBEBEB; 
-    /* FIX 1: Extreme tall aspect ratio. This forces more height and less width. */
-    aspect-ratio: 1 / 1.62; 
-    /* FIX 2: More padding on top/bottom (2.5rem), tighter on the sides (1.1rem) */
-    padding: 2.5rem 1.1rem; 
+    /* 3. The exact outer proportion of the Kodansha box */
+    aspect-ratio: 1 / 1.48; 
+    /* 4. Perfect Asymmetric Padding: 2rem top/bottom, 1rem sides */
+    padding: 2rem 1rem; 
     display: flex; 
     justify-content: center; 
     align-items: center; 
