@@ -368,24 +368,28 @@
             }
         }
         
-        // --- DOSSIER INTERACTION LOGIC ---
+       // --- DOSSIER INTERACTION LOGIC ---
         function openDetailView(seriesName, volumeIndex) {
             const series = groupedSeries[seriesName];
             const activeVol = series.volumes[volumeIndex];
 
+            // Hide main grid, show Dossier
             document.getElementById('main-view').style.display = 'none';
             document.getElementById('library-header-bar').style.display = 'none';
             document.getElementById('detail-view').style.display = 'flex';
-            window.scrollTo(0, 0); 
+            window.scrollTo(0, 0); // Scroll to top
 
+            // Populate Main Info
             document.getElementById('det-cover').src = activeVol.covers[0] || 'assets/placeholder.png';
             
-            // FIX: Pulls the exact "Name" column from Notion (e.g. "Spy x Family, Vol. 1")
-            document.getElementById('det-title').textContent = activeVol.title || seriesName; 
+            // THE FIX: Explicitly pull the exact "Name" column from your Notion Worker!
+            // No more guessing. Whatever is in Notion (e.g. "Spy x Family, Vol. 1") goes here.
+            document.getElementById('det-title').textContent = activeVol.title; 
             
             document.getElementById('det-author').textContent = `By ${activeVol.author}`;
             document.getElementById('det-review').textContent = activeVol.review || "No ecosystem data recorded for this volume yet.";
             
+            // Populate Table
             document.getElementById('det-category').textContent = activeVol.category || "-";
             document.getElementById('det-publisher').textContent = activeVol.publisher || "-";
             document.getElementById('det-date').textContent = activeVol.dateAcquired || "-";
@@ -400,7 +404,7 @@
                 const pName = activeVol.publisher ? activeVol.publisher.toLowerCase() : "";
                 let logoUrl = "";
                 
-                // Flexible matching: If Notion says "VIZ Media" or "Viz", it will find it.
+                // Matches the publisher name and pulls the official logo
                 if (pName.includes("viz")) logoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Viz_Media_logo.svg/512px-Viz_Media_logo.svg.png";
                 else if (pName.includes("kodansha") || pName.includes("vertical")) logoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Kodansha_logo.svg/512px-Kodansha_logo.svg.png";
                 else if (pName.includes("yen press")) logoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Yen_Press_logo.svg/512px-Yen_Press_logo.svg.png";
@@ -418,16 +422,18 @@
                 linkBtn.style.display = 'none';
             }
             
+            // Populate Tags (Genres)
             const tagsContainer = document.getElementById('det-tags');
             tagsContainer.innerHTML = activeVol.genres.map(g => `<span class="tag-badge">${g}</span>`).join('');
 
+            // Build the Mini-Shelf
             const miniShelf = document.getElementById('mini-shelf');
             miniShelf.innerHTML = "";
             
             series.volumes.forEach((vol, idx) => {
                 const mini = document.createElement('div');
                 mini.className = `mini-volume ${idx === volumeIndex ? 'active' : ''}`;
-                mini.onclick = () => openDetailView(seriesName, idx); 
+                mini.onclick = () => openDetailView(seriesName, idx); // Changes active volume
                 
                 const miniCover = vol.covers[0] || 'assets/placeholder.png';
                 mini.innerHTML = `
@@ -437,7 +443,7 @@
                 miniShelf.appendChild(mini);
             });
         }
-
+        
         function closeDetailView() {
             document.getElementById('detail-view').style.display = 'none';
             document.getElementById('main-view').style.display = 'block';
