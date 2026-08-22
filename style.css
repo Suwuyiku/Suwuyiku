@@ -238,12 +238,11 @@ body.is-searching .library-header p { opacity: 0.3; }
 @media (max-width: 950px) { .library-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 700px) { .library-grid { grid-template-columns: repeat(2, 1fr); } }
 
-/* Kodansha Grey Box: The Tall Pedestal Calculation */
+/* Kodansha Grey Box: The Tall 6/10 Rectangle */
 .cover-wrapper, .detail-cover-wrapper { 
     background-color: #F4F4F4; 
-    /* The calculated Kodansha tall aspect ratio */
-    aspect-ratio: 1 / 1.55; 
-    /* ZERO padding. The box size is absolute, and the image floats inside it. */
+    /* Forces a strictly tall, slender portrait shape */
+    aspect-ratio: 6 / 10; 
     padding: 0; 
     display: flex; 
     justify-content: center; 
@@ -264,10 +263,10 @@ body.is-searching .library-header p { opacity: 0.3; }
     background-color: #EAEAEA; 
 }
 
-/* The Cover: Decoupled Magic Sizing */
+/* The Cover: Tighter Containment */
 .book-cover, .detail-cover { 
-    /* Setting to 75% width mathematically creates tight side gaps and massive top/bottom gaps */
-    width: 75%; 
+    /* Shrinking the width to 68% guarantees large top/bottom gaps */
+    width: 68%; 
     height: auto; 
     object-fit: contain; 
     box-shadow: 4px 6px 14px rgba(0, 0, 0, 0.15), -1px -1px 3px rgba(255,255,255,0.5); 
