@@ -195,6 +195,7 @@ a:focus-visible, button:focus-visible { outline: 0.125rem solid var(--hover-gray
    06. PAGE: SHOP (Reserved Room)
    ========================================= */
 /* Future Shop / Commerce styling will go here */
+
 /* =========================================
    07. PAGE: LIBRARY (KODANSHA EDITORIAL ENGINE)
    ========================================= */
@@ -218,10 +219,11 @@ body.is-searching .library-header p { opacity: 0.3; }
 /* The Main Brutalist Grid - EXACT 4-COLUMN MATH */
 .library-grid { 
     display: grid; 
-    /* 1. minmax(260px) forces exactly 4 columns across a 1200px container */
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); 
-    /* 2. Matches Kodansha's exact spacing between the boxes */
-    gap: 2.5rem 1.5rem; 
+    /* THIS IS THE FIX: Never shrink below 220px, never stretch wider than 260px */
+    grid-template-columns: repeat(auto-fill, minmax(220px, 260px)); 
+    /* Locks the books to the left side of the screen */
+    justify-content: start; 
+    gap: 3rem 1.5rem; 
     width: 100%; 
     padding-bottom: 4rem; 
 }
@@ -241,9 +243,9 @@ body.is-searching .library-header p { opacity: 0.3; }
 .cover-wrapper, .detail-cover-wrapper { 
     background-color: #EBEBEB; 
     /* 3. The exact outer proportion of the Kodansha box */
-    aspect-ratio: 1 / 1.48; 
+    aspect-ratio: 1 / 1.6; 
     /* 4. Perfect Asymmetric Padding: 2rem top/bottom, 1rem sides */
-    padding: 2rem 1rem; 
+    padding: 3rem 0.6rem; 
     display: flex; 
     justify-content: center; 
     align-items: center; 
