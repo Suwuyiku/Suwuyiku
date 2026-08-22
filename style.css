@@ -197,114 +197,214 @@ a:focus-visible, button:focus-visible { outline: 0.125rem solid var(--hover-gray
 /* Future Shop / Commerce styling will go here */
 
 /* =========================================
+   07. PAGE: LIBRARY (KODANSHA EDITORIAL ENGINE)
+   ========================================= */
+
+/* Widescreen Container */
+.contact-page-wrapper {
+    max-width: 1200px;
+    margin: 0 auto; 
+    padding: 3rem 20px 6rem 20px;
+}
+
+/* Header Typography */
+.library-header { text-align: left; margin-bottom: 3rem; border-bottom: 0.25rem solid var(--kodansha-black); padding-bottom: 1.5rem; }
+.library-header h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.04em; color: var(--kodansha-black); margin-bottom: 0.5rem; }
+.library-header p { font-size: 1.1rem; color: #666666; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; transition: opacity 0.3s ease; }
+body.is-searching .library-header p { opacity: 0.3; }
+
+/* =========================================
+   THE GRID & THE MONUMENTAL BOXES
+   ========================================= */
+
+/* The Main Brutalist Grid - EXACT 4 COLUMNS */
+.library-grid { 
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 3rem 2rem; 
+    width: 100%; 
+    padding-bottom: 4rem; 
+}
+
+@media (max-width: 950px) { .library-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 700px) { .library-grid { grid-template-columns: repeat(2, 1fr); } }
+
+.kodansha-card { 
+    display: flex; 
+    flex-direction: column; 
+    cursor: pointer; 
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+/* Kodansha Grey Box: EXACT SOURCE CODE FROM INSPECTOR */
+.cover-wrapper, .detail-cover-wrapper { 
+    background-color: #F4F4F4; 
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2 / 3; 
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8%; 
+}
+
+/* ULTIMATE ANTI-RIP SHIELD */
+.cover-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 999;
+    background: transparent;
+}
+
+.kodansha-card:hover .cover-wrapper {
+    background-color: #EAEAEA; 
+}
+
+/* The Cover: EXACT SOURCE CODE FROM INSPECTOR */
+.book-cover, .detail-cover { 
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12); 
+    pointer-events: none;
+    -webkit-user-drag: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+}
+
+/* =========================================
+   EDITORIAL TYPOGRAPHY
+   ========================================= */
+
+.card-text { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 0.2rem; 
+    margin-top: 0.75rem; 
+    z-index: 1000;
+    position: relative;
+}
+
+.series-title { 
+    font-size: 0.95rem; 
+    font-weight: 800; 
+    color: #000000; 
+    line-height: 1.2; 
+    margin: 0;
+}
+
+.series-author { 
+    font-size: 0.8rem; 
+    color: #777777; 
+    font-weight: 400; 
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif; 
+    margin: 0;
+}
+
+/* =========================================
    THE DETAIL VIEW (THE DOSSIER)
    ========================================= */
 
 .detail-view { display: none; flex-direction: column; width: 100%; animation: fadeIn 0.4s ease; padding-bottom: 4rem; }
 
-/* Top Breadcrumb Navigation: RESTORED TO DOCUMENT FLOW */
+/* Top Breadcrumb Navigation: EXACT KODANSHA ABSOLUTE OVERLAP */
 .breadcrumbs {
-    width: 100%;
-    margin-bottom: 2rem;
-    /* Removed position: absolute so it sits perfectly above the book */
-    display: block; 
+    position: absolute;
+    /* Exactly matching their top and left offsets */
+    top: -1rem;
+    left: 2rem;
+    z-index: 10;
 }
 
+/* Exact matching of their .breadcrumb class */
 .btn-breadcrumb {
     padding: 0.25rem 1rem;
     border: 2px solid #000000;
     text-transform: uppercase;
     font-size: 0.75rem;
-    font-weight: 800; 
+    font-weight: 800; /* Approximating their Maax Medium */
     letter-spacing: 2px;
     background: #ffffff;
     color: #000000;
-    display: inline-flex;
-    align-items: center;
+    display: inline-block;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: all 0.2s ease;
 }
 
 .btn-breadcrumb:hover {
     background-color: #EAEAEA;
 }
 
-/* Flexbox Layout Upgrade: THE MASSIVE SHOWCASE SPLIT */
+/* Flexbox Layout Upgrade: Wide proportioned split */
 .detail-top { 
     display: flex;
-    gap: 4rem; /* Massive Kodansha-style gap between cover and text */
+    gap: 40px; 
     align-items: flex-start;
     margin-bottom: 3rem; 
+    /* THIS IS CRITICAL: Makes the absolute breadcrumb stick perfectly to the corner */
+    position: relative;
 }
 
-@media (max-width: 55rem) { 
-    .detail-top { flex-direction: column; gap: 2.5rem; } 
-    .detail-cover-wrapper { max-width: 100% !important; }
-    .detail-info { max-width: 100% !important; }
+@media (max-width: 48rem) { 
+    .detail-top { flex-direction: column; gap: 2rem; padding-top: 2rem; } 
+    .breadcrumbs { top: -1.5rem; left: 1rem; }
 }
 
-/* Detail View Image Frame - BLOWN UP TO SCALE */
+/* Detail View Image Frame - EXACT KODANSHA SOURCE CODE */
 .detail-cover-wrapper { 
-    flex: 1.2; /* Takes up more of the screen than the text */
-    max-width: 55%; /* Forces the book to be massive */
+    flex: 1;
+    max-width: 400px;
+    /* Their exact --color-gray-light variable */
     background-color: #f2f2f2; 
-    padding: 3rem 2rem !important; /* Huge gallery padding */
+    /* Overrides the grid padding and uses their exact hero padding */
+    padding: 1.5rem !important; 
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 /* Detail Text - Flex Column 2 */
 .detail-info { 
-    flex: 1;
-    max-width: 45%; /* Keeps the text constrained and readable */
+    flex: 2;
     display: flex; 
     flex-direction: column; 
-    gap: 1.5rem; 
+    gap: 1rem; 
 }
 
-.detail-title { font-size: 3rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; color: #000000; margin: 0; }
-.detail-author { font-size: 1.1rem; font-weight: 600; color: #555555; text-transform: uppercase; letter-spacing: 0.05em; margin: 0; }
+.detail-title { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; color: #000000; }
+.detail-author { font-size: 1rem; font-weight: 600; color: #555555; text-transform: uppercase; letter-spacing: 0.05em; }
 
-/* Enhanced Typography for Review */
+/* Enhanced Typography for Review - EXACT KODANSHA SOURCE CODE */
 .detail-review { 
     font-size: 1.125rem; 
-    line-height: 1.4; 
+    line-height: 1.3; 
     color: #000000; 
-    margin: 0; 
+    margin: 1rem 0; 
     white-space: pre-wrap; 
 }
 
-/* Publisher Button / Official Site: ENGINEERED FOR HTML LOGO */
-.kodansha-btn { 
-    display: inline-flex; 
-    justify-content: space-between; /* Pushes text to the left, logo to the right */
-    align-items: center; 
-    border: 2px solid #000000; 
-    background: transparent; 
-    color: #000000; 
-    padding: 1rem 1.5rem; 
-    font-size: 0.85rem; 
-    font-weight: 800; 
-    text-transform: uppercase; 
-    letter-spacing: 0.1em; 
-    text-decoration: none; 
-    transition: all 0.2s ease; 
-    width: 100%;
-    max-width: 320px;
-    gap: 1rem; 
-}
-.kodansha-btn:hover { background: #EAEAEA; }
+/* Publisher Button */
+.kodansha-btn { display: inline-flex; justify-content: center; align-items: center; border: 0.15rem solid #000000; background: transparent; color: #000000; padding: 0.85rem 1.5rem; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; text-decoration: none; transition: all 0.2s ease; max-width: 250px; }
+.kodansha-btn:hover { background: #000000; color: #ffffff; }
 
 /* Manager's Padding Fix for the Table */
-.volume-info-table { width: 100%; border-top: 2px solid #000000; border-bottom: 2px solid #000000; margin-top: 1rem; display: flex; flex-wrap: wrap; }
+.volume-info-table { width: 100%; border-top: 0.15rem solid #000000; border-bottom: 0.15rem solid #000000; margin-top: 2.5rem; display: flex; flex-wrap: wrap; }
 .info-cell { flex: 1 1 33%; padding: 1.5rem 1rem; border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 0.25rem; }
 .info-cell:last-child, .info-cell:nth-child(3) { border-right: none; }
 .info-label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: #888888; letter-spacing: 0.05em; }
 .info-value { font-size: 0.95rem; font-weight: 700; color: #000000; }
 
-.tags-row { width: 100%; padding: 1rem 0; display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
-.tag-badge { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; border: 1px solid var(--border-color); padding: 0.35rem 0.6rem; color: #444444; }
+.tags-row { width: 100%; padding: 1rem; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+.tag-badge { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; border: 1px solid var(--border-color); padding: 0.25rem 0.5rem; color: #444444; }
 
 /* Other Volumes Shelf */
 .other-volumes-header { font-size: 1.2rem; font-weight: 900; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; color: #000000;}
