@@ -247,32 +247,32 @@ body.is-searching .library-header p { opacity: 0.3; }
 .card-text { 
     display: flex; 
     flex-direction: column; 
-    gap: 0; /* Forces zero gap between flex items */
-    margin-top: 0.2rem; /* Pushes the text block completely flush with the gray box */
+    gap: 0 !important; 
+    margin-top: 0.4rem !important; /* Exactly matches the tight Kodansha spacing */
     z-index: 1000;
     position: relative;
 }
 
 .series-title { 
-    font-size: 0.95rem; /* Matched to Kodansha's slightly larger title weight */
+    font-size: 0.95rem; 
     font-weight: 800; 
     color: #000000; 
-    line-height: 1.1; /* Crushes the invisible box around the text */
-    margin: 0 0 0.1rem 0; /* ZERO top margin. Barely 1px bottom margin to separate author */
-    padding: 0;
+    line-height: 1 !important; /* Completely destroys invisible browser padding */
+    margin: 0 0 0.15rem 0 !important; /* FORCES zero top margin, tiny bottom margin */
+    padding: 0 !important;
     letter-spacing: -0.01em;
 }
 
 .series-author { 
-    font-size: 0.8rem; /* Scaled up slightly to match Kodansha's legibility */
+    font-size: 0.8rem; 
     color: #888888; 
     font-weight: 400; 
-    /* THE KODANSHA AUTHOR FONT: A sleek, classic web-safe Sans-Serif stack */
+    /* Perfect Kodansha web-safe Sans-Serif font stack */
     font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif; 
     letter-spacing: 0.01em;
-    margin: 0; /* ZERO margin */
-    padding: 0;
-    line-height: 1.2;
+    margin: 0 !important; /* FORCES zero margin */
+    padding: 0 !important;
+    line-height: 1.2 !important;
 }
 
 /* The Detail View (The Dossier) */
