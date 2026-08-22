@@ -356,33 +356,33 @@ body.is-searching .library-header p { opacity: 0.3; }
 
 .detail-view { display: none; flex-direction: column; width: 100%; animation: fadeIn 0.4s ease; padding-bottom: 4rem; }
 
-/* Top Breadcrumb Navigation: KODANSHA TINY BOX STYLE */
+/* Top Breadcrumb Navigation: Clean, Elegant Border Restored */
 .breadcrumbs {
     width: 100%;
-    margin-bottom: 2rem; /* Tight margin above the book */
-    padding-bottom: 0;
-    border-bottom: none; /* DESTROYED THE UGLY THICK LINE */
-    display: flex; 
-    justify-content: flex-start;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color, #dddddd); /* Sleek, structural line */
+    display: block; 
 }
 
+/* The Perfect Back Button */
 .btn-breadcrumb {
-    padding: 0.25rem 0.75rem; /* Tiny Kodansha padding */
-    border: 2px solid #000000; /* Crisp Kodansha border */
+    padding: 0.4rem 1.25rem;
+    border: 1px solid #000000;
     text-transform: uppercase;
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     font-weight: 800; 
-    letter-spacing: 0.1em;
+    letter-spacing: 0.05em;
     background: #ffffff;
     color: #000000;
     display: inline-flex;
     align-items: center;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: all 0.2s ease;
 }
 
 .btn-breadcrumb:hover { 
-    background-color: #EAEAEA; 
+    background-color: #f4f4f4; 
 }
 
 /* KODANSHA'S EXACT HERO COLUMNS: 50/50 Grid */
