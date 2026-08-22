@@ -248,31 +248,30 @@ body.is-searching .library-header p { opacity: 0.3; }
     display: flex; 
     flex-direction: column; 
     gap: 0 !important; 
-    margin-top: 0.4rem !important; /* Exactly matches the tight Kodansha spacing */
+    margin-top: 0.5rem !important; /* Slightly bumped to accommodate the larger text */
     z-index: 1000;
     position: relative;
 }
 
 .series-title { 
-    font-size: 0.95rem; 
+    font-size: 1.15rem !important; /* MUCH BIGGER: Legible, bold, and matches Kodansha */
     font-weight: 800; 
     color: #000000; 
-    line-height: 1 !important; /* Completely destroys invisible browser padding */
-    margin: 0 0 0.15rem 0 !important; /* FORCES zero top margin, tiny bottom margin */
+    line-height: 1.2 !important; 
+    margin: 0 0 0.15rem 0 !important; 
     padding: 0 !important;
     letter-spacing: -0.01em;
 }
 
 .series-author { 
-    font-size: 0.8rem; 
+    font-size: 0.9rem !important; /* SCALED UP: Easy to read without overpowering the title */
     color: #888888; 
     font-weight: 400; 
-    /* Perfect Kodansha web-safe Sans-Serif font stack */
     font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif; 
     letter-spacing: 0.01em;
-    margin: 0 !important; /* FORCES zero margin */
+    margin: 0 !important; 
     padding: 0 !important;
-    line-height: 1.2 !important;
+    line-height: 1.3 !important;
 }
 
 /* The Detail View (The Dossier) */
