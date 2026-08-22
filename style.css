@@ -215,10 +215,9 @@ body.is-searching .library-header p { opacity: 0.3; }
    THE GRID & THE MONUMENTAL BOXES
    ========================================= */
 
-/* The Main Brutalist Grid - MATHEMATICALLY CALIBRATED */
+/* The Main Brutalist Grid */
 .library-grid { 
     display: grid; 
-    /* Strictly 220px forces 4 invisible columns, keeping your 2 books the exact right size */
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
     gap: 3rem 1.5rem; 
     width: 100%; 
@@ -236,13 +235,13 @@ body.is-searching .library-header p { opacity: 0.3; }
     -webkit-user-drag: none;
 }
 
-/* Kodansha Grey Box: The True 1:1.48 Portrait Monument */
+/* Kodansha Grey Box: THE TALL PEDESTAL FIX */
 .cover-wrapper, .detail-cover-wrapper { 
     background-color: #EBEBEB; 
-    /* The exact aspect ratio of the Kodansha tall frame */
-    aspect-ratio: 1 / 1.48; 
-    /* ASYMMETRIC PADDING: Massive 2.2rem top/bottom, tight 1.2rem sides */
-    padding: 2.2rem 1.2rem; 
+    /* FIX 1: Extreme tall aspect ratio. This forces more height and less width. */
+    aspect-ratio: 1 / 1.62; 
+    /* FIX 2: More padding on top/bottom (2.5rem), tighter on the sides (1.1rem) */
+    padding: 2.5rem 1.1rem; 
     display: flex; 
     justify-content: center; 
     align-items: center; 
@@ -284,13 +283,14 @@ body.is-searching .library-header p { opacity: 0.3; }
     display: flex; 
     flex-direction: column; 
     gap: 0 !important; 
-    margin-top: 0.5rem !important; /* Slightly bumped to accommodate the larger text */
+    margin-top: 0.5rem !important; 
     z-index: 1000;
     position: relative;
 }
 
 .series-title { 
-    font-size: 1.15rem !important; /* MUCH BIGGER: Legible, bold, and matches Kodansha */
+    /* FIX 3: Shrunk back down to a sleek, professional size */
+    font-size: 0.9rem !important; 
     font-weight: 800; 
     color: #000000; 
     line-height: 1.2 !important; 
@@ -300,7 +300,8 @@ body.is-searching .library-header p { opacity: 0.3; }
 }
 
 .series-author { 
-    font-size: 0.9rem !important; /* SCALED UP: Easy to read without overpowering the title */
+    /* FIX 4: Author text made smaller and lighter */
+    font-size: 0.75rem !important; 
     color: #888888; 
     font-weight: 400; 
     font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif; 
