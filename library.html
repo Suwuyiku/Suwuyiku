@@ -298,14 +298,14 @@
                 const response = await fetch('https://api.suwuyiku.workers.dev/library');
                 const rawBooks = await response.json();
 
-                // SMART ERROR LOGGING: If the backend fails, print the exact reason to the screen
+                // SMART ERROR LOGGING
                 if (rawBooks.error) {
                     throw new Error(rawBooks.error);
                 }
 
                 grid.innerHTML = ""; // Clear loading message
 
-                // The Grouping Engine: Combines individual volumes into Series Stacks
+                // The Grouping Engine
                 rawBooks.forEach(book => {
                     if (!groupedSeries[book.series]) {
                         groupedSeries[book.series] = {
@@ -318,12 +318,12 @@
                     groupedSeries[book.series].volumes.push(book);
                 });
 
-                // Sort volumes within each series numerically
+                // Sort volumes
                 Object.values(groupedSeries).forEach(series => {
                     series.volumes.sort((a, b) => a.volumeNumber - b.volumeNumber);
                 });
 
-                // Build the Main Grid (Showing ONLY Volume 1)
+                // Build the Main Grid
                 Object.values(groupedSeries).forEach(series => {
                     const firstVol = series.volumes[0];
                     if (!firstVol) return;
@@ -336,7 +336,6 @@
                     card.setAttribute('data-search', searchData);
                     card.onclick = () => openDetailView(series.seriesName, 0);
 
-                    // Reverted back to just showing the Series Name on the main grid
                     card.innerHTML = `
                         <div class="cover-wrapper">
                             <img src="${coverUrl}" class="book-cover" alt="Cover">
@@ -351,7 +350,6 @@
 
             } catch (error) {
                 console.error("Library Sync Failed:", error);
-                // This will now print the exact Notion block message so we know what is wrong
                 grid.innerHTML = `<p style="color: #FF0000; padding: 2rem 0; line-height: 1.6;"><strong>System Error:</strong><br>${error.message}</p>`;
             }
         }
@@ -370,32 +368,7 @@
             // Populate Main Info
             document.getElementById('det-cover').src = activeVol.covers[0] || 'assets/placeholder.png';
             
-            // Reverted back to pulling EXACTLY what you wrote in the Notion "Name" column
-            document.getElementById('det-title').textContent = activeVol.title; 
-            
-            document.getElementById('det-author').textContent = `By ${activeVol.author}`;
-            document.getElementById('det-review').textContent = activeVol.review || "No ecosystem data recorded for this volume yet.";
-            
-            // Populate Table
-            document.getElementById('det-category').textContent = activeVol.category || "-";
-            document.getElementById('det-publisher').textContent = activeVol.publisher || "-";
-            document.getElementById('det-date').textContent = activeVol.dateAcquired || "-";
-
-         // --- DYNAMIC PUBLISHER LOGO SYSTEM ---
-function openDetailView(seriesName, volumeIndex) {
-            const series = groupedSeries[seriesName];
-            const activeVol = series.volumes[volumeIndex];
-
-            // Hide main grid, show Dossier
-            document.getElementById('main-view').style.display = 'none';
-            document.getElementById('library-header-bar').style.display = 'none';
-            document.getElementById('detail-view').style.display = 'flex';
-            window.scrollTo(0, 0); // Scroll to top
-
-            // Populate Main Info
-            document.getElementById('det-cover').src = activeVol.covers[0] || 'assets/placeholder.png';
-            
-            // FIX: Pull the exact volume "Name" from Notion, fallback to title if missing
+            // PRIORITY: Show exact Volume Name from Notion, fallback to Series Name
             document.getElementById('det-title').textContent = activeVol.name || activeVol.title || seriesName; 
             
             document.getElementById('det-author').textContent = `By ${activeVol.author}`;
@@ -428,11 +401,11 @@ function openDetailView(seriesName, volumeIndex) {
             // Display Logic for the Button
             if (activeVol.purchaseLink || activeVol.publisher) {
                 linkBtn.style.display = 'inline-flex';
-                linkBtn.href = activeVol.purchaseLink || "#"; // Default to # if no link exists
+                linkBtn.href = activeVol.purchaseLink || "#"; 
                 
                 const cleanPublisherName = activeVol.publisher ? activeVol.publisher.toLowerCase().trim() : "";
 
-                // FIX: Successfully inject the HTML logo image!
+                // Successfully injects the HTML logo image!
                 if (cleanPublisherName && publisherLogos[cleanPublisherName]) {
                     linkBtn.innerHTML = `<span>OFFICIAL SITE</span> <img src="${publisherLogos[cleanPublisherName]}" alt="${activeVol.publisher}">`;
                 } else {
