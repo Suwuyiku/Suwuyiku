@@ -318,9 +318,10 @@ body.is-searching .library-header p { opacity: 0.3; }
 /* Top Breadcrumb Navigation: Contact-Style Margin & Line */
 .breadcrumbs {
     width: 100%;
-    margin-bottom: 3rem;
+    margin-bottom: 3.5rem; /* Increased margin to match Contact spacing */
     padding-bottom: 1.5rem;
-    border-bottom: 1px solid #000000; /* Adds the structural line like your Contact page */
+    /* UPGRADED to match the thick Contact/Archive header line */
+    border-bottom: 0.25rem solid #000000; 
     display: block; 
 }
 
