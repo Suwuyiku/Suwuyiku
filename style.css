@@ -309,32 +309,38 @@ body.is-searching .library-header p { opacity: 0.3; }
     margin: 0;
 }
 
-/* The Detail View (The Dossier) */
+/* =========================================
+   THE DETAIL VIEW (THE DOSSIER)
+   ========================================= */
+
 .detail-view { display: none; flex-direction: column; width: 100%; animation: fadeIn 0.4s ease; padding-bottom: 4rem; }
 
-/* Top Breadcrumb Navigation */
+/* Top Breadcrumb Navigation: EXACT KODANSHA ABSOLUTE OVERLAP */
 .breadcrumbs {
-    width: 100%;
-    margin-bottom: 2.5rem;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 1rem;
+    position: absolute;
+    /* Exactly matching their top and left offsets */
+    top: -1rem;
+    left: 2rem;
+    z-index: 10;
 }
 
+/* Exact matching of their .breadcrumb class */
 .btn-breadcrumb {
-    background: transparent;
-    border: none;
-    font-size: 0.85rem;
-    font-weight: 800;
+    padding: 0.25rem 1rem;
+    border: 2px solid #000000;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #666666;
+    font-size: 0.75rem;
+    font-weight: 800; /* Approximating their Maax Medium */
+    letter-spacing: 2px;
+    background: #ffffff;
+    color: #000000;
+    display: inline-block;
     cursor: pointer;
-    transition: color 0.2s ease;
-    padding: 0;
+    transition: all 0.2s ease;
 }
 
 .btn-breadcrumb:hover {
-    color: #000000;
+    background-color: #EAEAEA;
 }
 
 /* Flexbox Layout Upgrade: Wide proportioned split */
@@ -343,16 +349,27 @@ body.is-searching .library-header p { opacity: 0.3; }
     gap: 40px; 
     align-items: flex-start;
     margin-bottom: 3rem; 
+    /* THIS IS CRITICAL: Makes the absolute breadcrumb stick perfectly to the corner */
+    position: relative;
 }
 
 @media (max-width: 48rem) { 
-    .detail-top { flex-direction: column; gap: 2rem; } 
+    .detail-top { flex-direction: column; gap: 2rem; padding-top: 2rem; } 
+    .breadcrumbs { top: -1.5rem; left: 1rem; }
 }
 
-/* Detail View Image Frame - Flex Column 1 */
+/* Detail View Image Frame - EXACT KODANSHA SOURCE CODE */
 .detail-cover-wrapper { 
     flex: 1;
     max-width: 400px;
+    /* Their exact --color-gray-light variable */
+    background-color: #f2f2f2; 
+    /* Overrides the grid padding and uses their exact hero padding */
+    padding: 1.5rem !important; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
 
 /* Detail Text - Flex Column 2 */
@@ -366,11 +383,11 @@ body.is-searching .library-header p { opacity: 0.3; }
 .detail-title { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; color: #000000; }
 .detail-author { font-size: 1rem; font-weight: 600; color: #555555; text-transform: uppercase; letter-spacing: 0.05em; }
 
-/* Enhanced Typography for Review */
+/* Enhanced Typography for Review - EXACT KODANSHA SOURCE CODE */
 .detail-review { 
-    font-size: 1.1rem; 
-    line-height: 1.6; 
-    color: #333333; 
+    font-size: 1.125rem; 
+    line-height: 1.3; 
+    color: #000000; 
     margin: 1rem 0; 
     white-space: pre-wrap; 
 }
