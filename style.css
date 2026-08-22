@@ -315,11 +315,11 @@ body.is-searching .library-header p { opacity: 0.3; }
 
 .detail-view { display: none; flex-direction: column; width: 100%; animation: fadeIn 0.4s ease; padding-bottom: 4rem; }
 
-/* Top Breadcrumb Navigation: FIXED AND ABOVE THE LAYOUT */
+/* Top Breadcrumb Navigation */
 .breadcrumbs {
     width: 100%;
     margin-bottom: 1.5rem;
-    display: block; /* Sits naturally in the page flow */
+    display: block; 
 }
 
 .btn-breadcrumb {
@@ -336,28 +336,27 @@ body.is-searching .library-header p { opacity: 0.3; }
     transition: background-color 0.2s ease;
 }
 
-.btn-breadcrumb:hover {
-    background-color: #EAEAEA;
-}
+.btn-breadcrumb:hover { background-color: #EAEAEA; }
 
 /* KODANSHA'S EXACT HERO COLUMNS: 50/50 Grid */
 .detail-top { 
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Exact Kodansha 50/50 split */
-    gap: 2rem; /* Exact Kodansha gap */
+    grid-template-columns: 1fr 1fr; 
+    gap: 3rem; 
     align-items: start;
-    margin-bottom: 3rem; 
 }
 
 @media (max-width: 55rem) { 
     .detail-top { grid-template-columns: 1fr; gap: 2.5rem; } 
 }
 
-/* Detail View Image Frame - TIGHT AND HIGH QUALITY */
+/* FIX: SMALLER GRAY BOX! */
 .detail-cover-wrapper { 
     width: 100%;
+    max-width: 380px; /* This stops the gray box from ballooning across the screen */
+    margin: 0 auto; /* Centers the tight box inside the grid column */
     background-color: #f2f2f2; 
-    padding: 1.5rem; /* Exact Kodansha hero padding */
+    padding: 2rem; /* Perfect, snug breathing room */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -367,7 +366,6 @@ body.is-searching .library-header p { opacity: 0.3; }
 .detail-cover {
     width: 100%;
     height: auto;
-    max-height: 600px; /* Protects it from stretching too tall and losing quality */
     object-fit: contain;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
@@ -379,11 +377,9 @@ body.is-searching .library-header p { opacity: 0.3; }
     gap: 1.25rem; 
 }
 
-/* Shrunk the title and author to match Kodansha proportions */
 .detail-title { font-size: 2.25rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; color: #000000; margin: 0; }
 .detail-author { font-size: 1rem; font-weight: 600; color: #555555; text-transform: uppercase; letter-spacing: 0.05em; margin: 0; }
 
-/* Enhanced Typography for Review - EXACT KODANSHA SOURCE CODE */
 .detail-review { 
     font-size: 1.125rem; 
     line-height: 1.3; 
@@ -392,7 +388,7 @@ body.is-searching .library-header p { opacity: 0.3; }
     white-space: pre-wrap; 
 }
 
-/* Publisher Button / Official Site: ENGINEERED FOR HTML LOGO */
+/* Publisher Button */
 .kodansha-btn { 
     display: inline-flex; 
     justify-content: space-between; 
@@ -413,18 +409,73 @@ body.is-searching .library-header p { opacity: 0.3; }
 }
 .kodansha-btn:hover { background: #EAEAEA; }
 
-/* Manager's Padding Fix for the Table */
-.volume-info-table { width: 100%; border-top: 2px solid #000000; border-bottom: 2px solid #000000; margin-top: 1rem; display: flex; flex-wrap: wrap; }
-.info-cell { flex: 1 1 33%; padding: 1.5rem 1rem; border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 0.25rem; }
-.info-cell:last-child, .info-cell:nth-child(3) { border-right: none; }
-.info-label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: #888888; letter-spacing: 0.05em; }
-.info-value { font-size: 0.95rem; font-weight: 700; color: #000000; }
+/* FIX: Forces the injected HTML image logo to display perfectly */
+.kodansha-btn img {
+    height: 1.4rem !important;
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
 
-.tags-row { width: 100%; padding: 1rem 0; display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
-.tag-badge { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; border: 1px solid var(--border-color); padding: 0.35rem 0.6rem; color: #444444; }
+/* =========================================
+   NEW FULL-WIDTH VOLUME INFO BOARD
+   ========================================= */
+.volume-info-section {
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+    margin-top: 3rem;
+    margin-bottom: 4rem;
+    align-items: stretch;
+}
+
+.volume-info-heading {
+    flex: 0 0 25%;
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    margin: 0;
+    color: #000000;
+}
+
+.volume-info-board {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #000000;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-bottom: 2px solid #000000;
+}
+
+.info-cell {
+    padding: 1.2rem 1.5rem;
+    border-right: 2px solid #000000;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.info-cell:last-child { border-right: none; }
+
+.info-label { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: #888888; letter-spacing: 0.05em; }
+.info-value { font-size: 1rem; font-weight: 700; color: #000000; }
+
+.tags-row { display: flex; align-items: center; padding: 1.2rem 1.5rem; gap: 1.5rem; }
+.tag-badge { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; border: 1px solid var(--border-color); padding: 0.35rem 0.6rem; color: #444444; background: transparent; }
+
+@media (max-width: 65rem) {
+    .volume-info-section { flex-direction: column; gap: 1.5rem; }
+    .info-grid { grid-template-columns: 1fr; }
+    .info-cell { border-right: none; border-bottom: 2px solid #000000; }
+}
 
 /* Other Volumes Shelf */
-.other-volumes-header { font-size: 1.2rem; font-weight: 900; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; color: #000000;}
+.other-volumes-header { font-size: 1.5rem; font-weight: 900; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; color: #000000;}
 .mini-shelf { display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 1rem; -webkit-overflow-scrolling: touch; }
 .mini-volume { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; cursor: pointer; width: 80px; flex-shrink: 0; opacity: 0.6; transition: opacity 0.2s; }
 .mini-volume:hover { opacity: 1; }
