@@ -313,7 +313,7 @@
             const grid = document.getElementById('library-grid');
             
             try {
-                // FIX: Cache-buster added. Forces Cloudflare to give you your new Notion titles instantly!
+                // THE CACHE BUSTER: Forces Cloudflare to pull live Notion data instantly
                 const response = await fetch('https://api.suwuyiku.workers.dev/library?nocache=' + new Date().getTime());
                 const rawBooks = await response.json();
 
@@ -321,7 +321,6 @@
 
                 grid.innerHTML = ""; // Clear loading skeleton
 
-                // Grouping Engine
                 rawBooks.forEach(book => {
                     if (!groupedSeries[book.series]) {
                         groupedSeries[book.series] = {
@@ -368,28 +367,24 @@
             }
         }
         
-       // --- DOSSIER INTERACTION LOGIC ---
+        // --- DOSSIER INTERACTION LOGIC ---
         function openDetailView(seriesName, volumeIndex) {
             const series = groupedSeries[seriesName];
             const activeVol = series.volumes[volumeIndex];
 
-            // Hide main grid, show Dossier
             document.getElementById('main-view').style.display = 'none';
             document.getElementById('library-header-bar').style.display = 'none';
             document.getElementById('detail-view').style.display = 'flex';
-            window.scrollTo(0, 0); // Scroll to top
+            window.scrollTo(0, 0); 
 
-            // Populate Main Info
             document.getElementById('det-cover').src = activeVol.covers[0] || 'assets/placeholder.png';
             
-            // THE FIX: Explicitly pull the exact "Name" column from your Notion Worker!
-            // No more guessing. Whatever is in Notion (e.g. "Spy x Family, Vol. 1") goes here.
+            // THE FIX: Pulls the exact "Name" column from Notion (e.g. "Spy x Family, Vol. 1")
             document.getElementById('det-title').textContent = activeVol.title; 
             
             document.getElementById('det-author').textContent = `By ${activeVol.author}`;
             document.getElementById('det-review').textContent = activeVol.review || "No ecosystem data recorded for this volume yet.";
             
-            // Populate Table
             document.getElementById('det-category').textContent = activeVol.category || "-";
             document.getElementById('det-publisher').textContent = activeVol.publisher || "-";
             document.getElementById('det-date').textContent = activeVol.dateAcquired || "-";
@@ -404,7 +399,7 @@
                 const pName = activeVol.publisher ? activeVol.publisher.toLowerCase() : "";
                 let logoUrl = "";
                 
-                // Matches the publisher name and pulls the official logo
+                // Matches the publisher name flawlessly
                 if (pName.includes("viz")) logoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Viz_Media_logo.svg/512px-Viz_Media_logo.svg.png";
                 else if (pName.includes("kodansha") || pName.includes("vertical")) logoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Kodansha_logo.svg/512px-Kodansha_logo.svg.png";
                 else if (pName.includes("yen press")) logoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Yen_Press_logo.svg/512px-Yen_Press_logo.svg.png";
@@ -414,7 +409,8 @@
                 else if (pName.includes("shueisha")) logoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Shueisha_logo.svg/512px-Shueisha_logo.svg.png";
 
                 if (logoUrl) {
-                    linkBtn.innerHTML = `<span>OFFICIAL SITE</span> <img src="${logoUrl}" alt="${activeVol.publisher}">`;
+                    // Inline styles force the image to render perfectly, ignoring cached CSS
+                    linkBtn.innerHTML = `<span>OFFICIAL SITE</span> <img src="${logoUrl}" alt="${activeVol.publisher}" style="height: 1.25rem; width: auto; object-fit: contain; display: block;">`;
                 } else {
                     linkBtn.innerHTML = `<span>OFFICIAL SITE</span> <span>${activeVol.publisher ? activeVol.publisher.toUpperCase() : "VISIT ↗"}</span>`;
                 }
@@ -422,18 +418,16 @@
                 linkBtn.style.display = 'none';
             }
             
-            // Populate Tags (Genres)
             const tagsContainer = document.getElementById('det-tags');
             tagsContainer.innerHTML = activeVol.genres.map(g => `<span class="tag-badge">${g}</span>`).join('');
 
-            // Build the Mini-Shelf
             const miniShelf = document.getElementById('mini-shelf');
             miniShelf.innerHTML = "";
             
             series.volumes.forEach((vol, idx) => {
                 const mini = document.createElement('div');
                 mini.className = `mini-volume ${idx === volumeIndex ? 'active' : ''}`;
-                mini.onclick = () => openDetailView(seriesName, idx); // Changes active volume
+                mini.onclick = () => openDetailView(seriesName, idx); 
                 
                 const miniCover = vol.covers[0] || 'assets/placeholder.png';
                 mini.innerHTML = `
@@ -443,7 +437,7 @@
                 miniShelf.appendChild(mini);
             });
         }
-        
+
         function closeDetailView() {
             document.getElementById('detail-view').style.display = 'none';
             document.getElementById('main-view').style.display = 'block';
