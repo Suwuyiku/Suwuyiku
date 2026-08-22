@@ -237,12 +237,11 @@ body.is-searching .library-header p { opacity: 0.3; }
 @media (max-width: 950px) { .library-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 700px) { .library-grid { grid-template-columns: repeat(2, 1fr); } }
 
-/* Kodansha Grey Box: Pure Padding Pedestal */
+/* Kodansha Grey Box: The Hardcoded Padding Math */
 .cover-wrapper, .detail-cover-wrapper { 
     background-color: #EBEBEB; 
-    /* NO ASPECT RATIO. Pure padding builds the box around the image natively. */
-    /* 2.5rem top/bottom for the tall pedestal, 1.25rem sides for the tight hug */
-    padding: 2.5rem 1.25rem; 
+    /* RAW MATH: Top/Bottom (48px) is exactly double Left/Right (24px) */
+    padding: 3rem 1.5rem; 
     display: flex; 
     justify-content: center; 
     align-items: center; 
@@ -264,7 +263,6 @@ body.is-searching .library-header p { opacity: 0.3; }
 
 /* The Cover: Native Scaling */
 .book-cover, .detail-cover { 
-    /* Fills the inside of the box perfectly without fighting the code */
     width: 100%; 
     height: auto; 
     display: block; 
