@@ -315,13 +315,11 @@ body.is-searching .library-header p { opacity: 0.3; }
 
 .detail-view { display: none; flex-direction: column; width: 100%; animation: fadeIn 0.4s ease; padding-bottom: 4rem; }
 
-/* Top Breadcrumb Navigation: RESTORED KODANSHA ABSOLUTE OVERLAP */
+/* Top Breadcrumb Navigation: FIXED AND ABOVE THE LAYOUT */
 .breadcrumbs {
-    position: absolute;
-    /* Exactly matching their top and left offsets to float over the box */
-    top: -1rem;
-    left: 2rem;
-    z-index: 10;
+    width: 100%;
+    margin-bottom: 1.5rem;
+    display: block; /* Sits naturally in the page flow */
 }
 
 .btn-breadcrumb {
@@ -335,66 +333,60 @@ body.is-searching .library-header p { opacity: 0.3; }
     color: #000000;
     display: inline-block;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: background-color 0.2s ease;
 }
 
 .btn-breadcrumb:hover {
     background-color: #EAEAEA;
 }
 
-/* Flexbox Layout Upgrade: THE MASSIVE SHOWCASE SPLIT */
+/* KODANSHA'S EXACT HERO COLUMNS: 50/50 Grid */
 .detail-top { 
-    display: flex;
-    gap: 40px; 
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Exact Kodansha 50/50 split */
+    gap: 2rem; /* Exact Kodansha gap */
+    align-items: start;
     margin-bottom: 3rem; 
-    position: relative; /* CRITICAL: Anchors the absolute breadcrumb here */
 }
 
 @media (max-width: 55rem) { 
-    .detail-top { flex-direction: column; gap: 2.5rem; padding-top: 2rem; } 
-    .breadcrumbs { top: -1.5rem; left: 1rem; }
-    .detail-cover-wrapper { max-width: 100% !important; }
-    .detail-info { max-width: 100% !important; }
+    .detail-top { grid-template-columns: 1fr; gap: 2.5rem; } 
 }
 
-/* Detail View Image Frame - BLOWN UP TO SCALE */
+/* Detail View Image Frame - TIGHT AND HIGH QUALITY */
 .detail-cover-wrapper { 
-    flex: 1.2; /* Takes up more of the screen than the text */
     width: 100%;
-    max-width: 55%; /* Allows the book to be massive while staying controlled */
     background-color: #f2f2f2; 
-    padding: 3.5rem 2.5rem !important; /* Huge gallery padding */
+    padding: 1.5rem; /* Exact Kodansha hero padding */
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* Forces the detail image to grow huge */
-.detail-cover-wrapper img, .detail-cover {
+/* The Cover Image */
+.detail-cover {
     width: 100%;
     height: auto;
-    max-height: 80vh; /* Lets it grow huge without breaking off-screen */
+    max-height: 600px; /* Protects it from stretching too tall and losing quality */
     object-fit: contain;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
 
-/* Detail Text - Flex Column 2 */
+/* Detail Text - Grid Column 2 */
 .detail-info { 
-    flex: 1;
-    max-width: 45%; /* Keeps the text constrained and readable */
     display: flex; 
     flex-direction: column; 
-    gap: 1.5rem; 
+    gap: 1.25rem; 
 }
 
-.detail-title { font-size: 3rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; color: #000000; margin: 0; }
-.detail-author { font-size: 1.1rem; font-weight: 600; color: #555555; text-transform: uppercase; letter-spacing: 0.05em; margin: 0; }
+/* Shrunk the title and author to match Kodansha proportions */
+.detail-title { font-size: 2.25rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; color: #000000; margin: 0; }
+.detail-author { font-size: 1rem; font-weight: 600; color: #555555; text-transform: uppercase; letter-spacing: 0.05em; margin: 0; }
 
-/* Enhanced Typography for Review */
+/* Enhanced Typography for Review - EXACT KODANSHA SOURCE CODE */
 .detail-review { 
     font-size: 1.125rem; 
-    line-height: 1.4; 
+    line-height: 1.3; 
     color: #000000; 
     margin: 0; 
     white-space: pre-wrap; 
@@ -403,7 +395,7 @@ body.is-searching .library-header p { opacity: 0.3; }
 /* Publisher Button / Official Site: ENGINEERED FOR HTML LOGO */
 .kodansha-btn { 
     display: inline-flex; 
-    justify-content: space-between; /* Pushes text to the left, logo to the right */
+    justify-content: space-between; 
     align-items: center; 
     border: 2px solid #000000; 
     background: transparent; 
