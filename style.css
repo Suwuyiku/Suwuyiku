@@ -356,23 +356,23 @@ body.is-searching .library-header p { opacity: 0.3; }
 
 .detail-view { display: none; flex-direction: column; width: 100%; animation: fadeIn 0.4s ease; padding-bottom: 4rem; }
 
-/* Top Breadcrumb Navigation: Contact-Style Margin & Line */
+/* Top Breadcrumb Navigation: KODANSHA TINY BOX STYLE */
 .breadcrumbs {
     width: 100%;
-    margin-bottom: 3.5rem; /* Increased margin to match Contact spacing */
-    padding-bottom: 1.5rem;
-    /* UPGRADED to match the thick Contact/Archive header line */
-    border-bottom: 0.25rem solid #000000; 
-    display: block; 
+    margin-bottom: 2rem; /* Tight margin above the book */
+    padding-bottom: 0;
+    border-bottom: none; /* DESTROYED THE UGLY THICK LINE */
+    display: flex; 
+    justify-content: flex-start;
 }
 
 .btn-breadcrumb {
-    padding: 0.25rem 1rem;
-    border: 2px solid #000000;
+    padding: 0.25rem 0.75rem; /* Tiny Kodansha padding */
+    border: 2px solid #000000; /* Crisp Kodansha border */
     text-transform: uppercase;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 800; 
-    letter-spacing: 2px;
+    letter-spacing: 0.1em;
     background: #ffffff;
     color: #000000;
     display: inline-flex;
@@ -381,7 +381,9 @@ body.is-searching .library-header p { opacity: 0.3; }
     transition: background-color 0.2s ease;
 }
 
-.btn-breadcrumb:hover { background-color: #EAEAEA; }
+.btn-breadcrumb:hover { 
+    background-color: #EAEAEA; 
+}
 
 /* KODANSHA'S EXACT HERO COLUMNS: 50/50 Grid */
 .detail-top { 
