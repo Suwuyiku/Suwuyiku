@@ -141,46 +141,52 @@
         </div>
 
 <!-- VIEW 2: THE KODANSHA DETAIL DOSSIER -->
-        <div id="detail-view" class="detail-view">
+<div id="detail-view" class="detail-view">
             
-            <div class="breadcrumbs">
-                <button class="btn-back-series" style="margin: 0;" onclick="closeDetailView()">
-                    ← Back to Archive
-                </button>
+    <div class="breadcrumbs">
+        <button class="btn-back-series" style="margin: 0;" onclick="closeDetailView()">
+            ← Back to Archive
+        </button>
+    </div>
+
+    <div class="detail-top">
+        <div class="detail-cover-wrapper">
+            <img id="det-cover" src="" class="detail-cover" alt="Volume Cover">
+        </div>
+        <div class="detail-info">
+            <h2 id="det-title" class="detail-title">Series Title</h2>
+            <p id="det-author" class="detail-author">By Author</p>
+                    
+            <!-- The Review Body -->
+            <div id="det-review" class="detail-review"></div>
+                    
+            <!-- Official Publisher Link -->
+            <a id="det-link" href="#" target="_blank" class="kodansha-btn">Visit Official Publisher ↗</a>
+        </div>
+    </div>
+
+    <!-- NEW FULL-WIDTH VOLUME INFO BOARD (Matching Kodansha exactly) -->
+    <div class="volume-info-section">
+        <h2 class="volume-info-heading">Volume<br>Info</h2>
+        <div class="volume-info-board">
+            <div class="info-grid">
+                <div class="info-cell"><span class="info-label">Category</span><span id="det-category" class="info-value">-</span></div>
+                <div class="info-cell"><span class="info-label">Publisher</span><span id="det-publisher" class="info-value">-</span></div>
+                <div class="info-cell"><span class="info-label">Date Acquired</span><span id="det-date" class="info-value">-</span></div>
             </div>
-
-            <div class="detail-top">
-                <div class="detail-cover-wrapper">
-                    <img id="det-cover" src="" class="detail-cover" alt="Volume Cover">
-                </div>
-                <div class="detail-info">
-                    <h2 id="det-title" class="detail-title">Series Title</h2>
-                    <p id="det-author" class="detail-author">By Author</p>
-                    
-                    <!-- The Review Body -->
-                    <div id="det-review" class="detail-review"></div>
-                    
-                    <!-- Official Publisher Link -->
-                    <a id="det-link" href="#" target="_blank" class="kodansha-btn">Visit Official Publisher ↗</a>
-                    
-                    <!-- Brutalist Volume Info Table -->
-                    <div class="volume-info-table">
-                        <div class="info-cell"><span class="info-label">Category</span><span id="det-category" class="info-value">-</span></div>
-                        <div class="info-cell"><span class="info-label">Publisher</span><span id="det-publisher" class="info-value">-</span></div>
-                        <div class="info-cell"><span class="info-label">Date Acquired</span><span id="det-date" class="info-value">-</span></div>
-                        <div class="tags-row">
-                            <span class="info-label" style="margin-right: 0.5rem;">Tags</span>
-                            <div id="det-tags" style="display: flex; gap: 0.5rem; flex-wrap: wrap;"></div>
-                        </div>
-                    </div>
-                </div>
+            <div class="tags-row">
+                <span class="info-label" style="min-width: 50px;">Tags</span>
+                <div id="det-tags" style="display: flex; gap: 0.5rem; flex-wrap: wrap;"></div>
             </div>
+        </div>
+    </div>
 
-           <!-- Mini Shelf for Other Volumes -->
-        <h3 class="other-volumes-header">Other Volumes in This Series</h3>
-        <div id="mini-shelf" class="mini-shelf"></div>
+    <!-- Mini Shelf for Other Volumes -->
+    <h3 class="other-volumes-header">Other Volumes in This Series</h3>
+    <div id="mini-shelf" class="mini-shelf"></div>
 
-    </div> 
+</div>
+        
 </main>
 
     <!-- 4. UNIFIED FOOTER -->
