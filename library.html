@@ -166,8 +166,9 @@
 <div id="detail-view" class="detail-view">
             
     <div class="breadcrumbs">
-        <button class="btn-back-series" style="margin: 0;" onclick="closeDetailView()">
-            ← Back to Archive
+        <!-- Replaced the massive button with the tiny Kodansha breadcrumb box -->
+        <button id="dynamic-breadcrumb" class="btn-breadcrumb" onclick="closeDetailView()">
+            ← ARCHIVE
         </button>
     </div>
 
@@ -386,6 +387,14 @@
             document.getElementById('library-header-bar').style.display = 'none';
             document.getElementById('detail-view').style.display = 'flex';
             window.scrollTo(0, 0); // Scroll to top
+            
+            // --- DYNAMIC KODANSHA BREADCRUMB ---
+            const breadcrumbBtn = document.getElementById('dynamic-breadcrumb');
+            if (breadcrumbBtn) {
+                const safeSeriesName = seriesName.toUpperCase();
+                const safeVolNum = activeVol.volumeNumber ? `VOL ${activeVol.volumeNumber}` : '';
+                breadcrumbBtn.textContent = `← ARCHIVE / ${safeSeriesName} / ${safeVolNum}`;
+            }
 
             // Populate Main Info
             document.getElementById('det-cover').src = activeVol.covers[0] || 'assets/placeholder.png';
