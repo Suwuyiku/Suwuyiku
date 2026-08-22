@@ -238,16 +238,18 @@ body.is-searching .library-header p { opacity: 0.3; }
 @media (max-width: 950px) { .library-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 700px) { .library-grid { grid-template-columns: repeat(2, 1fr); } }
 
-/* Kodansha Grey Box: The Tall 6/10 Rectangle */
+/* Kodansha Grey Box: The Exact Inspector Match */
 .cover-wrapper, .detail-cover-wrapper { 
     background-color: #F4F4F4; 
-    /* Forces a strictly tall, slender portrait shape */
-    aspect-ratio: 6 / 10; 
-    padding: 0; 
+    /* Direct from Kodansha's inspector: aspect-ratio 2 / 3 */
+    aspect-ratio: 2 / 3; 
+    width: 100%;
+    padding: 1.5rem; /* Clean, uniform breathing room */
     display: flex; 
     justify-content: center; 
     align-items: center; 
     position: relative; 
+    overflow: hidden;
 }
 
 /* ULTIMATE ANTI-RIP SHIELD */
@@ -263,13 +265,14 @@ body.is-searching .library-header p { opacity: 0.3; }
     background-color: #EAEAEA; 
 }
 
-/* The Cover: Tighter Containment */
+/* The Cover: Native Inspector Scaling */
 .book-cover, .detail-cover { 
-    /* Shrinking the width to 68% guarantees large top/bottom gaps */
-    width: 68%; 
-    height: auto; 
+    width: auto;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
     object-fit: contain; 
-    box-shadow: 4px 6px 14px rgba(0, 0, 0, 0.15), -1px -1px 3px rgba(255,255,255,0.5); 
+    box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.15); 
     pointer-events: none;
     -webkit-user-drag: none;
     user-select: none;
