@@ -416,12 +416,25 @@ body.is-searching .library-header p { opacity: 0.3; }
 
 /* FIX: SHRUNK TITLE */
 .detail-title { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; color: #000000; margin: 0; }
-.detail-author { font-size: 1rem; font-weight: 600; color: #555555; text-transform: uppercase; letter-spacing: 0.05em; margin: 0; }
 
+/* Author Font - Elegant Serif (Matches Kodansha) */
+.detail-author { 
+    font-family: 'Georgia', 'Times New Roman', serif; 
+    font-size: 1.15rem; 
+    font-weight: 400; 
+    color: #333333; 
+    text-transform: none; /* Removes the ALL CAPS */
+    letter-spacing: 0.01em; 
+    margin: 0; 
+}
+
+/* Review Font - Small, soft, elegant body text */
 .detail-review { 
-    font-size: 1.125rem; 
-    line-height: 1.3; 
-    color: #000000; 
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: 0.95rem; /* Shrunk slightly for elegance */
+    line-height: 1.7; /* Increased breathing room */
+    font-weight: 400;
+    color: #444444; /* Softer dark gray */
     margin: 0; 
     white-space: pre-wrap; 
 }
