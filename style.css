@@ -240,18 +240,18 @@ body.is-searching .library-header p { opacity: 0.3; }
     -webkit-user-drag: none;
 }
 
-/* Kodansha Grey Box: EXACT SOURCE CODE FROM INSPECTOR */
+/* Kodansha Grey Box & Detail Engine */
 .cover-wrapper, .detail-cover-wrapper { 
-    background-color: #F4F4F4; 
+    background-color: #EBEBEB; 
     box-sizing: border-box;
     position: relative;
     width: 100%;
-    aspect-ratio: 2 / 3; 
+    aspect-ratio: 1 / 1.45; 
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 8%; 
+    padding: 1.5rem; 
 }
 
 /* ULTIMATE ANTI-RIP SHIELD */
@@ -264,16 +264,18 @@ body.is-searching .library-header p { opacity: 0.3; }
 }
 
 .kodansha-card:hover .cover-wrapper {
-    background-color: #EAEAEA; 
+    background-color: #E2E2E2; 
 }
 
-/* The Cover: EXACT SOURCE CODE FROM INSPECTOR */
+/* The Cover Drop-Shadow Logic */
 .book-cover, .detail-cover { 
     max-width: 100%;
     max-height: 100%;
+    width: auto;
+    height: auto;
     object-fit: contain;
     display: block;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12); 
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.18), -1px -1px 3px rgba(255,255,255,0.6); 
     pointer-events: none;
     -webkit-user-drag: none;
     user-select: none;
@@ -305,7 +307,7 @@ body.is-searching .library-header p { opacity: 0.3; }
 /* Mimics the exact size of the Kodansha Gray Box */
 .skeleton-cover {
     width: 100%;
-    aspect-ratio: 2 / 3; 
+    aspect-ratio: 1 / 1.45; 
 }
 
 /* Mimics the Title */
@@ -328,24 +330,25 @@ body.is-searching .library-header p { opacity: 0.3; }
 .card-text { 
     display: flex; 
     flex-direction: column; 
-    gap: 0.2rem; 
-    margin-top: 0.75rem; 
+    gap: 0.15rem; 
+    margin-top: 1rem; 
     z-index: 1000;
     position: relative;
 }
 
 .series-title { 
-    font-size: 0.95rem; 
+    font-size: 0.9rem; 
     font-weight: 800; 
     color: #000000; 
-    line-height: 1.2; 
+    line-height: 1.3; 
+    letter-spacing: 0.01em;
     margin: 0;
 }
 
 .series-author { 
-    font-size: 0.8rem; 
+    font-size: 0.75rem; 
     color: #777777; 
-    font-weight: 400; 
+    font-weight: 500; 
     font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif; 
     margin: 0;
 }
@@ -356,12 +359,12 @@ body.is-searching .library-header p { opacity: 0.3; }
 
 .detail-view { display: none; flex-direction: column; width: 100%; animation: fadeIn 0.4s ease; padding-bottom: 4rem; }
 
-/* Top Breadcrumb Navigation: Clean, Elegant Border Restored */
+/* Top Breadcrumb Navigation */
 .breadcrumbs {
     width: 100%;
     margin-bottom: 2.5rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid var(--border-color, #dddddd); /* Sleek, structural line */
+    border-bottom: 1px solid var(--border-color, #dddddd);
     display: block; 
 }
 
@@ -399,21 +402,9 @@ body.is-searching .library-header p { opacity: 0.3; }
 
 /* FIX: SHRUNK GRAY BOX */
 .detail-cover-wrapper { 
-    width: 100%;
     max-width: 320px; /* Drastically shrunk the footprint */
     margin: 0 auto; 
-    background-color: #f2f2f2; 
-    padding: 1.25rem; /* Tighter padding */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.detail-cover {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    /* The rest of the properties are inherited from .cover-wrapper */
 }
 
 /* Detail Text - Grid Column 2 */
