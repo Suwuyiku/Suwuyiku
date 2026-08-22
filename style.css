@@ -217,67 +217,27 @@ body.is-searching .library-header p { opacity: 0.3; }
    THE GRID & THE MONUMENTAL BOXES
    ========================================= */
 
-/* The Main Brutalist Grid - EXACT Kodansha Replica */
+/* The Main Brutalist Grid - Responsive Window Fix */
 .library-grid { 
     display: grid; 
-    /* 1. SMALLER MIN-WIDTH: Drops it down so 4 items fit perfectly across the screen */
-    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); 
-    gap: 3rem 1.5rem; 
+    /* FIX 1: Smaller minimum width (160px). Keeps boxes small when window shrinks! */
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); 
+    gap: 2.5rem 1.5rem; 
     width: 100%; 
     padding-bottom: 4rem; 
 }
 
-.kodansha-card { 
-    display: flex; 
-    flex-direction: column; 
-    cursor: pointer; 
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    -webkit-user-drag: none;
-}
-
-/* Kodansha Grey Box: Taller frame, tighter sides for the perfect portrait monument */
+/* Kodansha Grey Box: Taller, less wide */
 .cover-wrapper, .detail-cover-wrapper { 
     background-color: #EBEBEB; 
-    /* 1. TALLER RATIO: Stretches the vertical height */
-    aspect-ratio: 1 / 1.65; 
-    /* 2. ASYMMETRIC PADDING: 1.8rem top/bottom, 1.1rem left/right (makes it less wide) */
-    padding: 1.8rem 1.1rem; 
+    /* FIX 2: Taller aspect ratio for more height */
+    aspect-ratio: 1 / 1.55; 
+    /* FIX 3: Squeezed sides (1rem) and more top/bottom (1.5rem) */
+    padding: 1.5rem 1rem; 
     display: flex; 
     justify-content: center; 
     align-items: center; 
     position: relative; 
-}
-
-/* ULTIMATE ANTI-RIP SHIELD: Transparent block completely covering the box */
-.cover-wrapper::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    z-index: 999;
-    background: transparent;
-}
-
-.kodansha-card:hover .cover-wrapper {
-    background-color: #EAEAEA; 
-}
-
-/* 2. The Cover Shadow: Crucial for making it look like a physical monument */
-.book-cover, .detail-cover { 
-    max-width: 100%; 
-    max-height: 100%; 
-    width: auto; 
-    height: auto; 
-    object-fit: contain; 
-    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.18), -1px -1px 3px rgba(255,255,255,0.6); 
-    
-    /* Disables all native browser interactions on the image itself */
-    pointer-events: none;
-    -webkit-user-drag: none;
-    user-select: none;
-    -webkit-touch-callout: none;
 }
 
 /* =========================================
@@ -287,27 +247,28 @@ body.is-searching .library-header p { opacity: 0.3; }
 .card-text { 
     display: flex; 
     flex-direction: column; 
-    gap: 0.2rem; 
-    margin-top: 1rem; 
+    /* FIX 4: Zero gap. We control the space tightly with margin now. */
+    gap: 0; 
+    margin-top: 0.8rem; 
     z-index: 1000;
     position: relative;
 }
 
 .series-title { 
-    /* 4. SOFT, SMALL TITLE: Exactly like Kodansha's layout */
-    font-size: 0.8rem; 
+    font-size: 0.85rem; 
     font-weight: 800; 
     color: #111111; 
-    line-height: 1.4; 
+    line-height: 1.2; 
+    margin-bottom: 0.15rem; /* Tiny space between title and author */
 }
 
 .series-author { 
-    /* 5. SLEEK AUTHOR FONT: Dropped the weight and changed the tone */
-    font-size: 0.7rem; 
-    color: #888888; 
-    font-weight: 400; /* Much sleeker and lighter than before */
-    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif; 
-    letter-spacing: 0.02em;
+    font-size: 0.75rem; 
+    color: #666666; 
+    font-weight: 400; 
+    /* FIX 5: THE SECRET KODANSHA FONT! They use a Serif font for the author. */
+    font-family: Georgia, "Times New Roman", Times, serif; 
+    letter-spacing: 0.01em;
 }
 
 /* The Detail View (The Dossier) */
