@@ -382,9 +382,33 @@
             document.getElementById('det-date').textContent = activeVol.dateAcquired || "-";
 
          // --- DYNAMIC PUBLISHER LOGO SYSTEM ---
+function openDetailView(seriesName, volumeIndex) {
+            const series = groupedSeries[seriesName];
+            const activeVol = series.volumes[volumeIndex];
+
+            // Hide main grid, show Dossier
+            document.getElementById('main-view').style.display = 'none';
+            document.getElementById('library-header-bar').style.display = 'none';
+            document.getElementById('detail-view').style.display = 'flex';
+            window.scrollTo(0, 0); // Scroll to top
+
+            // Populate Main Info
+            document.getElementById('det-cover').src = activeVol.covers[0] || 'assets/placeholder.png';
+            
+            // FIX: Pull the exact volume "Name" from Notion, fallback to title if missing
+            document.getElementById('det-title').textContent = activeVol.name || activeVol.title || seriesName; 
+            
+            document.getElementById('det-author').textContent = `By ${activeVol.author}`;
+            document.getElementById('det-review').textContent = activeVol.review || "No ecosystem data recorded for this volume yet.";
+            
+            // Populate Table
+            document.getElementById('det-category').textContent = activeVol.category || "-";
+            document.getElementById('det-publisher').textContent = activeVol.publisher || "-";
+            document.getElementById('det-date').textContent = activeVol.dateAcquired || "-";
+
+            // --- DYNAMIC PUBLISHER LOGO SYSTEM ---
             const linkBtn = document.getElementById('det-link');
             
-            // The Master Library of Publisher Logos
             const publisherLogos = {
                 "viz media": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Viz_Media_logo.svg/512px-Viz_Media_logo.svg.png",
                 "kodansha": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Kodansha_logo.svg/512px-Kodansha_logo.svg.png",
@@ -401,17 +425,18 @@
                 "macmillan": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Macmillan_Publishers_logo.svg/512px-Macmillan_Publishers_logo.svg.png"
             };
 
-            if (activeVol.purchaseLink) {
-                linkBtn.href = activeVol.purchaseLink;
+            // Display Logic for the Button
+            if (activeVol.purchaseLink || activeVol.publisher) {
                 linkBtn.style.display = 'inline-flex';
+                linkBtn.href = activeVol.purchaseLink || "#"; // Default to # if no link exists
                 
                 const cleanPublisherName = activeVol.publisher ? activeVol.publisher.toLowerCase().trim() : "";
 
+                // FIX: Successfully inject the HTML logo image!
                 if (cleanPublisherName && publisherLogos[cleanPublisherName]) {
-                    // Removed the grayscale filter so logos appear in their original color
-                    linkBtn.innerHTML = `OFFICIAL SITE <img src="${publisherLogos[cleanPublisherName]}" alt="${activeVol.publisher}" style="height: 1.2rem; margin-left: 0.75rem;">`;
+                    linkBtn.innerHTML = `<span>OFFICIAL SITE</span> <img src="${publisherLogos[cleanPublisherName]}" alt="${activeVol.publisher}">`;
                 } else {
-                    linkBtn.innerHTML = "VISIT OFFICIAL PUBLISHER ↗";
+                    linkBtn.innerHTML = `<span>OFFICIAL SITE</span> <span>${activeVol.publisher ? activeVol.publisher.toUpperCase() : "VISIT ↗"}</span>`;
                 }
             } else {
                 linkBtn.style.display = 'none';
