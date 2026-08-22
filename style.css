@@ -211,7 +211,6 @@ a:focus-visible, button:focus-visible { outline: 0.125rem solid var(--hover-gray
 .library-header h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.04em; color: var(--kodansha-black); margin-bottom: 0.5rem; }
 .library-header p { font-size: 1.1rem; color: #666666; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; transition: opacity 0.3s ease; }
 body.is-searching .library-header p { opacity: 0.3; }
-
 /* =========================================
    THE GRID & THE MONUMENTAL BOXES
    ========================================= */
@@ -223,25 +222,26 @@ body.is-searching .library-header p { opacity: 0.3; }
     padding: 3rem 20px 6rem 20px;
 }
 
-/* The Main Brutalist Grid - EXACT 4 COLUMNS */
+/* The Main Brutalist Grid - EXACT 4 COLUMNS & WIDER GAPS */
 .library-grid { 
     display: grid; 
-    /* THE ABSOLUTE FIX: Hardcode 4 equal columns. They will never stretch, even if you only have 1 book. */
     grid-template-columns: repeat(4, 1fr); 
-    gap: 3rem 1.5rem; 
+    /* THE GAP FIX: 3rem vertical gap, but a massive 4rem horizontal gap to match Kodansha */
+    gap: 3rem 4rem; 
     width: 100%; 
     padding-bottom: 4rem; 
 }
 
 /* Media Queries to keep it looking good on smaller screens */
-@media (max-width: 950px) { .library-grid { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 700px) { .library-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 950px) { .library-grid { grid-template-columns: repeat(3, 1fr); gap: 3rem 2rem; } }
+@media (max-width: 700px) { .library-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem 1.5rem; } }
 
-/* Kodansha Grey Box: The Hardcoded Padding Math */
+/* Kodansha Grey Box: The Tall Slender Rectangle */
 .cover-wrapper, .detail-cover-wrapper { 
     background-color: #EBEBEB; 
-    /* RAW MATH: Top/Bottom (48px) is exactly double Left/Right (24px) */
-    padding: 3rem 1.5rem; 
+    /* THE SHAPE FIX: Massive 2.8rem top/bottom padding, but a microscopic 0.6rem on the sides. 
+       This forces the box into that exact tall, slender rectangular shape with tiny side gaps! */
+    padding: 2.8rem 0.6rem; 
     display: flex; 
     justify-content: center; 
     align-items: center; 
