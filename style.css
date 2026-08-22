@@ -196,16 +196,15 @@ a:focus-visible, button:focus-visible { outline: 0.125rem solid var(--hover-gray
    ========================================= */
 /* Future Shop / Commerce styling will go here */
 
-
 /* =========================================
    07. PAGE: LIBRARY (KODANSHA EDITORIAL ENGINE)
    ========================================= */
 
-/* Widescreen Expansion - Mimics Kodansha's wide layout */
+/* Widescreen Expansion - MATCHING KODANSHA'S ACTUAL WIDTH */
 .contact-page-wrapper {
-    max-width: 1200px;
+    max-width: 1400px; /* FIX 1: Increased from 1200px. This makes the whole layout massive like Kodansha. */
     margin: 0 auto; 
-    padding: 3rem 20px 6rem 20px;
+    padding: 3rem 40px 6rem 40px;
 }
 
 .library-header { text-align: left; margin-bottom: 3rem; border-bottom: 0.25rem solid var(--kodansha-black); padding-bottom: 1.5rem; }
@@ -217,27 +216,67 @@ body.is-searching .library-header p { opacity: 0.3; }
    THE GRID & THE MONUMENTAL BOXES
    ========================================= */
 
-/* The Main Brutalist Grid - Responsive Window Fix */
+/* The Main Brutalist Grid - MATHEMATICALLY CALIBRATED */
 .library-grid { 
     display: grid; 
-    /* FIX 1: Smaller minimum width (160px). Keeps boxes small when window shrinks! */
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); 
-    gap: 2.5rem 1.5rem; 
+    /* FIX 2: Increased from 240px to 280px. This forces the boxes to render huge on screen. */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+    gap: 3.5rem 2rem; 
     width: 100%; 
     padding-bottom: 4rem; 
 }
 
-/* Kodansha Grey Box: Taller, less wide */
+.kodansha-card { 
+    display: flex; 
+    flex-direction: column; 
+    cursor: pointer; 
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+/* Kodansha Grey Box: Calculated for 1:1.41 manga covers (based on 400.avif) */
 .cover-wrapper, .detail-cover-wrapper { 
     background-color: #EBEBEB; 
-    /* FIX 2: Taller aspect ratio for more height */
-    aspect-ratio: 1 / 1.55; 
-    /* FIX 3: Squeezed sides (1rem) and more top/bottom (1.5rem) */
-    padding: 1.5rem 1rem; 
+    /* FIX 3: TALLER RATIO. 1.58 forces the box to be much taller and less wide. */
+    aspect-ratio: 1 / 1.58; 
+    /* FIX 4: EXTREME ASYMMETRIC PADDING. 3rem top/bottom, 1.2rem sides. */
+    padding: 3rem 1.2rem; 
     display: flex; 
     justify-content: center; 
     align-items: center; 
     position: relative; 
+}
+
+/* ULTIMATE ANTI-RIP SHIELD: Transparent block completely covering the box */
+.cover-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 999;
+    background: transparent;
+}
+
+.kodansha-card:hover .cover-wrapper {
+    background-color: #EAEAEA; 
+}
+
+/* The Cover Shadow: Crucial for making it look like a physical monument */
+.book-cover, .detail-cover { 
+    max-width: 100%; 
+    max-height: 100%; 
+    width: auto; 
+    height: auto; 
+    object-fit: contain; 
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.18), -1px -1px 3px rgba(255,255,255,0.6); 
+    
+    /* Disables all native browser interactions on the image itself */
+    pointer-events: none;
+    -webkit-user-drag: none;
+    user-select: none;
+    -webkit-touch-callout: none;
 }
 
 /* =========================================
